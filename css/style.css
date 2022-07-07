@@ -1,0 +1,104 @@
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav-bg{
+    background-color: rgb(99, 19, 19) !important;
+}
+.title-pe{
+    padding-top: 5px;
+    color: white;
+    margin-left: 10px;
+}
+.nav-link{
+    margin-left: 18px;
+    font-size: 18px;
+}
+#link{
+    color: white;
+}
+#link:hover{
+    transform: scale(1.02);
+}
+.click{
+    color: rgba(240, 247, 255, 0.589);
+}
+.click:hover{
+    color: white;
+}
+.top{
+    margin-top: 25px;
+}
+h1{
+    font-size: 50px;
+}
+.forgot{
+    color:white;
+}
+
+.bx-custom{
+    font-size: 80px;
+}
+.bx-custom:hover{
+    color: rgb(99, 19, 19);
+    transform: scale(1.05);
+}
+/*BUTTONS*/
+.btn-custom{
+    padding: 10px;
+    background-color: rgb(99, 19, 19);
+    width: 320px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 4px 4px #1f1616;
+}
+.btn-custom:hover{
+    background-color: #1f1616;
+    color: white;
+    box-shadow: 4px 4px rgb(114, 47, 47);
+    transition: .3s;
+    transition: ease-out .3s;
+}
+.service-btn{
+    padding: 10px;
+    width: 120px;
+    background-color : rgb(114, 47, 47);
+    color: white;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 4px 4px #1f1616;
+}
+.service-btn:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #1f1616;
+    box-shadow: 4px 4px rgb(114, 47, 47);
+    transition: .3s;
+    transition: ease-out .3s;
+}
+
+/*CAROUSEL*/
+.carousel-item{
+    height: 40rem;
+    background: #000;
+    color: white;
+}
+.carousel-body{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 280px;
+}
+.overlay-image{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.4;
+}
