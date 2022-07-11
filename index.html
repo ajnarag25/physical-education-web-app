@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>P.E Department</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -31,7 +31,7 @@
                 <a class="nav-link" id="link" href="#">Register</a>
               </li>
             </ul>
-            <div class="d-flex top">
+            <form class="d-flex top" action="/index.html">
               <div class="form-check-inline">
                 <input class="form-control" type="text" placeholder="Email" aria-label="Email">
                 <p class="forgot">Forgot password? <a class="click" href="">Click here</a></p>
@@ -40,9 +40,9 @@
                 <input class="form-control" type="password" placeholder="Password" aria-label="Password">
               </div>
               <div class="flex-column">
-                <button class="btn btn-outline-light btnn">Login</button>
+                <button type="submit" class="btn btn-outline-light btnn">Login</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </nav>
@@ -58,7 +58,7 @@
             <div class="overlay-image" style="background-image:url(assets/images/tup-c.jpg);"></div>
             <div class="container carousel-body text-center">
               <h1>Welcome Student in our P.E Department Website</h1>
-              <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
+              <p>This website is to provide a service where you can now inquire a uniform, reserve facilities, and borrow equipment from the department
                 — the choice is yours.</p>
               <button class="btn btn-custom">Learn More</button>
             </div>
@@ -111,12 +111,11 @@
                     <a href="" class="service-btn">Make Reservation</a>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <i class='bx bxs-edit-alt bx-custom'></i>
+                    <i class="iconify bx-custom" data-icon="bx:basketball"></i>
                     <br><br>
                     <h3>Borrow Equipments</h3>
                     <br>
-                    <p>Borrow any equipments in P.E Department, just simply fill-up all the 
-                        information that is needed.</p>
+                    <p>Borrow sports equipments in P.E Department, just simply go to the borrowing machine and you are good to go.</p>
                     <br>
                     <a href="" class="service-btn">Borrow Equipments</a>
                 </div>
@@ -128,6 +127,7 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
 </body>
 </html>

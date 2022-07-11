@@ -16,9 +16,11 @@
 }
 #link{
     color: white;
+    font-size: larger;
 }
 #link:hover{
-    transform: scale(1.02);
+   
+    color: rgb(236, 45, 45);
 }
 .click{
     color: rgba(240, 247, 255, 0.589);
@@ -56,16 +58,17 @@ h1{
     box-shadow: 4px 4px #1f1616;
 }
 .btn-custom:hover{
-    background-color: #1f1616;
+    background-color: rgb(182, 33, 33);
     color: white;
     box-shadow: 4px 4px rgb(114, 47, 47);
     transition: .3s;
     transition: ease-out .3s;
+    transform: scale(1.05);
 }
 .service-btn{
     padding: 10px;
     width: 120px;
-    background-color : rgb(114, 47, 47);
+    background-color : rgb(99, 19, 19);
     color: white;
     border: none;
     text-decoration: none;
@@ -73,9 +76,9 @@ h1{
     box-shadow: 4px 4px #1f1616;
 }
 .service-btn:hover{
-    text-decoration: none;
+    transform: scale(1.05);
     color: white;
-    background-color: #1f1616;
+    background-color: rgb(182, 33, 33);
     box-shadow: 4px 4px rgb(114, 47, 47);
     transition: .3s;
     transition: ease-out .3s;
@@ -105,10 +108,12 @@ h1{
     opacity: 0.4;
 }
 
-
-
 .btnn:hover{
-    background-color: rgb(220,53,69);
+    background-color: rgb(182, 33, 33);
     color: white;
-    border-color: rgb(220,53,69);
+    border-color: rgb(182, 33, 33);
+}
+
+input:hover{
+    background-color: rgb(235, 235, 235);
 }
