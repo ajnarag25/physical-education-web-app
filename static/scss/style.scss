@@ -1,0 +1,415 @@
+/* =======================================================================
+======================================================================= */
+
+/* ===================================== Import Less ================================== */
+@import 'variable';
+/* ===================================== Basic CSS ==================================== */
+@import 'base/basic_setup';
+
+
+header{
+    @include shado-1();
+    .header-top{
+        background-color: $color-primary;
+       
+        .col-det{
+            .ulleft{
+                li{
+                    float: left;
+                    padding: 11px;
+                    color: #FFF;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    i{
+                        margin-right: 5px;
+                    }
+                    span{
+                        margin-left: 15px;
+                    }
+                }
+            }
+            .ulright{
+                float: right;
+                li{
+                    float: left;
+                    padding: 11px;
+                    color: #FFF;
+                    font-size: 1rem;
+                    i{
+                        margin-right: 5px;
+                    }
+                    span{
+                        margin-left: 15px;
+                    }
+                }
+            }
+        }
+    }
+    .header-bottom{
+        .navbar{
+            float: right;
+            @media screen and (max-width: 991px) {
+                width: 100%;
+            }
+        }
+        background-color: #FFF;
+        img{
+            margin-top: 15px;
+            @media screen and (max-width: 991px){
+                padding: 5px;
+                margin-top: 0px;
+                max-width: 230px;
+            }
+        }
+    }
+    .nav-col{
+        .navbar-nav{
+            li{
+                padding: 14px 20px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.navbar{
+    @media screen and (max-width: 767px){
+        padding: 0px;
+    } 
+}
+.navbar-toggler{
+   position: absolute;
+   right: 0px;
+   top: 19px;
+   @media screen and (max-width: 767px){
+        top: -50px;
+        
+        
+   }
+}
+.scroll-to-fixed-fixed{
+    background-color: #FFF;
+    @include shado-1();
+}
+
+
+/* ===================================== Slider CSS ================================== */
+
+
+.slider-detail {
+ 
+
+  .carousel-caption {
+    text-align: left;
+    bottom: 90px;
+    bottom: 105px;
+    h5 {
+      font-size: 44px;
+      margin-left: -40px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    p {
+      margin-left: -40px;
+      
+      margin-top: 40px;
+      font-size: 19px;
+      text-align: center;
+    }
+  }
+
+  .vbh {
+    margin-left: -40px;
+    text-align: center;
+
+    .btn {
+      padding: 10px;
+      margin-top: 40px;
+      width: 200px;
+      margin-left: 10px;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+
+  .vdg-cur {
+    color: #FFF;
+    padding-top: 70px;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .slider-detail .carousel-caption {
+    bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 1057px) {
+  .slider-detail .carousel-caption {
+    bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 1057px) {
+  .slider-detail .carousel-caption h5 {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 927px) {
+  .slider-detail .carousel-caption h5 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 1057px) {
+  .slider-detail .carousel-caption p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 927px) {
+  .slider-detail .carousel-caption p {
+    font-size: 13px;
+  }
+}
+
+/* ===================================== Donation Process CSS ================================== */
+
+.donation-care {
+  @include big-padding();
+  background-color: #FFF;
+
+  h4 {
+    padding: 10px;
+    margin-bottom: 0px;
+      font-size: 1rem;
+      font-weight: 600;
+  }
+
+  p {
+    padding: 10px;
+    padding-top: 0px;
+    text-align: justify;
+      font-size: .85rem;
+  }
+
+  i {
+    font-size: 13px;
+    margin-left: 10px;
+  }
+
+  .vd {
+    margin-bottom: 20px;
+      
+  }
+    .bkjiu{
+        background-color: #F8F9FA;
+        padding: 5px;
+        .btn{
+            margin-bottom: 6px;
+            margin-left: 6px;
+        }
+    }
+}
+
+@media screen and (max-width: 940px) {
+  .health-care {
+    padding: 50px 10px;
+  }
+}
+
+
+
+/* ===================================== About US CSS ================================== */
+
+.about-us{
+    @include big-padding();
+       
+    background-color: #FFF;
+    .text{
+        p{
+            font-weight: 300;
+            font-size: .85rem;
+            color: #000;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+    }
+    .image{
+        img{
+            margin-top: 30px;
+        }
+    }
+}
+
+
+
+/* ===================================== About US CSS ================================== */
+
+footer{
+    background: $color-primary;
+   
+    padding: 50px !important;
+      @include big-padding();
+    padding-bottom: 32px !important;
+    @media screen and (max-width: 600px){
+      padding-bottom: 0px !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+    @media screen and (max-width: 991px){
+      padding-bottom: 50px !important;
+    }
+    .content-ro{
+        color: #FFF;
+        margin-top: 20px;
+        h2{
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .footer-contact{
+            .address-row{
+                display: flex;
+                margin-top: 10px;
+                .icon{
+                    padding: 15px;
+                }
+                .detail{
+                    p{
+                        font-weight: 300;
+                    }
+                }
+            }
+        }
+        .footer-links{
+
+            ul{
+                margin-bottom: 15px;
+                li{
+                    float: left;
+                    width: 50%;
+                    font-weight: 300;
+                }
+            }
+        }
+        .form-card{
+               margin-top: -138px;
+            @include shado-1();
+              @media screen and (max-width: 600px){
+                margin-top: 10px;
+              }
+            .form-title{
+                 padding: 20px;
+                background-color: #f9f9f9;
+                h4{
+                    margin-bottom: 0px;
+                    font-weight: 600;
+                    color: #444;
+                    text-align: center;
+                }
+            }
+            background-color: #fff;
+            .form-body{
+                padding: 20px;
+                border-top: 1px solid #cccccc5;
+                input{
+                    border-radius: 0px;
+                    height: 47px;
+                }
+            }
+
+        }
+    }
+    .footer-copy{
+        padding: 30px 0px;
+        color: #FFF;
+        margin-top: 35px;
+        border-top: 1px solid #fd8c90;
+        padding-bottom: 0px;
+        a{
+            color: #ccc;
+        }
+        .socila-link{
+          @media screen and (max-width: 991px){
+            margin-top: 20px;
+          }
+            ul{
+                float: right;
+                li{
+                    float: left;
+                    padding: 0px 20px;
+                    a{
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer-bot-image{
+    img{
+        position: absolute;
+           margin-top: -112px;
+    }
+}
+
+/* ===================================== Gallery  CSS ================================== */
+
+.gallery{
+    @include big-padding();
+    background-color: #f1f1f152;
+    @media (min-width: 478px){
+        .gg-element:nth-child(3n+0) {
+            grid-row-end: span 1;
+        }
+    }
+}
+
+/* ===================================== Our Blog  CSS ================================== */
+
+.blog-container{
+   background-color: #cccccc2e;
+    @include big-padding();
+    padding-bottom: 100px;
+   
+    .news-row{
+        margin-top: 20px;
+        .news-card{
+            display: flex;
+               
+            background-color: #FFF;
+            box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+            margin-bottom: 20px;
+            .detail{
+                padding: 10px;
+                margin: auto;
+                
+                h3{
+                    font-size: 1.1rem;
+                   
+                    margin-bottom: 0px;
+                }
+                p{
+                    font-size: .85rem;
+                    text-indent: 20px;
+                    text-align: justify
+                }
+                .footp{
+                    text-indent: 0px;
+                    background-color: #f2f6f7a1;
+                    margin-top: 5px;
+                    font-size: .8rem;
+                    span{
+                        padding: 0px 5px;
+                    }
+                }
+            }
+            &:hover{
+                @include shado-1();
+            }
+        }
+    }
+}
+   
