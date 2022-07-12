@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/images/tup-logo.png" rel="icon">
     <title>P.E Department</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-sm navbar-light nav-bg sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
           <img src="assets/images/tup-logo.png" width="50" alt="">
           <h4 class="title-pe">P.E Department</h4>
@@ -31,16 +35,18 @@
                 <a class="nav-link" id="link" href="#">Register</a>
               </li>
             </ul>
-            <form class="d-flex top" action="/index.html">
-              <div class="form-check-inline">
-                <input class="form-control" type="text" placeholder="Email" aria-label="Email">
-                <p class="forgot">Forgot password? <a class="click" href="">Click here</a></p>
-              </div>
-              <div class="form-check-inline">
-                <input class="form-control" type="password" placeholder="Password" aria-label="Password">
-              </div>
-              <div class="flex-column">
-                <button type="submit" class="btn btn-outline-light btnn">Login</button>
+            <form action="#">
+              <div class="d-flex top">
+                <div class="col-md-6">
+                  <input class="form-control" type="text" placeholder="Email" aria-label="Email" required>
+                  <p class="forgot">Forgot password? <a class="click" href="">click here</a></p>
+                </div>
+                <div class="col-md-6 side">
+                  <input class="form-control " type="password" placeholder="Password" aria-label="Password" required>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-danger side">Login</button>
+                </div>
               </div>
             </form>
           </div>
@@ -56,9 +62,9 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="overlay-image" style="background-image:url(assets/images/tup-c.jpg);"></div>
-            <div class="container carousel-body text-center">
+            <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
               <h1>Welcome Student in our P.E Department Website</h1>
-              <p>This website is to provide a service where you can now inquire a uniform, reserve facilities, and borrow equipment from the department
+              <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
                 — the choice is yours.</p>
               <button class="btn btn-custom">Learn More</button>
             </div>
@@ -79,12 +85,10 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      
-      <br><br>
 
-      <div id="services" class="jumbotron">
+      <div class="jumbotron">
         <div class="container service-container">
-            <div class="text-center">
+            <div class="text-center slideanim">
                 <h3>Our Services Offered</h3>
                 <p class="lead">Experience our quality service to meet your needs.</p>
                 <hr>
@@ -92,42 +96,213 @@
             <br>
             <div class="row">
                 <div class="col-sm-4 text-center">
+                  <br><br>
                   <i class='bx bxs-t-shirt bx-custom'></i>
-                    <br><br>
-                    <h3>Inquire Uniform</h3>
-                    <br>
-                    <p>Here you can Inquire P.E uniform simply input all of the necessary information needed
-                        and you are good to go.</p>
-                    <br>
-                    <a href="" class="service-btn">Buy Uniform</a>
+                  <br><br>
+                  <h3>Inquire Uniform</h3>
+                  <br>
+                  <p>Here you can Inquire P.E uniform simply input all of the necessary information needed
+                      and you are good to go.</p>
+                  <br>
+                  <a href="" class="service-btn">Buy Uniform</a>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <i class='bx bx-calendar bx-custom'></i>
-                    <br><br>
-                    <h3>Make Reservation</h3>
-                    <br>
-                    <p>Make your own reservation, make your time productive and just simply schedule your own choice.</p>
-                    <br>
-                    <a href="" class="service-btn">Make Reservation</a>
+                  <br><br>
+                  <i class='bx bx-calendar bx-custom'></i>
+                  <br><br>
+                  <h3>Make Reservation</h3>
+                  <br>
+                  <p>Make your own reservation, make your time productive and just simply schedule your own choice.</p>
+                  <br>
+                  <a href="" class="service-btn">Make Reservation</a>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <i class="iconify bx-custom" data-icon="bx:basketball"></i>
-                    <br><br>
-                    <h3>Borrow Equipments</h3>
-                    <br>
-                    <p>Borrow sports equipments in P.E Department, just simply go to the borrowing machine and you are good to go.</p>
-                    <br>
-                    <a href="" class="service-btn">Borrow Equipments</a>
+                  <br><br>
+                  <i class='bx bxs-basketball bx-custom'></i>
+                  <br><br>
+                  <h3>Borrow Equipments</h3>
+                  <br>
+                  <p>Borrow any equipments in P.E Department, just simply fill-up all the 
+                      information that is needed.</p>
+                  <br>
+                  <a href="" class="service-btn">Borrow Equipments</a>
+                </div>
+            </div>
+          </div>
+      </div>
+    
+      <br><br>
+
+      <div class="container">
+        <div class="row ">
+            <div class="col-sm-4 slideanim">
+                <div class="card">
+                    <img src="assets/images/tupc.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-sm-8 align-self-center text-center slideanim">
+                <br>
+                <h3>About</h3>
+                <br>
+                <p class="lead">This is a web-based application system for the PE Department that is associated with the innovation
+                    of the automated sports equipment borrowing machine of the Technology University of the Philippines - Cavite.</p>
+              </div>
+          </div>
+        </div>
+
+      <br><br>
+
+      <div class="jumbotron">
+        <div class="container">
+            <div class="row justify-content-center slideanim">
+              <div class="col-12 col-sm-8 col-lg-6 m-5">
+                <div class="section_heading text-center">
+                  <h3>Our Creative <span> Team</span></h3>
+                  <p>The people behind this project development</p>
+                  <hr>
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12 col-sm-4 col-lg-2 ">
+                <div class="single_advisor_profile">
+                  <div class="advisor_thumb"><img src="assets/profile/rai.jpg" width="200" alt="">
+                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                  </div>
+                  <div class="single_advisor_details_info">
+                    <h6>Raiza Gumarang</h6>
+                    <p class="designation">Research Leader</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-4 col-lg-2">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                  <div class="advisor_thumb"><img src="assets/profile/naj.jpg" width="200" alt="">
+                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                  </div>
+                  <div class="single_advisor_details_info">
+                    <h6>Nigelle Salvador</h6>
+                    <p class="designation">Designer</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-12 col-sm-6 col-lg-2">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                  <div class="advisor_thumb"><img src="assets/profile/aj.jpg" width="200" alt="">
+                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                  </div>
+                  <div class="single_advisor_details_info">
+                    <h6>Avor John Narag</h6>
+                    <p class="designation">Developer</p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-12 col-sm-6 col-lg-2">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                  <div class="advisor_thumb"><img src="assets/profile/sean.jpg" width="200" alt="">
+                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                  </div>
+                  <div class="single_advisor_details_info">
+                    <h6>Sean Monacillo</h6>
+                    <p class="designation">Developer</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-lg-2">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                  <div class="advisor_thumb"><img src="assets/profile/rilan.jpg" width="200" alt="">
+                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                  </div>
+                  <div class="single_advisor_details_info">
+                    <h6>Michael Rilan</h6>
+                    <p class="designation">Designer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br><br>
+
+        <div id="contact" class="container slideanim">
+          <h3 class="text-center">Contact</h3>
+          <br>
+          <div class="row contact-form">
+              <div class="col-sm-4 ">
+                  <br>
+                  <div class="content">
+                    <i class='bx bxs-navigation bx-contact' ></i>
+                    <p> Dasma, Philippines</p>
+                  </div>
+                  <div class="content">
+                    <i class='bx bx-phone bx-contact'></i>
+                    <p> (046) 416 4920</p>
+                  </div>
+                  <div class="content">
+                    <i class='bx bxs-envelope bx-contact' ></i>
+                    <p> tupcservices@gmail.com</p>
+                  </div>
+              </div>
+              <div class="col-sm-8 ">
+                  <form method="#">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" name="txtName" class="form-control" placeholder="Name" value="" required />
+                                  </div>
+                                  <br>
+                                  <div class="form-group">
+                                      <input type="email" name="txtEmail" class="form-control" placeholder="Email" value="" required/>
+                                  </div>
+                                  <br>
+                                  <div class="form-group">
+                                      <input type="text" name="txtPhone" class="form-control" placeholder="Phone Number" value="" required/>
+                                  </div>
+                                  <br>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <textarea name="txtMsg" class="form-control" placeholder="Message" style="width: 100%; height: 150px;" required></textarea>
+                                  </div>
+                                  <br>
+                              </div>
+                              <div class="form-group mx-auto text-center m-3">
+                                <button class="btn btn-custom">Send Message</button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      <br><br>
+
+      <footer class="footers">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h2 class="footer-heading" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">P.E Department System</h2>
+                    <p class="copyright">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | by <a href="#">P.E Department System</a>
+                      </p>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <br><br>
+      </footer>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/scripts.js"></script>
 
 </body>
 </html>

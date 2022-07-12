@@ -1,5 +1,6 @@
 *{
     font-family: 'Source Sans Pro', sans-serif;
+    scroll-behavior: smooth;
 }
 
 .nav-bg{
@@ -16,11 +17,11 @@
 }
 #link{
     color: white;
-    font-size: x-large;
+    font-size: 20px;
 }
 #link:hover{
-   
-    color: rgb(236, 45, 45);
+    transform: scale(1.02);
+    color: rgb(240, 0, 0);
 }
 .click{
     color: rgba(240, 247, 255, 0.589);
@@ -36,10 +37,12 @@ h1{
 }
 .forgot{
     color:white;
-    font-size: small;
-    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 13px;
 }
-
+.side{
+    margin-left: 10px;
+}
 .bx-custom{
     font-size: 80px;
 }
@@ -47,6 +50,15 @@ h1{
     color: rgb(99, 19, 19);
     transform: scale(1.05);
 }
+.bx-contact{
+    font-size: 30px;
+}
+.jumbotron{
+    background-color: aliceblue;
+    padding: 50px;
+    padding-bottom: 70px;
+}
+
 /*BUTTONS*/
 .btn-custom{
     padding: 10px;
@@ -58,17 +70,16 @@ h1{
     box-shadow: 4px 4px #1f1616;
 }
 .btn-custom:hover{
-    background-color: rgb(182, 33, 33);
+    background-color: #1f1616;
     color: white;
     box-shadow: 4px 4px rgb(114, 47, 47);
     transition: .3s;
     transition: ease-out .3s;
-    transform: scale(1.05);
 }
 .service-btn{
     padding: 10px;
     width: 120px;
-    background-color : rgb(99, 19, 19);
+    background-color : rgb(114, 47, 47);
     color: white;
     border: none;
     text-decoration: none;
@@ -76,9 +87,9 @@ h1{
     box-shadow: 4px 4px #1f1616;
 }
 .service-btn:hover{
-    transform: scale(1.05);
+    text-decoration: none;
     color: white;
-    background-color: rgb(182, 33, 33);
+    background-color: #1f1616;
     box-shadow: 4px 4px rgb(114, 47, 47);
     transition: .3s;
     transition: ease-out .3s;
@@ -108,12 +119,102 @@ h1{
     opacity: 0.4;
 }
 
-.btnn:hover{
-    background-color: rgb(182, 33, 33);
-    color: white;
-    border-color: rgb(182, 33, 33);
+/*CONTACT*/
+.content{
+    display: flex;
+}
+.content i:hover{
+    color: rgb(114, 47, 47);
+}
+.content p{
+    font-size: 22px;
+    margin-left: 10px;
 }
 
-input:hover{
-    background-color: rgb(235, 235, 235);
+/*SCROLL EFFECT*/
+.slideanim {
+    visibility:hidden;
+}
+.slider {
+  animation-name: slider;
+  -webkit-animation-name: slider;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+@keyframes slider {
+  0% {
+    opacity: 0;
+    transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@-webkit-keyframes slider {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+  }
+}
+
+/*FOOTER*/
+footer {
+    padding: 2em; }
+  
+.footers {
+    background: #121212; 
+}
+.footers a {
+    color: white;
+}
+.footers p {
+    color: rgba(255, 255, 255, 0.3); }
+    
+.footers .footer-heading {
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 30px; 
+}
+.footers .footer-heading .logo {
+    color: #fff; 
+    text-decoration: none;
+}
+
+
+/******************************************/
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1300px) {
+    .side{
+        margin-left: 0px;
+    }
+}
+@media only screen and (max-width: 530px) {
+    .carousel-body{
+        padding-bottom: 180px;
+    }
+    .content{
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .content p{
+        font-size: 20px;
+    }
+    .content i{
+        font-size: 18px;
+    }
+    .carousel-body h1{
+        font-size: 40px;
+    }
+    .btn-custom{
+        width: 150px;
+    }
 }
