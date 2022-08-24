@@ -1,3 +1,9 @@
+<?php 
+  include('connection.php');
+  session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +38,7 @@
                 <a class="nav-link" id="link" href="#">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">Register</a>
+                <a class="nav-link" id="link" href="register_student.php">Register</a>
               </li>
             </ul>
             <form action="#">
