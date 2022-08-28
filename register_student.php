@@ -36,26 +36,12 @@
                 <a class="nav-link active" aria-current="page" id="link" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">About</a>
+                <a class="nav-link" id="link" href="index.php#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">Register</a>
+                <a class="nav-link" id="link" href="register_student.php">Register</a>
               </li>
             </ul>
-            <form action="#">
-              <div class="d-flex top">
-                <div class="col-md-6">
-                  <input class="form-control" type="text" placeholder="Email" aria-label="Email" required>
-                  <p class="forgot">Forgot password? <a class="click" href="">click here</a></p>
-                </div>
-                <div class="col-md-6 side">
-                  <input class="form-control " type="password" placeholder="Password" aria-label="Password" required>
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-danger side">Login</button>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </nav>
@@ -123,13 +109,14 @@
                     <br>
                     <div class="col-md-6">
                         <label for="inputImage" class="form-label">Upload image for your profile pic</label>
-                        <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" required>
+                        <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
                     </div>
                 </div> 
                 <br>
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        <img id="frame" src="#" width="100px" height="100px"/>
+                        <img id="frame_1" src="#" width="100px" height="100px"/>
+                        <img id="frame_2" src="#" width="100px" height="100px"/>
                         <br><br>
                         <button type="button" class="btn btn-danger">Scan your ID QR code</button>
                     </div>
@@ -153,7 +140,7 @@
                 <br>
                 <div class="text-center">
                     <a class="btn btn-secondary" href="index.php">Back</a>
-                    <input type="hidden" name="qrcode" value="wala muna to">
+                    <input type="hidden" name="user_student" value="Student">
                     <button type="submit" class="btn btn-danger" name="register_student">Register</button>
                 </div>
 
@@ -170,6 +157,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
+    <script>
+      function preview() {
+          frame_1.src=URL.createObjectURL(event.target.files[0]);
+      }
 
+    </script>
 </body>
 </html>

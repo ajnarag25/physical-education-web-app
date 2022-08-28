@@ -1,7 +1,9 @@
 <?php 
   include('connection.php');
   session_start();
-
+  if (!isset($_SESSION['email'])) {
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,47 +40,19 @@
                 <a class="nav-link" id="link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="register_student.php">Register</a>
+                <a class="nav-link" id="link" href="register_student.php">Account</a>
               </li>
             </ul>
-            <form action="functions.php" method="POST">
-              <div class="d-flex top">
-                <div class="col-md-6">
-                  <input class="form-control" type="text" placeholder="Email" aria-label="Email" name="email" required>
-                  <p class="forgot">Forgot password? <a class="click" href="" data-bs-toggle="modal" data-bs-target="#forgot">click here</a></p>
-                </div>
-                <div class="col-md-6 side">
-                  <input class="form-control " type="password" placeholder="Password" aria-label="Password" name="password" required>
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-danger side" name="login">Login</button>
-                </div>
-              </div>
-            </form>
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <h4 class="title_profile">Welcome,  <?php echo $_SESSION['firstname']; ?> 
+        
+                 <a href="functions.php?logout" type="submit" class="btn btn-danger side" >Logout</a>
+                </h4>
+            </div>
           </div>
         </div>
       </nav>
-      <!-- Modal -->
-      <div class="modal fade" id="forgot" tabindex="-1" aria-labelledby="forgot" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="">Reset Password</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="functions.php" method="POST">
-              <div class="modal-body">
-                <h5>Please enter your email to find your account</h5>
-                <input type="text" class="form-control" placeholder="Email" name="email" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger" name="reset_password">Reset</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -173,7 +147,9 @@
             </div>
           </div>
       </div>
+    
       <br><br>
+
       <div class="container">
         <div class="row ">
             <div class="col-sm-4 slideanim">
