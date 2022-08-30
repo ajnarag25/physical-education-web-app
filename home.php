@@ -1,7 +1,7 @@
 <?php 
   include('connection.php');
   session_start();
-  if (!isset($_SESSION['email'])) {
+  if (!isset($_SESSION['get_data']['email'])) {
     header("Location: index.php");
 }
 ?>
@@ -34,17 +34,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" id="link" href="index.php">Home</a>
+                <a class="nav-link active" aria-current="page" id="link" href="home.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="register_student.php">Account</a>
+                <a class="nav-link" id="link" href="#">Account</a>
               </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
-                <h4 class="title_profile">Welcome,  <?php echo $_SESSION['firstname']; ?> 
+                <h4 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
         
                  <a href="functions.php?logout" type="submit" class="btn btn-danger side" >Logout</a>
                 </h4>
@@ -120,7 +120,7 @@
                   <p>Here you can Inquire P.E uniform simply input all of the necessary information needed
                       and you are good to go.</p>
                   <br>
-                  <a href="" class="service-btn">Inquire Uniform</a>
+                  <a href="pickuniform.php" class="service-btn">Inquire Uniform</a>
                 </div>
                 <div class="col-sm-4 text-center">
                   <br><br>

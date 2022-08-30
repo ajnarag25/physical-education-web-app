@@ -83,7 +83,15 @@
                 </div> 
                 <br>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label for="inputImage" class="form-label">Gender</label>
+                        <select name="gender" class="form-select" id="" required>
+                            <option value="" selected disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
                         <label for="inputDept" class="form-label">Department</label>
                         <select name="department" class="form-select" id="">
                             <option value="" selected disabled>Select Department</option>
@@ -102,7 +110,7 @@
                         </select>
                     </div>
                     <br>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="inputCourse" class="form-label">Upload image for your profile pic</label>
                         <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
                     </div>

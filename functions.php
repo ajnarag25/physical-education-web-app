@@ -13,12 +13,7 @@ if (isset($_POST['login'])) {
     $getData = mysqli_fetch_array($prompt);
 
     if (password_verify($password, $getData['password'])){
-        $get_first = $getData['firstname'];
-        $get_email = $getData['email'];
-        $get_id = $getData['id'];
-        $_SESSION['firstname'] = $get_first;
-        $_SESSION['email'] = $get_email;
-        $_SESSION['id'] = $get_id;
+        $_SESSION['get_data'] = $getData;
         header('location:home.php');
     }else{
         ?>
@@ -55,6 +50,7 @@ if (isset($_POST['register_student'])) {
     $last = $_POST['lastname'];
     $emails = $_POST['email'];
     $contacts = $_POST['contact'];
+    $gender = $_POST['gender'];
     $courses = $_POST['course'];
     $pass1 = $_POST['password1'];
     $pass2 = $_POST['password2'];
@@ -121,8 +117,8 @@ if (isset($_POST['register_student'])) {
                 </script>
                 <?php
             }else{
-                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, course, department, image, password, qr, users, otp) 
-                VALUES('$first','$middle','$last', '$emails', '$contacts', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user', 0)") or die($conn->error);
+                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp) 
+                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user', 0)") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -184,6 +180,7 @@ if (isset($_POST['register_teacher'])) {
     $last = $_POST['lastname'];
     $emails = $_POST['email'];
     $contacts = $_POST['contact'];
+    $gender = $_POST['gender'];
     $dept = $_POST['department'];
     $pass1 = $_POST['password1'];
     $pass2 = $_POST['password2'];
@@ -250,8 +247,8 @@ if (isset($_POST['register_teacher'])) {
                 </script>
                 <?php
             }else{
-                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, course, department, image, password, qr, users, otp) 
-                VALUES('$first','$middle','$last', '$emails', '$contacts', 'N/A', '$dept', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user',0)") or die($conn->error);
+                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp) 
+                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', 'N/A', '$dept', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user',0)") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -448,8 +445,21 @@ if (isset($_POST['change_pass'])) {
         </script>
         <?php
     }
- 
 
+}
+
+#INQUIRE UNIFORM
+if (isset($_POST['request_student_1'])) {
+    echo('PE 1 STUDENT');
+}
+if (isset($_POST['request_student_2'])) {
+    echo('PE 2 STUDENT');
+}
+if (isset($_POST['request_teacher_1'])) {
+    echo('PE 1 TEACHER');
+}
+if (isset($_POST['request_teacher_2'])) {
+    echo('PE 2 TEACHER');
 }
 
 ?>
