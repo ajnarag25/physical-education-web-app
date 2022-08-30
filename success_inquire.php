@@ -25,7 +25,7 @@
 
 <body>
     
-<nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
           <img src="assets/images/gear-spin.gif" width="50" alt="">
           <h4 class="title-pe">P.E Department</h4>
@@ -54,38 +54,50 @@
         </div>
       </nav>
 
-      <div class="jumbotron">
-        <div class="d-flex flex-row bd-highlight mb-3">
-            <a href="home.php" style="text-decoration: none; color:rgb(151, 8, 8);"><i class='bx bx-left-arrow-alt'></i> Back </a>
-        </div>
-        <div class="text-center">
-            <h2>Inquire Uniform</h2>
-        </div>
-        <br>
-        <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-                <div class="row">
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">PE-1</h4>
-                            <img src="assets/images/sample.jpg" width="250" alt="">
-                            <br>
-                            <div class="text-center">
-                                <p>P.E Uniform with shorts</p>
-                            </div>
-                            <a href="pe1.php" type="button" class="btn btn-danger" name="">Select</a>  
+        <div class="jumbotron">
+            <div class="text-center">
+                <h2>Your Request has been sent</h2>
+                <p>Please wait for your response.</p>
+            </div>
+            <br>
+            <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+                <div class="card card_custom">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Name: <?php echo $_SESSION['success_data'][0];?> <?php echo $_SESSION['success_data'][1];?> <?php echo $_SESSION['success_data'][2];?></h4>
+                            <hr>
+                            <h4>Gender: <?php echo $_SESSION['success_data'][5];?></h4>
+                            <hr>
+                            <h4>Course: <?php echo $_SESSION['success_data'][3];?></h4>
+                            <hr>
+                            <h4>Size of T-Shirt: <?php echo $_SESSION['success_data'][7];?></h4>
+                            <hr>
+                            <h4>Size of Short: <?php echo $_SESSION['success_data'][8];?></h4>
+                            <hr>
+                            <h4>Size of Joggingpants: <?php echo $_SESSION['success_data'][9];?></h4>
                         </div>
-                    </div>
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">PE-2</h4>
-                            <img src="assets/images/sample.jpg" width="250" alt="">
-                            <br>
-                            <div class="text-center">
-                                <p>P.E Uniform with joggingpants</p>
-                            </div>
-                                <a href="pe2.php" type="button" class="btn btn-danger" name="">Select</a>
+                        <div class="col">
+                            <h4>P.E Teacher: <?php echo $_SESSION['success_data'][6];?></h4>
+                            <hr>
+                            <h4>Date of Submission: <?php echo $_SESSION['success_data'][14];?></h4>
+                            <hr>
+                            <h4>Department: <?php echo $_SESSION['success_data'][4];?></h4>
+                            <hr>
+                            <h4>Status: <?php
+                                if($_SESSION['success_data'][12] == 'PENDING'){
+                                    $set_pending = $_SESSION['success_data'][12];
+                                    echo '<h4 style="color:rgb(185, 187, 48)">'.$set_pending.'</h4>';
+                                }
+                             
+                             ?></h4>
+                             <hr>
+                             <h4>Note: <?php echo $_SESSION['success_data'][13];?></h4>
+
+                        </div>
+                        <div class="text-center">
+                          <br>
+                            <a class="btn btn-secondary" href="pickuniform.php">Back</a>
+                            <button type="submit" class="btn btn-danger" name="request_student_1">Cancel Request</button>
                         </div>
                     </div>
                 </div>

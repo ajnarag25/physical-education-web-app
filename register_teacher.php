@@ -57,17 +57,17 @@
             </div>
             <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-4">
+                <div class="col-md-4">
                         <label for="inputFirst" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="inputFirst" name="firstname" required>
+                        <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" name="firstname" required>
                     </div>
                     <div class="col-md-4">
                         <label for="inputMiddle" class="form-label">Middle name</label>
-                        <input type="text" class="form-control" id="inputMiddle" name="middlename" required>
+                        <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" name="middlename" required>
                     </div>
                     <div class="col-md-4">
                         <label for="inputLast" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="inputLast" name="lastname" required>
+                        <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" name="lastname" required>
                     </div>
                 </div> 
                 <br>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputDept" class="form-label">Department</label>
-                        <select name="department" class="form-select" id="">
+                        <select name="department" class="form-select" id="" required>
                             <option value="" selected disabled>Select Department</option>
                             <option value="OAA">Office of Academic Affair (OAA)</option>
                             <option value="DIT">Department of Information Technology (DIT)</option>
@@ -164,6 +164,17 @@
           function preview() {
             frame_1.src=URL.createObjectURL(event.target.files[0]);
         }
+    </script>
+       <script>
+        function lettersOnly(input) {
+            var regex = /[^a-z]/gi;
+            input.value = input.value.replace(regex, "");
+        }
+    </script>
+    <script>
+        $("input[id='inputContact']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        });
     </script>
 </body>
 </html>

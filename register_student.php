@@ -59,15 +59,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="inputFirst" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="inputFirst" name="firstname" required>
+                        <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" name="firstname" required>
                     </div>
                     <div class="col-md-4">
                         <label for="inputMiddle" class="form-label">Middle name</label>
-                        <input type="text" class="form-control" id="inputMiddle" name="middlename" required>
+                        <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" name="middlename" required>
                     </div>
                     <div class="col-md-4">
                         <label for="inputLast" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="inputLast" name="lastname" required>
+                        <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" name="lastname" required>
                     </div>
                 </div> 
                 <br>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputCourse" class="form-label">Course</label>
-                        <select name="course" class="form-select" id="">
+                        <select name="course" class="form-select" id="" required>
                             <option value="" selected disabled>Select Course</option>
                             <option value="BSCE">BSCE - Bachelor of Science in Civil Engineering</option>
                             <option value="BSEE">BSEE - Bachelor of Science in Electrical Engineering</option>
@@ -170,6 +170,17 @@
           frame_1.src=URL.createObjectURL(event.target.files[0]);
       }
 
+    </script>
+    <script>
+        function lettersOnly(input) {
+            var regex = /[^a-z]/gi;
+            input.value = input.value.replace(regex, "");
+        }
+    </script>
+    <script>
+        $("input[id='inputContact']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        });
     </script>
 </body>
 </html>

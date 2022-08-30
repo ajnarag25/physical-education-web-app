@@ -44,10 +44,10 @@
               </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
-                <h4 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
+                <h5 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
         
                  <a href="functions.php?logout" type="submit" class="btn btn-danger side" >Logout</a>
-                </h4>
+                </h5>
             </div>
           </div>
         </div>

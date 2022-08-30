@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 session_start();
-// error_reporting(0);
+error_reporting(0);
 
 #LOGIN
 if (isset($_POST['login'])) {
@@ -173,7 +173,7 @@ if (isset($_POST['register_student'])) {
 
 
 
-#REGISTER STUDENT
+#REGISTER TEACHER
 if (isset($_POST['register_teacher'])) {
     $first = $_POST['firstname'];
     $middle = $_POST['middlename'];
@@ -466,6 +466,26 @@ if (isset($_POST['request_student_1'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
+    $create_list = [
+        $first,
+        $middle,
+        $last,
+        $course,
+        $dept,
+        $gender,
+        $teacher,
+        $sizeT,
+        $sizeS,
+        $sizeJ,
+        $email,
+        $image,
+        $status,
+        $note,
+        $date
+    ];
+
+    $_SESSION['success_data'] = $create_list;
+
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
@@ -481,9 +501,9 @@ if (isset($_POST['request_student_1'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "pe1.php";
+                    window.location.href = "success_inquire.php";
                     }else{
-                        window.location.href = "pe1.php";
+                        window.location.href = "success_inquire.php";
                     }
                 })
                 
@@ -533,6 +553,26 @@ if (isset($_POST['request_student_2'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
+    $create_list = [
+        $first,
+        $middle,
+        $last,
+        $course,
+        $dept,
+        $gender,
+        $teacher,
+        $sizeT,
+        $sizeS,
+        $sizeJ,
+        $email,
+        $image,
+        $status,
+        $note,
+        $date
+    ];
+
+    $_SESSION['success_data'] = $create_list;
+
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
@@ -548,9 +588,9 @@ if (isset($_POST['request_student_2'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "pe1.php";
+                    window.location.href = "success_inquire.php";
                     }else{
-                        window.location.href = "pe1.php";
+                        window.location.href = "success_inquire.php";
                     }
                 })
                 
@@ -600,6 +640,26 @@ if (isset($_POST['request_teacher_1'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
+    $create_list = [
+        $first,
+        $middle,
+        $last,
+        $course,
+        $dept,
+        $gender,
+        $teacher,
+        $sizeT,
+        $sizeS,
+        $sizeJ,
+        $email,
+        $image,
+        $status,
+        $note,
+        $date
+    ];
+
+    $_SESSION['success_data'] = $create_list;
+
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
@@ -615,9 +675,9 @@ if (isset($_POST['request_teacher_1'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "pe1.php";
+                    window.location.href = "success_inquire.php";
                     }else{
-                        window.location.href = "pe1.php";
+                        window.location.href = "success_inquire.php";
                     }
                 })
                 
@@ -667,6 +727,26 @@ if (isset($_POST['request_teacher_2'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
+    $create_list = [
+        $first,
+        $middle,
+        $last,
+        $course,
+        $dept,
+        $gender,
+        $teacher,
+        $sizeT,
+        $sizeS,
+        $sizeJ,
+        $email,
+        $image,
+        $status,
+        $note,
+        $date
+    ];
+
+    $_SESSION['success_data'] = $create_list;
+
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
@@ -682,9 +762,9 @@ if (isset($_POST['request_teacher_2'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "pe1.php";
+                    window.location.href = "success_inquire.php";
                     }else{
-                        window.location.href = "pe1.php";
+                        window.location.href = "success_inquire.php";
                     }
                 })
                 
