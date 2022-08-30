@@ -798,4 +798,61 @@ if (isset($_POST['request_teacher_2'])) {
     }
 }
 
+#CANCEL REQUEST
+if (isset($_POST['cancel_request'])) {
+    
+    $get_mail = $_POST['check_email'];
+
+    if ($get_mail != null){
+        $conn->query("UPDATE inquire SET  status='CANCELED' WHERE email='$get_mail'") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Canceled',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "home.php";
+                    }else{
+                        window.location.href = "home.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+    else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "home.php";
+                    }else{
+                        window.location.href = "home.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
+
 ?>

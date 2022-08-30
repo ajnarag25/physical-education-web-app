@@ -97,13 +97,35 @@
                         <div class="text-center">
                           <br>
                             <a class="btn btn-secondary" href="pickuniform.php">Back</a>
-                            <button type="submit" class="btn btn-danger" name="request_student_1">Cancel Request</button>
+                            <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Modal -->
+        <div class="modal fade" id="cancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cancel Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center">
+                <h4>Are you sure to cancel your request?</h4>
+                <p><i class='bx bxs-message-alt-error bx-flashing' style="color:red"></i> This action is irreversible!</p>
+              </div>
+              <div class="modal-footer">
+                <form action="functions.php" method="POST">
+                  <input type="hidden" value="<?php echo $_SESSION['get_data']['email']; ?>" name="check_email">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" name="cancel_request">Yes, Cancel it now</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
    
 
   
@@ -111,11 +133,5 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
-    <script>
-      function preview() {
-          frame_1.src=URL.createObjectURL(event.target.files[0]);
-      }
-
-    </script>
 </body>
 </html>
