@@ -69,7 +69,9 @@
         $set_data6 = $_SESSION['get_data']['gender'];
         $set_data7 = $_SESSION['get_data']['email'];
         $set_data8 = $_SESSION['get_data']['image'];
-        
+
+        $date_today = date("d/m/Y");
+
         if ($_SESSION['get_data']['users'] == 'Student'){
         
         echo '
@@ -153,6 +155,13 @@
                     </div> 
                     <br>
                     <div class="text-center">
+                        <input type="hidden" name="date" value="'.$date_today.'">
+                        <input type="hidden" name="email" value="'.$set_data7.'">
+                        <input type="hidden" name="image" value="'.$set_data8.'">
+                        <input type="hidden" name="note" value="N/A">
+                        <input type="hidden" name="status" value="PENDING">
+                        <input type="hidden" name="department" value="N/A">
+                        <input type="hidden" name="sizes" value="N/A">
                         <a class="btn btn-secondary" href="pickuniform.php">Back</a>
                         <button type="submit" class="btn btn-danger" name="request_student_2">Request</button>
                     </div>
@@ -243,6 +252,13 @@
                     </div> 
                     <br>
                     <div class="text-center">
+                        <input type="hidden" name="date" value="'.$date_today.'">
+                        <input type="hidden" name="email" value="'.$set_data7.'">
+                        <input type="hidden" name="image" value="'.$set_data8.'">
+                        <input type="hidden" name="note" value="N/A">
+                        <input type="hidden" name="status" value="PENDING">
+                        <input type="hidden" name="course" value="N/A">
+                        <input type="hidden" name="sizes" value="N/A">
                         <a class="btn btn-secondary" href="pickuniform.php">Back</a>
                         <button type="submit" class="btn btn-danger" name="request_teacher_2">Request</button>
                     </div>

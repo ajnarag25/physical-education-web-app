@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 session_start();
-error_reporting(0);
+// error_reporting(0);
 
 #LOGIN
 if (isset($_POST['login'])) {
@@ -450,16 +450,272 @@ if (isset($_POST['change_pass'])) {
 
 #INQUIRE UNIFORM
 if (isset($_POST['request_student_1'])) {
-    echo('PE 1 STUDENT');
+    $first = $_POST['firstname'];
+    $middle = $_POST['middlename'];
+    $last = $_POST['lastname'];
+    $course = $_POST['course'];
+    $dept = $_POST['department'];
+    $gender = $_POST['gender']; 
+    $teacher = $_POST['teacher'];
+    $sizeT = $_POST['tshirt'];
+    $sizeS = $_POST['shorts'];
+    $sizeJ = $_POST['sizej'];
+    $email = $_POST['email'];
+    $image = $_POST['image'];
+    $status = $_POST['status'];
+    $note = $_POST['note'];
+    $date =  $_POST['date'];
+    
+    if ($email != null){
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
 }
 if (isset($_POST['request_student_2'])) {
-    echo('PE 2 STUDENT');
+    $first = $_POST['firstname'];
+    $middle = $_POST['middlename'];
+    $last = $_POST['lastname'];
+    $course = $_POST['course'];
+    $dept = $_POST['department'];
+    $gender = $_POST['gender']; 
+    $teacher = $_POST['teacher'];
+    $sizeT = $_POST['tshirt'];
+    $sizeS = $_POST['sizes'];
+    $sizeJ = $_POST['joggingpants'];
+    $email = $_POST['email'];
+    $image = $_POST['image'];
+    $status = $_POST['status'];
+    $note = $_POST['note'];
+    $date =  $_POST['date'];
+    
+    if ($email != null){
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe2.php";
+                    }else{
+                        window.location.href = "pe2.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
 }
 if (isset($_POST['request_teacher_1'])) {
-    echo('PE 1 TEACHER');
+    $first = $_POST['firstname'];
+    $middle = $_POST['middlename'];
+    $last = $_POST['lastname'];
+    $course = $_POST['course'];
+    $dept = $_POST['department'];
+    $gender = $_POST['gender']; 
+    $teacher = $_POST['teacher'];
+    $sizeT = $_POST['tshirt'];
+    $sizeS = $_POST['shorts'];
+    $sizeJ = $_POST['sizej'];
+    $email = $_POST['email'];
+    $image = $_POST['image'];
+    $status = $_POST['status'];
+    $note = $_POST['note'];
+    $date =  $_POST['date'];
+    
+    if ($email != null){
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
 }
 if (isset($_POST['request_teacher_2'])) {
-    echo('PE 2 TEACHER');
+    $first = $_POST['firstname'];
+    $middle = $_POST['middlename'];
+    $last = $_POST['lastname'];
+    $course = $_POST['course'];
+    $dept = $_POST['department'];
+    $gender = $_POST['gender']; 
+    $teacher = $_POST['teacher'];
+    $sizeT = $_POST['tshirt'];
+    $sizeS = $_POST['sizes'];
+    $sizeJ = $_POST['joggingpants'];
+    $email = $_POST['email'];
+    $image = $_POST['image'];
+    $status = $_POST['status'];
+    $note = $_POST['note'];
+    $date =  $_POST['date'];
+    
+    if ($email != null){
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe1.php";
+                    }else{
+                        window.location.href = "pe1.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pe2.php";
+                    }else{
+                        window.location.href = "pe2.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
 }
 
 ?>
