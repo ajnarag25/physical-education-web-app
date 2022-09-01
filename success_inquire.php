@@ -63,35 +63,41 @@
             <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                 <div class="card card_custom">
                     <div class="row">
+                        <?php 
+                          $email = $_SESSION['get_data']['email']; 
+                          $query = "SELECT * FROM inquire WHERE email='$email'";
+                          $result = mysqli_query($conn, $query);
+                          while ($row = mysqli_fetch_array($result)) {
+                        ?>
                         <div class="col">
-                            <h4>Name: <?php echo $_SESSION['success_data'][0];?> <?php echo $_SESSION['success_data'][1];?> <?php echo $_SESSION['success_data'][2];?></h4>
+                            <h4>Name: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h4>
                             <hr>
-                            <h4>Gender: <?php echo $_SESSION['success_data'][5];?></h4>
+                            <h4>Gender: <?php echo $row['gender'] ?></h4>
                             <hr>
-                            <h4>Course: <?php echo $_SESSION['success_data'][3];?></h4>
+                            <h4>Course: <?php echo $row['course'] ?></h4>
                             <hr>
-                            <h4>Size of T-Shirt: <?php echo $_SESSION['success_data'][7];?></h4>
+                            <h4>Size of T-Shirt: <?php echo $row['size_t'] ?></h4>
                             <hr>
-                            <h4>Size of Short: <?php echo $_SESSION['success_data'][8];?></h4>
+                            <h4>Size of Short: <?php echo $row['size_s'] ?></h4>
                             <hr>
-                            <h4>Size of Joggingpants: <?php echo $_SESSION['success_data'][9];?></h4>
+                            <h4>Size of Joggingpants: <?php echo $row['size_j'] ?></h4>
                         </div>
                         <div class="col">
-                            <h4>P.E Teacher: <?php echo $_SESSION['success_data'][6];?></h4>
+                            <h4>P.E Teacher: <?php echo $row['teacher'] ?></h4>
                             <hr>
-                            <h4>Date of Submission: <?php echo $_SESSION['success_data'][14];?></h4>
+                            <h4>Date of Submission: <?php echo $row['date'] ?></h4>
                             <hr>
-                            <h4>Department: <?php echo $_SESSION['success_data'][4];?></h4>
+                            <h4>Department: <?php echo $row['department'] ?></h4>
                             <hr>
                             <h4>Status: <?php
-                                if($_SESSION['success_data'][12] == 'PENDING'){
-                                    $set_pending = $_SESSION['success_data'][12];
+                                if($row['status'] == 'PENDING'){
+                                    $set_pending = $row['status'];
                                     echo '<h4 style="color:rgb(185, 187, 48)">'.$set_pending.'</h4>';
                                 }
                              
                              ?></h4>
                              <hr>
-                             <h4>Note: <?php echo $_SESSION['success_data'][13];?></h4>
+                             <h4>Note: <?php echo $row['note'] ?></h4>
 
                         </div>
                         <div class="text-center">
@@ -99,6 +105,8 @@
                             <a class="btn btn-secondary" href="pickuniform.php">Back</a>
                             <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
                         </div>
+                        <?php
+                        }?>
                     </div>
                 </div>
             </div>

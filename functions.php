@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 session_start();
-error_reporting(0);
+
 
 #LOGIN
 if (isset($_POST['login'])) {
@@ -854,5 +854,70 @@ if (isset($_POST['cancel_request'])) {
     }
 }
 
+
+#RESERVE FACILITY
+if (isset($_POST['reserve_facility'])) {
+    $check_mail = $_POST['email'];
+    $names = $_POST['names'];
+    $dept_course = $_POST['dept_course'];
+    $dates = $_POST['date'];
+    $times = $_POST['time'];
+    $bookings = $_POST['book'];
+    $purposes = $_POST['purpose'];
+    $participants = $_POST['participants'];
+    $reasons = $_POST['reason'];
+    $status = $_POST['stats'];
+    $rescheds = $_POST['resched'];
+
+    if ($check_mail != null){
+        $conn->query("INSERT INTO reserve (email, name, dept_course, date, time, booking, purpose, participants, reason, status, resched) 
+        VALUES('$check_mail','$names','$dept_course','$dates', '$times', '$bookings', '$purposes', '$participants', '$reasons', '$status', '$rescheds')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "success_reserve.php";
+                    }else{
+                        window.location.href = "success_reserve.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "reserve.php";
+                    }else{
+                        window.location.href = "reserve.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
 
 ?>

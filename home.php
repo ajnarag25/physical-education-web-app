@@ -130,7 +130,7 @@
                   <br>
                   <p>Make your own reservation, make your time productive and just simply schedule your own choice.</p>
                   <br>
-                  <a href="" class="service-btn">Make Reservation</a>
+                  <a href="reserve.php" class="service-btn">Make Reservation</a>
                 </div>
                 <div class="col-sm-4 text-center">
                   <br><br>

@@ -234,8 +234,8 @@
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
-                                <option value="extralarge">XL</option>
-                                <option value="2extralarge">XXL</option>
+                                <option value="extra large">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -245,8 +245,8 @@
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
-                                <option value="extralarge">XL</option>
-                                <option value="2extralarge">XXL</option>
+                                <option value="extra large">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </div>
                     </div> 
