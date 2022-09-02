@@ -141,7 +141,7 @@
                   <p>Borrow any equipments in P.E Department, just simply fill-up all the 
                       information that is needed.</p>
                   <br>
-                  <a href="" class="service-btn">Borrow Equipments</a>
+                  <a href="pickequipment.php" class="service-btn">Borrow Equipments</a>
                 </div>
                 <div id="about"></div>
             </div>
