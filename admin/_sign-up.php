@@ -1,3 +1,8 @@
+<?php
+    include('connection.php');
+    session_start();
+?>
+
 <!doctype html>
 <html class="no-js " lang="en">
 
@@ -22,42 +27,51 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-12">
-                <form class="card auth_form">
+                <form class="card auth_form" method="POST" action="functions.php"> 
                     <div class="header">
                         <img class="logo" src="assets/images/tuplogo.png" alt="">
                         <h5>Sign Up</h5>
-                        <span>Register a new membership</span>
+                        <span>Admin Registration</span>
                     </div>
                     <div class="body">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username" required>
+                            <input type="text" class="form-control" name="firstname" placeholder="Firstname" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                             </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="lastname" placeholder="Lastname" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                            </div>
                         </div>                    
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password1" placeholder="Password" required>
                             <div class="input-group-append">                                
                                 <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                             </div>                            
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Confirm Password" required>
+                            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
                             <div class="input-group-append">                                
                                 <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                             </div>                            
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Verification Code" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="zmdi zmdi-confirmation-number"></i></span>
-                            </div>
-                        </div>   
-                        <!-- <div class="checkbox">
-                            <input id="remember_me" type="checkbox">
-                            <label for="remember_me">I read and agree to the <a href="javascript:void(0);">terms of usage</a></label>
-                        </div> -->
-                        <a href="index.php" class="btn btn-primary btn-block waves-effect waves-light">SIGN UP</a>
+                        </div> 
+                        <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" name="signup">SIGN UP</button>
                         <div class="signin_with mt-3">
                             <a class="link" href="index.php">You already have a account?</a>
                         </div>

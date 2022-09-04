@@ -1,3 +1,10 @@
+<?php
+    include('connection.php');
+    session_start();
+    if (!isset($_SESSION['get_data']['username'])) {
+    header("Location: index.php");
+}
+?>
 <!doctype html>
 <html class="no-js " lang="en">
 
@@ -34,7 +41,7 @@
 <div class="navbar-right">
     <ul class="navbar-nav">
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li><a href="index.html" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="functions.php?logout" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
 </div>
 
@@ -50,8 +57,8 @@
                 <div class="user-info">
                     <a class="image" href="_profile.html"><img src="assets/images/tuplogo.png" alt="User"></a>
                     <div class="detail">
-                        <h4>Michael</h4>
-                        <small>Super Admin</small>                        
+                        <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
+                        <small>Administrator</small>                        
                     </div>
                 </div>
             </li>
@@ -60,7 +67,7 @@
             <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform Inquiries</span></a></li>
             <li><a href="_basketball.php"><i class="zmdi zmdi-chart-donut"></i><span>Sports Equipment</span></a></li> 
             <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
-            <li><a href="index.php"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
+            <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
         </ul>
     </div>
 </aside>
@@ -110,7 +117,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Welcome to P.E. Department Admin Site</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="_index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -248,8 +255,8 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Calendar</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="_reservation.html">Facility Reservation</a></li>
+                        <li class="breadcrumb-item"><a href="_index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="_reservation.php">Facility Reservation</a></li>
                         <li class="breadcrumb-item active">Reservation Calendar</li>
                     </ul>
                 </div>

@@ -44,7 +44,7 @@
             <form action="functions.php" method="POST">
               <div class="d-flex top">
                 <div class="col-md-6">
-                  <input class="form-control" type="text" placeholder="Email" aria-label="Email" name="email" required>
+                  <input class="form-control" type="email" placeholder="Email" aria-label="Email" name="email" required>
                   <p class="forgot">Forgot password? <a class="click" href="" data-bs-toggle="modal" data-bs-target="#forgot">click here</a></p>
                 </div>
                 <div class="col-md-6 side">
