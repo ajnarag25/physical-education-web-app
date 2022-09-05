@@ -64,7 +64,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="_profile.html"><img src="assets/images/tuplogo.png" alt="User"></a>
+                    <a class="image" href="_profile.php"><img src="assets/images/tuplogo.png" alt="User"></a>
                     <div class="detail">
                         <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
                         <small>Administrator</small>                        

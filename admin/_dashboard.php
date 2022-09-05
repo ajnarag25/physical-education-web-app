@@ -55,7 +55,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="_profile.html"><img src="assets/images/tuplogo.png" alt="User"></a>
+                    <a class="image" href="_profile.php"><img src="assets/images/tuplogo.png" alt="User"></a>
                     <div class="detail">
                         <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
                         <small>Administrator</small>                        
@@ -132,8 +132,18 @@
                     <div class="card widget_2 big_icon zmdi-calendar">
                         <div class="body">
                             <h6>Facility Reservation <br><small>(P.E. Dept. Facilities)</small></h6>
-                            <h2>7 <small class="info">New Request</small></h2>
-                            <small>Pending: 2</small>
+                            <?php 
+                                $query = "SELECT * FROM reserve";
+                                $result = mysqli_query($conn, $query);
+                                $row_reserve_1 = mysqli_num_rows($result);
+                            ?>
+                            <h2><?php echo $row_reserve_1; ?> <small class="info">Request/s</small></h2>
+                            <?php 
+                                $query = "SELECT * FROM reserve";
+                                $result = mysqli_query($conn, $query);
+                                $row_reserve_2 = mysqli_num_rows($result);
+                            ?>
+                            <small>Pending: <?php echo $row_reserve_2; ?></small>
                             <div class="progress">
                                 <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 2%;"></div>
                             </div>
@@ -144,10 +154,20 @@
                     <div class="card widget_2 big_icon sales">
                         <div class="body">
                             <h6>Uniform Inquiries <br><small>(P.E. Uniform)</small></h6>
-                            <h2>37 <small class="info">New Request</small></h2>
-                            <small>Pending: 42</small>
+                            <?php 
+                                $query = "SELECT * FROM inquire";
+                                $result = mysqli_query($conn, $query);
+                                $row_inquire_1 = mysqli_num_rows($result);
+                            ?>
+                            <h2><?php echo $row_inquire_1; ?> <small class="info">Request/s</small></h2>
+                            <?php 
+                                $query = "SELECT * FROM inquire WHERE status='PENDING'";
+                                $result = mysqli_query($conn, $query);
+                                $row_inquire_2 = mysqli_num_rows($result);
+                            ?>
+                            <small>Pending: <?php echo $row_inquire_2; ?></small>
                             <div class="progress">
-                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: 42%;"></div>
+                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: 4%;"></div>
                             </div>
                         </div>
                     </div>
@@ -192,51 +212,62 @@
                                         <th>Name</th>
                                         <th>Item</th>
                                         <th>Request Date</th>
-                                        <th>Quantity</th>                                    
+                                        <th>P.E Teacher</th>   
+                                        <th>Size of T-shirt</th>   
+                                        <th>Size of Shorts</th>   
+                                        <th>Size of Joggingpants</th>                                    
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php 
+                                    $query = "SELECT * FROM inquire";
+                                    $result = mysqli_query($conn, $query);
+                                    $check_row = mysqli_num_rows($result);
+                                    if ($check_row == 0){
+                                        echo 'No available data...';
+                                    }
+                                    while ($row = mysqli_fetch_array($result)) {
+                                ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Sean Monacillo</td>
-                                        <td>PE 1</td>
-                                        <td>12/08/2019</td>
-                                        <td>1</td>
-                                        <td><span class="badge badge-success">Paid</span></td>
+                                        <td><?php echo $row['id'] ?></td>
+                                        <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                        <td>
+                                            <?php if ($row['size_s'] == 'N/A'){
+                                                    echo '
+                                                        PE-2
+                                                    ';
+                                                }else{
+                                                    echo '
+                                                        PE-1
+                                                    ';
+                                                }
+                                            ?>
+                                        </td>
+                                        <td><?php echo $row['date'] ?></td>
+                                        <td><?php echo $row['teacher'] ?></td>
+                                        <td><?php echo $row['size_t'] ?></td>
+                                        <td><?php echo $row['size_s'] ?></td>
+                                        <td><?php echo $row['size_j'] ?></td>
+                                        <td>
+                                            <?php if ($row['status'] == 'PENDING'){
+                                                    echo '
+                                                        <span class="badge badge-warning">Pending</span>
+                                                    ';
+                                                } elseif ($row['status'] == 'APPROVED'){
+                                                    echo '
+                                                        <span class="badge badge-success">Approved</span>
+                                                    ';     
+                                                }else{
+                                                    echo '
+                                                        <span class="badge badge-danger">Declined</span>
+                                                    ';
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Avor Narag</td>
-                                        <td>PE 2</td>
-                                        <td>12/08/2019</td>
-                                        <td>1</td>
-                                        <td><span class="badge badge-warning">Unpaid</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Nigelle Salvador</td>
-                                        <td>PE 1</td>
-                                        <td>12/08/2019</td>
-                                        <td>1</td>
-                                        <td><span class="badge badge-success">Paid</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Michael Rilan</td>
-                                        <td>PE 1</td>
-                                        <td>12/08/2019</td>
-                                        <td>1</td>
-                                        <td><span class="badge badge-success">Paid</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Raiza Gumarang</td>
-                                        <td>PE 2</td>
-                                        <td>12/08/2019</td>
-                                        <td>1</td>
-                                        <td><span class="badge badge-warning">Unpaid</span></td>
-                                    </tr>
+
+                                <?php }?>
                                 </tbody>
                             </table>
                         </div>

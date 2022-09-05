@@ -65,7 +65,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="_profile.html"><img src="assets/images/tuplogo.png" alt="User"></a>
+                    <a class="image" href="_profile.php"><img src="assets/images/tuplogo.png" alt="User"></a>
                     <div class="detail">
                         <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
                         <small>Administrator</small>                        
@@ -115,74 +115,122 @@
                                     <thead class="thead-light">
                                         <tr>                               
                                             <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
+                                            <th><small>Course/Department</small></th>
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
-                                            <th><small>Req. Date/Time</small></th>
+                                            <th><small>Req. Date</small></th>
                                             <th><small>Selected</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
                                         <tr>                                    
                                             <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
+                                            <th><small>Course/Department</small></th>
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
-                                            <th><small>Req. Date/Time</small></th>
+                                            <th><small>Req. Date</small></th>
                                             <th><small>Selected</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM inquire WHERE status='PENDING'";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        if ($check_row == 0){
+                                            echo 'No available data...';
+                                        }
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
                                         <tr>
-                                            <td id="nem">Tiger Nixon</td>
-                                            <td>COET</td>
-                                            <td>Male</td>
-                                            <td>PE 1</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
+                                            <td id="nem"><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
                                             <td>
-                                                <input type="checkbox" name="check-tab1"></td>
+                                                <?php if ($row['course'] == 'N/A'){
+                                                    $department = $row['department'];
+                                                    echo $department;
+                                                }else{
+                                                    $course = $row['course'];
+                                                    echo $course;
+                                                } ?>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="nem">Cedric Kelly</td>
-                                            <td>COET</td>
-                                            <td>Male</td>
-                                            <td>PE 1</td>
-                                            <td>Large</td>
-                                            <td>Medium</td>
-                                            <td>Jester</td>
-                                            <td>08/21/2022 / 9:00AM</td>
+                                            <td><?php echo $row['gender'] ?></td>
                                             <td>
-                                                <input type="checkbox" name="check-tab1"></td>
+                                                <?php if ($row['size_s'] == 'N/A'){
+                                                        echo '
+                                                            PE-2
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                            PE-1
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $row['size_t'] ?></td>
+                                            <td><?php echo $row['size_s'] ?></td>
+                                            <td><?php echo $row['size_j'] ?></td>
+                                            <td><?php echo $row['teacher'] ?></td>
+                                            <td><?php echo $row['date'] ?></td>
+                                            <td>
+                                                <input type="checkbox" name="checks[]" value="<?php echo $row['id']; ?>">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td id="nem">Brielle Williamson</td>
-                                            <td>COET</td>
-                                            <td>Male</td>
-                                            <td>PE 2</td>
-                                            <td>Small</td>
-                                            <td>Small</td>
-                                            <td>Mica</td>
-                                            <td>08/21/2022 / 9:00AM</td>
-                                            <td> 
-                                                <input type="checkbox" name="check-tab1"></td>
-                                            </td>
-                                        </tr>
+                                         <!-- Modal for Accept -->
+                                        <div class="modal fade" id="accept" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="title" id="largeModalLabel">Set Schedule for Payment</h4>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="card">
+                                                                <div class="modal-header">
+                                                                    <h6 class="title " style="text-align: center;">Requested By:</h6>
+                                                                </div>
+                                                                <div class="body">
+                                                                    <form method="POST" action="functions.php">
+                                                                        <div class="form-group">
+                                                                            <div class="form-line">
+                                                                                <input type="text" value="Brielle Williamson,Cedric Kelly,Tiger Nixon" data-role="tagsinput">
+                                                                            </div>
+                                                                        </div>
+                                                                        <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
+                                                                        <div name="approvesched" id="approvesched" class="form-group">
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                </div>
+                                                                                <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
+                                                                            <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
                                     </tbody>
                                    
                                 </table>
                                 <div class="col-sm-3 btn-group" role="group">
                                     <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept</button>
+                                   
                                     <button class="btn btn-danger btn-sm ">Decline</button>
                                 </div>
                             </div>
@@ -515,47 +563,6 @@
     
 </section>
 
-<!-- Modal for Accept -->
-<div class="modal fade" id="accept" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Set Schedule for Payment</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By:</h6>
-                        </div>
-                        <div class="body">
-                            <form name='myForm'>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" value="Brielle Williamson,Cedric Kelly,Tiger Nixon" data-role="tagsinput" disabled>
-                                    </div>
-                                </div>
-                                <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
-                                <div name="approvesched" id="approvesched" class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                        </div>
-                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal for Pickup -->
 <div class="modal fade" id="pickup" tabindex="-1" role="dialog">

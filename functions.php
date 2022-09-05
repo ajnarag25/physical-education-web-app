@@ -490,8 +490,8 @@ if (isset($_POST['request_student_1'])) {
     $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
-        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
-        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -577,8 +577,8 @@ if (isset($_POST['request_student_2'])) {
     $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
-        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
-        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -664,8 +664,8 @@ if (isset($_POST['request_teacher_1'])) {
     $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
-        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
-        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -751,8 +751,8 @@ if (isset($_POST['request_teacher_2'])) {
     $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
-        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date) 
-        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date')") or die($conn->error);
+        $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
+        VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
