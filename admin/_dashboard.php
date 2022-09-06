@@ -145,7 +145,7 @@
                             ?>
                             <small>Pending: <?php echo $row_reserve_2; ?></small>
                             <div class="progress">
-                                <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 2%;"></div>
+                                <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row_reserve_1?>%"></div>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                             ?>
                             <small>Pending: <?php echo $row_inquire_2; ?></small>
                             <div class="progress">
-                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: 4%;"></div>
+                                <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row_inquire_1?>%;"></div>
                             </div>
                         </div>
                     </div>

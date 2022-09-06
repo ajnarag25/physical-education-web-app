@@ -183,8 +183,14 @@
                                                 <input type="checkbox" name="checks[]" value="<?php echo $row['id']; ?>">
                                             </td>
                                         </tr>
-                                         <!-- Modal for Accept -->
-                                        <div class="modal fade" id="accept" tabindex="-1" role="dialog">
+                                    <?php } ?>
+                                    </tbody>
+                                   
+                                </table>
+                                <div class="col-sm-3 btn-group" role="group">
+                                    <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept</button>
+                                           <!-- Modal for Accept -->
+                                           <div class="modal fade" id="accept" tabindex="-1" role="dialog">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -215,7 +221,7 @@
                                                                         <div class="modal-footer">
                                                                             <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
                                                                             <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                                                        </div>
+                                                                        </div>        
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -224,13 +230,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php } ?>
-                                    </tbody>
-                                   
-                                </table>
-                                <div class="col-sm-3 btn-group" role="group">
-                                    <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept</button>
-                                   
                                     <button class="btn btn-danger btn-sm ">Decline</button>
                                 </div>
                             </div>
