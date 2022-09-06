@@ -1,7 +1,7 @@
 <?php 
   include('connection.php');
   session_start();
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,13 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+    
+
+
+
+
 </head>
 
 <body>
@@ -52,6 +59,7 @@
         </div>
         <br>
         <div class="card card_custom container"  data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+            <p class="text-primary">Fields that has (*) are required to fillout</p>
             <div class="d-flex flex-row-reverse bd-highlight">
                 <a href="register_teacher.php" style="text-decoration: none; color:rgb(151, 8, 8);">Register as Teacher <i class='bx bx-right-arrow-alt'></i> </a>
             </div>
@@ -72,11 +80,15 @@
                 </div> 
                 <br>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label for="input_stuID" class="form-label">ID-number(TUPC-xx-xxxx)</label>
+                        <input type="text" class="form-control" id="inputstuid" name="stuid" value="TUPC-" required>
+                    </div>
+                    <div class="col-md-4">
                         <label for="inputEmail" class="form-label">Email</label>
                         <input type="text" class="form-control" id="inputEmail" name="email" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="inputContact" class="form-label">Contact No.</label>
                         <input type="text" class="form-control" id="inputContact" name="contact" required>
                     </div>
@@ -118,16 +130,23 @@
                     <div class="col-md-4">
                         <label for="inputImage" class="form-label">Upload image for your profile pic</label>
                         <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
+                        
+
                     </div>
                 </div> 
                 <br>
+
                 <div class="row">
-                    <div class="col-md-4 text-center">
-                        <img id="frame_1" src="#" width="100px" height="100px"/>
-                        <img id="frame_2" src="#" width="100px" height="100px"/>
-                        <br><br>
-                        <button type="button" class="btn btn-danger">Scan your ID QR code</button>
+
+
+                    <div class="col-md-4">
+                        <label for="inputQR" class="form-label">Upload QR code from your School ID</label>
+                        <input type="file" class="form-control" id = "qr_input" name="ID_pic" accept="image/png, image/jpeg" required><br>
+                        <input type="text" class="form-control" name="qr_val" id="qr_data" readonly>
+                        <p id="pp" class="text-primary">Select a clearer photo for the system to scan</p>
                     </div>
+
+
                     <div class="col-md-4">
                         <label for="inputPass1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="inputPass1" name="password1" required>
@@ -139,7 +158,7 @@
                         <p>NOTE:</p>
                         <ul>
                             <li>Your password can't be too similar to your other personal information.</li>
-                            <li>Your password must conatain at least 8 characters.</li>
+                            <li>Your password must contain at least 8 characters.</li>
                             <li>Your password can't be a commonly used password.</li>
                             <li>Your password can't be entirely numeric.</li>
                         </ul>
@@ -160,17 +179,39 @@
 
    
 
-  
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
+
+
+    <!---DITO KO NILAGAY YUNG PAG IMPORT NG QR JS PACKAGES----->
+    <script type="text/javascript" src="js/qr_js_packages/script_qr.js"></script>
     <script>
       function preview() {
           frame_1.src=URL.createObjectURL(event.target.files[0]);
       }
+    </script>
+
+
+    <script>
+        var input = document.getElementById('inputstuid');
+
+        input.addEventListener("keydown", function() {
+        var oldVal = this.value;
+        console.log(oldVal);
+        var field = this;
+        
+        setTimeout(function () {
+            if(field.value.indexOf('TUPC-') !== 0) {
+                field.value = oldVal;
+            } 
+        }, 1);
+        });
 
     </script>
+
+    <!----ENDING NG GINAWA KO SA JS PART-------->
     <script>
         function lettersOnly(input) {
             var regex = /[^a-z]/gi;
@@ -182,5 +223,6 @@
             $(this).val($(this).val().replace(/[^0-9]/g, ''));
         });
     </script>
+
 </body>
 </html>

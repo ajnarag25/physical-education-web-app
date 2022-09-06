@@ -55,8 +55,10 @@ if (isset($_POST['register_student'])) {
     $pass1 = $_POST['password1'];
     $pass2 = $_POST['password2'];
     $user = $_POST['user_student'];
-
+    $idno = $_POST['stuid'];
+    $dir_qr = "uploads/school_id_qr/";
     $target_dir = "uploads/";
+    
     $target_file = $target_dir . time(). basename($_FILES["profile_pic"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -65,6 +67,10 @@ if (isset($_POST['register_student'])) {
 
     $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle'  AND lastname='$last' ";
     $result = mysqli_query($conn, $sql);
+
+
+    
+
 
     if ($pass1 != $pass2){
         ?>
@@ -117,8 +123,8 @@ if (isset($_POST['register_student'])) {
                 </script>
                 <?php
             }else{
-                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp) 
-                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user', 0)") or die($conn->error);
+                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp,id_no) 
+                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user', 0,'$idno')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
