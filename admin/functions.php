@@ -144,4 +144,64 @@
     
     }
 
+    if (isset($_POST['set_sched'])) {
+        $get_check = $_POST['checks'];
+        $set_scheds = $_POST['sched'];
+        $get_msg = $_POST['msg'];
+
+        if ($get_check != null){
+            foreach ($get_check as $get_val){
+                $conn->query("UPDATE inquire SET status='UNPAID', sched_pay='$set_scheds' WHERE id='$get_val'") or die($conn->error);
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Approved!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "_uniform.php";
+                            }else{
+                                window.location.href = "_uniform.php";
+                            }
+                        })
+                        
+                    })
+            
+                </script>
+                <?php
+            }
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Please select a student first',
+                    text: 'An error occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    
+    }
+
+    
 ?>

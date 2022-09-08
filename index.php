@@ -127,7 +127,6 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
       <div class="jumbotron">
         <div class="container service-container">
             <div class="text-center slideanim">

@@ -37,12 +37,12 @@
 <body class="theme-blush">
 
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<!-- <div class="page-loader-wrapper">
     <div class="loader">
         <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/tuplogo.png" width="48" height="48" alt="Aero"></div>
         <p>Please wait...</p>
     </div>
-</div>
+</div> -->
 
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
@@ -109,6 +109,7 @@
                             </ul>
                             <h2><strong>Request</strong> Table </h2>
                         </div>
+                        <form method="POST" action="functions.php">
                         <div class="body">
                             <div class="table-responsive" style="text-align: center;">
                                 <table class="table table-bordered table-hover js-basic-example dataTable table-sm " id="table1">
@@ -124,6 +125,7 @@
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Req. Date</small></th>
                                             <th><small>Selected</small></th>
+                                            <th><small>Decline</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -138,6 +140,7 @@
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Req. Date</small></th>
                                             <th><small>Selected</small></th>
+                                            <th><small>Decline</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -145,9 +148,6 @@
                                         $query = "SELECT * FROM inquire WHERE status='PENDING'";
                                         $result = mysqli_query($conn, $query);
                                         $check_row = mysqli_num_rows($result);
-                                        if ($check_row == 0){
-                                            echo 'No available data...';
-                                        }
                                         while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                         <tr>
@@ -182,15 +182,48 @@
                                             <td>
                                                 <input type="checkbox" name="checks[]" value="<?php echo $row['id']; ?>">
                                             </td>
+                                            <td>
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <!-- Modal for Decline -->
+                                                <div class="modal fade" id="decline<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Decline Inquiry of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <div class="body">
+                                                                            <h3>Declining the inquiry</h3>
+                                                                            <p>This Action is Irrevesible!</p>
+                                                                            <p>Please compose a reason why this inquiry needs to be declined.</p>
+                                                                            <div name="approvesched" id="approvesched" class="form-group">
+                                                                                <div class="input-group">
+                                                                                    <textarea class="form-control" name="msg" id="" cols="30" rows="10"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
+                                                                                <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
                                    
                                 </table>
                                 <div class="col-sm-3 btn-group" role="group">
-                                    <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept</button>
-                                           <!-- Modal for Accept -->
-                                           <div class="modal fade" id="accept" tabindex="-1" role="dialog">
+                                    <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept Inquiry</button>
+                                         <!-- Modal for Accept -->
+                                         <div class="modal fade" id="accept" tabindex="-1" role="dialog">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -199,30 +232,21 @@
                                                     <div class="row clearfix">
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <div class="card">
-                                                                <div class="modal-header">
-                                                                    <h6 class="title " style="text-align: center;">Requested By:</h6>
-                                                                </div>
+                                                                <br>
                                                                 <div class="body">
-                                                                    <form method="POST" action="functions.php">
-                                                                        <div class="form-group">
-                                                                            <div class="form-line">
-                                                                                <input type="text" value="Brielle Williamson,Cedric Kelly,Tiger Nixon" data-role="tagsinput">
+                                                                    <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
+                                                                    <div name="approvesched" id="approvesched" class="form-group">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                             </div>
+                                                                            <input type="text" id="setdate" name="sched" class="form-control datetimepicker" placeholder="Please choose date & time" required>
                                                                         </div>
-                                                                        <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
-                                                                        <div name="approvesched" id="approvesched" class="form-group">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                                                                </div>
-                                                                                <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
-                                                                            <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                                                        </div>        
-                                                                    </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
+                                                                        <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                    </div>        
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -230,13 +254,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <button class="btn btn-danger btn-sm ">Decline</button>
+                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <!-- Ongoing Table -->
             <div class="row clearfix" id="onprocess">
