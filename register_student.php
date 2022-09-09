@@ -63,6 +63,7 @@
             <div class="d-flex flex-row-reverse bd-highlight">
                 <a href="register_teacher.php" style="text-decoration: none; color:rgb(151, 8, 8);">Register as Teacher <i class='bx bx-right-arrow-alt'></i> </a>
             </div>
+
             <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-4">
@@ -128,23 +129,25 @@
                     </div>
                     <br>
                     <div class="col-md-4">
-                        <label for="inputImage" class="form-label">Upload image for your profile pic</label>
-                        <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
+                        <center>
+                        <img id="frame_1" src="default_profile/dafauta.jpg" width="100px" height="100px"/>
+                        </center>
                         
-
                     </div>
                 </div> 
                 <br>
 
                 <div class="row">
-
-
                     <div class="col-md-4">
                         <label for="inputQR" class="form-label">Upload QR code from your School ID</label>
-                        <input type="file" class="form-control" id = "qr_input" name="ID_pic" accept="image/png, image/jpeg" required><br>
-                        <input type="text" class="form-control" name="qr_val" id="qr_data" readonly>
+                        <input type="text" class="form-control" name="qr_val" id="qr_data" hidden>
+
+                        <input type="file" class="form-control" id = "qr_input" name="ID_pic" accept="image/png, image/jpeg" required>
+                        
                         <p id="pp" class="text-primary">Select a clearer photo for the system to scan</p>
+                        <input type="text" id="watcher" name="watcher" class="form-control" hidden>
                     </div>
+                        
 
 
                     <div class="col-md-4">
@@ -155,13 +158,8 @@
                         <input type="password" class="form-control" id="inputPass2" name="password2" required>
                     </div>
                     <div class="col-md-4">
-                        <p>NOTE:</p>
-                        <ul>
-                            <li>Your password can't be too similar to your other personal information.</li>
-                            <li>Your password must contain at least 8 characters.</li>
-                            <li>Your password can't be a commonly used password.</li>
-                            <li>Your password can't be entirely numeric.</li>
-                        </ul>
+                    <label for="inputImage" class="form-label">Upload image for your profile pic</label>
+                    <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
                     </div>
                 </div> 
                 <br>
@@ -201,7 +199,9 @@
         var oldVal = this.value;
         console.log(oldVal);
         var field = this;
-        
+        document.getElementById("qr_input").value = "";
+        document.getElementById("pp").innerText = "Select a clearer photo for the system to scan";
+        document.getElementById("watcher"). value = "";
         setTimeout(function () {
             if(field.value.indexOf('TUPC-') !== 0) {
                 field.value = oldVal;

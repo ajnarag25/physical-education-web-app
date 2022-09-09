@@ -98,11 +98,10 @@
                              ?></h4>
                              <hr>
                              <h4>Note: <?php echo $row['note'] ?></h4>
-
                         </div>
                         <div class="text-center">
                           <br>
-                            <a class="btn btn-secondary" href="pickuniform.php">Back</a>
+                            <a class="btn btn-secondary" href="home.php">Back</a>
                             <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
                         </div>
                         <?php
