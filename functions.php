@@ -79,9 +79,12 @@ if (isset($_POST['register_student'])) {
     $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle' AND lastname='$last' AND id_no = '$idno'";
     $result = mysqli_query($conn, $sql);
 
+<<<<<<< HEAD
     
 
 
+=======
+>>>>>>> e24f611489086c013b5951c1d34282d2f87288d7
     if ($pass1 != $pass2){
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

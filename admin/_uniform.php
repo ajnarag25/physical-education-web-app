@@ -37,12 +37,12 @@
 <body class="theme-blush">
 
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<!-- <div class="page-loader-wrapper">
     <div class="loader">
         <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/tuplogo.png" width="48" height="48" alt="Aero"></div>
         <p>Please wait...</p>
     </div>
-</div>
+</div> -->
 
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
@@ -123,7 +123,7 @@
                                             <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Req. Date</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -137,7 +137,7 @@
                                             <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Req. Date</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -145,9 +145,6 @@
                                         $query = "SELECT * FROM inquire WHERE status='PENDING'";
                                         $result = mysqli_query($conn, $query);
                                         $check_row = mysqli_num_rows($result);
-                                        if ($check_row == 0){
-                                            echo 'No available data...';
-                                        }
                                         while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                         <tr>
@@ -180,63 +177,87 @@
                                             <td><?php echo $row['teacher'] ?></td>
                                             <td><?php echo $row['date'] ?></td>
                                             <td>
-                                                <input type="checkbox" name="checks[]" value="<?php echo $row['id']; ?>">
+                                                <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
+                                                <!-- Modal for Accept -->
+                                                <div class="modal fade" id="accept<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Set Schedule for Payment</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="body">
+                                                                                <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
+                                                                                <div name="approvesched" id="approvesched" class="form-group">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                        </div>
+                                                                                        <input type="text" id="setdate" name="sched" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <!-- Modal for Decline -->
+                                                <div class="modal fade" id="decline<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Decline Inquiry</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Decline Inquiry of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p>This Action is Irrevesible!</p>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_decline">Decline</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
                                    
                                 </table>
-                                <div class="col-sm-3 btn-group" role="group">
-                                    <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept">Accept</button>
-                                           <!-- Modal for Accept -->
-                                           <div class="modal fade" id="accept" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="title" id="largeModalLabel">Set Schedule for Payment</h4>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <div class="card">
-                                                                <div class="modal-header">
-                                                                    <h6 class="title " style="text-align: center;">Requested By:</h6>
-                                                                </div>
-                                                                <div class="body">
-                                                                    <form method="POST" action="functions.php">
-                                                                        <div class="form-group">
-                                                                            <div class="form-line">
-                                                                                <input type="text" value="Brielle Williamson,Cedric Kelly,Tiger Nixon" data-role="tagsinput">
-                                                                            </div>
-                                                                        </div>
-                                                                        <label id="approveschedd" for="approvesched">Set Date/Time for Student to Pay the Uniform</label>
-                                                                        <div name="approvesched" id="approvesched" class="form-group">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                                                                </div>
-                                                                                <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
-                                                                            <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                                                        </div>        
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <button class="btn btn-danger btn-sm ">Decline</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <!-- Ongoing Table -->
             <div class="row clearfix" id="onprocess">
@@ -262,12 +283,13 @@
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Sched. of Payment</small></th>
                                             <th><small>Status</small></th>
                                             <th><small>Modify</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -277,78 +299,273 @@
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Sched. of Payment</small></th>
                                             <th><small>Status</small></th>
                                             <th><small>Modify</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM inquire WHERE status='UNPAID' OR status='PAID' ";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>Paid</td>
+                                            <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                            <td>
+                                                <?php if ($row['course'] == 'N/A'){
+                                                    $department = $row['department'];
+                                                    echo $department;
+                                                }else{
+                                                    $course = $row['course'];
+                                                    echo $course;
+                                                } ?>
+                                            </td>
+                                            <td><?php echo $row['gender'] ?></td>
+                                            <td>
+                                                <?php if ($row['size_s'] == 'N/A'){
+                                                        echo '
+                                                            PE-2
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                            PE-1
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $row['size_t'] ?></td>
+                                            <td><?php echo $row['size_s'] ?></td>
+                                            <td><?php echo $row['size_j'] ?></td>
+                                            <td><?php echo $row['teacher'] ?></td>
+                                            <td><?php echo $row['sched_pay'] ?></td>
+                                            <td>
+                                                <?php 
+                                                    if ($row['status'] == 'UNPAID'){
+                                                        echo '
+                                                            <p class="text-warning">UNPAID</p>
+                                                        ';
+                                                    }else {
+                                                        echo '
+                                                            <p class="text-success">PAID</p>
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
                                             <td>
                                                 <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#modify">Edit</button>
+                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#modify<?php echo $row['id'] ?>">Edit</button>
+                                                </div>
+                                                <!-- Modal for modify -->
+                                                <div class="modal fade" id="modify<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Modify Order </h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Modify Order of: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <form action="functions.php" method="POST">
+                                                                                <label  for="stat">Current Status</label>
+                                                                                <?php
+                                                                                    if ($row['status'] == 'UNPAID'){
+                                                                                        echo '
+                                                                                        <div style="text-align: center;" class="alert alert-warning ">
+                                                                                        <strong>Unpaid</strong>
+                                                                                        </div>
+                                                                                        ';
+                                                                                    }else{
+                                                                                        echo '
+                                                                                        <div style="text-align: center;" class="alert alert-success ">
+                                                                                        <strong>Paid</strong>
+                                                                                        </div>
+                                                                                        ';
+                                                                                    }
+                                                                                ?>
+                                                                                <label  for="status">Change Status</label>
+                                                                                <div class="mb-3">
+                                                                                    <select class="form-control show-tick" name="stat">
+                                                                                    <?php
+                                                                                        if ($row['status'] == 'UNPAID'){
+                                                                                            $unpaid = $row['status'];
+                                                                                            echo '
+                                                                                            <option selected value='.$unpaid.'>'.$unpaid.'</option>
+                                                                                            <option value="PAID">PAID</option>
+                                                                                            ';
+                                                                                        }else{
+                                                                                            $paid = $row['status'];
+                                                                                            echo '
+                                                                                            <option selected value='.$paid.'>'.$paid.'</option>
+                                                                                            <option value="UNPAID">UNPAID</option>
+                                                                                            ';
+                                                                                        }
+                                                                                    ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-4 col-md-8">
+                                                                                        <div class="form-group">
+                                                                                            <label for="change">T-shirt Size</label>
+                                                                                            <select class="form-control show-tick" name="tshirts">
+                                                                                                <option selected value="<?php echo $row['size_t'] ?>"><?php echo $row['size_t'] ?></option>
+                                                                                                <option value="small">Small</option>
+                                                                                                <option value="medium">Medium</option>
+                                                                                                <option value="large">Large</option>
+                                                                                                <option value="extra large">Extra Large</option>
+                                                                                                <option value="XXL">XXL</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>       
+                                                                                    <div class="col-lg-4 col-md-8">
+                                                                                        <div class="form-group">
+                                                                                            <label for="change">Shorts Size</label>
+                                                                                            <select class="form-control show-tick" name="shorts">
+                                                                                                <?php 
+                                                                                                    if ($row['size_s'] == 'N/A'){
+                                                                                                        echo '
+                                                                                                            <option selected value="N/A">N/A</option>
+                                                                                                        ';
+                                                                                                    }else{
+                                                                                                        $shorts = $row['size_s'];
+                                                                                                        echo '
+                                                                                                            <option selected value='.$shorts.'>'.$shorts.'</option>
+                                                                                                            <option value="small">Small</option>
+                                                                                                            <option value="medium">Medium</option>
+                                                                                                            <option value="large">Large</option>
+                                                                                                            <option value="extra large">Extra Large</option>
+                                                                                                            <option value="XXL">XXL</option>
+                                                                                                        ';
+                                                                                                    }
+                                                                                                ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>     
+                                                                                    <div class="col-lg-4 col-md-8">
+                                                                                        <div class="form-group">
+                                                                                            <label for="change">Joggingpants Size</label>
+                                                                                            <select class="form-control show-tick" name="joggingpants">
+                                                                                                <?php 
+                                                                                                    if ($row['size_j'] == 'N/A'){
+                                                                                                        echo '
+                                                                                                            <option selected value="N/A">N/A</option>
+                                                                                                        ';
+                                                                                                    }else{
+                                                                                                        $jogging = $row['size_j'];
+                                                                                                        echo '
+                                                                                                            <option selected value='.$jogging.'>'.$jogging.'</option>
+                                                                                                            <option value="small">Small</option>
+                                                                                                            <option value="medium">Medium</option>
+                                                                                                            <option value="large">Large</option>
+                                                                                                            <option value="extra large">Extra Large</option>
+                                                                                                            <option value="XXL">XXL</option>
+                                                                                                        ';
+                                                                                                    }
+                                                                                                ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>                    
+                                                                                </div>      
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_modify" value="<?php echo $row['id'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="modify_inquire">Save Changes</button>
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="check-tab1"></td>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pickup<?php echo $row['id'] ?>"><i class="zmdi zmdi-assignment-check"></i></button>
+                                            <!-- Modal for Pickup -->
+                                            <div class="modal fade" id="pickup<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Set Schedule for Pick up</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <div class="modal-header">
+                                                                        <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="body">
+                                                                        <form action="functions.php" method="POST">
+                                                                            <label id="approveschedd" for="approvesched">Set Appointment Date & Time for Student to pick up the uniform</label>
+                                                                            <div name="approvesched" id="approvesched" class="form-group">
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                    </div>
+                                                                                    <input type="text" name="sched" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" value="<?php echo $row['id'] ?>" name="id_pickup">
+                                                                                <input type="hidden" value="<?php echo $row['status'] ?>" name="check_stat">
+                                                                                <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_pickup">Confirm</button>
+                                                                                <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                            <!-- Modal for Decline -->
+                                            <div class="modal fade" id="cancel<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Cancel Order</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <br>
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="body">
+                                                                            <h3>Cancel Order of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                            <p>This Action is Irrevesible!</p>
+                                                                            <p style="text-align:left">Leave a message for this user:</p>
+                                                                            <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_cancel">Cancel</button>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Small</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>Unpaid</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#modify">Edit</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="check-tab1"></td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Medium</td>
-                                            <td>Large</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>Paid</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#modify">Edit</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="check-tab1"></td>
-                                            </td>
-                                        </tr>                                       
+                                      <?php } ?>                                      
                                     </tbody>
                                 </table>
-                                <div class="col-sm-3 btn-group" role="group">
-                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pickup">Pickup Order</button>
-                                    <button class="btn btn-danger btn-sm ">Cancel Order</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -492,63 +709,99 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
+                                            <th><small>Course/Department</small></th>
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
-                                            <th><small>Date Received/Cancelled</small></th>
+                                            <th><small>Date</small></th>
                                             <th><small>Status</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
                                         <tr>
                                             <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
+                                            <th><small>Course/Department</small></th>
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
-                                            <th><small>Date Received/Cancelled</small></th>
+                                            <th><small>Date</small></th>
                                             <th><small>Status</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM inquire ";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 1</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td class="text-success">Success</td>
+                                            <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                            <td>
+                                                <?php if ($row['course'] == 'N/A'){
+                                                    $department = $row['department'];
+                                                    echo $department;
+                                                }else{
+                                                    $course = $row['course'];
+                                                    echo $course;
+                                                } ?>
+                                            </td>
+                                            <td><?php echo $row['gender'] ?> </td>
+                                            <td>
+                                                <?php if ($row['size_s'] == 'N/A'){
+                                                        echo '
+                                                            PE-2
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                            PE-1
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $row['size_t'] ?></td>
+                                            <td><?php echo $row['size_s'] ?></td>
+                                            <td><?php echo $row['size_j'] ?></td>
+                                            <td><?php echo $row['teacher'] ?></td>
+                                            <td><?php echo $row['date'] ?></td>
+                                            <td>
+                                                <?php 
+                                                if ($row['status'] == 'PENDING'){
+                                                    echo'
+                                                    <p class="text-warning">PENDING</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'UNPAID'){
+                                                    echo'
+                                                    <p class="text-warning">UNPAID</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'PAID'){
+                                                    echo'
+                                                    <p class="text-success">PAID</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'PICKUP'){
+                                                    echo'
+                                                    <p class="text-success">PICKUP</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="text-danger">DECLINED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="text-danger">CANCELED</p>
+                                                    ';
+                                                } 
+                                                
+                                                ?>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 1</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td class="text-danger">Cancelled</td>    
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 1</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td class="text-success">Success</td>
-                                        </tr>                                       
+                                    <?php } ?>       
                                     </tbody>
                                 </table>
                             </div>
@@ -561,49 +814,6 @@
 
     
 </section>
-
-
-<!-- Modal for Pickup -->
-<div class="modal fade" id="pickup" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Set Schedule for Pick up</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By:</h6>
-                        </div>
-                        <div class="body">
-                            <form name='myForm'>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" value="Ashton Cox,Colleen Hurst,Rhona Davidson" data-role="tagsinput" disabled>
-                                    </div>
-                                </div>
-                                <label id="approveschedd" for="approvesched">Set Appointment Date & Time for Student to pick up the uniform</label>
-                                <div name="approvesched" id="approvesched" class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                        </div>
-                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal for Reschdule -->
 <div class="modal fade" id="resched" tabindex="-1" role="dialog">
@@ -647,75 +857,6 @@
     </div>
 </div>
 
-<!-- Modal for modify -->
-<div class="modal fade" id="modify" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Modify Order</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <label  for="stat">Current Status</label>
-                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-warning ">
-                                    <strong >Unpaid</strong>
-                                </div>
-                                <label  for="status">Change Status</label>
-                                <div class="mb-3">
-                                    <select id="sta" class="form-control show-tick" onChange="update()">
-                                        <option selected>Unpaid</option>
-                                        <option>Paid</option>
-                                    </select>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="user">Variation</label>
-                                            <select id="var" class="form-control show-tick">
-                                                <option selected>PE 1</option>
-                                                <option>PE 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">T-shirt Size</label>
-                                            <select id="size1" class="form-control show-tick">
-                                                <option selected>Small</option>
-                                                <option>Medium</option>
-                                                <option>Large</option>
-                                            </select>
-                                        </div>
-                                    </div>       
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Short/Pants Size</label>
-                                            <select id="size2" class="form-control show-tick">
-                                                <option selected>Small</option>
-                                                <option>Medium</option>
-                                                <option>Large</option>
-                                            </select>
-                                        </div>
-                                    </div>                      
-                                </div>      
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Save Changes</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal for reschdule reason -->
 <div class="modal fade" id="reason" tabindex="-1" role="dialog">
@@ -758,22 +899,6 @@
     </div>
 </div>
 
-
-<script type="text/javascript">
-    function update() {
-        var select = document.getElementById('sta');
-        var option = select.options[select.selectedIndex];
-        if (option.text == "Paid") {
-            document.getElementById('stat').classList = 'alert alert-success';
-    }   else {
-        document.getElementById('stat').classList = 'alert alert-warning';
-    }   
-
-        document.getElementById('stat').innerHTML = option.text;
-    }
-
-    update();
-</script>
 
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
