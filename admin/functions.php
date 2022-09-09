@@ -147,9 +147,11 @@
     if (isset($_POST['set_sched'])) {
         $id_accept = $_POST['id_accept'];
         $set_scheds = $_POST['sched'];
+        $get_email = $_POST['email_set_sched'];
 
         if ($id_accept != null){
-            $conn->query("UPDATE inquire SET status='UNPAID', sched_pay='$set_scheds' WHERE id='$id_accept'") or die($conn->error);
+            $conn->query("UPDATE inquire SET status='UNPAID', note='Approved', sched_pay='$set_scheds' WHERE id='$id_accept'") or die($conn->error);
+            include 'send_email_1.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -203,8 +205,10 @@
     if (isset($_POST['set_decline'])) {
         $id_decline = $_POST['id_decline'];
         $msg = $_POST['msg_decline'];
+        $get_email = $_POST['email_set_decline'];
         if ($id_decline != null){
             $conn->query("UPDATE inquire SET status='DECLINED', note='$msg' WHERE id='$id_decline'") or die($conn->error);
+            include 'send_email_2.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -318,9 +322,11 @@
         $id_pickup = $_POST['id_pickup'];
         $set_pickup = $_POST['sched'];
         $check_status = $_POST['check_stat'];
+        $get_email = $_POST['set_email_pickup'];
 
         if ($check_status == 'PAID'){
-            $conn->query("UPDATE inquire SET status='PICKUP', sched_pickup='$set_pickup' WHERE id='$id_pickup'") or die($conn->error);
+            $conn->query("UPDATE inquire SET status='PICKUP', note='Ready for Pickup', sched_pickup='$set_pickup' WHERE id='$id_pickup'") or die($conn->error);
+            include 'send_email_3.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -399,9 +405,10 @@
     if (isset($_POST['set_cancel'])) {
         $id_cancel = $_POST['id_cancel'];
         $msg = $_POST['msg_cancel'];
-        
+        $get_email = $_POST['set_email_cancel'];
         if ($id_cancel != null){
             $conn->query("UPDATE inquire SET status='CANCELED', note='$msg' WHERE id='$id_cancel'") or die($conn->error);
+            include 'send_email_4.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -452,11 +459,13 @@
 
 
     }
-    #CANCEL INQUIRY
+    #RECEIVED ORDER
     if (isset($_POST['received_order'])) {
         $received_id = $_POST['id_received'];
+        $get_email = $_POST['set_email_received'];
         if ($received_id != null){
-            $conn->query("UPDATE inquire SET status='RECEIVED' WHERE id='$received_id'") or die($conn->error);
+            $conn->query("UPDATE inquire SET status='RECEIVED', note='Completed Inquiry' WHERE id='$received_id'") or die($conn->error);
+            include 'send_email_5.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -464,7 +473,63 @@
                 $(document).ready(function(){
                     Swal.fire({
                     icon: 'success',
-                    title: 'Successfully Updated the Inquiry',
+                    title: 'Successfully Completed the transaction',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
+    #RESCHEDULE INQUIRY
+    if (isset($_POST['set_resched'])) {
+        $resched_id = $_POST['id_resched'];
+        $get_resched = $_POST['resched_date'];
+        $get_email = $_POST['set_email_resched'];
+        if ($resched_id != null){
+            $conn->query("UPDATE inquire SET status='PICKUP', note='Rescheduled', sched_pickup='$get_resched' WHERE id='$resched_id'") or die($conn->error);
+            include 'send_email_6.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Reschedule the Inquiry',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Okay'
                     }).then((result) => {

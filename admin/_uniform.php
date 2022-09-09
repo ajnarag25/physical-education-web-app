@@ -205,6 +205,7 @@
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_sched" value="<?php echo $row['email'] ?>">
                                                                                     <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
@@ -236,6 +237,7 @@
                                                                                 <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
                                                                                     <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_decline">Decline</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
@@ -519,6 +521,7 @@
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" value="<?php echo $row['id'] ?>" name="id_pickup">
                                                                                 <input type="hidden" value="<?php echo $row['status'] ?>" name="check_stat">
+                                                                                <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_pickup">
                                                                                 <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_pickup">Confirm</button>
                                                                                 <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>
@@ -550,6 +553,7 @@
                                                                             <textarea class="form-control" name="msg_cancel" id="" cols="30" rows="5" required></textarea>
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_cancel" value="<?php echo $row['id'] ?>">
+                                                                                <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_cancel">
                                                                                 <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_cancel">Cancel</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
@@ -667,6 +671,7 @@
                                                                         <div class="body">
                                                                             <form action="functions.php" method="POST">
                                                                                 <input type="hidden" value="<?php echo $row['id'] ?>" name="id_received">
+                                                                                <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_received">
                                                                                 <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="received_order">Received Order</button>
                                                                                 <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </form>
@@ -693,18 +698,20 @@
                                                                         </div>
                                                                         <br>
                                                                         <div class="body">
-                                                                            <form name='myForm'>
+                                                                            <form action='functions.php' method="POST">
                                                                                 <label id="approveschedd" for="approvesched">Set Appointment Date & Time for Student to pick up the uniform</label>
                                                                                 <div name="approvesched" id="approvesched" class="form-group">
                                                                                     <div class="input-group">
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                        <input type="text" name="resched_date" class="form-control datetimepicker" placeholder="Please choose date & time" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
+                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="id_resched">
+                                                                                    <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_resched">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_resched">Confirm</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>
                                                                             </form>
