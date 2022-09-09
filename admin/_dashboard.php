@@ -207,7 +207,7 @@
                             <table class="table table-hover c_table">
                                 <thead>
                                     <tr>
-                                        <th style="width:60px;">#</th>
+                                        <th>Image</th>
                                         <th>Name</th>
                                         <th>Item</th>
                                         <th>Request Date</th>
@@ -229,7 +229,7 @@
                                     while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $row['id'] ?></td>
+                                        <td><img src="../<?php echo $row['image'] ?>" width="40" alt=""> </td>
                                         <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
                                         <td>
                                             <?php if ($row['size_s'] == 'N/A'){

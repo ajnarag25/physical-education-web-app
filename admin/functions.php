@@ -145,36 +145,34 @@
     }
 
     if (isset($_POST['set_sched'])) {
-        $get_check = $_POST['checks'];
+        $id_accept = $_POST['id_accept'];
         $set_scheds = $_POST['sched'];
-        $get_msg = $_POST['msg'];
 
-        if ($get_check != null){
-            foreach ($get_check as $get_val){
-                $conn->query("UPDATE inquire SET status='UNPAID', sched_pay='$set_scheds' WHERE id='$get_val'") or die($conn->error);
-                ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function(){
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully Approved!',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                        }).then((result) => {
-                        if (result.isConfirmed) {
+        if ($id_accept != null){
+            $conn->query("UPDATE inquire SET status='UNPAID', sched_pay='$set_scheds' WHERE id='$id_accept'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Approved!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
                             window.location.href = "_uniform.php";
-                            }else{
-                                window.location.href = "_uniform.php";
-                            }
-                        })
-                        
+                        }
                     })
+                    
+                })
+        
+            </script>
+            <?php
             
-                </script>
-                <?php
-            }
         }else{
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -183,8 +181,7 @@
                 $(document).ready(function(){
                     Swal.fire({
                     icon: 'error',
-                    title: 'Please select a student first',
-                    text: 'An error occured!',
+                    title: 'An Error Occured!',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Okay'
                     }).then((result) => {
@@ -202,6 +199,199 @@
         }
     
     }
+    if (isset($_POST['set_decline'])) {
+        $id_decline = $_POST['id_decline'];
+        $msg = $_POST['msg_decline'];
+        if ($id_decline != null){
+            $conn->query("UPDATE inquire SET status='DECLINED', note='$msg' WHERE id='$id_decline'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Declined the Inquiry!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
 
+
+    }
+    if (isset($_POST['modify_inquire'])) {
+        $id_modify = $_POST['id_modify'];
+        $status = $_POST['stat'];
+        $tshirt = $_POST['tshirts'];
+        $short = $_POST['shorts'];
+        $jogging = $_POST['joggingpants'];
+
+
+        if ($id_modify != null){
+            $conn->query("UPDATE inquire SET status='$status', size_t='$tshirt', size_s='$short', size_j='$jogging' WHERE id='$id_modify'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
+    if (isset($_POST['set_pickup'])) {
+        $id_pickup = $_POST['id_pickup'];
+        $set_pickup = $_POST['sched'];
+        $check_status = $_POST['check_stat'];
+
+        if ($check_status == 'PAID'){
+            $conn->query("UPDATE inquire SET status='PICKUP', sched_pickup='$set_pickup' WHERE id='$id_pickup'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Set Pickup Schedule!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }elseif ($check_status == 'UNPAID'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'This user is still unpaid',
+                    text: 'Please check the status',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_uniform.php";
+                        }else{
+                            window.location.href = "_uniform.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
     
+    }
+  
+
 ?>
