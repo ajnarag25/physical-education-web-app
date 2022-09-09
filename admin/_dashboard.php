@@ -27,12 +27,12 @@
 <body class="theme-blush">
 
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<!-- <div class="page-loader-wrapper">
     <div class="loader">
         <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/tuplogo.png" width="48" height="48" alt="Aero"></div>
         <p>Please wait...</p>
     </div>
-</div>
+</div> -->
 
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
@@ -202,7 +202,8 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>Recent</strong> Uniform Orders</h2>
+                            
+                            <h2><strong>Recent</strong>Uniform Orders</h2>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-hover c_table">
@@ -309,12 +310,11 @@
 </section>
 
 <!-- Jquery Core Js --> 
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="assets/bundles/libscripts.bundle.js"></script>
+<script src="assets/bundles/vendorscripts.bundle.js"></script>
 <script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts --> 
-
 <script src="assets/bundles/mainscripts.bundle.js"></script>
-
+<script src=""></script>
 
 <script src="assets/js/pages/calendar/calendar.js"></script>
 </body>

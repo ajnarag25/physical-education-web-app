@@ -59,8 +59,16 @@ if (isset($_POST['register_student'])) {
     $pass2 = $_POST['password2'];
     $user = $_POST['user_student'];
     $idno = $_POST['stuid'];
+    $watcher = $_POST['watcher'];
+    $qr_val = $_POST['qr_val'];
     $dir_qr = "uploads/school_id_qr/";
-    $target_dir = "uploads/";
+
+    $target_file_qr = $dir_qr . time(). basename($_FILES["ID_pic"]["name"]);
+    $uploadOk_qr = 1;
+    $imageFileType_qr = strtolower(pathinfo($target_file_qr,PATHINFO_EXTENSION));
+    $check_qr = getimagesize($_FILES["ID_pic"]["tmp_name"]);
+
+    $target_dir = "uploads/profile_pic/";
     
     $target_file = $target_dir . time(). basename($_FILES["profile_pic"]["name"]);
     $uploadOk = 1;
@@ -68,9 +76,8 @@ if (isset($_POST['register_student'])) {
     $check = getimagesize($_FILES["profile_pic"]["tmp_name"]);
 
 
-    $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle'  AND lastname='$last' ";
+    $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle' AND lastname='$last' AND id_no = '$idno'";
     $result = mysqli_query($conn, $sql);
-
 
     
 
@@ -101,7 +108,8 @@ if (isset($_POST['register_student'])) {
     }else{
         if (!$result->num_rows > 0) {
             move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file);
-            if ($check == false){
+            move_uploaded_file($_FILES["ID_pic"]["tmp_name"], $target_file_qr);
+            if ($check == false ){
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -124,10 +132,35 @@ if (isset($_POST['register_student'])) {
                     })
             
                 </script>
+            <?php
+            }elseif ($watcher == 0) {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Uploaded QR-Code doesnt match on the inputted information',
+                        text: 'Please check the filled out fields and Reupload the image of QR in your School ID',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "register_student.php";
+                            }else{
+                                window.location.href = "register_student.php";
+                            }
+                        })
+                        
+                    })
+            
+                </script>
+
                 <?php
             }else{
-                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp,id_no) 
-                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user', 0,'$idno')") or die($conn->error);
+                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp,id_no,qr_path) 
+                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', '$courses', 'N/A', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','$qr_val','$user', 0,'$idno','$target_file_qr')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -459,6 +492,7 @@ if (isset($_POST['change_pass'])) {
 
 #INQUIRE UNIFORM
 if (isset($_POST['request_student_1'])) {
+    
     $first = $_POST['firstname'];
     $middle = $_POST['middlename'];
     $last = $_POST['lastname'];
@@ -474,27 +508,6 @@ if (isset($_POST['request_student_1'])) {
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
-    
-    $create_list = [
-        $first,
-        $middle,
-        $last,
-        $course,
-        $dept,
-        $gender,
-        $teacher,
-        $sizeT,
-        $sizeS,
-        $sizeJ,
-        $email,
-        $image,
-        $status,
-        $note,
-        $date
-    ];
-
-    $_SESSION['success_data'] = $create_list;
-
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
@@ -562,25 +575,6 @@ if (isset($_POST['request_student_2'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
-    $create_list = [
-        $first,
-        $middle,
-        $last,
-        $course,
-        $dept,
-        $gender,
-        $teacher,
-        $sizeT,
-        $sizeS,
-        $sizeJ,
-        $email,
-        $image,
-        $status,
-        $note,
-        $date
-    ];
-
-    $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
@@ -649,25 +643,6 @@ if (isset($_POST['request_teacher_1'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
-    $create_list = [
-        $first,
-        $middle,
-        $last,
-        $course,
-        $dept,
-        $gender,
-        $teacher,
-        $sizeT,
-        $sizeS,
-        $sizeJ,
-        $email,
-        $image,
-        $status,
-        $note,
-        $date
-    ];
-
-    $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
@@ -736,25 +711,7 @@ if (isset($_POST['request_teacher_2'])) {
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
-    $create_list = [
-        $first,
-        $middle,
-        $last,
-        $course,
-        $dept,
-        $gender,
-        $teacher,
-        $sizeT,
-        $sizeS,
-        $sizeJ,
-        $email,
-        $image,
-        $status,
-        $note,
-        $date
-    ];
 
-    $_SESSION['success_data'] = $create_list;
 
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
@@ -813,7 +770,10 @@ if (isset($_POST['cancel_request'])) {
     $get_mail = $_POST['check_email'];
 
     if ($get_mail != null){
-        $conn->query("UPDATE inquire SET  status='CANCELED' WHERE email='$get_mail'") or die($conn->error);
+        // $kuha_id="SELECT id FROM inquire WHERE email='$email'";
+        // $prompt = mysqli_query($conn, $login);
+        // $getData = mysqli_fetch_array($prompt);
+        $conn->query("DELETE FROM inquire WHERE email='$get_mail';") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

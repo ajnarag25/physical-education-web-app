@@ -120,7 +120,23 @@
                   <p>Here you can Inquire P.E uniform simply input all of the necessary information needed
                       and you are good to go.</p>
                   <br>
-                  <a href="pickuniform.php" class="service-btn">Inquire Uniform</a>
+                  <?php 
+                    $email = $_SESSION['get_data']['email'];
+                    $query = "SELECT status FROM inquire where email = '$email'";
+                    $result = mysqli_query($conn, $query);
+                    if ($result->num_rows == 0) {
+                    ?>
+                    <a href="pickuniform.php" class="service-btn">Inquire Uniform</a>
+                    <?php
+                    }
+                    else {
+                    ?>
+                      <a href="success_inquire.php" class="service-btn">Inquire Uniform</a>
+                    <?php
+                      }
+                        
+                    ?>
+                  
                 </div>
                 <div class="col-sm-4 text-center">
                   <br><br>

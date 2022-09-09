@@ -1,7 +1,10 @@
 fileInp = document.getElementById("qr_input"),
 infoText = document.getElementById("pp"),
-qr = document.getElementById("qr_data");
+watcher = document.getElementById("watcher"),
+qr = document.getElementById("qr_data"),
+stuid = document.getElementById("inputstuid");
 function fetchRequest(file, formData) {
+    watcher.value = "";
     document.getElementById("qr_data").value = "";
     infoText.innerText = "Scanning QR Code...";
     fetch("http://api.qrserver.com/v1/read-qr-code/", {
@@ -18,16 +21,17 @@ function fetchRequest(file, formData) {
             let stuid_val = document.getElementById("inputstuid").value;
             let lname_val = document.getElementById("inputLast").value;
             let lname_val_up = lname_val.toUpperCase()
-            
             verifying_info_id = result.search(stuid_val);
             verifying_info_lname = result.search(lname_val_up);
-            if((verifying_info_id !== -1)){
+            if((verifying_info_id !== -1) && (stuid_val !== "TUPC-")){
                 infoText.innerText = "Scanned Successfully";
+                watcher.value = "1";
             }
             else{
                 infoText.innerText ="QR data does not match to the Inputted Information";
-
-
+                watcher.value = "0";
+                stuid.value = "TUPC-";
+                
             }
 
         }

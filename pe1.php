@@ -69,7 +69,6 @@
         $set_data6 = $_SESSION['get_data']['gender'];
         $set_data7 = $_SESSION['get_data']['email'];
         $set_data8 = $_SESSION['get_data']['image'];
-        
         $date_today = date("d/m/Y");
 
         if ($_SESSION['get_data']['users'] == 'Student'){
