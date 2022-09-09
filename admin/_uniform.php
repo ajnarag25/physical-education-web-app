@@ -231,7 +231,7 @@
                                                                         <form action="functions.php" method="POST">
                                                                             <div class="body">
                                                                                 <h3>Decline Inquiry of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
-                                                                                <p>This Action is Irrevesible!</p>
+                                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
                                                                                 <p style="text-align:left">Leave a message for this user:</p>
                                                                                 <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
                                                                                 <div class="modal-footer">
@@ -545,11 +545,11 @@
                                                                     <form action="functions.php" method="POST">
                                                                         <div class="body">
                                                                             <h3>Cancel Order of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
-                                                                            <p>This Action is Irrevesible!</p>
+                                                                            <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
                                                                             <p style="text-align:left">Leave a message for this user:</p>
-                                                                            <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
+                                                                            <textarea class="form-control" name="msg_cancel" id="" cols="30" rows="5" required></textarea>
                                                                             <div class="modal-footer">
-                                                                                <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                <input type="hidden" name="id_cancel" value="<?php echo $row['id'] ?>">
                                                                                 <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_cancel">Cancel</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
@@ -596,12 +596,11 @@
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Sched. of Pick-up</small></th>
-                                            <th><small>Reschedule Request</small></th>
-                                            <th><small>Reason</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -611,77 +610,118 @@
                                             <th><small>Gender</small></th>
                                             <th><small>Variation</small></th>
                                             <th><small>T-Shirt Size</small></th>
-                                            <th><small>Short/Pants Size</small></th>
+                                            <th><small>Shorts Size</small></th>
+                                            <th><small>Joggingpants Size</small></th>
                                             <th><small>P.E. Instructor</small></th>
                                             <th><small>Sched. of Pick-up</small></th>
-                                            <th><small>Reschedule Request</small></th>
-                                            <th><small>Reason</small></th>
-                                            <th><small>Selected</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM inquire WHERE status='PICKUP' ";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Medium</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>No</td>
+                                            <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
                                             <td>
-                                                <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#reason" disabled>Info</button>
-                                                </div>
+                                                <?php if ($row['course'] == 'N/A'){
+                                                    $department = $row['department'];
+                                                    echo $department;
+                                                }else{
+                                                    $course = $row['course'];
+                                                    echo $course;
+                                                } ?>
                                             </td>
+                                            <td><?php echo $row['gender'] ?></td>
                                             <td>
-                                                <input type="checkbox" name="check-tab1"></td>
+                                                <?php if ($row['size_s'] == 'N/A'){
+                                                        echo '
+                                                            PE-2
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                            PE-1
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $row['size_t'] ?></td>
+                                            <td><?php echo $row['size_s'] ?></td>
+                                            <td><?php echo $row['size_j'] ?></td>
+                                            <td><?php echo $row['teacher'] ?></td>
+                                            <td><?php echo $row['sched_pickup'] ?></td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#received<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
+                                                <!-- Modal for Recieved -->
+                                                <div class="modal fade" id="received<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <h4 class="title" id="largeModalLabel">Received Order</h4>
+                                                                        <h6 class="text-center" style="text-align: center;">Received By: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        <div class="body">
+                                                                            <form action="functions.php" method="POST">
+                                                                                <input type="hidden" value="<?php echo $row['id'] ?>" name="id_received">
+                                                                                <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="received_order">Received Order</button>
+                                                                                <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#resched<?php echo $row['id'] ?>"><i class="zmdi zmdi-assignment-o"></i></button>
+                                                <!-- Modal for Reschdule -->
+                                                <div class="modal fade" id="resched<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Reschedule for Pick up</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="body">
+                                                                            <form name='myForm'>
+                                                                                <label id="approveschedd" for="approvesched">Set Appointment Date & Time for Student to pick up the uniform</label>
+                                                                                <div name="approvesched" id="approvesched" class="form-group">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                        </div>
+                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Small</td>
-                                            <td>Small</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>Yes</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#reason">Info</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="check-tab1"></td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>COET</td>
-                                            <td>Female</td>
-                                            <td>PE 2</td>
-                                            <td>Medium</td>
-                                            <td>Large</td>
-                                            <td>Janlee</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>No</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#reason" disabled>Info</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="check-tab1"></td>
-                                            </td>
-                                        </tr>                                       
+                                    <?php } ?>                     
                                     </tbody>
                                 </table>
                                 <div class="col-sm-3 btn-group" role="group">
-                                    <button class="btn btn-success btn-sm">Received</button>
-                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#resched">Reschedule</button>
+              
                                 </div>
                             </div>
                         </div>
@@ -774,29 +814,33 @@
                                                 <?php 
                                                 if ($row['status'] == 'PENDING'){
                                                     echo'
-                                                    <p class="text-warning">PENDING</p>
+                                                    <p class="badge badge-warning">PENDING</p>
                                                     ';
                                                 }elseif ($row['status'] == 'UNPAID'){
                                                     echo'
-                                                    <p class="text-warning">UNPAID</p>
+                                                    <p class="badge badge-warning">UNPAID</p>
                                                     ';
                                                 }elseif ($row['status'] == 'PAID'){
                                                     echo'
-                                                    <p class="text-success">PAID</p>
+                                                    <p class="badge badge-success">PAID</p>
                                                     ';
                                                 }elseif ($row['status'] == 'PICKUP'){
                                                     echo'
-                                                    <p class="text-success">PICKUP</p>
+                                                    <p class="badge badge-success">PICKUP</p>
                                                     ';
                                                 }elseif ($row['status'] == 'DECLINED'){
                                                     echo'
-                                                    <p class="text-danger">DECLINED</p>
+                                                    <p class="badge badge-danger">DECLINED</p>
                                                     ';
-                                                }elseif ($row['status'] == 'DECLINED'){
+                                                }elseif ($row['status'] == 'CANCELED'){
                                                     echo'
-                                                    <p class="text-danger">CANCELED</p>
+                                                    <p class="badge badge-danger">CANCELED</p>
                                                     ';
-                                                } 
+                                                }elseif ($row['status'] == 'RECEIVED'){
+                                                    echo'
+                                                    <p class="badge badge-primary">RECEIVED</p>
+                                                    ';
+                                                }  
                                                 
                                                 ?>
                                             </td>
@@ -814,91 +858,6 @@
 
     
 </section>
-
-<!-- Modal for Reschdule -->
-<div class="modal fade" id="resched" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Reschedule for Pick up</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By:</h6>
-                        </div>
-                        <div class="body">
-                            <form name='myForm'>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" value="Ashton Cox" data-role="tagsinput" disabled>
-                                    </div>
-                                </div>
-                                <label id="approveschedd" for="approvesched">Set Appointment Date & Time for Student to pick up the uniform</label>
-                                <div name="approvesched" id="approvesched" class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                        </div>
-                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal for reschdule reason -->
-<div class="modal fade" id="reason" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Reschdule Request Info</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <label  for="stat">Current Status</label>
-                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-info ">
-                                    <strong >Request for Reschedule</strong>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label  for="reas">Students Reason:</label>
-                                            <div class="form-line">
-                                                <textarea name="reas" rows="4" class="form-control no-resize" readonly>I have emergency sir</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>    
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 

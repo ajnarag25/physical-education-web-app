@@ -268,11 +268,15 @@
                                                     echo'
                                                     <p class="badge badge-danger">DECLINED</p>
                                                     ';
-                                                }elseif ($row['status'] == 'DECLINED'){
+                                                }elseif ($row['status'] == 'CANCELED'){
                                                     echo'
                                                     <p class="badge badge-danger">CANCELED</p>
                                                     ';
-                                                } 
+                                                }elseif ($row['status'] == 'RECEIVED'){
+                                                    echo'
+                                                    <p class="badge badge-primary">RECEIVED</p>
+                                                    ';
+                                                }  
                                             ?>
                                         </td>
                                     </tr>
