@@ -223,9 +223,6 @@
                                     $query = "SELECT * FROM inquire";
                                     $result = mysqli_query($conn, $query);
                                     $check_row = mysqli_num_rows($result);
-                                    if ($check_row == 0){
-                                        echo 'No available data...';
-                                    }
                                     while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                     <tr>
@@ -249,19 +246,32 @@
                                         <td><?php echo $row['size_s'] ?></td>
                                         <td><?php echo $row['size_j'] ?></td>
                                         <td>
-                                            <?php if ($row['status'] == 'PENDING'){
-                                                    echo '
-                                                        <span class="badge badge-warning">Pending</span>
+                                            <?php
+                                                if ($row['status'] == 'PENDING'){
+                                                    echo'
+                                                    <p class="badge badge-warning">PENDING</p>
                                                     ';
-                                                } elseif ($row['status'] == 'APPROVED'){
-                                                    echo '
-                                                        <span class="badge badge-success">Approved</span>
-                                                    ';     
-                                                }else{
-                                                    echo '
-                                                        <span class="badge badge-danger">Declined</span>
+                                                }elseif ($row['status'] == 'UNPAID'){
+                                                    echo'
+                                                    <p class="badge badge-warning">UNPAID</p>
                                                     ';
-                                                }
+                                                }elseif ($row['status'] == 'PAID'){
+                                                    echo'
+                                                    <p class="badge badge-success">PAID</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'PICKUP'){
+                                                    echo'
+                                                    <p class="badge badge-success">PICKUP</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">DECLINED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">CANCELED</p>
+                                                    ';
+                                                } 
                                             ?>
                                         </td>
                                     </tr>
