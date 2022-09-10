@@ -79,12 +79,6 @@ if (isset($_POST['register_student'])) {
     $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle' AND lastname='$last' AND id_no = '$idno'";
     $result = mysqli_query($conn, $sql);
 
-<<<<<<< HEAD
-    
-
-
-=======
->>>>>>> e24f611489086c013b5951c1d34282d2f87288d7
     if ($pass1 != $pass2){
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -629,7 +623,10 @@ if (isset($_POST['request_student_2'])) {
         <?php
     }
 }
+
+
 if (isset($_POST['request_teacher_1'])) {
+    
     $first = $_POST['firstname'];
     $middle = $_POST['middlename'];
     $last = $_POST['lastname'];
@@ -645,8 +642,6 @@ if (isset($_POST['request_teacher_1'])) {
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
-    
-
     if ($email != null){
         $conn->query("INSERT INTO inquire (firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
         VALUES('$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);

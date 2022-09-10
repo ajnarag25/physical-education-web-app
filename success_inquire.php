@@ -67,7 +67,9 @@
                           $email = $_SESSION['get_data']['email']; 
                           $query = "SELECT * FROM inquire WHERE email='$email'";
                           $result = mysqli_query($conn, $query);
+                          $statuses = null;
                           while ($row = mysqli_fetch_array($result)) {
+                              $statuses = $row['status']
                         ?>
                         <div class="col">
                             <h4>Name: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h4>
@@ -80,7 +82,7 @@
                             <hr>
                             <h4>Size of Short: <?php echo $row['size_s'] ?></h4>
                             <hr>
-                            <h4>Size of Joggingpants: <?php echo $row['size_j'] ?></h4>
+                            <h4>Size of Jogging Pants: <?php echo $row['size_j'] ?></h4>
                         </div>
                         <div class="col">
                             <h4>P.E Teacher: <?php echo $row['teacher'] ?></h4>
@@ -92,7 +94,25 @@
                             <h4>Status: <?php
                                 if($row['status'] == 'PENDING'){
                                     $set_pending = $row['status'];
+                                    
                                     echo '<h4 style="color:rgb(185, 187, 48)">'.$set_pending.'</h4>';
+                                }
+                                elseif($row['status'] == 'UNPAID'){
+                                  $set_pending = $row['status'];
+                                  
+                                  echo '<h4 style="color:rgb(187, 101, 48)">'.$set_pending.'</h4>';
+                                }elseif($row['status'] == 'UNPAID'){
+                                  $set_pending = $row['status'];
+                                  
+                                  echo '<h4 style="color:rgb(187, 101, 48)">'.$set_pending.'</h4>';
+                                }elseif($row['status'] == 'DECLINED'){
+                                  $set_pending = $row['status'];
+                                  
+                                  echo '<h4 style="color:rgb(212, 11, 11)">'.$set_pending.'</h4>';
+                                }elseif($row['status'] == 'PICKUP'){
+                                  $set_pending = $row['status'];
+                                  
+                                  echo '<h4 style="color:rgb(3, 105, 59)">'.$set_pending.'</h4>';
                                 }
                              
                              ?></h4>
@@ -102,7 +122,19 @@
                         <div class="text-center">
                           <br>
                             <a class="btn btn-secondary" href="home.php">Back</a>
-                            <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
+                            <?php
+                            if($row['status'] == 'PENDING'){
+                              ?>
+                              <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
+                              <?php
+                            }else{
+                            
+                            
+                            ?><button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel" disabled>Cancel Request</button>
+                            <?php
+                            }
+                            ?>
+                            
                         </div>
                         <?php
                         }?>
@@ -115,9 +147,10 @@
         <div class="modal fade" id="cancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
+              
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Cancel Request</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
               </div>
               <div class="modal-body text-center">
                 <h4>Are you sure to cancel your request?</h4>
