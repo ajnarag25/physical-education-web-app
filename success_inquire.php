@@ -127,12 +127,7 @@
                               ?>
                               <button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel">Cancel Request</button>
                               <?php
-                            }else{
-                            
-                            
-                            ?><button type="button" class="btn btn-danger" name="" data-bs-toggle="modal" data-bs-target="#cancel" disabled>Cancel Request</button>
-                            <?php
-                            }
+                            }else
                             ?>
                             
                         </div>
