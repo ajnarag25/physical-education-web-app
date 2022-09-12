@@ -65,7 +65,14 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="_profile.php"><img src="assets/images/tuplogo.png" alt="User"></a>
+                    <?php 
+                        $check_name =  $_SESSION['get_data']['firstname'];
+                        $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <a href="_profile.php"><img src="<?php echo $row['image'] ?>" class="rounded-circle shadow" width="60" alt="profile-image"></a>
+                    <?php }; ?>
                     <div class="detail">
                         <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
                         <small>Administrator</small>                        

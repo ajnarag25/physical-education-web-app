@@ -4,7 +4,7 @@
 <?php
     include('connection.php');
     session_start();
-    // error_reporting(0);
+    error_reporting(0);
 
     #LOGOUT
     if (isset($_GET['logout'])) {
@@ -91,7 +91,7 @@
         }else{
             if(!$result->num_rows > 0){
                 $conn->query("INSERT INTO admin (firstname, lastname, username, password, email, image) 
-                VALUES('$first','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','N/A')") or die($conn->error);
+                VALUES('$first','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','../default_profile/defauta.jpg')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -864,4 +864,74 @@
             <?php
         }
     } 
+
+    #UPLOAD IMAGE ADMIN
+    if (isset($_POST['upload_admin_image'])) {
+        $get_id_img = $_POST['admin_id_img'];
+
+        $target_dir = "../uploads/profile_pic/";
+        $target_file = $target_dir . basename($_FILES["admin_profile"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["admin_profile"]["tmp_name"]);
+    
+        if($check !== false) {
+        
+            $uploadOk = 1;
+            if ($uploadOk == 0) {
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Sorry, your file was not uploaded',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "_profile.php";
+                            }else{
+                                window.location.href = "_profile.php";
+                            }
+                        })
+                        
+                    })
+            
+                </script>
+                <?php
+            } else {
+                move_uploaded_file($_FILES["admin_profile"]["tmp_name"], $target_file);
+            }
+                $sql="UPDATE admin SET image='$target_file' WHERE id='$get_id_img'";
+                $result = mysqli_query($conn, $sql);
+                header('location: _profile.php');
+            
+        } else {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'File is not an image!',
+                    text: 'Please upload an image format',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_profile.php";
+                        }else{
+                            window.location.href = "_profile.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
 ?>

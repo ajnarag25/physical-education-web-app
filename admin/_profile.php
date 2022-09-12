@@ -64,7 +64,14 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="_profile.php"><img src="assets/images/tuplogo.png" alt="User"></a>
+                    <?php 
+                        $check_name =  $_SESSION['get_data']['firstname'];
+                        $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <a href="_profile.php"><img src="<?php echo $row['image'] ?>" class="rounded-circle shadow" width="60" alt="profile-image"></a>
+                    <?php }; ?>
                     <div class="detail">
                         <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
                         <small>Administrator</small>                        
@@ -138,19 +145,29 @@
                 <div class="col-md-12">
                     <div class="card mcard_3">
                         <div class="body">
-                            <a href="profile.html"><img src="assets/images/tuplogo.png" class="rounded-circle shadow" width="150" height="150" alt="profile-image"></a>
-                            <h4 class="m-t-10">Michael Narag</h4>   
-                            <button id="changepic" class="btn btn-primary">Change Profile Picture</button>                         
+                            <?php 
+                                $check_name =  $_SESSION['get_data']['firstname'];
+                                $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                                $result = mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                            <a href="_profile.php"><img src="<?php echo $row['image'] ?>" class="rounded-circle shadow" width="150" height="150" alt="profile-image"></a>
+                            <?php }; ?>
+                            <h4 class="m-t-10"><?php echo $_SESSION['get_data']['firstname'] ?> <?php echo $_SESSION['get_data']['lastname'] ?></h4>   
+                            <button id="changepic" class="btn btn-primary">Change Profile Picture</button>    
+                            <form action="functions.php" method="POST" enctype="multipart/form-data">                    
                             <div id="uploadpic" class="row" hidden>
                                 <div class="col-12">
                                     <label for="changepp"></label>
                                     <div class="body">
-                                        <input id="getpic" type="file" accept="image/*" class="dropify">
+                                        <input id="getpic" type="file" name="admin_profile" accept="image/png, image/jpeg" class="dropify" required>
                                     </div>
                                 </div>                     
                             </div>
                             <div id="savepic" class="col-12" hidden>
-                                <button id="getpic2" class="btn btn-primary" disabled>Save Changes</button>
+                                <input type="hidden" value="<?php echo $_SESSION['get_data']['id'] ?>" name="admin_id_img">
+                                <button type="submit" id="getpic2" class="btn btn-primary" name="upload_admin_image">Save Changes</button>
+                            </form> 
                                 <button id="cancelpic" class="btn btn-secondary" >Cancel</button>
                             </div>    
                         </div>
