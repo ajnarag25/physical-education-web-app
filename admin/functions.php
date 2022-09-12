@@ -143,6 +143,7 @@
         }
     
     }
+
     #SET SCHEDULE OF PAYMENT
     if (isset($_POST['set_sched'])) {
         $id_accept = $_POST['id_accept'];
@@ -201,6 +202,7 @@
         }
     
     }
+
     #DECLINE INQUIRY
     if (isset($_POST['set_decline'])) {
         $id_decline = $_POST['id_decline'];
@@ -259,6 +261,7 @@
 
 
     }
+
     #UPDATE INQUIRE INFORMATION
     if (isset($_POST['modify_inquire'])) {
         $id_modify = $_POST['id_modify'];
@@ -317,6 +320,7 @@
             <?php
         }
     }
+
     #SET SCHEDULE OF PICKUP
     if (isset($_POST['set_pickup'])) {
         $id_pickup = $_POST['id_pickup'];
@@ -401,6 +405,7 @@
         }
     
     }
+
     #CANCEL INQUIRY
     if (isset($_POST['set_cancel'])) {
         $id_cancel = $_POST['id_cancel'];
@@ -459,6 +464,7 @@
 
 
     }
+
     #RECEIVED ORDER
     if (isset($_POST['received_order'])) {
         $received_id = $_POST['id_received'];
@@ -514,6 +520,7 @@
             <?php
         }
     }
+
     #RESCHEDULE INQUIRY
     if (isset($_POST['set_resched'])) {
         $resched_id = $_POST['id_resched'];
@@ -571,4 +578,174 @@
         }
     }
 
+    #ACCEPT REQUEST
+    if (isset($_POST['set_accept'])) {
+        $id_accepts = $_POST['id_accept'];
+        $get_email = $_POST['email_set_accept'];
+
+        if ($id_accepts != null){
+            $conn->query("UPDATE reserve SET status='ACCEPTED' WHERE id='$id_accepts'") or die($conn->error);
+            include 'send_email_7.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Accepted the Request',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }   
+
+    #APPROVE REQUEST
+    if (isset($_POST['set_approval'])) {
+    $id_approve = $_POST['id_approval'];
+    $get_email = $_POST['get_email_approval'];
+    $status = $_POST['stats'];
+    $resched = $_POST['resched'];
+    $reasons = $_POST['reason'];
+    $setdate = $_POST['setdate'];
+
+    if ($resched == null && $status =='APPROVED'){
+        $conn->query("UPDATE reserve SET status='APPROVED', reason='$reasons', resched='N/A' WHERE id='$id_approve'") or die($conn->error);
+        include 'send_email_8.php';
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Approved Request',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "_reservation.php";
+                    }else{
+                        window.location.href = "_reservation.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+            
+    }elseif ($resched == null && $status == 'DECLINED'){
+        $conn->query("UPDATE reserve SET status='DECLINED', reason='$reasons', resched='N/A' WHERE id='$id_approve'") or die($conn->error);
+        include 'send_email_9.php';
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Declined the Request',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "_reservation.php";
+                    }else{
+                        window.location.href = "_reservation.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        if ($id_approve != null){
+            $conn->query("UPDATE reserve SET status='RESCHEDULE', reason='$reasons', resched='$resched' WHERE id='$id_approve'") or die($conn->error);
+            include 'send_email_10.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Reschedule Request',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
+    }
 ?>

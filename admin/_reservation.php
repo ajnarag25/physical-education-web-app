@@ -134,7 +134,6 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
                                             <th><small>Decisions</small></th>
@@ -146,58 +145,94 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
                                             <th><small>Decisions</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM reserve WHERE status='PENDING'";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>Industrial Education</td>
-                                            <td>07/13/2022 / 9:00AM</td>
-                                            <td>Gymnasium</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>One Day League</td>
-                                            <td>100</td>
+                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['dept_course'] ?></td>
+                                            <td><?php echo $row['date'] ?> / <?php echo $row['time'] ?></td>
+                                            <td><?php echo $row['booking'] ?></td>
+                                            <td><?php echo $row['purpose'] ?></td>
+                                            <td><?php echo $row['participants'] ?></td>
                                             <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm ">Accept</button>
-                                                    <button class="btn btn-danger btn-sm ">Decline</button>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
+                                                <!-- Modal for Accept -->
+                                                <div class="modal fade" id="accept<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Accept Request</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="body">
+                                                                                <h3>Accept this User Request?</h3>
+                                                                                <h4>Venue Reservation: <span style="color: blue"><?php echo $row['booking'] ?></span></h4>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_accept" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_accept">Approve</button>
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <!-- Modal for Decline -->
+                                                <div class="modal fade" id="decline<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Decline Request</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Decline Request of : <?php echo $row['name'] ?> </h3>
+                                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_decline" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="decline_req">Decline</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Industrial Technology</td>
-                                            <td>07/15/2022 / 9:00AM</td>
-                                            <td>Amphitheater</td>
-                                            <td>08/21/2022 / 9:00AM</td>
-                                            <td>Choir Practice</td>
-                                            <td>30</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm ">Accept</button>
-                                                    <button class="btn btn-danger btn-sm ">Decline</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Engineering Science</td>
-                                            <td>07/30/2022 / 9:00AM</td>
-                                            <td>Conference Room</td>
-                                            <td>08/24/2022 / 9:00AM</td>
-                                            <td>Meeting</td>
-                                            <td>10</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm ">Accept</button>
-                                                    <button class="btn btn-danger btn-sm ">Decline</button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <?php } ?>
                                         
                                     </tbody>
                                 </table>
@@ -231,7 +266,6 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
                                             <th><small>Decisions</small></th>
@@ -243,59 +277,183 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
                                             <th><small>Decisions</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM reserve WHERE status='ACCEPTED'";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Industrial Education</td>
-                                            <td>07/13/2022 / 9:00AM</td>
-                                            <td>Gymnasium</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>One Day League</td>
-                                            <td>100</td>
+                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['dept_course'] ?></td>
+                                            <td><?php echo $row['date'] ?> / <?php echo $row['time'] ?></td>
+                                            <td><?php echo $row['booking'] ?></td>
+                                            <td><?php echo $row['purpose'] ?></td>
+                                            <td><?php echo $row['participants'] ?></td>
                                             <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approve">Approve</button>
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status">Status</button>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approve<?php echo $row['id'] ?>"><i class="zmdi zmdi-assignment-check"></i></button>
+                                                <!-- Modal for Approve -->
+                                                <div class="modal fade" id="approve<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Approving Process</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <form action="functions.php" method="POST">
+                                                                                <label for="stat">Current Status</label>
+                                                                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-success">
+                                                                                    <strong >ACCEPTED</strong>
+                                                                                </div>
+                                                                                <label for="status">Action Status</label>
+                                                                                <div name="stats" class="form-group"> 
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="APPROVED" required>
+                                                                                        <label for="Approve">Approve</label>
+                                                                                    </div>                             
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="decline" class="with-gap" value="DECLINED" required>
+                                                                                        <label for="decline">Decline</label>
+                                                                                    </div>
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="res" class="with-gap" value="RESCHEDULE" required>
+                                                                                        <label for="res">Reschedule</label>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div id="resched" class="inlineblock col-sm-6" hidden>
+                                                                                        <div class="input-group">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                            </div>
+                                                                                            <input type="text" name="resched" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
+                                                                                <div class="form-group">                                
+                                                                                    <input type="text" name="reason" class="form-control" placeholder="Enter your reason" required>
+                                                                                </div>
+                                                                                <label id="approveschedd" for="approvesched">Date/Time of Approval/Decline/Reschedule (Date Today)</label>
+                                                                                <div name="approvesched" id="approvesched" class="form-group">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                        </div>
+                                                                                        <input type="text" name="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="id_approval">
+                                                                                    <input type="hidden" value="<?php echo $row['email'] ?>" name="get_email_approval">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_approval">Confirm</button>
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status"><i class="zmdi zmdi-alarm"></i></button>
+                                                <!-- Modal for Status -->
+                                                <div class="modal fade" id="status" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Request for Approval of Other Departments</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <form>
+                                                                                <div class="row clearfix js-sweetalert">
+                                                                                    <div class="col-lg-5">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Office of Student Affairs</label>
+                                                                                            <input type="text" class="form-control" value="Jane Doe" required readonly>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-3">
+                                                                                        <label for="statt">Current Status</label>
+                                                                                        <input type="text" class="form-control bg-warning text-white" value="Pending" readonly>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">  
+                                                                                        <label for="statt">Inform the Head Department</label>
+                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix js-sweetalert">
+                                                                                    <div class="col-lg-5">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Department of Engineering Science</label>
+                                                                                            <input type="text" class="form-control" value="Ann Whitaker" required readonly>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-3">
+                                                                                        <label for="statt">Current Status</label>
+                                                                                        <input type="text" class="form-control bg-danger text-white" value="Uninformed" readonly>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">  
+                                                                                        <label for="statt">Inform the Head Department</label>
+                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix js-sweetalert">
+                                                                                    <div class="col-lg-5">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Department of Industrial Technology</label>
+                                                                                            <input type="text" class="form-control" value="Lisa Hurley" required readonly>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-3">
+                                                                                        <label for="statt">Current Status</label>
+                                                                                        <input type="text" class="form-control bg-success text-white" value="Approved" readonly>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">  
+                                                                                        <label for="statt">Inform the Head Department</label>
+                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success" disabled>Inform</button>          
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                            <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
+                                                                                <strong ><div class="alert-icon">
+                                                                                    <i class="zmdi zmdi-alert-circle-o"></i>
+                                                                                </div>Note:
+                                                                                    <br>-> If status is 'Uninformed' it means that the head department is not yet informed about the request. Simply click the button 'Inform' to inform the head department.
+                                                                                    <br>-> If status is 'Pending' it means that you already informed the head department and you'll need to wait for his/her approval. To inform again just simply click the button 'Inform'.
+                                                                                    <br>-> If status is 'Approved' it means the head department approved the request. You can now decide whether approved, dissapproved or reschedule.</strong>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-danger btn-block waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Industrial Technology</td>
-                                            <td>07/15/2022 / 9:00AM</td>
-                                            <td>Amphitheater</td>
-                                            <td>08/21/2022 / 9:00AM</td>
-                                            <td>Choir Practice</td>
-                                            <td>30</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approve">Approve</button>
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status">Status</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Engineering Science</td>
-                                            <td>07/30/2022 / 9:00AM</td>
-                                            <td>Conference Room</td>
-                                            <td>08/24/2022 / 9:00AM</td>
-                                            <td>Meeting</td>
-                                            <td>10</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-success btn-sm " data-toggle="modal" data-target="#approve">Approve</button>
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status">Status</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -328,10 +486,8 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
-                                            <th><small>Request cancelled</small></th>
                                             <th><small>Decision</small></th>
                                         </tr>
                                     </thead>
@@ -341,23 +497,25 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
-                                            <th><small>Request cancelled</small></th>
                                             <th><small>Decisions</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM reserve WHERE status='RESCHEDULE'";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
                                         <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Industrial Education</td>
-                                            <td>07/13/2022 / 9:00AM</td>
-                                            <td>Gymnasium</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>One Day League</td>
-                                            <td>100</td>
-                                            <td>Yes</td>
+                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['dept_course'] ?></td>
+                                            <td><?php echo $row['date'] ?> / <?php echo $row['time'] ?></td>
+                                            <td><?php echo $row['booking'] ?></td>
+                                            <td><?php echo $row['purpose'] ?></td>
+                                            <td><?php echo $row['participants'] ?></td>
                                             <td>
                                                 <div class="col-sm-12 btn-group" role="group">
                                                     <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
@@ -365,39 +523,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Industrial Technology</td>
-                                            <td>07/15/2022 / 9:00AM</td>
-                                            <td>Amphitheater</td>
-                                            <td>08/21/2022 / 9:00AM</td>
-                                            <td>Choir Practice</td>
-                                            <td>30</td>
-                                            <td>No</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
-                                                    <button class="btn btn-danger btn-sm ">Cancel</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Engineering Science</td>
-                                            <td>07/30/2022 / 9:00AM</td>
-                                            <td>Conference Room</td>
-                                            <td>08/24/2022 / 9:00AM</td>
-                                            <td>Meeting</td>
-                                            <td>10</td>
-                                            <td>No</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
-                                                    <button class="btn btn-danger btn-sm ">Cancel</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
+
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -430,7 +557,6 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
                                             <th><small>Status</small></th>
@@ -442,47 +568,65 @@
                                             <th><small>Department</small></th>
                                             <th><small>Req. Date/Time</small></th>
                                             <th><small>Venue</small></th>
-                                            <th><small>Sched. Date/Time</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
-                                            <th><small>Decisions</small></th>
+                                            <th><small>Status</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM reserve ";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
                                         <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Industrial Education</td>
-                                            <td>07/13/2022 / 9:00AM</td>
-                                            <td>Gymnasium</td>
-                                            <td>08/13/2022 / 9:00AM</td>
-                                            <td>One Day League</td>
-                                            <td>100</td>
-                                            <td class="text-success">Approve</td>
+                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['dept_course'] ?></td>
+                                            <td><?php echo $row['date'] ?> / <?php echo $row['time'] ?></td>
+                                            <td><?php echo $row['booking'] ?></td>
+                                            <td><?php echo $row['purpose'] ?></td>
+                                            <td><?php echo $row['participants'] ?></td>
+                                            <td>
+                                            <?php 
+                                                if ($row['status'] == 'PENDING'){
+                                                    echo'
+                                                    <p class="badge badge-warning">PENDING</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'ACCEPTED'){
+                                                    echo'
+                                                    <p class="badge badge-success">ACCEPTED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'APPROVED'){
+                                                    echo'
+                                                    <p class="badge badge-success">APPROVED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">DECLINED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DISAPPROVED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">DISAPPROVED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'RESCHEDULE'){
+                                                    echo'
+                                                    <p class="badge badge-warning">RESCHEDULE</p>
+                                                    ';
+                                                }  
+                                                elseif ($row['status'] == 'RECEIVED'){
+                                                    echo'
+                                                    <p class="badge badge-primary">RECEIVED</p>
+                                                    ';
+                                                }  
+                                                
+                                                ?>
+                                            </td>
                                             
                                         </tr>
                                         <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Industrial Technology</td>
-                                            <td>07/15/2022 / 9:00AM</td>
-                                            <td>Amphitheater</td>
-                                            <td>08/21/2022 / 9:00AM</td>
-                                            <td>Choir Practice</td>
-                                            <td>30</td>
-                                            <td class="text-warning">Reschedule</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Engineering Science</td>
-                                            <td>07/30/2022 / 9:00AM</td>
-                                            <td>Conference Room</td>
-                                            <td>08/24/2022 / 9:00AM</td>
-                                            <td>Meeting</td>
-                                            <td>10</td>
-                                            <td class="text-danger">Disapproved</td>
-                                            
-                                        </tr>
                                         
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -497,161 +641,6 @@
     
 </section>
 
-<!-- Modal for Approve -->
-<div class="modal fade" id="approve" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Approving Process</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <label for="stat">Current Status</label>
-                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-warning">
-                                    <strong >PENDING</strong>
-                                </div>
-                                <label for="status">Action Status</label>
-                                <div name="stats" class="form-group"> 
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="Approve">
-                                        <label for="Approve">Approve</label>
-                                    </div>                             
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="decline" class="with-gap" value="decline">
-                                        <label for="decline">Decline</label>
-                                    </div>
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="res" class="with-gap" value="reschedule">
-                                        <label for="res">Reschedule</label>
-                                    </div>
-                                    
-                                    <div id="resched" class="inlineblock col-sm-6" hidden>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule">
-                                        </div>
-                                    </div>
-                                </div>
-                                <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
-                                <div class="form-group">                                
-                                    <input type="text" id="reason" class="form-control" placeholder="Enter your reason" disabled required>
-                                </div>
-                                <label for="name">Action by</label>
-                                <div class="form-group">                                
-                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" disabled required>
-                                </div>
-                                <label id="approveschedd" for="approvesched">Date/Time of Approval/Decline/Reschedule (Date Today)</label>
-                                <div name="approvesched" id="approvesched" class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                        </div>
-                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" disabled required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Confirm</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Status -->
-<div class="modal fade" id="status" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Request for Approval of Other Departments</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <div class="row clearfix js-sweetalert">
-                                    <div class="col-lg-5">
-                                        <div class="form-group">
-                                            <label id="reasonlabel" for="reason">Office of Student Affairs</label>
-                                            <input type="text" class="form-control" value="Jane Doe" required readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label for="statt">Current Status</label>
-                                        <input type="text" class="form-control bg-warning text-white" value="Pending" readonly>
-                                    </div>
-                                    <div class="col-lg-4">  
-                                        <label for="statt">Inform the Head Department</label>
-                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
-                                    </div>
-                                </div>
-                                <div class="row clearfix js-sweetalert">
-                                    <div class="col-lg-5">
-                                        <div class="form-group">
-                                            <label id="reasonlabel" for="reason">Department of Engineering Science</label>
-                                            <input type="text" class="form-control" value="Ann Whitaker" required readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label for="statt">Current Status</label>
-                                        <input type="text" class="form-control bg-danger text-white" value="Uninformed" readonly>
-                                    </div>
-                                    <div class="col-lg-4">  
-                                        <label for="statt">Inform the Head Department</label>
-                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
-                                    </div>
-                                </div>
-                                <div class="row clearfix js-sweetalert">
-                                    <div class="col-lg-5">
-                                        <div class="form-group">
-                                            <label id="reasonlabel" for="reason">Department of Industrial Technology</label>
-                                            <input type="text" class="form-control" value="Lisa Hurley" required readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label for="statt">Current Status</label>
-                                        <input type="text" class="form-control bg-success text-white" value="Approved" readonly>
-                                    </div>
-                                    <div class="col-lg-4">  
-                                        <label for="statt">Inform the Head Department</label>
-                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success" disabled>Inform</button>          
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
-                                <strong ><div class="alert-icon">
-                                    <i class="zmdi zmdi-alert-circle-o"></i>
-                                </div>Note:
-                                    <br>-> If status is 'Uninformed' it means that the head department is not yet informed about the request. Simply click the button 'Inform' to inform the head department.
-                                    <br>-> If status is 'Pending' it means that you already informed the head department and you'll need to wait for his/her approval. To inform again just simply click the button 'Inform'.
-                                    <br>-> If status is 'Approved' it means the head department approved the request. You can now decide whether approved, dissapproved or reschedule.</strong>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger btn-block waves-effect" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal for Info -->
 <div class="modal fade" id="info" tabindex="-1" role="dialog">
@@ -754,7 +743,7 @@
 		document.getElementById('reasonlabel').innerHTML = 'Reason for Reschedule';
         document.getElementById('approveschedd').innerHTML = 'Date/Time of Reschedule (Date Today)';
 		document.getElementById('stat').innerHTML = 'Reschedule';
-        document.getElementById('stat').classList = 'alert alert-info';
+        document.getElementById('stat').classList = 'alert alert-warning';
         document.getElementById('reason').disabled = false;
         document.getElementById('name').disabled = false;
         document.getElementById('setdate').disabled = false;

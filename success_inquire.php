@@ -92,28 +92,35 @@
                             <h4>Department: <?php echo $row['department'] ?></h4>
                             <hr>
                             <h4>Status: <?php
-                                if($row['status'] == 'PENDING'){
-                                    $set_pending = $row['status'];
-                                    
-                                    echo '<h4 style="color:rgb(185, 187, 48)">'.$set_pending.'</h4>';
-                                }
-                                elseif($row['status'] == 'UNPAID'){
-                                  $set_pending = $row['status'];
-                                  
-                                  echo '<h4 style="color:rgb(187, 101, 48)">'.$set_pending.'</h4>';
-                                }elseif($row['status'] == 'UNPAID'){
-                                  $set_pending = $row['status'];
-                                  
-                                  echo '<h4 style="color:rgb(187, 101, 48)">'.$set_pending.'</h4>';
-                                }elseif($row['status'] == 'DECLINED'){
-                                  $set_pending = $row['status'];
-                                  
-                                  echo '<h4 style="color:rgb(212, 11, 11)">'.$set_pending.'</h4>';
-                                }elseif($row['status'] == 'PICKUP'){
-                                  $set_pending = $row['status'];
-                                  
-                                  echo '<h4 style="color:rgb(3, 105, 59)">'.$set_pending.'</h4>';
-                                }
+                                if ($row['status'] == 'PENDING'){
+                                  echo'
+                                  <p class="text-warning">PENDING</p>
+                                  ';
+                              }elseif ($row['status'] == 'UNPAID'){
+                                  echo'
+                                  <p class="text-warning">UNPAID</p>
+                                  ';
+                              }elseif ($row['status'] == 'PAID'){
+                                  echo'
+                                  <p class="text-success">PAID</p>
+                                  ';
+                              }elseif ($row['status'] == 'PICKUP'){
+                                  echo'
+                                  <p class="text-success">PICKUP</p>
+                                  ';
+                              }elseif ($row['status'] == 'DECLINED'){
+                                  echo'
+                                  <p class="text-danger">DECLINED</p>
+                                  ';
+                              }elseif ($row['status'] == 'CANCELED'){
+                                  echo'
+                                  <p class="text-danger">CANCELED</p>
+                                  ';
+                              }elseif ($row['status'] == 'RECEIVED'){
+                                  echo'
+                                  <p class="text-primary">RECEIVED</p>
+                                  ';
+                              }  
                              
                              ?></h4>
                              <hr>
@@ -161,7 +168,7 @@
             </div>
           </div>
         </div>
-   
+                        
 
   
     <script src="js/jquery.js"></script>
