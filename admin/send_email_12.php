@@ -8,7 +8,7 @@
     $mail = new PHPMailer;
 
     $email =  $get_email;
-    $names = "REQUEST ACCEPTED";
+    $names = "CANCELED REQUEST";
 
     //SMTP Settings
     $mail->SMTPDebug = 0; 
@@ -26,10 +26,11 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($get_email);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We accept your request it is on process now. Please wait for the approval of each department head. Thank you have nice day';
+    $mail->Body = $msg;
 
 
     if ($mail->send())
         // echo "Mail Sent";
+
 
 ?>

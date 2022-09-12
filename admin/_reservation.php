@@ -517,10 +517,41 @@
                                             <td><?php echo $row['purpose'] ?></td>
                                             <td><?php echo $row['participants'] ?></td>
                                             <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
-                                                    <button class="btn btn-danger btn-sm ">Cancel</button>
+                                              
+                                                <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <!-- Modal for Cancel -->
+                                                <div class="modal fade" id="cancel<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Cancel Request</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Cancel Request of : <?php echo $row['name'] ?> </h3>
+                                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_cancel" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_cancel" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_cancel" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="cancel_req">Cancel</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                              
                                             </td>
                                         </tr>
 
@@ -605,9 +636,9 @@
                                                     echo'
                                                     <p class="badge badge-danger">DECLINED</p>
                                                     ';
-                                                }elseif ($row['status'] == 'DISAPPROVED'){
+                                                }elseif ($row['status'] == 'CANCELED'){
                                                     echo'
-                                                    <p class="badge badge-danger">DISAPPROVED</p>
+                                                    <p class="badge badge-danger">CANCELED</p>
                                                     ';
                                                 }elseif ($row['status'] == 'RESCHEDULE'){
                                                     echo'

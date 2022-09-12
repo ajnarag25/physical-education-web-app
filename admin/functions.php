@@ -633,7 +633,65 @@
             </script>
             <?php
         }
-    }   
+    } 
+
+    #DECLINE REQUEST
+    if (isset($_POST['decline_req'])) {
+        $id_declines = $_POST['id_decline'];
+        $get_email = $_POST['email_set_decline'];
+        $msg = $_POST['msg_decline'];
+
+        if ($id_declines != null){
+            $conn->query("UPDATE reserve SET status='DECLINED', reason='$msg' WHERE id='$id_declines'") or die($conn->error);
+            include 'send_email_11.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Declined the Request',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    } 
 
     #APPROVE REQUEST
     if (isset($_POST['set_approval'])) {
@@ -746,6 +804,64 @@
             </script>
             <?php
         }
+        }
     }
-    }
+
+    #CANCEL REQUEST
+    if (isset($_POST['cancel_req'])) {
+        $id_cancel = $_POST['id_cancel'];
+        $get_email = $_POST['email_set_cancel'];
+        $msg = $_POST['msg_cancel'];
+
+        if ($id_cancel != null){
+            $conn->query("UPDATE reserve SET status='CANCELED', reason='$msg' WHERE id='$id_cancel'") or die($conn->error);
+            include 'send_email_12.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Canceled the Request',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_reservation.php";
+                        }else{
+                            window.location.href = "_reservation.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    } 
 ?>
