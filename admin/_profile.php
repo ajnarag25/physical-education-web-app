@@ -174,7 +174,6 @@
                     </div>
 
                     <div class="card">
-                        <form>
                             <div class="header">
                                 <h2><strong>Account</strong> Settings</h2>
                             </div>
@@ -186,22 +185,56 @@
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
                                             <label for="user">Current Username</label>
-                                            <input name="user" type="text" class="form-control" value="Michael Narag" readonly required>
+                                            <?php 
+                                                $check_name =  $_SESSION['get_data']['firstname'];
+                                                $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                                                $result = mysqli_query($conn, $query);
+                                                while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                            <input name="user" type="text" class="form-control" value="<?php echo $row['username'] ?>" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Change Username</label>
-                                            <input id="usernew" name="change" type="text" class="form-control" placeholder="Enter new username" readonly required>
+                                        <div class="col-lg-4 col-12">
+                                        <form action="functions.php" method="POST">
+                                            <div class="form-group">
+                                                <label for="change">Change Username</label>
+                                                <input id="usernew" name="username" type="text" class="form-control" placeholder="Enter new username" readonly required>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <!-- Modal for Update Username -->
+                                        <div class="modal fade" id="changeuser<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="title" id="largeModalLabel">Username</h4>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="card">
+                                                                <br>
+                                                                <div class="body">
+                                                                    <h3>Update username of : <?php echo $row['firstname'] ?> <?php echo $row['lastname'] ?> </h3>
+                                                                    <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> You will be automatically logout and simply login your new updated username</p>
+                                                                    <div class="modal-footer">
+                                                                        <input type="hidden" name="id_username" value="<?php echo $row['id'] ?>">
+                                                                        <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="user_admin">Update</button>
+                                                                        <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                    </div>        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="col-12">
-                                        <button id="saveuser" type="submit" class="btn btn-primary" disabled>Save Changes</button>
-                                        <button id="canceluser" class="btn btn-secondary" disabled>Cancel</button>
-                                    </div>                                
+                                            <button id="saveuser" class="btn btn-primary" data-toggle="modal" data-target="#changeuser<?php echo $row['id'] ?>" disabled>Save Changes</button>
+                                            <button id="canceluser" class="btn btn-secondary" disabled>Cancel</button>
+                                        </div> 
+                                    <?php } ?>                           
                                 </div>                              
                             </div>
-                        </form>
                     </div>
 
                     <div class="card">
@@ -214,21 +247,28 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-12">
+                                    <?php 
+                                        $check_name =  $_SESSION['get_data']['firstname'];
+                                        $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
                                     <div class="form-group" >
                                         <label for="user">Current Password</label>
-                                        <input name="user" type="password" id="txtPassword" class="form-control" value="poginisean" readonly>
+                                        <input name="user" type="password" id="txtPassword" class="form-control" value="administrator123" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
+                                <form action="functions.php" method="POST">
                                     <div class="form-group" >
                                         <label for="change">Enter New Password</label>
-                                        <input id="passnew" name="change" type="password" class="form-control" placeholder="Enter new password" readonly required>
+                                        <input id="passnew" name="pass1" type="password" class="form-control" placeholder="Enter new password" readonly required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group" >
                                         <label for="change">Confirm New Password</label>
-                                        <input id="confirmpassnew" name="change" type="password" class="form-control" placeholder="Enter confirm password" readonly required>
+                                        <input id="confirmpassnew" name="pass2" type="password" class="form-control" placeholder="Enter confirm password" readonly required>
 
                                     </div>
                                 </div>
@@ -241,8 +281,36 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button id="savepass" class="btn btn-primary" disabled>Save Changes</button>
+                                    <!-- Modal for Update Password -->
+                                    <div class="modal fade" id="changepass<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="title" id="largeModalLabel">Password</h4>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="card">
+                                                            <br>
+                                                            <div class="body">
+                                                                <h3>Update Password of : <?php echo $row['firstname'] ?> <?php echo $row['lastname'] ?> </h3>
+                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> You will be automatically logout and simply login your new updated password</p>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id_password" value="<?php echo $row['id'] ?>">
+                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="pass_admin">Update</button>
+                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                </div>        
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <button id="savepass" class="btn btn-primary" data-toggle="modal" data-target="#changepass<?php echo $row['id'] ?>" disabled>Save Changes</button>
                                     <button id="cancelpass" class="btn btn-secondary" disabled>Cancel</button>
+                                    <?php } ?>
                                 </div>                                
                             </div>                              
                         </div>
@@ -324,22 +392,17 @@
 <script type="text/javascript">
     function ShowPassword(chkShowPassword) {
         //Reference the TextBox.
-        var txtPassword = document.getElementById("txtPassword");
         var txtPassword1 = document.getElementById("passnew");
         var txtPassword2 = document.getElementById("confirmpassnew");
 
  
         //If CheckBox is Checked i.e. Password needs to be shown.
         if (chkShowPassword.checked) {
-            txtPassword.setAttribute('TYPE', 'TEXT');
-
             txtPassword1.setAttribute('TYPE', 'TEXT');
       
             txtPassword2.setAttribute('TYPE', 'TEXT');
     
         } else {
-            txtPassword.setAttribute('TYPE', 'PASSWORD');
-
             txtPassword1.setAttribute('TYPE', 'PASSWORD');
    
             txtPassword2.setAttribute('TYPE', 'PASSWORD');
