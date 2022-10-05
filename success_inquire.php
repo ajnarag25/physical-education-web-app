@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
           <img src="assets/images/gear-spin.gif" width="50" alt="">
