@@ -148,17 +148,44 @@
                   <br>
                   <a href="reserve.php" class="service-btn">Make Reservation</a>
                 </div>
-                <div class="col-sm-4 text-center">
+
+                <?php 
+                    $id_no = $_SESSION['get_data']['id_no'];
+                    $query = "SELECT id_no FROM borrowing_machine_info where status = 'unreturned' ";
+                    $result = mysqli_query($conn, $query);
+                    if ($result->num_rows == 0) {
+                    ?>
+                    <div class="col-sm-4 text-center">
+                      <br><br>
+                      <i class='bx bxs-basketball bx-custom'></i>
+                      <br><br>
+                      <h3>Borrow Equipments</h3>
+                      <br>
+                      <p>Borrow any equipments in P.E Department, just simply fill-up all the 
+                          information that is needed.</p>
+                      <br>
+                      <a href="pickequipment.php" class="service-btn">Borrow Equipments</a>
+                    </div>
+                <?php
+                    }
+
+                    else {
+                   ?>
+                  <div class="col-sm-4 text-center">
                   <br><br>
                   <i class='bx bxs-basketball bx-custom'></i>
                   <br><br>
-                  <h3>Borrow Equipments</h3>
+                  <h3>Return Your Equipment</h3>
                   <br>
-                  <p>Borrow any equipments in P.E Department, just simply fill-up all the 
-                      information that is needed.</p>
+                  <p>You have an unreturned Equipment from the machine, Click here to Generate OTP</p>
                   <br>
-                  <a href="pickequipment.php" class="service-btn">Borrow Equipments</a>
-                </div>
+                  <a href="borrowing_slip.php" class="service-btn">Return Equipment</a>
+                </div> 
+                <?php  
+                    }
+                  ?>
+
+
                 <div id="about"></div>
             </div>
           </div>

@@ -381,6 +381,7 @@ if (isset($_POST['reset_password'])) {
         </script>
         <?php
     }else{
+        
         $conn->query("UPDATE registration SET otp=$setOTP WHERE email='$emails'") or die($conn->error);
         include 'otp_email.php';
         header("Location: verify_otp.php");
@@ -887,4 +888,25 @@ if (isset($_POST['reserve_facility'])) {
     }
 }
 
+
+#SELECT BALL
+if (isset($_POST['basketball_btn'])) {
+    $id_no = $_SESSION['get_data']['id_no'];
+    $equipment_to_borrowszx = "basketball";
+    $otp_equipment = rand(11111,88888);
+    $conn->query("UPDATE registration SET otp_equipment=$otp_equipment, equipment_to_borrow = '$equipment_to_borrowszx'  WHERE id_no='$id_no'") or die($conn->error);
+    ?>
+    <script>
+    window.location.href = "display_otp_equip.php";
+    </script>
+    <?php
+}
+
+if (isset($_POST['volleyball_btn'])) {
+
+    echo "DFFHGH";
+}
+
 ?>
+
+

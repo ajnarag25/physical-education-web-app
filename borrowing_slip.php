@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/images/tup-logo.png" rel="icon">
-    <title>P.E Department - Borrow Equipment</title>
+    <title>P.E Department - Inquire Uniform</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/profile.css">
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
           <img src="assets/images/gear-spin.gif" width="50" alt="">
@@ -54,72 +54,56 @@
         </div>
       </nav>
 
-      <div class="jumbotron">
-        <div class="d-flex flex-row bd-highlight mb-3">
-            <a href="home.php" style="text-decoration: none; color:rgb(151, 8, 8);"><i class='bx bx-left-arrow-alt'></i> Back </a>
-        </div>
-        <div class="text-center">
-            <h2>Borrow Equipment</h2>
-        </div>
-        <br>
-        <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-          <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                  
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">Basketball</h4>
-                            <div class="text-center">
-                                <img src="assets/images/basketball.png" width="250" alt="">
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-danger" name="basketball_btn">Select</button>
-                            <!-- <a href="" type="button" class="btn btn-danger" name="">Select</a>   -->
-                        </div>
-                    </div>
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">Volleyball</h4>
-                            <div class="text-center">
-                                <img src="assets/images/volleyball.png" width="250" alt="">
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-danger" name="volleyball_btn">Select</button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">Other Equipments</h4>
-                            <div class="text-center">
-                                <img src="assets/images/notepad.png" width="215" alt="">
-                            </div>
+        <div class="jumbotron">
+            <div class="text-center">
+                <h2>Borrowing Slip</h2>
+            
+            </div>
+            <br>
+            <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+                <div class="card card_custom">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Name:</h4>
+                            <hr>
+                            <h4>ID No:</h4>
+                            <hr>
+                            <h4>Course: </h4>
+                            <hr>
+                            <h4>Equipment:</h4>
+                            <hr>
+                            <h4>Ball ID:</h4>
+                            <hr>
+                            <h4>Status:</h4>
                             
-                            <br>
-                            <a href="form_equipment.php" type="button" class="btn btn-danger" name="">Select</a>
+                        </div>
+                        <div class="col">
+                            <h4>Time Borrow: </h4>
+                            <hr>
+                            <h4>Date Borrow:</h4>
+                            <hr>
+                            <h4>Time Return:</h4>
+                            <hr>
+                            <h4>Date Return:</h4>
+                             <hr>
+                             <h4>Note(If the ball Deflated/Damaged):</h4>
+                        </div>
+                        <div class="text-center">
+                          <br>
+                            <a class="btn btn-secondary" href="home.php">Back</a>
+                            
                         </div>
                     </div>
                 </div>
-        
-          </form>
-                
             </div>
         </div>
-
-   
+    
+                        
 
   
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
-    <script>
-      function preview() {
-          frame_1.src=URL.createObjectURL(event.target.files[0]);
-      }
-
-    </script>
 </body>
 </html>
