@@ -61,7 +61,7 @@
             <h1 id= "display_otp"></h1>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-info">Generate new OTP</button>
+            <button type="submit" class="btn btn-info" hidden>Generate new OTP</button>
             <button type="submit" class="btn btn-danger">Cancel</button>
 
         </div>

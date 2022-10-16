@@ -63,7 +63,6 @@
         </div>
         <br>
         <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-          <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                   
                     <div class="col">
@@ -74,7 +73,7 @@
                                 <img src="assets/images/basketball.png" width="250" alt="">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-danger" name="basketball_btn">Select</button>
+                            <a href="borrowing_slip.php?equipment_to_borrow=basketball" type="button" class="btn btn-danger" name="">Select</a>
                             <!-- <a href="" type="button" class="btn btn-danger" name="">Select</a>   -->
                         </div>
                     </div>
@@ -86,24 +85,10 @@
                                 <img src="assets/images/volleyball.png" width="250" alt="">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-danger" name="volleyball_btn">Select</button>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <br>
-                        <div class="card card_custom">
-                            <h4 class="text-center mb-4">Other Equipments</h4>
-                            <div class="text-center">
-                                <img src="assets/images/notepad.png" width="215" alt="">
-                            </div>
-                            
-                            <br>
-                            <a href="form_equipment.php" type="button" class="btn btn-danger" name="">Select</a>
+                            <a href="borrowing_slip.php?equipment_to_borrow=volleyball" type="button" class="btn btn-danger" name="">Select</a>
                         </div>
                     </div>
                 </div>
-        
-          </form>
                 
             </div>
         </div>
