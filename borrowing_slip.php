@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/images/tup-logo.png" rel="icon">
-    <title>P.E Department - Inquire Uniform</title>
+    <title>P.E Department</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/profile.css">
@@ -23,13 +23,22 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style_koto.css">
-    
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+			integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 
 <body>
+  
 
     <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
@@ -60,24 +69,28 @@
         </div>
       </nav>
         <?php
+
         if (isset($_GET['equipment_to_borrow'])) {
           $equip = $_GET['equipment_to_borrow'];
           $sql = "SELECT $equip FROM ball_sequence where id = '3'";
           $result = mysqli_query($conn, $sql);
+          
           while($row = mysqli_fetch_assoc($result)) {
         
           
           ?>
-          <div id="invoice">
-
-              <div class="jumbotron">
-            <div class="text-center">
-                <h2>Borrower's Slip</h2>
+          
             
+            <div class="jumbotron">
+            <div id="invoice">
+            <div class="text-center">
+           
+
+                <h2>Borrower's Slip</h2>
             </div>
             <br>
             <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-                <div class="card card_custom">
+                <!-- <div class="card card_custom"> -->
                     <div class="row">
                         <div class="col-md-4">
                             <h5><b>ID No:</b>  
@@ -95,12 +108,13 @@
                             </h5>
                             <hr>
                             <h5><b>Equipment:</b>
-                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow'] ?> </span>
+                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow'];$_SESSION["equipment"] = $_GET['equipment_to_borrow']; ?> </span>
 
                             </h5>
                             <hr>
                             <h5> <b>Ball ID:</b>
-                              <span  id = "ball_id"> <?php echo $row["$equip"] ?> </span>    
+                            
+                              <span  id = "ball_id"> <?php echo $row["$equip"]; $_SESSION["bbid"] = $row["$equip"];?> </span>    
                             </h5>
                               
 
@@ -113,10 +127,10 @@
                             
                             <hr>
                             <h5><b>Date Borrow</b>
-                              <span  id = "time_borrow"> <?php echo date("Y-m-d");?> </span>
+                              <span  id = "date_borrow"> <?php echo date("Y-m-d");?> </span>
 
                             </h5>
-                        </div>
+                        </div> <!--end of col md 4--->
                         <?php }?>
                         <div class="col-md-8">
                             <p><b> Terms and Conditions</b> </p>
@@ -133,24 +147,26 @@
                             <li align = "justify" class = "alignments">I agree that the sports equipment will be used only  within the TUPC premises.</li>
                             <br>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" onclick = "accept_cbb()" type="checkbox" id="iaccept" >
+                              <input class="form-check-input" type="checkbox" id="iaccept" >
                               <label class="form-check-label" for="iaccept"> I Accept the Terms and Conditions</label>
                             </div>
                             
-                          </div>
-                      
- 
-                        
+                          </div> <!---end of col-md-8---->
+                          
+                          
+                        <div class = "container">
                         <div class="text-center">
                           <br>
                             <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
-                            <button class="btn btn-danger"  id = "btn_confirm_generate"> Confirm</button>
+                            <button href ="display_otp_equip.php"  class="btn btn-danger"  id = "btn_confirm_generate" disabled> Confirm</button>
+                        </div> <!---end of text center for buttons--->
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+                        
+                    <!-- </div> -->
+                </div><!---end of row---->
+            </div><!---end of containe marg top---->
+        </div><!---end of jumbotron---->
+        </div><!-----end ofinvoice---->
           <?php
         }
         else {
@@ -159,14 +175,31 @@
         }
         ?>
         
-        </div>
-
+        
+    <iframe id = "frame" src="rec.php" style = "width = 100%; border:0; height:0;"></iframe>
     <script>
-      function accept_cbb() {
-        alert("fsadfsdf");       
-      }
+      // function accept_cbb() {
+      //   cb_agree= document.getElementById("iaccept");
+      //   confirm_btn = document.getElementById("btn_confirm_generate");
+      //   if (cb_agree.checked){
+      //       cb_agree.disabled = true;
+      //       confirm_btn.disabled = false;
+      //   }       
+      // }
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#iaccept').addEventListener('click', function () {
+          let wspFrame = document.getElementById('frame').contentWindow;
+          document.getElementById('iaccept').disabled = true;
+          document.getElementById('btn_confirm_generate').disabled = false;
+		      wspFrame.focus();
+		      wspFrame.print();
+          });
+        });
+        //////////////
+        //////////////
+      
     </script>
-    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>                 
+
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
