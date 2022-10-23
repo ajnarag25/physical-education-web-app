@@ -23,8 +23,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script>
         function exexutedis() {
-        var otp = "<?php 
-                                
+        var otp = "<?php        
                                 $id_no = $_SESSION['get_data']['id_no'];
                                 $sql = "SELECT otp_equipment FROM registration WHERE id_no='$id_no'";
                                 $result = mysqli_query($conn, $sql);

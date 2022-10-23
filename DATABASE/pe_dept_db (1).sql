@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2022 at 05:17 PM
+-- Generation Time: Oct 23, 2022 at 01:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -133,7 +133,7 @@ CREATE TABLE `registration` (
 INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`) VALUES
 (2, 'Avor John', 'Atienza', 'Narag', 'ajnarag25@gmail.com', '09089637505', 'Male', 'N/A', 'OSA', 'uploads/16618353763135715.png', '$2y$10$IttA/.7kEBsdKLqiuTO6x.iGSlyYOHCgj3sQ.ZAlAEEdlKy56Zt.6', 'N/A', 'Teacher', 0, NULL, NULL),
 (3, 'Liza', 'Soberano', 'Narag', 'liza@gmail.com', '09555498137', 'Female', 'BSCE', 'N/A', 'uploads/16618354423135715.png', '$2y$10$iarvYHCL1hS3ez7IdBlNaewiXQKHSwg57MjMlI347Rr1H7dHtzmrS', 'N/A', 'Student', 0, NULL, NULL),
-(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '1999', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$Hqo96R/vvpyGKkHva6d/heS7VedJA1BFu2lb3JymfYtD1b60l4lKi', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg');
+(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '09120282536', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$Hqo96R/vvpyGKkHva6d/heS7VedJA1BFu2lb3JymfYtD1b60l4lKi', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg');
 
 -- --------------------------------------------------------
 
