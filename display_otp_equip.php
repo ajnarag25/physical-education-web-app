@@ -22,17 +22,15 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script>
+      var x = document.getElementById("display_otp");
         function exexutedis() {
         var otp = "<?php        
-                                $id_no = $_SESSION['get_data']['id_no'];
-                                $sql = "SELECT otp_generate FROM borrowing_machine_info WHERE id_no='$id_no'";
-                                $result = mysqli_query($conn, $sql);
-                                while($row = mysqli_fetch_assoc($result)) {
-                                    echo $row["otp_equipment"];
-                                }
-            ?>"
-            document.getElementById("display_otp").innerHTML = otp;
+              echo $_SESSION['borrower_get_data']['otp_generate'];
+                    ?>"
+              x.innerHTML = otp;
         }
+        
+      
 </script>
 </head>
 
@@ -53,23 +51,23 @@
       <div class="jumbotron">
         <div class="text-center">
             <h3 id = "thistypeotp">Type This OTP into the Machine</h3>
-            <h6 id = "nevershare"> <b>NEVER SHARE</b> this Code with Others,<br> Valid for  <b> 5 minutes</b></h6>
-            <h6 id = "importantnote"> <b>Impotant Note:</b> The OTP and Terms and Conditions will Reset if you Cancel or Leave this page. <br>
-          </h6>
+            <h6 id = "nevershare"> <b>NEVER SHARE</b> this Code with Others, the OTP will also send to your gsfe account<br> Valid for  <b> 5 minutes</b></h6>
+            <h6 id = "nevershare"> <b>Impotant Note:</b> The OTP and Terms and Conditions will be <b> void</b> if you Cancel or Leave this page</h6>
         </div>
+          <div class="row">
+            <div class="text-center">
+              <button onclick = "mdown()" class="btn btn-dark" style = "color:white;">Click to View</button>
+              <h1 id = "display_otp" style = "display:none;"></h1>
+          </div>
+          </div>
+          
+          <br>
         <div class="text-center">
-            <h1 id= "display_otp">
-              
-            </h1>
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-info" hidden>Generate new OTP</button>
+            <button type="submit" class="btn btn-primary" style = "color:white;" hidden>Generate new OTP</button>
             <button type="submit" class="btn btn-danger">Cancel</button>
 
         </div>
    
-
-  
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -78,7 +76,16 @@
       function preview() {
           frame_1.src=URL.createObjectURL(event.target.files[0]);
       }
-
+    </script>
+    <script>
+      var x = document.getElementById("display_otp");
+      function mdown() {
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
     </script>
 
 

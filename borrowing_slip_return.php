@@ -5,7 +5,6 @@
   if (!isset($_SESSION['get_data']['email'])) {
 
     header("Location: index.php");
-    $borrower_info = array();
 }
 ?>
 
@@ -95,7 +94,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5><b>ID No:</b>  
-                              <span  id = "id_no"> <?php echo $_SESSION['get_data']['id_no']; $borrower_info['id_no'] = $_SESSION['get_data']['id_no'];?></span>
+                              <span  id = "id_no"> <?php echo $_SESSION['get_data']['id_no'];?></span>
                             </h5>
                             <hr>
                             <h5><b>Name:</b>  
@@ -109,42 +108,30 @@
                             </h5>
                             <hr>
                             <h5><b>Equipment:</b>
-                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow']; $borrower_info['equipment_to_borrow'] = $_GET['equipment_to_borrow']; ?> </span>
+                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow'];$_SESSION["equipment"] = $_GET['equipment_to_borrow']; ?> </span>
 
                             </h5>
                             <hr>
                             <h5> <b>Ball ID:</b>
                             
-                              <span  id = "ball_id"> <?php echo $row["$equip"]; $borrower_info['ball_id'] = $row["$equip"];?> </span>    
+                              <span  id = "ball_id"> <?php echo $row["$equip"]; $_SESSION["bbid"] = $row["$equip"];?> </span>    
                             </h5>
                               
 
                             <hr>
                             <h5><b>Time Borrow</b>
                               <span  id = "time_borrow"> <?php
-                              echo date("h:ia"); $_SESSION["time_borrow"] = date("h:ia"); $borrower_info['time_borrow'] = date("h:ia")?> </span>
+                              echo date("h:ia");?> </span>
 
                             </h5>
                             
                             <hr>
                             <h5><b>Date Borrow</b>
-                              <span  id = "date_borrow"> <?php echo date("Y-m-d"); $borrower_info['date_borrow'] = date("Y-m-d");?> </span>
+                              <span  id = "date_borrow"> <?php echo date("Y-m-d");?> </span>
+
                             </h5>
                         </div> <!--end of col md 4--->
                         <?php }?>
-
-
-                      <?php 
-                      // THIS IS THE CODE WHERE THE SYSTEM WILL GENERATE ONE TIME PASSWORD THRU RAND() MODULE AND WILL PASS IT 
-                      //ON THE SESSION VARIABLE TOGETHER WITH SOME IMPORTANT DATAS ABOVE
-                      $permitted_char = '0123456789ABCD';
-                      $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
-                      $borrower_info['otp_generate'] = $otp_equipment;
-                      $_SESSION['borrower_get_data'] = $borrower_info;
-                      ?>
-
-
-
                         <div class="col-md-8">
                             <p><b> Terms and Conditions</b> </p>
                             <li align = "justify" class = "alignments">I agree that I will take good care of the sports equipment being borrowed.</li>
@@ -172,14 +159,10 @@
                           <br>
 
                             <?php
-                              
+                              $permitted_chars = 
                             ?>
-                            
-                            <form action="display_otp_equip.php" method = "post">
-                              <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
-                              <button type = "submit" name = "passed_borrower_slip" class="btn btn-danger"  id = "btn_confirm_generate" disabled> Confirm</button>
-                            </form>
-                            
+                            <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
+                            <a href = "display_otp_equip.php" name  = "generate_otp" class="btn btn-danger"  id = "btn_confirm_generate" disabled> Confirm</a>
                         </div> <!---end of text center for buttons--->
                         </div>
                         
@@ -201,9 +184,8 @@
       document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#iaccept').addEventListener('click', function () {
           let wspFrame = document.getElementById('frame').contentWindow;
-          document.getElementById('btn_confirm_generate').disabled = false;
           document.getElementById('iaccept').disabled = true;
-          
+          document.getElementById('btn_confirm_generate').disabled = false;
 		      wspFrame.focus();
 		      wspFrame.print();
           });
@@ -212,6 +194,7 @@
         //////////////
       
     </script>
+
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

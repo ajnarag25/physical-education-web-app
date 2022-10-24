@@ -179,7 +179,7 @@
                   <br>
                   <p>You have an unreturned Equipment from the machine, Click here to Generate OTP</p>
                   <br>
-                  <a href="borrowing_slip.php" class="service-btn">Return Equipment</a>
+                  <a href="borrowing_slip_return.php" class="service-btn">Return Equipment</a>
                 </div> 
                 <?php  
                     }
