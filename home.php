@@ -151,7 +151,7 @@
 
                 <?php 
                     $id_no = $_SESSION['get_data']['id_no'];
-                    $query = "SELECT id_no FROM borrowing_machine_info where status = 'unreturned' ";
+                    $query = "SELECT id_no FROM borrowing_machine_info where status = 'UNRETURNED' ";
                     $result = mysqli_query($conn, $query);
                     if ($result->num_rows == 0) {
                     ?>

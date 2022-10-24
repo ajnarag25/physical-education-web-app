@@ -175,8 +175,7 @@
         }
         ?>
         
-        
-    <iframe id = "frame" src="rec.php" style = "width = 100%; border:0; height:0;"></iframe>
+    <iframe id = "frame" src="official_rec.php" style = "width = 100%; border:0; height:0;"></iframe>
     <script>
       // function accept_cbb() {
       //   cb_agree= document.getElementById("iaccept");

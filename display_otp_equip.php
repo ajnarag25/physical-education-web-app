@@ -25,9 +25,8 @@
         function exexutedis() {
         var otp = "<?php        
                                 $id_no = $_SESSION['get_data']['id_no'];
-                                $sql = "SELECT otp_equipment FROM registration WHERE id_no='$id_no'";
+                                $sql = "SELECT otp_generate FROM borrowing_machine_info WHERE id_no='$id_no'";
                                 $result = mysqli_query($conn, $sql);
-                                
                                 while($row = mysqli_fetch_assoc($result)) {
                                     echo $row["otp_equipment"];
                                 }
@@ -54,10 +53,14 @@
       <div class="jumbotron">
         <div class="text-center">
             <h3 id = "thistypeotp">Type This OTP into the Machine</h3>
-            <h6 id = "nevershare"> <b>NEVER SHARE</b> this Code with Others, the OTP will also send to your gsfe account<br> Valid for  <b> 5 minutes</b></h6>
+            <h6 id = "nevershare"> <b>NEVER SHARE</b> this Code with Others,<br> Valid for  <b> 5 minutes</b></h6>
+            <h6 id = "importantnote"> <b>Impotant Note:</b> The OTP and Terms and Conditions will Reset if you Cancel or Leave this page. <br>
+          </h6>
         </div>
         <div class="text-center">
-            <h1 id= "display_otp"></h1>
+            <h1 id= "display_otp">
+              
+            </h1>
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-info" hidden>Generate new OTP</button>

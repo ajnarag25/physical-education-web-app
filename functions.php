@@ -4,7 +4,6 @@
 <?php
 include('connection.php');
 session_start();
-date_default_timezone_set('Asia/Manila');
 
 #LOGIN
 if (isset($_POST['login'])) {
@@ -886,41 +885,6 @@ if (isset($_POST['reserve_facility'])) {
         <?php
     }
 }
-
-
-// #SELECT BALL
-// if (isset($_POST['basketball_btn'])) {
-//     $id_no = $_SESSION['get_data']['id_no'];
-//     $equipment_to_borrowszx = "basketball";
-//     $permitted_char = '0123456789ABCD';
-//     $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
-
-
-//     $sql = "SELECT otp_equipment,equipment_to_borrow FROM registration where id_no = '$id_no'";
-//     $result = mysqli_query($conn, $sql);
-//     $check = mysqli_num_rows($result);
-//     if ($check == 0){
-//         $conn->query("UPDATE registration SET otp_equipment='$otp_equipment', equipment_to_borrow = '$equipment_to_borrowszx'  WHERE id_no='$id_no';
-//         CREATE EVENT IF NOT EXISTS $id_no
-//         ON SCHEDULE EVERY 5 MINUTE
-//         DO UPDATE registration SET otp_equipment = NULL,equipment_to_borrow = NULL WHERE id_no = '$id_no';
-//         ") or die($conn->error);
-//         // $query = "CREATE EVENT IF NOT EXISTS $id_no
-//         // ON SCHEDULE EVERY 5 MINUTE
-//         // DO UPDATE registration SET otp_equipment = NULL,equipment_to_borrow = NULL WHERE id_no = '$id_no';";
-//     }
-//     // $conn->query("UPDATE registration SET otp_equipment='$otp_equipment', equipment_to_borrow = '$equipment_to_borrowszx'  WHERE id_no='$id_no'") or die($conn->error);
-//     // ?>
-//     <script>
-//     window.location.href = "display_otp_equip.php";
-//     </script>
-//     <?php
-// }
-
-// if (isset($_POST['volleyball_btn'])) {
-
-//     echo "DFFHGH";
-// }
 
 ?>
 
