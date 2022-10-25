@@ -4,8 +4,11 @@
   if (!isset($_SESSION['get_data']['email'])) {
     header("Location: index.php");
 }
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $conn->query("DELETE FROM borrowing_machine_info WHERE id = $id") or die($conn->error);
+  }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,6 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
-
 <body>
     
     <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">

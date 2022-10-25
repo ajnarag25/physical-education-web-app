@@ -25,7 +25,7 @@
 		<link rel="stylesheet" href="css/custom2.css" />
 	</head>
 	<body>
-		<?php if(isset ($_SESSION["bbid"]) and isset ($_SESSION["equipment"]))
+		<?php if(isset ($_SESSION['borrower_get_data']['ball_id']) and isset ( $_SESSION['borrower_get_data']['equipment_to_borrow']))
 		{
 		?>
 		<div class="container receipt-wrap" id="receipt-wrap">
@@ -87,8 +87,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="col-md-2"><b><?php echo $_SESSION["bbid"]?></b> </td>
-									<td class="col-md-2"><b><?php echo $_SESSION["equipment"]?></b> </td>
+									<td class="col-md-2"><b><?php echo $_SESSION['borrower_get_data']['ball_id']?></b> </td>
+									<td class="col-md-2"><b><?php echo $_SESSION['borrower_get_data']['ball_id']?></b> </td>
 								</tr>
 							</tbody>
 						</table>
@@ -136,7 +136,6 @@
 		}
 		else {
 			?>
-
 			<h1>Request Denied</h1>
           	<h6>There's Something wrong with your URL request</h6>
 			<?php

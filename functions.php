@@ -889,3 +889,104 @@ if (isset($_POST['reserve_facility'])) {
 ?>
 
 
+<?php
+
+if (isset($_POST['passed_borrower_slip'])) {
+    if (isset($_POST['accept_terms'])) {
+        $id_no = $_POST['id_no'];
+        $equipment_to_borrow = $_POST['equipment_to_borrow'];
+        $ball_id = $_POST['ball_id'];
+        $time_borrow = $_POST['time_borrow'];
+        $date_borrow = $_POST['date_borrow'];
+        $time_return = $_POST['time_return'];
+        $date_return = $_POST['date_return'];
+        $status = $_POST['status'];
+        $qr = $_POST['qr'];
+        $typed = $_POST['typed'];
+        $otp_generate = $_POST['otp_generate'];
+        $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow,date_borrow,time_return,date_return, status, qr, typed,otp_generate) 
+        VALUES('$id_no','$equipment_to_borrow','$ball_id','$time_borrow', '$date_borrow', '$time_return', '$date_return', '$status', '$qr', '$typed', '$otp_generate')") or die($conn->error);
+
+    ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: "Borrower's Saved  Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                    }).then((result)=>{
+
+                        window.location.href = "display_otp_equip.php";
+                    })
+                    })
+        </script>
+    
+    <?php
+    }
+    else {
+    ?>        
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'Please Read and Accept the Terms and Conditions!',
+                text: "Borrower's Slip has been Reset",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "pickequipment.php";
+                    }else{
+                        window.location.href = "pickequipment.php";
+                    }
+                })
+                
+            })
+    
+        </script>    
+<?php
+    }
+}
+
+?>
+<?php
+//IF THE USER CLICK THE CANCEL BUTTON
+if (isset($_GET['cancel_otp_id'])) {
+    $get_id = $_GET['cancel_otp_id'];
+?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Your borrower's slip and all requests will be void if you leave the page",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Cancel it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                        'Cancelled',
+                        'Your Request has been Cancelled',
+                        'success'
+                        )
+                        window.location.href = "pickequipment.php?id=<?php echo $get_id?>";
+                    }else{
+                        window.location.href = "display_otp_equip.php";
+
+                    }
+                    })
+                    })
+        </script>
+<?php
+}
+?>

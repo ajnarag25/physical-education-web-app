@@ -109,7 +109,7 @@
                             </h5>
                             <hr>
                             <h5><b>Equipment:</b>
-                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow']; $borrower_info['equipment_to_borrow'] = $_GET['equipment_to_borrow']; ?> </span>
+                            <span  id = "equipment"> <?php echo $equip; $borrower_info['equipment_to_borrow'] = $equip; ?> </span>
 
                             </h5>
                             <hr>
@@ -144,7 +144,6 @@
                       ?>
 
 
-
                         <div class="col-md-8">
                             <p><b> Terms and Conditions</b> </p>
                             <li align = "justify" class = "alignments">I agree that I will take good care of the sports equipment being borrowed.</li>
@@ -160,7 +159,7 @@
                             <li align = "justify" class = "alignments">I agree that the sports equipment will be used only  within the TUPC premises.</li>
                             <br>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="iaccept" >
+                              <input class="form-check-input" form = "submit_machine_info" name = "accept_terms" type="checkbox" id="iaccept" >
                               <label class="form-check-label" for="iaccept"> I Accept the Terms and Conditions</label>
                             </div>
                             
@@ -175,9 +174,20 @@
                               
                             ?>
                             
-                            <form action="display_otp_equip.php" method = "post">
+                            <form action="functions.php" id = "submit_machine_info" method = "post">
                               <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
-                              <button type = "submit" name = "passed_borrower_slip" class="btn btn-danger"  id = "btn_confirm_generate" disabled> Confirm</button>
+                              <input type="hidden" name = "id_no" value = '<?php echo $_SESSION['borrower_get_data']['id_no']?>'>
+                              <input type="hidden" name = "equipment_to_borrow" value = '<?php echo $_SESSION['borrower_get_data']['equipment_to_borrow']?>'>
+                              <input type="hidden" name = "ball_id" value = '<?php echo $_SESSION['borrower_get_data']['ball_id']?>'>
+                              <input type="hidden" name = "time_borrow" value = '<?php echo $_SESSION['borrower_get_data']['time_borrow']?>'>
+                              <input type="hidden" name = "date_borrow" value = '<?php echo $_SESSION['borrower_get_data']['date_borrow']?>'>
+                              <input type="hidden" name = "time_return" value = 'N/A'>
+                              <input type="hidden" name = "date_return" value = 'N/A'>
+                              <input type="hidden" name = "status" value = "PENDING">
+                              <input type="hidden" name = "qr" value = "<?php echo $_SESSION['get_data']['qr'];?>">
+                              <input type="hidden" name = "typed" value = "0">
+                              <input type="hidden" name = "otp_generate" value = "<?php echo $_SESSION['borrower_get_data']['otp_generate']?>">
+                              <button type = "submit" name = "passed_borrower_slip" class="btn btn-danger"  id = "btn_confirm_generate"> Confirm</button>
                             </form>
                             
                         </div> <!---end of text center for buttons--->
@@ -200,12 +210,11 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#iaccept').addEventListener('click', function () {
+          if(event.target.checked) {
           let wspFrame = document.getElementById('frame').contentWindow;
-          document.getElementById('btn_confirm_generate').disabled = false;
-          document.getElementById('iaccept').disabled = true;
-          
 		      wspFrame.focus();
 		      wspFrame.print();
+          }
           });
         });
         //////////////

@@ -21,20 +21,9 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <script>
-      var x = document.getElementById("display_otp");
-        function exexutedis() {
-        var otp = "<?php        
-              echo $_SESSION['borrower_get_data']['otp_generate'];
-                    ?>"
-              x.innerHTML = otp;
-        }
-        
-      
-</script>
 </head>
 
-<body onload = "exexutedis()">
+<body>
     
     <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
@@ -50,22 +39,38 @@
 
       <div class="jumbotron">
         <div class="text-center">
-            <h3 id = "thistypeotp">Type This OTP into the Machine</h3>
-            <h6 id = "nevershare"> <b>NEVER SHARE</b> this Code with Others, the OTP will also send to your gsfe account<br> Valid for  <b> 5 minutes</b></h6>
-            <h6 id = "nevershare"> <b>Impotant Note:</b> The OTP and Terms and Conditions will be <b> void</b> if you Cancel or Leave this page</h6>
+            <h3 id = "thistypeotp">Type The OTP into the Machine</h3>
+            <b>The OTP is valid for 5 Minutes Only</b>
+            <p><b> Important Note:</b> </p>
+            <li align = "justify center" class = "alignments">The Terms and Conditions and the OTP will be <b>void</b> if you cancel or leave the page.</li>
+                    
+            <li align = "justify center" class = "alignments">The OTP is concealed for privacy and security purposes, toggle the button "Click to View" to show and hide the OTP</li>
+                            <br>     
+
         </div>
-          <div class="row">
+        <div class="row">
             <div class="text-center">
-              <button onclick = "mdown()" class="btn btn-dark" style = "color:white;">Click to View</button>
-              <h1 id = "display_otp" style = "display:none;"></h1>
+
+              <button onclick = "mdown()" id = "toggle_bt" class="btn btn-dark" style = "color:white;">Click to View</button>
+              <?php
+              $id_no = $_SESSION['get_data']['id_no'];
+              $sql = "SELECT id,otp_generate FROM borrowing_machine_info where id_no = '$id_no' AND status = 'PENDING'";
+              $result = mysqli_query($conn, $sql);
+              $get_id = null;
+              while($row = mysqli_fetch_assoc($result)) {
+                  $get_id = $row['id'];
+              ?>
+              <h1 id = "display_otp" style = "display:none;"> <?php echo $row['otp_generate']?></h1>
+              <?php
+              }
+              ?>
           </div>
           </div>
           
           <br>
         <div class="text-center">
             <button type="submit" class="btn btn-primary" style = "color:white;" hidden>Generate new OTP</button>
-            <button type="submit" class="btn btn-danger">Cancel</button>
-
+            <a href = "functions.php?cancel_otp_id=<?php echo $get_id?>" class="btn btn-danger">Cancel</a>
         </div>
    
     <script src="js/jquery.js"></script>
@@ -79,11 +84,14 @@
     </script>
     <script>
       var x = document.getElementById("display_otp");
+      var tg_btn = document.getElementById("toggle_bt");
       function mdown() {
         if (x.style.display === "none") {
           x.style.display = "block";
+          tg_btn.innerHTML = "Click To Hide";
         } else {
           x.style.display = "none";
+          tg_btn.innerHTML = "Click To View";
         }
       }
     </script>
