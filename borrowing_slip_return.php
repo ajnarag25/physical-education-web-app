@@ -69,15 +69,8 @@
         </div>
       </nav>
         <?php
-
-        if (isset($_GET['equipment_to_borrow'])) {
-          $equip = $_GET['equipment_to_borrow'];
-          $sql = "SELECT $equip FROM ball_sequence where id = '3'";
-          $result = mysqli_query($conn, $sql);
-          
-          while($row = mysqli_fetch_assoc($result)) {
-        
-          
+        if (isset($_GET['equipment_to_return'])) {
+          $equip = $_GET['equipment_to_return'];
           ?>
           
             
@@ -86,13 +79,22 @@
             <div class="text-center">
            
 
-                <h2>Borrower's Slip</h2>
+                <h2>Ball Return</h2>
             </div>
             <br>
             <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                 <!-- <div class="card card_custom"> -->
                     <div class="row">
-                        <div class="col-md-4">
+                        <?php
+
+            
+                        $fetch_data="SELECT * FROM borrowing_machine_info WHERE id_no ='$equip'";
+                        $result_data = mysqli_query($conn, $fetch_data);
+
+                        while ($row = mysqli_fetch_array($result_data)) {
+                      
+                        ?>
+                        <div class="col-md-12">
                             <h5><b>ID No:</b>  
                               <span  id = "id_no"> <?php echo $_SESSION['get_data']['id_no'];?></span>
                             </h5>
@@ -108,65 +110,62 @@
                             </h5>
                             <hr>
                             <h5><b>Equipment:</b>
-                            <span  id = "equipment"> <?php echo $_GET['equipment_to_borrow'];$_SESSION["equipment"] = $_GET['equipment_to_borrow']; ?> </span>
+                            <span  id = "equipment"> <?php echo $row['equipment']; ?> </span>
 
                             </h5>
                             <hr>
-                            <h5> <b>Ball ID:</b>
-                            
-                              <span  id = "ball_id"> <?php echo $row["$equip"]; $_SESSION["bbid"] = $row["$equip"];?> </span>    
-                            </h5>
-                              
+                            <h5><b>Ball ID:</b>
+                            <span  id = "bbid"> <?php echo $row['ball_id']; ?> </span>
 
+                            </h5>
                             <hr>
-                            <h5><b>Time Borrow</b>
-                              <span  id = "time_borrow"> <?php
-                              echo date("h:ia");?> </span>
+                            <h5><b>Time Borrow: </b>
+                              <span  id = "time_borrow"> <?php echo $row['time_borrow']; ?> </span>
 
                             </h5>
                             
                             <hr>
-                            <h5><b>Date Borrow</b>
+                            <h5><b>Date Borrow(Year-Month-Day): </b>
+                              <span  id = "date_borrow"> <?php echo $row['date_borrow']; ?> </span>
+                            </h5>
+                            <hr>
+                            <h5><b>Time Return: </b>
+                              <span  id = "time_borrow"> <?php echo date("h:ia");?> </span>
+                            </h5>
+                            
+                            <hr>
+                            <h5><b>Date Return(Year-Month-Day): </b>
                               <span  id = "date_borrow"> <?php echo date("Y-m-d");?> </span>
-
                             </h5>
-                        </div> <!--end of col md 4--->
-                        <?php }?>
-                        <div class="col-md-8">
-                            <p><b> Terms and Conditions</b> </p>
-                            <li align = "justify" class = "alignments">I agree that I will take good care of the sports equipment being borrowed.</li>
-                            
-                            <li align = "justify" class = "alignments">I agree that I will return the sports equipment after used.</li>
-                            
-                            <li align = "justify" class = "alignments">I agree that I will take accountability to any damage to the sports equipment being borrowed.</li>
-                            
-                            <li align = "justify" class = "alignments">I agree that any loss of sports equipment is subject to penalty.</li>
-                            
-                            <li align = "justify" class = "alignments">I agree that the information of my transactions will be  saved  for security purposes and will be kept confidential.</li>
-                            
-                            <li align = "justify" class = "alignments">I agree that the sports equipment will be used only  within the TUPC premises.</li>
-                            <br>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="iaccept" >
-                              <label class="form-check-label" for="iaccept"> I Accept the Terms and Conditions</label>
-                            </div>
-                            
-                          </div> <!---end of col-md-8---->
+                        </div> <!--end of col md 12--->
+
+                      <?php 
+                      // THIS IS THE CODE WHERE THE SYSTEM WILL GENERATE ONE TIME PASSWORD THRU RAND() MODULE AND WILL PASS IT 
+                      //ON THE SESSION VARIABLE TOGETHER WITH SOME IMPORTANT DATAS ABOVE
+                      $permitted_char = '0123456789ABCD';
+                      $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
+                      ?>
                           
                           
                         <div class = "container">
                         <div class="text-center">
                           <br>
-
-                            <?php
-                              $permitted_chars = 
-                            ?>
-                            <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
-                            <a href = "display_otp_equip.php" name  = "generate_otp" class="btn btn-danger"  id = "btn_confirm_generate" disabled> Confirm</a>
+                            <form action="functions.php" id = "submit_machine_info" method = "post">
+                              <input type="hidden" name = "id_no" value = '<?php echo $_SESSION['get_data']['id_no']?>'>
+                              <input type="hidden" name = "equipment_to_borrow" value = '<?php echo $row['equipment']; ?>'>
+                              <input type="hidden" name = "otp_generate" value = '<?php echo $otp_equipment ?>'>
+                              <input type="hidden" name = "typed" value = '0'>
+                              <input type="hidden" name = "actionn" value = 'RETURNING'>
+                              <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
+                              <button type = "submit" name = "passed_borrower_slip_return" class="btn btn-danger"  id = "btn_confirm_generate">Generate OTP</button>
+                            </form>                 
                         </div> <!---end of text center for buttons--->
                         </div>
-                        
                     <!-- </div> -->
+                    <?php
+                        }
+                            ?>
+
                 </div><!---end of row---->
             </div><!---end of containe marg top---->
         </div><!---end of jumbotron---->
@@ -175,26 +174,25 @@
         }
         else {
           echo "<h1>Request Denied</h1>";
-          echo "<h6>Please Click the 'Home'  --> 'Borrow Equipments' to request a Borrowing Slip</h6>";
+          echo "<h6>Please Click the 'Home'  --> 'Return your Equipment'</h6>";
         }
         ?>
         
     <iframe id = "frame" src="official_rec.php" style = "width = 100%; border:0; height:0;"></iframe>
-    <script>
+    <!-- <script>
       document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#iaccept').addEventListener('click', function () {
+          if(event.target.checked) {
           let wspFrame = document.getElementById('frame').contentWindow;
-          document.getElementById('iaccept').disabled = true;
-          document.getElementById('btn_confirm_generate').disabled = false;
 		      wspFrame.focus();
 		      wspFrame.print();
+          }
           });
         });
         //////////////
         //////////////
       
-    </script>
-
+    </script> -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

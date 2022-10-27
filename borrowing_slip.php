@@ -70,15 +70,9 @@
         </div>
       </nav>
         <?php
-
         if (isset($_GET['equipment_to_borrow'])) {
           $equip = $_GET['equipment_to_borrow'];
-          $sql = "SELECT $equip FROM ball_sequence where id = '3'";
-          $result = mysqli_query($conn, $sql);
-          
-          while($row = mysqli_fetch_assoc($result)) {
         
-          
           ?>
           
             
@@ -87,7 +81,7 @@
             <div class="text-center">
            
 
-                <h2>Borrower's Slip</h2>
+                <h2>Terms and Conditions</h2>
             </div>
             <br>
             <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
@@ -109,29 +103,21 @@
                             </h5>
                             <hr>
                             <h5><b>Equipment:</b>
-                            <span  id = "equipment"> <?php echo $equip; $borrower_info['equipment_to_borrow'] = $equip; ?> </span>
+                            <span  id = "equipment"> <?php echo $equip; ?> </span>
 
                             </h5>
                             <hr>
-                            <h5> <b>Ball ID:</b>
-                            
-                              <span  id = "ball_id"> <?php echo $row["$equip"]; $borrower_info['ball_id'] = $row["$equip"];?> </span>    
-                            </h5>
-                              
-
-                            <hr>
-                            <h5><b>Time Borrow</b>
+                            <h5><b>Time: </b>
                               <span  id = "time_borrow"> <?php
                               echo date("h:ia"); $_SESSION["time_borrow"] = date("h:ia"); $borrower_info['time_borrow'] = date("h:ia")?> </span>
 
                             </h5>
                             
                             <hr>
-                            <h5><b>Date Borrow</b>
+                            <h5><b>Date(Year-Month-Day): </b>
                               <span  id = "date_borrow"> <?php echo date("Y-m-d"); $borrower_info['date_borrow'] = date("Y-m-d");?> </span>
                             </h5>
                         </div> <!--end of col md 4--->
-                        <?php }?>
 
 
                       <?php 
@@ -139,13 +125,9 @@
                       //ON THE SESSION VARIABLE TOGETHER WITH SOME IMPORTANT DATAS ABOVE
                       $permitted_char = '0123456789ABCD';
                       $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
-                      $borrower_info['otp_generate'] = $otp_equipment;
-                      $_SESSION['borrower_get_data'] = $borrower_info;
                       ?>
-
-
                         <div class="col-md-8">
-                            <p><b> Terms and Conditions</b> </p>
+                            
                             <li align = "justify" class = "alignments">I agree that I will take good care of the sports equipment being borrowed.</li>
                             
                             <li align = "justify" class = "alignments">I agree that I will return the sports equipment after used.</li>
@@ -169,25 +151,14 @@
                         <div class = "container">
                         <div class="text-center">
                           <br>
-
-                            <?php
-                              
-                            ?>
-                            
                             <form action="functions.php" id = "submit_machine_info" method = "post">
+                              <input type="hidden" name = "id_no" value = '<?php echo $_SESSION['get_data']['id_no']?>'>
+                              <input type="hidden" name = "equipment_to_borrow" value = '<?php echo $equip?>'>
+                              <input type="hidden" name = "otp_generate" value = '<?php echo $otp_equipment ?>'>
+                              <input type="hidden" name = "typed" value = '0'>
+                              <input type="hidden" name = "actionn" value = 'BORROWING'>
                               <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
-                              <input type="hidden" name = "id_no" value = '<?php echo $_SESSION['borrower_get_data']['id_no']?>'>
-                              <input type="hidden" name = "equipment_to_borrow" value = '<?php echo $_SESSION['borrower_get_data']['equipment_to_borrow']?>'>
-                              <input type="hidden" name = "ball_id" value = '<?php echo $_SESSION['borrower_get_data']['ball_id']?>'>
-                              <input type="hidden" name = "time_borrow" value = '<?php echo $_SESSION['borrower_get_data']['time_borrow']?>'>
-                              <input type="hidden" name = "date_borrow" value = '<?php echo $_SESSION['borrower_get_data']['date_borrow']?>'>
-                              <input type="hidden" name = "time_return" value = 'N/A'>
-                              <input type="hidden" name = "date_return" value = 'N/A'>
-                              <input type="hidden" name = "status" value = "PENDING">
-                              <input type="hidden" name = "qr" value = "<?php echo $_SESSION['get_data']['qr'];?>">
-                              <input type="hidden" name = "typed" value = "0">
-                              <input type="hidden" name = "otp_generate" value = "<?php echo $_SESSION['borrower_get_data']['otp_generate']?>">
-                              <button type = "submit" name = "passed_borrower_slip" class="btn btn-danger"  id = "btn_confirm_generate"> Confirm</button>
+                              <button type = "submit" name = "passed_borrower_slip" class="btn btn-danger"  id = "btn_confirm_generate">Generate OTP</button>
                             </form>
                             
                         </div> <!---end of text center for buttons--->
@@ -202,12 +173,12 @@
         }
         else {
           echo "<h1>Request Denied</h1>";
-          echo "<h6>Please Click the 'Home'  --> 'Borrow Equipments' to request a Borrowing Slip</h6>";
+          echo "<h6>Please Click the 'Home'  --> 'Borrow Equipments' to request a sport equipment</h6>";
         }
         ?>
         
     <iframe id = "frame" src="official_rec.php" style = "width = 100%; border:0; height:0;"></iframe>
-    <script>
+    <!-- <script>
       document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#iaccept').addEventListener('click', function () {
           if(event.target.checked) {
@@ -220,7 +191,7 @@
         //////////////
         //////////////
       
-    </script>
+    </script> -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

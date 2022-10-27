@@ -6,7 +6,7 @@
 }
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $conn->query("DELETE FROM borrowing_machine_info WHERE id = $id") or die($conn->error);
+    $conn->query("DELETE FROM otp_requests WHERE id =".$id) or die($conn->error);
   }
 ?>
 <!DOCTYPE html>

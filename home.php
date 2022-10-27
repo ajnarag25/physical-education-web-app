@@ -151,7 +151,7 @@
 
                 <?php 
                     $id_no = $_SESSION['get_data']['id_no'];
-                    $query = "SELECT id_no FROM borrowing_machine_info where status = 'UNRETURNED' ";
+                    $query = "SELECT * FROM borrowing_machine_info where status = 'UNRETURNED'  and id_no = '$id_no';";
                     $result = mysqli_query($conn, $query);
                     if ($result->num_rows == 0) {
                     ?>
@@ -170,6 +170,10 @@
                     }
 
                     else {
+                      $get_id = null;
+                      while ($row = mysqli_fetch_array($result)) {
+                        $get_id = $row['id_no'];
+                    }
                    ?>
                   <div class="col-sm-4 text-center">
                   <br><br>
@@ -179,7 +183,7 @@
                   <br>
                   <p>You have an unreturned Equipment from the machine, Click here to Generate OTP</p>
                   <br>
-                  <a href="borrowing_slip_return.php" class="service-btn">Return Equipment</a>
+                  <a href="borrowing_slip_return.php?equipment_to_return=<?php echo $get_id?>" class="service-btn">Return Equipment</a>
                 </div> 
                 <?php  
                     }
@@ -190,7 +194,6 @@
             </div>
           </div>
       </div>
-    
       <br><br>
 
       <div class="container">

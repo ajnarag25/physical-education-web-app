@@ -4,6 +4,7 @@
 <?php
 include('connection.php');
 session_start();
+date_default_timezone_set('Asia/Manila');
 
 #LOGIN
 if (isset($_POST['login'])) {
@@ -892,22 +893,33 @@ if (isset($_POST['reserve_facility'])) {
 <?php
 
 if (isset($_POST['passed_borrower_slip'])) {
-    if (isset($_POST['accept_terms'])) {
-        $id_no = $_POST['id_no'];
-        $equipment_to_borrow = $_POST['equipment_to_borrow'];
-        $ball_id = $_POST['ball_id'];
-        $time_borrow = $_POST['time_borrow'];
-        $date_borrow = $_POST['date_borrow'];
-        $time_return = $_POST['time_return'];
-        $date_return = $_POST['date_return'];
-        $status = $_POST['status'];
-        $qr = $_POST['qr'];
-        $typed = $_POST['typed'];
-        $otp_generate = $_POST['otp_generate'];
-        $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow,date_borrow,time_return,date_return, status, qr, typed,otp_generate) 
-        VALUES('$id_no','$equipment_to_borrow','$ball_id','$time_borrow', '$date_borrow', '$time_return', '$date_return', '$status', '$qr', '$typed', '$otp_generate')") or die($conn->error);
+    $arr_user =array();
+    $equipment_to_borrow = $_POST['equipment_to_borrow'];
+    $id_no = $_POST['id_no'];
+    $otp_generate = $_POST['otp_generate'];
+    $typed = $_POST['typed'];
+    $actionn = $_POST['actionn'];
 
-    ?>
+    $arr_user['equipment_to_borrow'] = $equipment_to_borrow;
+    $arr_user['id_no'] = $id_no;
+    $arr_user['otp_generate'] = $otp_generate;
+    $arr_user['typed'] = $typed;
+    $arr_user['actionn'] = $actionn;
+    $_SESSION['arr_user'] = $arr_user;
+
+
+
+    if (isset($_POST['accept_terms'])) {
+        
+        $query = "SELECT otp_generate FROM otp_requests where id_no = '$id_no'";
+        $result = mysqli_query($conn, $query);
+        $check = mysqli_num_rows($result);
+
+        if ($check == 0) {
+        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn')") or die($conn->error);
+        
+        ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -915,17 +927,27 @@ if (isset($_POST['passed_borrower_slip'])) {
                     Swal.fire({
                     position: 'middle',
                     icon: 'success',
-                    title: "Borrower's Saved  Successfully",
+                    title: "OTP Generated Successfully",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
                     }).then((result)=>{
-
                         window.location.href = "display_otp_equip.php";
                     })
                     })
         </script>
-    
-    <?php
+        <?php
+        }
+        else {
+            // $conn->query("UPDATE otp_requests SET (id_no,equipment_to_borrow) 
+            // VALUES('$id_no','$equipment_to_borrow')") or die($conn->error);
+            $conn->query("UPDATE otp_requests SET typed= otp_generate='".$_SESSION['arr_user']['otp_generate']."',equipment_to_borrow='".$_SESSION['arr_user']['equipment_to_borrow']."' WHERE id_no='$id_no'") or die($conn->error);
+            ?>
+            <script>
+                window.location.href = "display_otp_equip.php";
+            </script>
+            
+            <?php
+          }
     }
     else {
     ?>        
@@ -936,17 +958,15 @@ if (isset($_POST['passed_borrower_slip'])) {
                 Swal.fire({
                 icon: 'error',
                 title: 'Please Read and Accept the Terms and Conditions!',
-                text: "Borrower's Slip has been Reset",
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "pickequipment.php";
+                    window.location.href = "borrowing_slip.php?equipment_to_borrow=<?php echo $equipment_to_borrow?>";
                     }else{
-                        window.location.href = "pickequipment.php";
+                        window.location.href = "borrowing_slip.php?equipment_to_borrow=<?php echo $equipment_to_borrow?>";
                     }
                 })
-                
             })
     
         </script>    
@@ -955,12 +975,79 @@ if (isset($_POST['passed_borrower_slip'])) {
 }
 
 ?>
+
+
+
+
+
+
+
+<?php
+
+if (isset($_POST['passed_borrower_slip_return'])) {
+    $arr_user =array();
+    $equipment_to_borrow = $_POST['equipment_to_borrow'];
+    $id_no = $_POST['id_no'];
+    $otp_generate = $_POST['otp_generate'];
+    $typed = $_POST['typed'];
+    $actionn = $_POST['actionn'];
+    $arr_user['equipment_to_borrow'] = $equipment_to_borrow;
+    $arr_user['id_no'] = $id_no;
+    $arr_user['otp_generate'] = $otp_generate;
+    $arr_user['typed'] = $typed;
+    $arr_user['actionn'] = $actionn;
+    $_SESSION['arr_user'] = $arr_user;
+        
+        $query = "SELECT otp_generate FROM otp_requests where id_no = '$id_no'";
+        $result = mysqli_query($conn, $query);
+        $check = mysqli_num_rows($result);
+
+        if ($check == 0) {
+        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: "OTP Generated Successfully",
+                    showConfirmButton: false,
+                    timer: 1000
+                    }).then((result)=>{
+                        window.location.href = "display_otp_equip.php";
+                    })
+                    })
+        </script>
+        <?php
+        }
+        else {
+            // $conn->query("UPDATE otp_requests SET (id_no,equipment_to_borrow) 
+            // VALUES('$id_no','$equipment_to_borrow')") or die($conn->error);
+            $conn->query("UPDATE otp_requests SET typed= otp_generate='".$_SESSION['arr_user']['otp_generate']."',equipment_to_borrow='".$_SESSION['arr_user']['equipment_to_borrow']."' WHERE id_no='$id_no'") or die($conn->error);
+            ?>
+            <script>
+                window.location.href = "display_otp_equip.php";
+            </script>
+            
+            <?php
+          }
+    
+}
+?>
+
+
+
+
 <?php
 //IF THE USER CLICK THE CANCEL BUTTON
 if (isset($_GET['cancel_otp_id'])) {
-    $get_id = $_GET['cancel_otp_id'];
+    $fet_id = $_GET['cancel_otp_id'];
+    echo $fet_id;
 ?>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
                 $(document).ready(function(){
@@ -974,15 +1061,9 @@ if (isset($_GET['cancel_otp_id'])) {
                     confirmButtonText: 'Yes, Cancel it!'
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire(
-                        'Cancelled',
-                        'Your Request has been Cancelled',
-                        'success'
-                        )
-                        window.location.href = "pickequipment.php?id=<?php echo $get_id?>";
+                        window.location.href = "pickequipment.php?id=<?php echo $fet_id?>";
                     }else{
                         window.location.href = "display_otp_equip.php";
-
                     }
                     })
                     })
@@ -990,3 +1071,36 @@ if (isset($_GET['cancel_otp_id'])) {
 <?php
 }
 ?>
+
+<?php
+if (isset($_POST['generate_new_otp'])) {
+    $equipment_to_borrow = $_POST['equipment_to_borrow'];
+    $id_no = $_POST['id_no'];
+    $permitted_char = '0123456789ABCD';
+    $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
+    $typed = $_POST['typed'];
+    $actionn = $_POST['actionn'];
+    $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_equipment','$typed', '$actionn')") or die($conn->error);
+?>
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: "OTP Generated Successfully",
+                    showConfirmButton: false,
+                    timer: 1000
+                    }).then((result)=>{
+                        window.location.href = "display_otp_equip.php";
+                    })
+                    })
+        </script>
+<?php
+}
+?>
+
+

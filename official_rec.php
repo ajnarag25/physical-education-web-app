@@ -87,8 +87,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="col-md-2"><b><?php echo $_SESSION['borrower_get_data']['ball_id']?></b> </td>
-									<td class="col-md-2"><b><?php echo $_SESSION['borrower_get_data']['ball_id']?></b> </td>
+									<td class="col-md-2"><b><?php echo gdfg //$_SESSION['borrower_get_data']['ball_id']?></b> </td>
+									<td class="col-md-2"><b><?php echo dfggf//$_SESSION['borrower_get_data']['ball_id']?></b> </td>
 								</tr>
 							</tbody>
 						</table>
@@ -123,7 +123,7 @@
 						<div class="col-xs-8 col-sm-8 col-md-8 text-left">
                             <hr>
 							<div class="receipt-right">
-								<h5 style="color: rgb(39, 38, 38); font-weight:800 ;">This Borrower's is Downloaded Upon Accepting Terms and Conditions</h5>
+								<h5 style="color: rgb(39, 38, 38); font-weight:800 ;">This Borrower's is Downloaded Upon Accepting the Equipment in the Machine</h5>
                                     
 							</div>
 						</div>
