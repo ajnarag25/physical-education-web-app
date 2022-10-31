@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 01:09 PM
+-- Generation Time: Oct 31, 2022 at 05:00 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -38,9 +38,9 @@ CREATE TABLE `ball_sequence` (
 --
 
 INSERT INTO `ball_sequence` (`id`, `basketball`, `volleyball`) VALUES
-(1, 'bb1', 'vb1'),
-(2, 'bb2', 'vb2'),
-(3, 'bb3', 'vb3');
+(1, 'bb1', ''),
+(2, 'bb2', 'vb1'),
+(3, 'bb3', 'vb2');
 
 -- --------------------------------------------------------
 
@@ -51,23 +51,22 @@ INSERT INTO `ball_sequence` (`id`, `basketball`, `volleyball`) VALUES
 CREATE TABLE `borrowing_machine_info` (
   `id` int(11) NOT NULL,
   `id_no` varchar(20) NOT NULL,
-  `firstname` varchar(80) NOT NULL,
-  `middlename` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `contact` varchar(11) NOT NULL,
-  `course` varchar(20) NOT NULL,
-  `department` varchar(20) NOT NULL,
-  `qr` varchar(100) NOT NULL,
-  `typed` int(11) DEFAULT NULL,
   `equipment` varchar(20) NOT NULL,
   `ball_id` varchar(3) NOT NULL,
   `time_borrow` varchar(30) NOT NULL,
   `date_borrow` varchar(30) NOT NULL,
   `time_return` varchar(30) NOT NULL,
   `date_return` varchar(30) NOT NULL,
-  `status` varchar(30) DEFAULT NULL
+  `status` varchar(30) DEFAULT NULL,
+  `qr` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `borrowing_machine_info`
+--
+
+INSERT INTO `borrowing_machine_info` (`id`, `id_no`, `equipment`, `ball_id`, `time_borrow`, `date_borrow`, `time_return`, `date_return`, `status`, `qr`) VALUES
+(25, 'TUPC-18-0638', 'volleyball', 'vb3', '11:37pm', '2022-10-27', 'N/A', 'N/A', 'UNRETURNED', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636');
 
 -- --------------------------------------------------------
 
@@ -100,6 +99,22 @@ CREATE TABLE `inquire` (
 
 INSERT INTO `inquire` (`id`, `firstname`, `middlename`, `lastname`, `course`, `department`, `gender`, `teacher`, `size_t`, `size_s`, `size_j`, `email`, `image`, `status`, `note`, `date`) VALUES
 (1, ' Avor John ', 'Atienza', 'Narag', 'N/A', 'OSA', 'Male', 'Eiman', 'small', 'N/A', 'XXL', 'ajnarag25@gmail.com', 'uploads/16618353763135715.png', 'CANCELED', 'N/A', '01/09/2022');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otp_requests`
+--
+
+CREATE TABLE `otp_requests` (
+  `id` int(11) NOT NULL,
+  `id_no` varchar(30) NOT NULL,
+  `equipment_to_borrow` varchar(20) NOT NULL,
+  `otp_generate` varchar(5) NOT NULL,
+  `date_time_generate` datetime DEFAULT current_timestamp(),
+  `typed` varchar(1) NOT NULL,
+  `actionn` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -173,6 +188,12 @@ ALTER TABLE `inquire`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `otp_requests`
+--
+ALTER TABLE `otp_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `registration`
 --
 ALTER TABLE `registration`
@@ -192,13 +213,19 @@ ALTER TABLE `reserve`
 -- AUTO_INCREMENT for table `borrowing_machine_info`
 --
 ALTER TABLE `borrowing_machine_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `inquire`
 --
 ALTER TABLE `inquire`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `otp_requests`
+--
+ALTER TABLE `otp_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `registration`
