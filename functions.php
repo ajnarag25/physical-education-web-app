@@ -211,133 +211,6 @@ if (isset($_POST['register_student'])) {
 
 
 
-#REGISTER TEACHER
-if (isset($_POST['register_teacher'])) {
-    $first = $_POST['firstname'];
-    $middle = $_POST['middlename'];
-    $last = $_POST['lastname'];
-    $emails = $_POST['email'];
-    $contacts = $_POST['contact'];
-    $gender = $_POST['gender'];
-    $dept = $_POST['department'];
-    $pass1 = $_POST['password1'];
-    $pass2 = $_POST['password2'];
-    $user = $_POST['user_teacher'];
-
-    $target_dir = "uploads/";
-    $target_file = $target_dir . time(). basename($_FILES["profile_pic"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    $check = getimagesize($_FILES["profile_pic"]["tmp_name"]);
-
-
-    $sql = "SELECT * FROM registration WHERE email='$emails' OR firstname='$first' AND middlename='$middle'  AND lastname='$last' ";
-    $result = mysqli_query($conn, $sql);
-
-    if ($pass1 != $pass2){
-        ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                Swal.fire({
-                icon: 'error',
-                title: 'Your password does not match',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Okay'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "register_teacher.php";
-                    }else{
-                        window.location.href = "register_teacher.php";
-                    }
-                })
-                
-            })
-    
-        </script>
-        <?php
-    }else{
-        if (!$result->num_rows > 0) {
-            move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file);
-            if ($check == false){
-                ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function(){
-                        Swal.fire({
-                        icon: 'error',
-                        title: 'Uploaded file is not an image!',
-                        text: 'Please upload an image format',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "register_teacher.php";
-                            }else{
-                                window.location.href = "register_teacher.php";
-                            }
-                        })
-                        
-                    })
-            
-                </script>
-                <?php
-            }else{
-                $conn->query("INSERT INTO registration (firstname, middlename, lastname, email, contact, gender, course, department, image, password, qr, users, otp) 
-                VALUES('$first','$middle','$last', '$emails', '$contacts', '$gender', 'N/A', '$dept', '$target_file', '".password_hash($pass1, PASSWORD_DEFAULT)."','N/A','$user',0)") or die($conn->error);
-                ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function(){
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'Successfully Registered',
-                        text: 'Please login your credentials now',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "index.php";
-                            }else{
-                                window.location.href = "index.php";
-                            }
-                        })
-                        
-                    })
-            
-                </script>
-                <?php
-                }
-            }else{
-                ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function(){
-                        Swal.fire({
-                        icon: 'error',
-                        title: 'User is already registered',
-                        text: 'Please login your credentials now',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                        }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "register_teacher.php";
-                            }else{
-                                window.location.href = "register_teacher.php";
-                            }
-                        })
-                        
-                    })
-            
-                </script>
-                <?php
-                }
-        }
-    }
 
 
 #LOGOUT
@@ -1132,6 +1005,190 @@ if (isset($_POST['generate_new_otp'])) {
         </script>
 <?php
 }
+
+
+
+// UPDATE PROFILE INFORMATION
+if (isset($_POST['update_profile'])) {
+    $id = $_POST['id'];
+    $firstname = $_POST['fname'];
+    $middlename = $_POST['mname'];
+    $lastname = $_POST['lname'];
+    $email = $_POST['email'];
+    $contact = $_POST['contact'];
+
+
+    $checking = "SELECT * FROM registration WHERE firstname='$firstname' AND middlename='$middlename' AND lastname='$lastname' AND email='$email' AND contact='$contact' ";
+    $prompt = $conn->query($checking);
+    $row = mysqli_num_rows($prompt);
+
+
+    if ($row == 0){
+        $conn->query("UPDATE registration SET firstname='$firstname', middlename='$middlename', lastname='$lastname', email='$email',  contact='$contact' WHERE id='$id'") or die($conn->error);
+        session_destroy();
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated your Account',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php";
+                    }else{
+                        window.location.href = "index.php";
+                    }
+                })
+                
+            })
+
+        </script>
+        <?php
+
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'warning',
+                title: 'No changes has been made!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "account.php";
+                    }else{
+                        window.location.href = "account.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
+
+// UPDATE PROFILE PICTURE
+if (isset($_POST['update_pic'])) {
+    $get_id = $_POST['id'];
+    $target_dir = "uploads/profile_pic/";
+    $target_file = $target_dir . basename($_FILES["pic"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $check = getimagesize($_FILES["pic"]["tmp_name"]);
+
+    if($check !== false) {
+
+        $uploadOk = 1;
+        if ($uploadOk == 0) {
+            echo "<script type=\"text/javascript\">
+            alert(\"Sorry, your file was not uploaded.\");
+            window.location = \"account.php\"
+            </script>";
+    } else {
+    move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file);
+    }
+        $sql='UPDATE registration SET image="'.$target_file.'" WHERE id="'.$get_id.'"';
+        $result = mysqli_query($conn, $sql);
+        header('location: account.php');
+        
+    } else {
+        $uploadOk = 0;
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'File is not an image!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "account.php";
+                    }else{
+                        window.location.href = "account.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
+// UPDATE PASSWORD
+if (isset($_POST['update_password'])) {
+    $id = $_POST['id'];
+    $password1 = $_POST['password1'];
+    $password2 = $_POST['password2'];
+
+    if ($password1 != $password2){
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'Password does not match',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "account.php";
+                    }else{
+                        window.location.href = "account.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        $conn->query("UPDATE registration SET password='".password_hash($password1, PASSWORD_DEFAULT)."' WHERE id='$id'") or die($conn->error);
+        session_destroy();
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully changed your password',
+                text: 'Please login your credentials now',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php";
+                    }else{
+                        window.location.href = "index.php";
+                    }
+                })
+                
+            })
+
+        </script>
+        <?php
+    }
+}
+
+
 ?>
 
 

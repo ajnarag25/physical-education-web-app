@@ -45,7 +45,10 @@ if (isset($_GET['id'])) {
                 <a class="nav-link" id="link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">Account</a>
+                <a class="nav-link" id="link" href="account.php">Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="link" href="#">Transaction</a>
               </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
@@ -127,7 +130,7 @@ if (isset($_GET['id'])) {
                   <br>
                   <?php 
                     $email = $_SESSION['get_data']['email'];
-                    $query = "SELECT status FROM inquire where email = '$email'";
+                    $query = "SELECT * FROM inquire where status = 'PENDING'";
                     $result = mysqli_query($conn, $query);
                     if ($result->num_rows == 0) {
                     ?>

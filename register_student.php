@@ -60,9 +60,6 @@
         <br>
         <div class="card card_custom container"  data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
             <p class="text-primary">Fields that has (*) are required to fillout</p>
-            <div class="d-flex flex-row-reverse bd-highlight">
-                <a href="register_teacher.php" style="text-decoration: none; color:rgb(151, 8, 8);">Register as Teacher <i class='bx bx-right-arrow-alt'></i> </a>
-            </div>
 
             <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
                 <div class="row">

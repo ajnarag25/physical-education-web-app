@@ -43,7 +43,7 @@
                 <a class="nav-link" id="link" href="home.php#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">Account</a>
+                <a class="nav-link" id="link" href="account.php">Account</a>
               </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
