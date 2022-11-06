@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2022 at 05:00 PM
+-- Generation Time: Nov 06, 2022 at 11:51 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `image` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `firstname`, `lastname`, `username`, `password`, `email`, `image`) VALUES
+(1, 'Michael', 'Rilan', 'micorilan', '$2y$10$E5cjVUiAJeKwbWem/yaN6.zEHgUZih1mL48QvV0VS7RQmn7A1naNS', 'micorilan1999@gmail.com', 'default_profile/default_pic.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ball_sequence`
 --
 
@@ -38,9 +61,9 @@ CREATE TABLE `ball_sequence` (
 --
 
 INSERT INTO `ball_sequence` (`id`, `basketball`, `volleyball`) VALUES
-(1, 'bb1', ''),
-(2, 'bb2', 'vb1'),
-(3, 'bb3', 'vb2');
+(1, '', 'vb1'),
+(2, 'bb1', 'vb2'),
+(3, 'bb2', 'vb3');
 
 -- --------------------------------------------------------
 
@@ -66,7 +89,7 @@ CREATE TABLE `borrowing_machine_info` (
 --
 
 INSERT INTO `borrowing_machine_info` (`id`, `id_no`, `equipment`, `ball_id`, `time_borrow`, `date_borrow`, `time_return`, `date_return`, `status`, `qr`) VALUES
-(25, 'TUPC-18-0638', 'volleyball', 'vb3', '11:37pm', '2022-10-27', 'N/A', 'N/A', 'UNRETURNED', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636');
+(26, 'TUPC-18-0638', 'basketball', 'bb3', '10:01pm', '2022-11-05', 'N/A', 'N/A', 'UNRETURNED', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636');
 
 -- --------------------------------------------------------
 
@@ -148,7 +171,8 @@ CREATE TABLE `registration` (
 INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`) VALUES
 (2, 'Avor John', 'Atienza', 'Narag', 'ajnarag25@gmail.com', '09089637505', 'Male', 'N/A', 'OSA', 'uploads/16618353763135715.png', '$2y$10$IttA/.7kEBsdKLqiuTO6x.iGSlyYOHCgj3sQ.ZAlAEEdlKy56Zt.6', 'N/A', 'Teacher', 0, NULL, NULL),
 (3, 'Liza', 'Soberano', 'Narag', 'liza@gmail.com', '09555498137', 'Female', 'BSCE', 'N/A', 'uploads/16618354423135715.png', '$2y$10$iarvYHCL1hS3ez7IdBlNaewiXQKHSwg57MjMlI347Rr1H7dHtzmrS', 'N/A', 'Student', 0, NULL, NULL),
-(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '09120282536', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$Hqo96R/vvpyGKkHva6d/heS7VedJA1BFu2lb3JymfYtD1b60l4lKi', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg');
+(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '09120282536', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$Hqo96R/vvpyGKkHva6d/heS7VedJA1BFu2lb3JymfYtD1b60l4lKi', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg'),
+(5, 'Alliah', 'Sasis', 'Nazaire', 'alliiahfaithn@gmail.com', '0914654', 'Female', 'BET-COET', 'N/A', 'uploads/profile_pic/1667662038download.jfif', '$2y$10$J7izCXhvKiCdtGFry7bXQunqdBwTIxiH5yCriV/oE3B2Al4nBOkyi', 'TUPC-18-0182 NAZAIR A BET-COET-NS-C5180', 'Student', 0, 'TUPC-18-0182', 'uploads/school_id_qr/1667662038BBB.jpg');
 
 -- --------------------------------------------------------
 
@@ -171,9 +195,33 @@ CREATE TABLE `reserve` (
   `resched` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `v_code`
+--
+
+CREATE TABLE `v_code` (
+  `id` int(11) NOT NULL,
+  `verif_code` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `v_code`
+--
+
+INSERT INTO `v_code` (`id`, `verif_code`) VALUES
+(1, 'admin123');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `borrowing_machine_info`
@@ -210,10 +258,16 @@ ALTER TABLE `reserve`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `borrowing_machine_info`
 --
 ALTER TABLE `borrowing_machine_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `inquire`
@@ -225,13 +279,13 @@ ALTER TABLE `inquire`
 -- AUTO_INCREMENT for table `otp_requests`
 --
 ALTER TABLE `otp_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `reserve`

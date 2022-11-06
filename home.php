@@ -4,6 +4,11 @@
   if (!isset($_SESSION['get_data']['email'])) {
     header("Location: index.php");
 }
+
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $conn->query("DELETE FROM otp_requests WHERE id =".$id) or die($conn->error);
+}
 ?>
 
 <!DOCTYPE html>

@@ -11,6 +11,8 @@ if (isset($_POST['success_really'])) {
         $equipment_to_borrow = $row['equipment_to_borrow'];
     if ($row['typed'] == '0') {
         ?>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -29,6 +31,7 @@ if (isset($_POST['success_really'])) {
     <?php
     }
     else {
+        // IF THE ACTION IS FOR BORROWING::
         if ($row['actionn'] == 'BORROWING') {     
         
         $equipment_to_borrow = $row['equipment_to_borrow'];
@@ -64,12 +67,16 @@ if (isset($_POST['success_really'])) {
         $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, qr,status) 
                 VALUES('$id_no','$equipment_to_borrow','$get_row_3', '$time_borrow', '$date_borrow', 'N/A', 'N/A', '$qr', 'UNRETURNED');") or die($conn->error);
         
+        $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
+
+
         //Stack and  Queue Database Edition
         $conn->query("UPDATE ball_sequence SET $equipment_to_borrow= '$get_row_2' WHERE id ='3';") or die($conn->error);
         $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='$get_row_1' WHERE id ='2';") or die($conn->error);
         $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='' WHERE id ='1';") or die($conn->error);
         ?>
-
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -91,29 +98,72 @@ if (isset($_POST['success_really'])) {
         </script>
     <?php
         }
+
+
+
+        // IF THE ACTION SAVED IS FOR RETURNING::
+
+
         elseif ($row['actionn'] == 'RETURNING') {
-            $_SESSION['command'] = "return".$equipment_to_borrow;
-            echo $_SESSION['command'];
+            $query_check="SELECT id_no FROM borrowing_machine_info WHERE status ='UNRETURNED'";
+            $result_check = mysqli_query($conn, $query_check);
+            $check_row = mysqli_num_rows($result_check);
+            if ($check_row == 0) {
+                ?>
+                <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="css/bootstrap.min.css">
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                            $(document).ready(function(){
+                            Swal.fire({
+                            icon: 'Success',
+                            title: 'The Ball has been Returned',
+                            text:'The Borrowers Slip can be download on transaction menu.',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "home.php";
+                                }else{
+                                    window.location.href = "home.php";
+                                }
+                            })
+                        })
+                </script>
+
+
+
+                
+                <?php
+            }
+            else{
+                ?>
+                <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="css/bootstrap.min.css">
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                            $(document).ready(function(){
+                            Swal.fire({
+                            icon: 'Error',
+                            title: 'Please put the <?php echo $equipment_to_borrow?> inside the returning hole',
+                            text:'Please insert the ball into the Machine',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "display_otp_equip.php";
+                                }else{
+                                    window.location.href = "display_otp_equip.php";
+                                }
+                            })
+                        })
+                </script>
+                <?php
+            }
     ?>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-                $(document).ready(function(){
-                Swal.fire({
-                icon: 'sucess',
-                title: 'The door for <?php echo $equipment_to_borrow?> is Unlocked',
-                text:'Please insert the ball into the Machine',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Okay'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "home.php";
-                    }else{
-                        window.location.href = "home.php";
-                    }
-                })
-            })
-        </script>
+    
     <?php
         }
     }
