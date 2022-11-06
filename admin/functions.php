@@ -5,6 +5,7 @@
     include('connection.php');
     session_start();
     error_reporting(0);
+    date_default_timezone_set('Asia/Manila');
 
     #LOGOUT
     if (isset($_GET['logout'])) {
@@ -14,12 +15,12 @@
     
     #LOGIN
     if (isset($_POST['signin'])) {
-        $user = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
-
-        $login="SELECT * FROM admin WHERE username='$user'";
+        $login="SELECT * FROM admin WHERE email='$email'";
         $prompt = mysqli_query($conn, $login);
         $getData = mysqli_fetch_array($prompt);
+
 
         if (password_verify($password, $getData['password'])){
             $_SESSION['get_data'] = $getData;
@@ -60,6 +61,7 @@
         $mail = $_POST['email'];
         $pass1 = $_POST['password1'];
         $pass2 = $_POST['password2'];
+        
 
         $sql = "SELECT * FROM admin WHERE username='$user' OR firstname='$first' AND lastname='$last' ";
         $result = mysqli_query($conn, $sql);
@@ -90,8 +92,8 @@
             <?php
         }else{
             if(!$result->num_rows > 0){
-                $conn->query("INSERT INTO admin (firstname, lastname, username, password, email, image) 
-                VALUES('$first','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','../default_profile/defauta.jpg')") or die($conn->error);
+                $conn->query("INSERT INTO admin (firstname, lastname, username, password, email, image)
+                VALUES('$first','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','default_profile/default_pic.jpg')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
