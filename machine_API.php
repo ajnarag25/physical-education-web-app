@@ -121,7 +121,11 @@ if (isset($_POST['success_really'])) {
 }
 ?>
 
+
 <?php
+// WEMOS_1 = NODEMCU =FOR BORROW AND FOR IR SENSOR THAT SERVES AS CONFIRMATION OF RETURNING EQUIPMENT OR SOMETHING ROLLS INSIDE THE MACHINE
+// WEMOS_2 = WEMOS D1 R1 ESP8266 = FOR OTP AND OPENING THE RETURN HOLE DEPENDS ON WHAT KIND OF EQUIPMENT IS BEING RETURNED
+
 if (isset($_POST['command_wemos1'])) {
 
     $get_otp = $_POST['command_wemos1'];
@@ -139,4 +143,5 @@ if (isset($_POST['command_wemos1'])) {
     }
     
 }
+//Isaiah 41:10
 ?>
