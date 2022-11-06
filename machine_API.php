@@ -61,8 +61,6 @@ if (isset($_POST['success_really'])) {
         $time_borrow = date("h:ia");
         $date_borrow = date("Y-m-d");
 
-        //SET SESSION COMMAND, THIS WILL SERVE AS THE RESPONSE FOR THE WEMOS
-        $_SESSION['command'] = "borrow".$equipment_to_borrow;
 
         $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, qr,status) 
                 VALUES('$id_no','$equipment_to_borrow','$get_row_3', '$time_borrow', '$date_borrow', 'N/A', 'N/A', '$qr', 'UNRETURNED');") or die($conn->error);
@@ -75,6 +73,8 @@ if (isset($_POST['success_really'])) {
         $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='$get_row_1' WHERE id ='2';") or die($conn->error);
         $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='' WHERE id ='1';") or die($conn->error);
         ?>
+
+
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -102,8 +102,6 @@ if (isset($_POST['success_really'])) {
 
 
         // IF THE ACTION SAVED IS FOR RETURNING::
-
-
         elseif ($row['actionn'] == 'RETURNING') {
             $query_check="SELECT id_no FROM borrowing_machine_info WHERE status ='UNRETURNED'";
             $result_check = mysqli_query($conn, $query_check);
@@ -173,25 +171,45 @@ if (isset($_POST['success_really'])) {
 
 
 <?php
-// WEMOS_1 = NODEMCU =FOR BORROW AND FOR IR SENSOR THAT SERVES AS CONFIRMATION OF RETURNING EQUIPMENT OR SOMETHING ROLLS INSIDE THE MACHINE
-// WEMOS_2 = WEMOS D1 R1 ESP8266 = FOR OTP AND OPENING THE RETURN HOLE DEPENDS ON WHAT KIND OF EQUIPMENT IS BEING RETURNED
+// WEMOS1 = NODEMCU = FOR OTP AND OPENING THE RETURN HOLE DEPENDS ON WHAT KIND OF EQUIPMENT IS BEING RETURNED
+// WEMOS2 = WEMOS D1 R1 =FOR BORROW AND FOR IR SENSOR THAT SERVES AS CONFIRMATION OF RETURNING EQUIPMENT OR SOMETHING ROLLS INSIDE THE MACHINE
 
-if (isset($_POST['command_wemos1'])) {
-
-    $get_otp = $_POST['command_wemos1'];
+if (isset($_POST['fetch_otp_wemos1'])) {
+    $get_otp = $_POST['fetch_otp_wemos1'];
     $query="SELECT * FROM otp_requests WHERE otp_generate='$get_otp'";
     $prompt = mysqli_query($conn, $query);
     $check = mysqli_num_rows($prompt);
+    $get_data = mysqli_fetch_array($prompt);
     if ($check == 0) {
         echo "OTP doesnt exists";
     }
     else {
-        while ($row = mysqli_fetch_array($prompt)) {
             $conn->query("UPDATE otp_requests SET typed= '1' WHERE otp_generate = '".$get_otp."'") or die($conn->error);
-            echo "Sucess";
-        }    
+            
+            if ($get_data['actionn'] == 'RETURNING') {
+                echo "returning".$get_data['equipment_to_borrow'];
+                //SEND THIS TO WEMOS1 TO OPEN THE RETURN HOLE DEPENDING ON THE BORROWED BALL BY ACTIVATING THE SERVO MOTOR
+            }
+            else {
+                echo "borrowing".$get_data['equipment_to_borrow'];
+            }
+            
     }
     
 }
+
 //Isaiah 41:10
+?>
+<?php
+if (isset($_POST['ir_volleyball_wemos2'])) {
+    $query="SELECT * FROM otp_requests WHERE typed='1'";
+    $prompt = mysqli_query($conn, $query);
+    $get_data = mysqli_fetch_array($prompt);
+    $conn->query("UPDATE borrowing_machine_info SET status= 'RETURNED' WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
+    $conn->query("UPDATE borrowing_machine_info SET time_return = '".date("h:ia")."'"." WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
+    $conn->query("UPDATE borrowing_machine_info SET date_return = '".date("Y-m-d")."'"." WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
+
+    
+}
+
 ?>
