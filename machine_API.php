@@ -208,8 +208,33 @@ if (isset($_POST['ir_volleyball_wemos2'])) {
     $conn->query("UPDATE borrowing_machine_info SET status= 'RETURNED' WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
     $conn->query("UPDATE borrowing_machine_info SET time_return = '".date("h:ia")."'"." WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
     $conn->query("UPDATE borrowing_machine_info SET date_return = '".date("Y-m-d")."'"." WHERE id_no = '".$get_data['id_no']."';") or die($conn->error);
-
     
+    //STACK AND QUEUE RETURNING EQUIPMENT EDITION
+    $equipment_to_borrow = $get_data['equipment_to_borrow'];
+    $fetch_ball_3="SELECT $equipment_to_borrow FROM ball_sequence WHERE id = '3'";
+    $fetch_ball_2="SELECT $equipment_to_borrow FROM ball_sequence WHERE id = '2'";
+    $fetch_ball_1="SELECT $equipment_to_borrow FROM ball_sequence WHERE id = '1'";
+
+    $prompt_3 = mysqli_query($conn, $fetch_ball_3);
+    $prompt_2 = mysqli_query($conn, $fetch_ball_2);
+    $prompt_1 = mysqli_query($conn, $fetch_ball_1);
+
+
+    $get_fetch_ball_3 = mysqli_fetch_array($prompt_3);
+    $get_fetch_ball_2 = mysqli_fetch_array($prompt_2);
+    $get_fetch_ball_1 = mysqli_fetch_array($prompt_1);
+
+    echo $get_fetch_ball_3;
+    echo $get_fetch_ball_2;
+    echo $get_fetch_ball_1;
+
+    if (($get_fetch_ball_3 != "" or $get_fetch_ball_3 != null) and ($get_fetch_ball_2 != "" or $get_fetch_ball_2 != null) and ($get_fetch_ball_1 == "" or $get_fetch_ball_1 == null)) {
+        $conn->query("UPDATE ball_sequence SET ".$equipment_to_borrow."="."'".$get_data['equipment']."'"." WHERE id = 3") or die($conn->error);
+    }elseif (($get_fetch_ball_3 != "" or $get_fetch_ball_3 != null) and ($get_fetch_ball_2 == "" or $get_fetch_ball_2 == null) and ($get_fetch_ball_1 == "" or $get_fetch_ball_1 == null)) {
+        $conn->query("UPDATE ball_sequence SET ".$equipment_to_borrow."="."'".$get_data['equipment']."'"." WHERE id = 2") or die($conn->error);
+    }elseif (($get_fetch_ball_3 == "" or $get_fetch_ball_3 == null) and ($get_fetch_ball_2 == "" or $get_fetch_ball_2 == null) and ($get_fetch_ball_1 == "" or $get_fetch_ball_1 == null)) {
+        $conn->query("UPDATE ball_sequence SET ".$equipment_to_borrow."="."'".$get_data['equipment']."'"." WHERE id = 1") or die($conn->error);
+    }
 }
 
 ?>

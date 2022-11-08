@@ -66,8 +66,30 @@
         <br>
         <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
             <div class="row">
-                  
+            <?php
+                    $query = "SELECT * FROM ball_sequence where id = '3'";
+                    $result = mysqli_query($conn, $query);
+                    $get_near_ball = mysqli_fetch_array($result);
+                    if ($get_near_ball['basketball'] == NULL or $get_near_ball['basketball'] == '') {
+                    ?>
+
                     <div class="col">
+                        <br>
+                        <div class="card card_custom">
+                            <h4 class="text-center mb-4">Basketball</h4>
+                            <div class="text-center">
+                                <img src="assets/images/basketball.png" width="250" alt="">
+                            </div>
+                            <br>
+                            <h5 class = "text-center">Unavailable</h5>
+                           
+                        </div>
+                    </div>
+
+                    <?php
+                    }else{
+                    ?>
+                      <div class="col">
                         <br>
                         <div class="card card_custom">
                             <h4 class="text-center mb-4">Basketball</h4>
@@ -79,7 +101,29 @@
                             <!-- <a href="" type="button" class="btn btn-danger" name="">Select</a>   -->
                         </div>
                     </div>
+
+                    <?php
+                    }
+                    
+                    ?>
+                    <?php
+                    if ($get_near_ball['volleyball'] == NULL or $get_near_ball['volleyball'] == '') {
+                    ?>
                     <div class="col">
+                        <br>
+                        <div class="card card_custom">
+                            <h4 class="text-center mb-4">Volleyball</h4>
+                            <div class="text-center">
+                                <img src="assets/images/volleyball.png" width="250" alt="">
+                            </div>
+                            <br>
+                            <h5 class = "text-center">Unavailable</h5>
+                        </div>
+                    </div>
+                      <?php
+                    }else{
+                      ?>
+                      <div class="col">
                         <br>
                         <div class="card card_custom">
                             <h4 class="text-center mb-4">Volleyball</h4>
@@ -90,6 +134,10 @@
                             <a href="borrowing_slip.php?equipment_to_borrow=volleyball" type="button" class="btn btn-danger" name="">Select</a>
                         </div>
                     </div>
+                      <?php
+                    }
+                      ?>
+
                 </div>
                 
             </div>

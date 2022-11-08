@@ -47,115 +47,51 @@ $id_no = $_SESSION['get_data']['id_no'];
           </div>
         </div>
       </nav>
-      <?php 
-          $id_no = $_SESSION['get_data']['id_no'];
-          $query = "SELECT otp_generate FROM otp_requests where id_no = '$id_no';";
-          $result = mysqli_query($conn, $query);
-          $check = mysqli_num_rows($result);
-          if ($check > 0) {
-                    ?>
-        <div class="jumbotron">
-        <div class="text-center">
-            <h4 id = "thistypeotp">Type The OTP into the Machine and click "Done" button to claim</h4>
-            
-            <li><b>Important Note:</b></li>
-            <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you leave the page or click the `Cancel` button.</li>
-                    
-            <li align = "justify center" class = "alignments">Toggle the button "Click to View" to show and hide the OTP <b>Valid for 5 Minutes Only</b></li>
-                            <br>     
-        </div>
-        <div class="row">
-            <div class="text-center">
-              <button onclick = "mdown()" id = "toggle_bt" class="btn btn-dark" style = "color:white;">Click to View</button>
-              <?php 
-                  $query = "SELECT id,otp_generate FROM otp_requests where id_no = '$id_no';";
-                  $result = mysqli_query($conn, $query);
-                  while ($row = mysqli_fetch_array($result)) {
-                    ?>
-              <h1 id = "display_otp" style = "display:none;"><?php echo $row['otp_generate'] ?></h1>
-          </div>
-          </div>
-          <br>
-        <div class="text-center">
-            
-            <form action="machine_API.php" method="post">
-              <a href = "functions.php?cancel_otp_id=<?php echo $row['id'] ?>" class="btn btn-danger">Cancel</a>
-              <button type = "submit" class="btn btn-info" name="success_really" style = "color:white;">Done</a>
-            </form>
-            
-        </div>
-        <?php
-            }
-        ?>
-   
-    </div><!-----END OF JUMBOTRON--------->
-    <?php
-          }
-          else {
-    ?>
-    <div class="jumbotron">
-        <div class="text-center">
-            <h3 id = "thistypeotp">OTP has been Expired</h3>
-        </div>
-        <div class="row">
-            <div class="text-center">
-              <form action="functions.php" method="post">
-                <input type="hidden" name = "id_no" value = <?php echo $_SESSION['arr_user']['id_no']?>>
-                <input type="hidden" name = "equipment_to_borrow" value = <?php echo $_SESSION['arr_user']['equipment_to_borrow']?>>
-                <input type="hidden" name = "typed" value = <?php echo $_SESSION['arr_user']['typed']?>>
-                <input type="hidden" name = "actionn" value = <?php echo $_SESSION['arr_user']['actionn']?>>
-              <button type = "submit" name = "generate_new_otp" class="btn btn-dark" style = "color:white;">Generate New OTP</button>
-              </form>
-          </div>
-          </div>
-          <br>
-        <div class="text-center">
-            <a href = "home.php" class="btn btn-danger">back to home</a>
-        </div>
-   
-    </div><!-----END OF JUMBOTRON--------->
 
-    <?php
-          }
-    ?>
+    <div class="container">
+		  <div id="link_wrapper">
 
+		  </div>
+	  </div>
+
+
+ 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
+     <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
   <!-----IMPORTING AJAX MODULE FOR POST REQUEST--->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
-<!----END ------>
-    <script>
-      function preview() {
-          frame_1.src=URL.createObjectURL(event.target.files[0]);
-      }
-    </script>
-
-    <script>
-      var x = document.getElementById("display_otp");
-      var tg_btn = document.getElementById("toggle_bt");
-      function mdown() {
-        if (x.style.display === "none") {
-          x.style.display = "block";
-          tg_btn.innerHTML = "Click To Hide";
-        } else {
-          x.style.display = "none";
-          tg_btn.innerHTML = "Click To View";
-        }
-      }
-    </script>
+  <!----END ------>
 
 
 
+<!---refreshes the div everytime there's changes inside the database----->
+<script>
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("link_wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "display_otp_update.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+	loadXMLDoc();
+	// 1sec
+},1000);
 
+window.onload = loadXMLDoc;
+</script>
 
-    <script>
-      setTimeout(function(){
-      window.location.reload();
-    },310000);
-    </script>
 
 </body>
 </html>
