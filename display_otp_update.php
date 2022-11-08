@@ -48,7 +48,6 @@ if ($check > 0) {
       }
       else {
         if ($row['actionn'] == 'BORROWING') {     
-        
           $equipment_to_borrow = $row['equipment_to_borrow'];
           $fetch_ball_3="SELECT `$equipment_to_borrow` FROM ball_sequence WHERE id ='3'";
           $fetch_ball_2="SELECT `$equipment_to_borrow` FROM ball_sequence WHERE id ='2'";
@@ -80,7 +79,7 @@ if ($check > 0) {
           $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, qr,status) 
                   VALUES('$id_no','$equipment_to_borrow','$get_row_3', '$time_borrow', '$date_borrow', 'N/A', 'N/A', '$qr', 'UNRETURNED');") or die($conn->error);
           
-          $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
+          //$conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
   
   
           //Stack and  Queue Database Edition
@@ -88,7 +87,22 @@ if ($check > 0) {
           $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='$get_row_1' WHERE id ='2';") or die($conn->error);
           $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='' WHERE id ='1';") or die($conn->error);
         ?>
-        
+
+        <div>
+        <div class="text-center">
+            <h4 id = "thistypeotp">Please Wait and Claim the borrowed ball in the Machine</h4>
+            
+            <b>Important Note:</b>
+            <li align = "justify center" class = "alignments">If the ball is <b>deflated/damaged</b>, Please return the ball to the PE Department <b>Immediately</b></li>
+                            <br>     
+        </div>
+        <div class="row">
+            <div class="text-center">
+            <a href = "home.php" class="btn btn-danger">back to home</a>
+          </div>
+          </div>
+
+    </div><!-----END OF PARENT DIV--------->
         <?php
         }//end of if condition for borrowing
       }//end of else

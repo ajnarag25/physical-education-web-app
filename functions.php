@@ -765,13 +765,14 @@ if (isset($_POST['reserve_facility'])) {
 <?php
 
 if (isset($_POST['passed_borrower_slip'])) {
+    
+    $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
     $arr_user =array();
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];
     $otp_generate = $_POST['otp_generate'];
     $typed = $_POST['typed'];
     $actionn = $_POST['actionn'];
-
     $arr_user['equipment_to_borrow'] = $equipment_to_borrow;
     $arr_user['id_no'] = $id_no;
     $arr_user['otp_generate'] = $otp_generate;
@@ -857,6 +858,7 @@ if (isset($_POST['passed_borrower_slip'])) {
 <?php
 
 if (isset($_POST['passed_borrower_slip_return'])) {
+    $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
     $arr_user =array();
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];

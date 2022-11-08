@@ -65,7 +65,7 @@ if (isset($_POST['success_really'])) {
         $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, qr,status) 
                 VALUES('$id_no','$equipment_to_borrow','$get_row_3', '$time_borrow', '$date_borrow', 'N/A', 'N/A', '$qr', 'UNRETURNED');") or die($conn->error);
         
-        $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
+        
 
 
         //Stack and  Queue Database Edition
