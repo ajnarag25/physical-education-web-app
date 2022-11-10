@@ -4,6 +4,11 @@
   if (!isset($_SESSION['get_data']['email'])) {
     header("Location: index.php");
 }
+
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $conn->query("DELETE FROM otp_requests WHERE id =".$id) or die($conn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -172,20 +177,39 @@
                     $id_no = $_SESSION['get_data']['id_no'];
                     $query = "SELECT * FROM borrowing_machine_info where status = 'UNRETURNED'  and id_no = '$id_no';";
                     $result = mysqli_query($conn, $query);
+                    $query1 = "SELECT * FROM ball_sequence where id = '3'";
+                    $result1 = mysqli_query($conn, $query1);
+                    $get_near_ball = mysqli_fetch_array($result1);
                     if ($result->num_rows == 0) {
                     ?>
+                      <?php
+                      if (($get_near_ball['basketball'] == NULL OR $get_near_ball['basketball'] == '') AND ($get_near_ball['volleyball'] == NULL OR $get_near_ball['volleyball'] == '')) {
+                       ?>
+                        <div class="col-sm-4 text-center">
+                          <br><br>
+                          <i class='bx bxs-basketball bx-custom'></i>
+                          <br><br>
+                          <h3>Borrow Equipments</h3>
+                          <br>
+                          <p>The borrowing machine is empty as of now, please wait until other user returned their equipment</p>
+                          <br>
+                          <h5 class = 'text-center'>Unavailable</h5>
+                        </div>
+                      <?php 
+                      }else{
+                      ?>
                     <div class="col-sm-4 text-center">
                       <br><br>
                       <i class='bx bxs-basketball bx-custom'></i>
                       <br><br>
                       <h3>Borrow Equipments</h3>
                       <br>
-                      <p>Borrow any equipments in P.E Department, just simply fill-up all the 
-                          information that is needed.</p>
+                      <p>Borrow Equipments at ease,just simply click the desired equipment and type the generated OTP into the machine.</p>
                       <br>
                       <a href="pickequipment.php" class="service-btn">Borrow Equipments</a>
                     </div>
                 <?php
+                      }
                     }
 
                     else {

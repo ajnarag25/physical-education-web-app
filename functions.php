@@ -1,6 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-
 <?php
 include('connection.php');
 session_start();
@@ -766,13 +765,14 @@ if (isset($_POST['reserve_facility'])) {
 <?php
 
 if (isset($_POST['passed_borrower_slip'])) {
+    
+    $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
     $arr_user =array();
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];
     $otp_generate = $_POST['otp_generate'];
     $typed = $_POST['typed'];
     $actionn = $_POST['actionn'];
-
     $arr_user['equipment_to_borrow'] = $equipment_to_borrow;
     $arr_user['id_no'] = $id_no;
     $arr_user['otp_generate'] = $otp_generate;
@@ -858,6 +858,7 @@ if (isset($_POST['passed_borrower_slip'])) {
 <?php
 
 if (isset($_POST['passed_borrower_slip_return'])) {
+    $conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
     $arr_user =array();
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];
@@ -918,8 +919,11 @@ if (isset($_POST['passed_borrower_slip_return'])) {
 //IF THE USER CLICK THE CANCEL BUTTON
 if (isset($_GET['cancel_otp_id'])) {
     $fet_id = $_GET['cancel_otp_id'];
-    echo $fet_id;
-?>
+    $query="SELECT actionn FROM otp_requests WHERE id = '$fet_id'";
+    $result = mysqli_query($conn, $query);
+    $fetch = mysqli_fetch_array($result);
+    if ($fetch['actionn'] == 'BORROWING') {
+    ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -941,6 +945,35 @@ if (isset($_GET['cancel_otp_id'])) {
                     })
                     })
         </script>
+    
+    <?php
+    }elseif ($fetch['actionn'] == 'RETURNING') {
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Your OTP request will be void if you leave the page",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Cancel it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "home.php?id=<?php echo $fet_id?>";
+                    }else{
+                        window.location.href = "display_otp_equip.php";
+                    }
+                    })
+                    })
+        </script>
+        <?php
+    }
+?>
+        
 <?php
 }
 ?>
