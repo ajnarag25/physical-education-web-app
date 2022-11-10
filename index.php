@@ -88,7 +88,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="overlay-image" style="background-image:url(assets/images/tup-c.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/bg.jpg);"></div>
             <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
               <h1>Welcome Student in our P.E Department Website</h1>
               <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department

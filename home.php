@@ -43,7 +43,7 @@
                 <a class="nav-link" id="link" href="account.php">Account</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="link" href="#">Transaction</a>
+                <a class="nav-link" id="link" href="transaction.php">Transaction</a>
               </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
@@ -65,7 +65,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="overlay-image" style="background-image:url(assets/images/tup-c.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/bg.jpg);"></div>
             <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
               <h1>Welcome Student in our P.E Department Website</h1>
               <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
@@ -125,7 +125,7 @@
                   <br>
                   <?php 
                     $email = $_SESSION['get_data']['email'];
-                    $query = "SELECT * FROM inquire where status = 'PENDING'";
+                    $query = "SELECT * FROM inquire where status = 'PENDING' and email='$email'";
                     $result = mysqli_query($conn, $query);
                     if ($result->num_rows == 0) {
                     ?>
@@ -149,7 +149,23 @@
                   <br>
                   <p>Make your own reservation, make your time productive and just simply schedule your own choice.</p>
                   <br>
-                  <a href="reserve.php" class="service-btn">Make Reservation</a>
+                  <?php 
+                    $email = $_SESSION['get_data']['email'];
+                    $query = "SELECT * FROM reserve where status = 'PENDING' and email='$email'";
+                    $result = mysqli_query($conn, $query);
+                    if ($result->num_rows == 0) {
+                    ?>
+                    <a href="reserve.php" class="service-btn">Make Reservation</a>
+                    <?php
+                    }
+                    else {
+                    ?>
+                      <a href="success_reserve.php" class="service-btn">Make Reservation</a>
+                    <?php
+                      }
+                        
+                    ?>
+         
                 </div>
 
                 <?php 
