@@ -126,6 +126,10 @@
 
 <!-- Main Content -->
 <section class="content">
+    <!--start here--->
+    <div id="link_wrap">
+
+    
     <div class="body_scroll" id="bv">
         <div class="block-header">
             <div class="row">
@@ -136,6 +140,7 @@
                         <li class="breadcrumb-item active">Basketball & Volleyball Table</li>
                         <li class="breadcrumb-item"><a href="#history">History Table</a></li>
                         <li class="breadcrumb-item"><a href="#report">Report Table</a></li>
+                        
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -145,70 +150,119 @@
             <div class="container">
                 <div class="row justify-content-center ">
                     <div class="col centerr">
-                        <h5>Basketball Position in the Machine</h5>
+                        <h5>Volleyball Position in the Machine</h5>
+                        <?php 
+                                // fetch all ball id in row 1
+                                $query_ball_row_1 = "SELECT * FROM ball_sequence WHERE id = '1'";
+                                $result_ball_row_1 = mysqli_query($conn, $query_ball_row_1);
+                                $fetch_ball_row_1 = mysqli_fetch_array($result_ball_row_1);
+
+
+                                // fetch all ball id in row 2
+                                $query_ball_row_2 = "SELECT * FROM ball_sequence WHERE id = '2'";
+                                $result_ball_row_2 = mysqli_query($conn, $query_ball_row_2);
+                                $fetch_ball_row_2 = mysqli_fetch_array($result_ball_row_2);
+
+
+
+                                // fetch all ball id in row 3
+                                $query_ball_row_3 = "SELECT * FROM ball_sequence WHERE id = '3'";
+                                $result_ball_row_3 = mysqli_query($conn, $query_ball_row_3);
+                                $fetch_ball_row_3 = mysqli_fetch_array($result_ball_row_3);
+                            ?>
+                        
+
+                        <?php
+                        if ($fetch_ball_row_1['volleyball'] != '' or $fetch_ball_row_1['volleyball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_1['volleyball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
                         <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
+                        <?php
+                        }
+                        ?>
+
+                        
+                        
+                        <?php
+                        if ($fetch_ball_row_2['volleyball'] != '' or $fetch_ball_row_2['volleyball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_2['volleyball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
                         <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
-                        <button class="btn btn-success btn-sm btn-circle btn-xl" >B3</button>
+                        <?php
+                        }
+                        ?>
+
+
+
+
+                        <?php
+                        if ($fetch_ball_row_3['volleyball'] != '' or $fetch_ball_row_3['volleyball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_3['volleyball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
+                        <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
+                        <?php
+                        }
+                        ?>
+                        <p>next to borrow</p>
                     </div>
                     <div class="col centerr">
-                        <button class="btn btn-success btn-sm btn-circle btn-xl" >B2</button>
-                        <button class="btn btn-success btn-sm btn-circle btn-xl" >B3</button>
-                        <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
-                        <h5>Volleyball Position in the Machine</h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Unreturned Table Basketball -->
-            <div class="row clearfix" id="">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2><strong>Unreturned</strong> Table (Basketball)</h2>
-                        </div>
-                        <div class="body">
-                            <div class="table-responsive" style="text-align: center;">
-                                <table class="table table-bordered table-hover dataTable js-exportable table-sm">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
-                                            <th><small>Ball Number</small></th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot class="thead-light">
-                                        <tr>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Name</small></th>
-                                            <th><small>Course</small></th>
-                                            <th><small>Ball Number</small></th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>07:00AM</td>
-                                            <td>08/13/2022</td>                                           
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>                               
-                                            <td>1</td>
-                                        </tr>
-                                        <tr>
-                                            <td>08:00AM</td>
-                                            <td>08/13/2022</td>                               
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>                                           
-                                            <td>2</td>
-                                        </tr>                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <p>next to borrow</p>
+                        
 
+                        <?php
+                        if ($fetch_ball_row_3['basketball'] != '' or $fetch_ball_row_3['basketball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_3['basketball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
+                        <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
+                        <?php
+                        }
+                        ?>
+
+                        
+                        
+                        <?php
+                        if ($fetch_ball_row_2['basketball'] != '' or $fetch_ball_row_2['basketball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_2['basketball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
+                        <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
+                        <?php
+                        }
+                        ?>
+
+
+
+
+                        <?php
+                        if ($fetch_ball_row_1['basketball'] != '' or $fetch_ball_row_1['basketball'] != NULL) {
+                        ?>
+                        <button class="btn btn-success text-center btn-md btn-circle btn-xl" ><?php echo $fetch_ball_row_1['basketball'] ?></button>
+                        <?php
+                        }else{
+                        ?>
+                        <button class="btn btn-danger btn-sm btn-circle btn-xl" ></button>
+                        <?php
+                        }
+                        ?>
+                        <h5>Basketball Position in the Machine</h5>
+                        
+                    </div>
+                </div>
+            </div>
             <!-- Unreturned Table Volleyball -->
             <div class="row clearfix" id="">
                 <div class="col-lg-12">
@@ -221,30 +275,120 @@
                                 <table class="table table-bordered table-hover dataTable js-exportable table-sm">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Date</small></th>
+                                            <th><small>ID No.</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Ball Number</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
                                         <tr>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Date</small></th>
+                                            <th><small>ID No.</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Ball Number</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                            $query_unret_vball = "SELECT * FROM borrowing_machine_info WHERE status='UNRETURNED' AND equipment = 'volleyball' order by sort_date_time desc";
+                                            $result_unret_vball = mysqli_query($conn, $query_unret_vball);
+
+
+                                            while ($row_unret_vball = mysqli_fetch_array($result_unret_vball)) {
+                                                $query_info = "SELECT * FROM registration WHERE id_no = '".$row_unret_vball['id_no']."'";
+                                                $result_info = mysqli_query($conn, $query_info);
+                                                $fetch_info = mysqli_fetch_array($result_info);
+                                        ?>
                                         <tr>
-                                            <td>07:00AM</td>
-                                            <td>08/13/2022</td>                                           
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>                               
-                                            <td>1</td>
-                                        </tr>                                   
+                                            <td><?php echo $row_unret_vball['id_no']?></td>
+                                            <td><?php echo $fetch_info['firstname'] ?> <?php echo $fetch_info['middlename'] ?> <?php echo $fetch_info['lastname'] ?></td>
+                                            <td><?php echo $fetch_info['course'] ?></td>                            
+                                            <td><?php echo $row_unret_vball['ball_id']?></td>
+                                            <td><?php echo $row_unret_vball['time_borrow']?></td>                                           
+                                            <td><?php echo $row_unret_vball['date_borrow']?></td>
+                                            <td>
+                                                <div class="col-sm-12 btn-group" role="group">
+                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
+                                                </div>
+                                            </td>
+                                        </tr> 
+                                        <?php
+                                            }
+                                        ?>                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unreturned Table Basketball -->
+            <div class="row clearfix" id="">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Unreturned</strong> Table (Basketball)</h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive" style="text-align: center;">
+                                <table class="table table-bordered table-hover dataTable js-exportable table-sm">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th><small>ID No.</small></th>
+                                            <th><small>Name</small></th>
+                                            <th><small>Course</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Action</small></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot class="thead-light">
+                                        <tr>
+                                            <th><small>ID No.</small></th>
+                                            <th><small>Name</small></th>
+                                            <th><small>Course</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Action</small></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <?php 
+                                            $query_unret_bball = "SELECT * FROM borrowing_machine_info WHERE status='UNRETURNED' AND equipment = 'basketball' order by sort_date_time desc";
+                                            $result_unret_bball = mysqli_query($conn, $query_unret_bball);
+
+
+                                            while ($row_unret_bball = mysqli_fetch_array($result_unret_bball)) {
+                                                $query_info1 = "SELECT * FROM registration WHERE id_no = '".$row_unret_bball['id_no']."'";
+                                                $result_info1 = mysqli_query($conn, $query_info1);
+                                                $fetch_info1 = mysqli_fetch_array($result_info1);
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row_unret_bball['id_no']?></td>
+                                            <td><?php echo $fetch_info1['firstname'] ?> <?php echo $fetch_info1['middlename'] ?> <?php echo $fetch_info1['lastname'] ?></td>
+                                            <td><?php echo $fetch_info1['course'] ?></td>                            
+                                            <td><?php echo $row_unret_bball['ball_id']?></td>
+                                            <td><?php echo $row_unret_bball['time_borrow']?></td>                                           
+                                            <td><?php echo $row_unret_bball['date_borrow']?></td>
+                                            <td>
+                                                <div class="col-sm-12 btn-group" role="group">
+                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
+                                                </div>
+                                            </td>
+                                        </tr> 
+                                        <?php
+                                            }
+                                        ?>                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -263,6 +407,7 @@
                                 <li class="breadcrumb-item"><a href="#bv">Basketball & Volleyball Table</a></li>
                                 <li class="breadcrumb-item active">History Table</li>
                                 <li class="breadcrumb-item"><a href="#report">Report Table</a></li>
+                                
                             </ul>
                             <h2><strong>History</strong> Table </h2>
                         </div>
@@ -271,76 +416,60 @@
                                 <table class="table table-bordered table-hover dataTable js-exportable table-sm">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th><small>Returned Time</small></th>
-                                            <th><small>Returned Date</small></th>
+                                            <th><small>ID No.</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Item</small></th>
-                                            <th><small>Ball Number</small></th>
-                                            <th><small>Report</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Time Returned</small></th>
+                                            <th><small>Date Returned</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
                                         <tr>
-                                            <th><small>Returned Time</small></th>
-                                            <th><small>Returned Date</small></th>
+                                            <th><small>ID No.</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Item</small></th>
-                                            <th><small>Ball Number</small></th>
-                                            <th><small>Report</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Time Returned</small></th>
+                                            <th><small>Date Returned</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                            $query_ret_all = "SELECT * FROM borrowing_machine_info WHERE status='RETURNED' order by sort_date_time desc";
+                                            $result_ret_all = mysqli_query($conn, $query_ret_all);
+
+
+                                            while ($row_ret_all = mysqli_fetch_array($result_ret_all)) {
+                                                $query_info2 = "SELECT * FROM registration WHERE id_no = '".$row_ret_all['id_no']."'";
+                                                $result_info2 = mysqli_query($conn, $query_info2);
+                                                $fetch_info2 = mysqli_fetch_array($result_info2);
+                                        ?>
                                         <tr>
-                                            <td>08:00AM</td>
-                                            <td>08/12/2022</td>
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>07:00AM</td>
-                                            <td>Volleyball</td>
-                                            <td>1</td>
+                                            <td><?php echo $row_ret_all['id_no']?></td>
+                                            <td><?php echo $fetch_info2['firstname'] ?> <?php echo $fetch_info2['middlename'] ?> <?php echo $fetch_info2['lastname'] ?></td>
+                                            <td><?php echo $fetch_info2['course'] ?></td>                            
+                                            <td><?php echo $row_ret_all['ball_id']?></td>
+                                            <td><?php echo $row_ret_all['time_borrow']?></td>                                           
+                                            <td><?php echo $row_ret_all['date_borrow']?></td>
+                                            <td><?php echo $row_ret_all['time_return']?></td>
+                                            <td><?php echo $row_ret_all['date_return']?></td>
                                             <td>
                                                 <div class="col-sm-12 btn-group" role="group">
                                                     <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>09:00AM</td> 
-                                            <td>08/12/2022</td>                                          
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>08:00AM</td>
-                                            <td>Volleyball</td>
-                                            <td>2</td>
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>10:00AM</td>
-                                            <td>08/12/2022</td>
-                                            <td>Colleen Hurst</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>09:00AM</td>
-                                            <td>Volleyball</td>
-                                            <td>3</td>     
-                                            <td>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
-                                                </div>
-                                            </td>                              
-                                        </tr>                                       
+                                        </tr> 
+                                        <?php
+                                            }
+                                        ?>
+                                                                              
                                     </tbody>
                                 </table>
                             </div>
@@ -359,6 +488,7 @@
                                 <li class="breadcrumb-item"><a href="#bv">Basketball & Volleyball Table</a></li>
                                 <li class="breadcrumb-item"><a href="#history">History Table</a></li>
                                 <li class="breadcrumb-item active">Report Table</li>
+                               
                             </ul>
                             <h2><strong>Reported</strong> Table </h2>
                         </div>
@@ -435,6 +565,7 @@
         </div>
     </div>
 
+</div><!---end here(link_wrap)---->
 </section>
 
 <!-- Modal for modify -->

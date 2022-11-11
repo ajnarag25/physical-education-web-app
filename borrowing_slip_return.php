@@ -94,6 +94,10 @@
                         while ($row = mysqli_fetch_array($result_data)) {
                       
                         ?>
+                        <p><b>Note:</b> 
+                          <br>
+                          *Each ball has its own ID, your information will be saved as the last borrower of the specified equipment.
+                        </p>
                         <div class="col-md-12">
                             <h5><b>ID No:</b>  
                               <span  id = "id_no"> <?php echo $_SESSION['get_data']['id_no'];?></span>
@@ -138,6 +142,9 @@
                               <span  id = "date_borrow"> <?php echo date("Y-m-d");?> </span>
                             </h5>
                         </div> <!--end of col md 12--->
+                        <br>
+                        <br>
+                        
 
                       <?php 
                       // THIS IS THE CODE WHERE THE SYSTEM WILL GENERATE ONE TIME PASSWORD THRU RAND() MODULE AND WILL PASS IT 

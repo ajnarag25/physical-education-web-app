@@ -183,10 +183,53 @@
                     <div class="card widget_2 big_icon zmdi-star-circle">
                         <div class="body">
                             <h6>Borrow Ball <br><small>(Basketball)</small></h6>
-                            <h2>2 <small class="info">Borrowed</small></h2>
-                            <small>Remaining Ball in the Machine: 1</small>
+                            <?php 
+                                //count all unreturned users for equipment basketball
+                                $query_unret_basketball = "SELECT * FROM borrowing_machine_info WHERE equipment = 'basketball' AND status = 'UNRETURNED'";
+                                $result_unret_basketball = mysqli_query($conn, $query_unret_basketball);
+                                $row_result_unret_basketball = mysqli_num_rows($result_unret_basketball);
+                                
+                                //count all unreturned users for equipment volleyball
+                                $query_unret_volleyball = "SELECT * FROM borrowing_machine_info WHERE equipment = 'volleyball' AND status = 'UNRETURNED'";
+                                $result_unret_volleyball = mysqli_query($conn, $query_unret_volleyball);
+                                $row_result_unret_volleyball = mysqli_num_rows($result_unret_volleyball);
+
+
+                                //how many basketball inside the machine
+                                $query_cnt_basketball = "SELECT * from ball_sequence where basketball != ''";
+                                $result_cnt_baskeball = mysqli_query($conn, $query_cnt_basketball);
+                                $row_cnt_basketball =mysqli_num_rows($result_cnt_baskeball);
+                                
+
+                                //how many volleyball inside the machine
+                                $query_cnt_volleyball = "SELECT * from ball_sequence where volleyball != ''";
+                                $result_cnt_volleyball = mysqli_query($conn, $query_cnt_volleyball);
+                                $row_cnt_volleyball =mysqli_num_rows($result_cnt_volleyball);
+                            ?>
+
+
+                            <h2><?php echo $row_result_unret_basketball; ?> <small class="info">Unreturned</small></h2>
+                            <small>Remaining Ball in the Machine: <?php echo $row_cnt_basketball?></small>
                             <div class="progress">
+                                <?php
+                                if ($row_cnt_basketball == 3) {
+                                ?>
+                                <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                <?php
+                                }elseif ($row_cnt_basketball == 2) {
+                                ?>
+                                <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 66%;"></div>
+                                <?php
+                                }elseif ($row_cnt_basketball == 1) {
+                                ?>
                                 <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 33%;"></div>
+                                <?php
+                                }elseif($row_cnt_basketball ==0){
+                                ?>
+                                <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -195,10 +238,28 @@
                     <div class="card widget_2 big_icon zmdi-star-circle">
                         <div class="body">
                             <h6>Borrow Ball <br><small>(Volleyball)</small></h6>
-                            <h2>1 <small class="info">Borrowed</small></h2>
-                            <small>Remaining Ball in the Machine: 2</small>
+                            <h2><?php echo $row_result_unret_volleyball; ?> <small class="info">Unreturned</small></h2>
+                            <small>Remaining Ball in the Machine: <?php echo $row_cnt_volleyball?></small>
                             <div class="progress">
-                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" style="width: 66%;"></div>
+                            <?php
+                                if ($row_cnt_volleyball == 3) {
+                                ?>
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                <?php
+                                }elseif ($row_cnt_volleyball == 2) {
+                                ?>
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 66%;"></div>
+                                <?php
+                                }elseif ($row_cnt_volleyball == 1) {
+                                ?>
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 33%;"></div>
+                                <?php
+                                }elseif($row_cnt_volleyball ==0){
+                                ?>
+                                <div class="progress-bar l-green" role="progressbar" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

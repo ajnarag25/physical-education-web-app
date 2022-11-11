@@ -10,10 +10,34 @@ $result = mysqli_query($conn, $query);
 $check = mysqli_num_rows($result);
 if ($check > 0) {
   $id_no=  $_SESSION['get_data']['id_no'];
+
+
+    //if there's request for the specific user
     $check_typed="SELECT * FROM otp_requests WHERE id_no='$id_no'";
     $result = mysqli_query($conn, $check_typed);
+
+
+
+    //if the ball rack inside the machine is empty 
+    $check_ball="SELECT * FROM ball_sequence WHERE id='3'";
+    $exec_check_ball = mysqli_query($conn, $check_ball);
+    $fet_exec_check_ball = mysqli_fetch_array($exec_check_ball);
+
+
+
+    // if the user have been returned the ball successfully
+    $check_unreturned="SELECT * FROM borrowing_machine_info WHERE id_no='$id_no' and status = 'UNRETURNED'";
+    $exec_check_unreturned = mysqli_query($conn, $check_unreturned);
+    $fet_exec_check_unreturned = mysqli_num_rows($exec_check_unreturned);
+    
+
+
+
+
     while ($row = mysqli_fetch_array($result)) {
       if ($row['typed'] == '0') {
+          $check_nearest_ball = $row['equipment_to_borrow'];
+          if($fet_exec_check_ball[$check_nearest_ball] != NULL or $fet_exec_check_ball[$check_nearest_ball] != ''){ 
 ?>
 <div>
         <div class="text-center">
@@ -45,51 +69,28 @@ if ($check > 0) {
 
     </div><!-----END OF PARENT DIV--------->
 <?php
+          }
+          else {
+            ?>
+                      <div>
+          <div class="text-center">
+            <h4 id = "thistypeotp"><?php echo $row['equipment_to_borrow']?> is currently not available, please try again later</h4>
+        </div>
+        <div class="row">
+            <div class="text-center">
+            <a href = "home.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">back to home</a>
+            </div>
+        </div>
+
+        <?php
+          }
       }
       else {
-        if ($row['actionn'] == 'BORROWING') {     
-          $equipment_to_borrow = $row['equipment_to_borrow'];
-          $fetch_ball_3="SELECT `$equipment_to_borrow` FROM ball_sequence WHERE id ='3'";
-          $fetch_ball_2="SELECT `$equipment_to_borrow` FROM ball_sequence WHERE id ='2'";
-          $fetch_ball_1="SELECT `$equipment_to_borrow` FROM ball_sequence WHERE id ='1'";
-          
-          $result_ball_3 = mysqli_query($conn, $fetch_ball_3);
-          $result_ball_2 = mysqli_query($conn, $fetch_ball_2);
-          $result_ball_1 = mysqli_query($conn, $fetch_ball_1);
-          
-          $get_row_3 = null;
-          $get_row_2 = null;
-          $get_row_1 = null;
-          while ($row_3 = mysqli_fetch_array($result_ball_3)) {
-              $get_row_3 = $row_3[$equipment_to_borrow];
-          }
-          while ($row_2 = mysqli_fetch_array($result_ball_2)) {
-              $get_row_2 = $row_2[$equipment_to_borrow];
-          }
-          while ($row_1 = mysqli_fetch_array($result_ball_1)) {
-              $get_row_1 = $row_1[$equipment_to_borrow];
-          }
-  
-          $id_no = $_SESSION['get_data']['id_no'];
-          $qr= $_SESSION['get_data']['qr'];
-          $time_borrow = date("h:ia");
-          $date_borrow = date("Y-m-d");
-  
-  
-          $conn->query("INSERT INTO borrowing_machine_info (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, qr,status) 
-                  VALUES('$id_no','$equipment_to_borrow','$get_row_3', '$time_borrow', '$date_borrow', 'N/A', 'N/A', '$qr', 'UNRETURNED');") or die($conn->error);
-          
-          //$conn->query("DELETE FROM `otp_requests` WHERE typed='1';") or die($conn->error);
-  
-  
-          //Stack and  Queue Database Edition
-          $conn->query("UPDATE ball_sequence SET $equipment_to_borrow= '$get_row_2' WHERE id ='3';") or die($conn->error);
-          $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='$get_row_1' WHERE id ='2';") or die($conn->error);
-          $conn->query("UPDATE ball_sequence SET $equipment_to_borrow='' WHERE id ='1';") or die($conn->error);
+        
+        if ($row['actionn'] == 'BORROWING') {
         ?>
-
         <div>
-        <div class="text-center">
+          <div class="text-center">
             <h4 id = "thistypeotp">Please Wait and Claim the borrowed ball in the Machine</h4>
             
             <b>Important Note:</b>
@@ -98,16 +99,44 @@ if ($check > 0) {
         </div>
         <div class="row">
             <div class="text-center">
-            <a href = "home.php" class="btn btn-danger">back to home</a>
-          </div>
-          </div>
+            <a href = "home.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">back to home</a>
+            </div>
+        </div>
 
-    </div><!-----END OF PARENT DIV--------->
-        <?php
+      </div><!-----END OF PARENT DIV--------->
+
+
+          <?php
         }//end of if condition for borrowing
+
+        elseif ($row['actionn'] == 'RETURNING') {
+          if($fet_exec_check_unreturned == 0){
+          ?>
+          <h4 class= "text-center">The return door for <?php echo $row['equipment_to_borrow']?> has been Unlocked!</h4>
+          <h5 class = "text-center">Please return the ball before the time expires</h5>
+          <?php
+          }
+          else {
+            ?>
+                    <div>
+          <div class="text-center">
+            <h4 id = "thistypeotp">Equipment Returned Successfully! <br> You can view and download your borrower's slip in the transaction menu</h4>
+                            <br>     
+        </div>
+        <div class="row">
+            <div class="text-center">
+            <a href = "home.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">back to home</a>
+            </div>
+        </div>
+
+      </div><!-----END OF PARENT DIV--------->
+            <?php
+          }
+        }
+
       }//end of else
-}// end of while loop
-} //end of check if condition
+    }// end of while loop
+    } //end of check if condition
 else {
 ?>
 <div>
