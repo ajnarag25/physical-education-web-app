@@ -43,6 +43,9 @@
               <li class="nav-item">
                 <a class="nav-link" id="link" href="account.php">Account</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="link" href="transaction.php">Transaction</a>
+              </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
                 <h5 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
@@ -62,7 +65,7 @@
 
         <div class="container">
             <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <?php 
@@ -93,7 +96,7 @@
             </div>
             <div class="col-lg-8">
                 <form action="functions.php" method="POST">
-                    <div class="card mb-4">
+                    <div class="card mb-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                         <div class="card-body">
                             <h4 class="text-center">Profile Information:</h4>
                             <br>
@@ -181,7 +184,7 @@
                 </form>
                 <form action="functions.php" method="POST">
 
-                    <div class="card mb-4">
+                    <div class="card mb-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                         <div class="card-body">
                             <h4 class="text-center">Change Password:</h4>
                             <br>

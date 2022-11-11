@@ -59,6 +59,9 @@
               <li class="nav-item">
                 <a class="nav-link" id="link" href="account.php">Account</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="link" href="transaction.php">Transaction</a>
+              </li>
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
                 <h5 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
