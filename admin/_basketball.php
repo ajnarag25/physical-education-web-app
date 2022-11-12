@@ -314,8 +314,13 @@
                                             <td><?php echo $row_unret_vball['time_borrow']?></td>                                           
                                             <td><?php echo $row_unret_vball['date_borrow']?></td>
                                             <td>
+                                            <?php
+                                                $_SESSION['get_id_no'] = $row_unret_vball['id_no'];
+                                                $_SESSION['get_name'] = $fetch_info['firstname']." ".$fetch_info['middlename']." ".$fetch_info['lastname'];
+                                                
+                                                ?>
                                                 <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
+                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_unret_vball['id_no']?>">Report</button>
                                                 </div>
                                             </td>
                                         </tr> 
@@ -381,8 +386,12 @@
                                             <td><?php echo $row_unret_bball['time_borrow']?></td>                                           
                                             <td><?php echo $row_unret_bball['date_borrow']?></td>
                                             <td>
+                                            <?php
+                                                $_SESSION['get_id_no'] = $row_unret_bball['id_no'];
+                                                $_SESSION['get_name'] = $fetch_info['firstname']." ".$fetch_info['middlename']." ".$fetch_info['lastname'];
+                                                ?>
                                                 <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
+                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_unret_bball['id_no']?>">Report</button>
                                                 </div>
                                             </td>
                                         </tr> 
@@ -409,10 +418,20 @@
                                 <li class="breadcrumb-item"><a href="#report">Report Table</a></li>
                                 
                             </ul>
+
                             <h2><strong>History</strong> Table </h2>
+
+
+                            
+
+
+
+
                         </div>
                         <div class="body">
+                            
                             <div class="table-responsive" style="text-align: center;">
+                           
                                 <table class="table table-bordered table-hover dataTable js-exportable table-sm">
                                     <thead class="thead-light">
                                         <tr>
@@ -461,8 +480,13 @@
                                             <td><?php echo $row_ret_all['time_return']?></td>
                                             <td><?php echo $row_ret_all['date_return']?></td>
                                             <td>
+                                                <?php
+                                                $_SESSION['get_id_no'] = $row_ret_all['id_no'];
+                                                $_SESSION['get_name'] = $fetch_info['firstname']." ".$fetch_info['middlename']." ".$fetch_info['lastname'];
+
+                                                ?>
                                                 <div class="col-sm-12 btn-group" role="group">
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt">Report</button>
+                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_ret_all['id_no']?>">Report</button>
                                                 </div>
                                             </td>
                                         </tr> 
@@ -478,7 +502,8 @@
                 </div>
             </div>
 
-            <!-- Reported Table -->
+            <!-- Report Table -->
+
             <div class="row clearfix" id="report">
                 <div class="col-lg-12">
                     <div class="card">
@@ -488,73 +513,89 @@
                                 <li class="breadcrumb-item"><a href="#bv">Basketball & Volleyball Table</a></li>
                                 <li class="breadcrumb-item"><a href="#history">History Table</a></li>
                                 <li class="breadcrumb-item active">Report Table</li>
-                               
+                                
                             </ul>
-                            <h2><strong>Reported</strong> Table </h2>
+                            <h2><strong>Report</strong> Table </h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive" style="text-align: center;">
                                 <table class="table table-bordered table-hover dataTable js-exportable table-sm">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th><small>Returned Time</small></th>
-                                            <th><small>Returned Date</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Item</small></th>
-                                            <th><small>Reason</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Equipment</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Time Returned</small></th>
+                                            <th><small>Date Returned</small></th>
+                                            <th><small>Remarks</small></th>
+                                            <th><small>Report by</small></th>
                                             <th><small>Status</small></th>
+                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
                                         <tr>
-                                            <th><small>Returned Time</small></th>
-                                            <th><small>Returned Date</small></th>
                                             <th><small>Name</small></th>
                                             <th><small>Course</small></th>
-                                            <th><small>Borrowed Date</small></th>
-                                            <th><small>Borrowed Time</small></th>
-                                            <th><small>Borrowed Item</small></th>
-                                            <th><small>Reason</small></th>
+                                            <th><small>Ball ID</small></th>
+                                            <th><small>Equipment</small></th>
+                                            <th><small>Time Borrowed</small></th>
+                                            <th><small>Date Borrowed</small></th>
+                                            <th><small>Time Returned</small></th>
+                                            <th><small>Date Returned</small></th>
+                                            <th><small>Remarks</small></th>
+                                            <th><small>Report by</small></th>
                                             <th><small>Status</small></th>
+                                            <th><small>Resolved</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php 
+                                            $query_rep_all = "SELECT * FROM report_equip order by sort_date_time desc";
+                                            $result_rep_all = mysqli_query($conn, $query_rep_all);
+
+
+                                            while ($row_rep_all = mysqli_fetch_array($result_rep_all)) {
+                                                $query_info3 = "SELECT * FROM registration WHERE id_no = '".$row_rep_all['id_no']."'";
+                                                $result_info3 = mysqli_query($conn, $query_info3);
+                                                $fetch_info3 = mysqli_fetch_array($result_info3);
+                                        ?>
                                         <tr>
-                                            <td>08:00AM</td>
-                                            <td>08/12/2022</td>
-                                            <td>Rhona Davidson</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>07:00AM</td>
-                                            <td>Volleyball</td>
-                                            <td>Nabutas yung bola</td>
-                                            <td class="text-success">Done</td>
-                                        </tr>
-                                        <tr>
-                                            <td>09:00AM</td> 
-                                            <td>08/12/2022</td>                                          
-                                            <td>Ashton Cox</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>08:00AM</td>
-                                            <td>Volleyball</td>
-                                            <td>Nawala yung bola</td>
-                                            <td class="text-warning">Pending</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10:00AM</td>
-                                            <td>08/12/2022</td>
-                                            <td>Colleen Hurst</td>
-                                            <td>COET</td>
-                                            <td>08/12/2022</td>
-                                            <td>09:00AM</td>
-                                            <td>Basketball</td> 
-                                            <td>Pinalitan yung bola</td> 
-                                            <td class="text-success">Done</td>                          
-                                        </tr>                                       
+                                            <td><?php echo $fetch_info3['firstname'] ?> <?php echo $fetch_info3['middlename'] ?> <?php echo $fetch_info3['lastname'] ?></td>
+                                            <td><?php echo $fetch_info3['course'] ?></td>                            
+                                            <td><?php echo $row_rep_all['ball_id']?></td>
+                                            <td><?php echo $row_rep_all['equipment']?></td>
+                                            <td><?php echo $row_rep_all['time_borrow']?></td>                                           
+                                            <td><?php echo $row_rep_all['date_borrow']?></td>
+                                            <td><?php echo $row_rep_all['time_return']?></td>
+                                            <td><?php echo $row_rep_all['date_return']?></td>
+                                            <td><?php echo $row_rep_all['remarks']?></td>
+                                            <td><?php echo $row_rep_all['admin_name']?></td>
+                                            <?php
+                                            if ($row_rep_all['status'] == 'pending') {
+                                            
+                                            ?>
+                                            <td><p class="badge badge-danger">pending</p></td>
+                                            <?php
+                                            }elseif($row_rep_all['status'] == 'resolved'){
+                                            ?>
+                                            <td><p class="badge badge-success">resolved</p></td>
+                                            <?php
+                                            }
+                                            ?>
+                                            <td>
+                                                <div class="col-sm-12 btn-group" role="group">
+                                                    <button class="btn btn-info btn-sm ">Resolve</button>
+                                                </div>
+                                            </td>
+                                        </tr> 
+                                        <?php
+                                            }
+                                        ?>
+                                                                              
                                     </tbody>
                                 </table>
                             </div>
@@ -568,29 +609,47 @@
 </div><!---end here(link_wrap)---->
 </section>
 
-<!-- Modal for modify -->
-<div class="modal fade" id="reportt" tabindex="-1" role="dialog">
+<!-- Modal for report student_returned -->
+<div class="modal fade" id="reportt<?php echo $_SESSION['get_id_no']?>" tabindex="-1" role="dialog">
+                    
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Report Student</h4>
+                <h4 class="title" id="largeModalLabel">Report Student <?php echo $_SESSION['get_id_no'].":"." ".$_SESSION['get_name']?></h4>
             </div>
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
-                            <form> 
-                                <label id="reasonlabel" for="reason">Reason for Reporting:</label>
+                            <form action="functions.php" id="send_report" method="post">
+                                <label id="reasonlabel" for="reason">Remarks/Reason:</label>
+                                
                                 <div class="form-group">
-                                    <textarea name="reason" rows="4" class="form-control no-resize" required>Please Enter something ...</textarea>
+                                    <textarea rows="4" name="remarks" class="form-control no-resize" placeholder = 'Please Enter something ...' required></textarea>
                                 </div>
                                 <label for="name">Action by:</label>
                                 <div class="form-group">                                
-                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                                    <input type="text" id="name" name = "admin_name" class="form-control" value = "<?php echo  $_SESSION['get_data']['firstname'].' '.$_SESSION['get_data']['lastname'];?>" readonly>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect">Save Changes</button>
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+
+                                        <?php
+                                            $query_get_info = "SELECT * FROM borrowing_machine_info WHERE id_no = '".$_SESSION['get_id_no']."'";
+                                            $result_info = mysqli_query($conn, $query_get_info);
+                                            $fetch_infoo = mysqli_fetch_array($result_info);
+                                        ?>
+                                    
+                                        <input type="hidden" name = "id_no" value = "<?php echo $fetch_infoo['id_no']?>">
+                                        <input type="hidden" name = "equipment" value = "<?php echo $fetch_infoo['equipment']?>">
+                                        <input type="hidden" name = "ball_id" value = "<?php echo $fetch_infoo['ball_id']?>">
+                                        <input type="hidden" name = "time_borrow" value = "<?php echo $fetch_infoo['time_borrow']?>">
+                                        <input type="hidden" name = "date_borrow" value = "<?php echo $fetch_infoo['date_borrow']?>">
+                                        <input type="hidden" name = "time_return" value = "<?php echo $fetch_infoo['time_return']?>">
+                                        <input type="hidden" name = "date_return" value = "<?php echo $fetch_infoo['date_return']?>">           
+                                        <button type="submit" name = "submit_report" class="btn btn-outline-success btn-round waves-effect">Save Changes</button>
+                                        <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                
+                                    
                                 </div>
                             </form>
                         </div>
@@ -599,7 +658,9 @@
             </div>
         </div>
     </div>
-</div>
+</div><!---end div of modal--->
+
+
 <style type="text/css">
     .btn-circle.btn-xl {
         width: 70px;
@@ -619,6 +680,7 @@
     }
 
 </style>
+
 
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 

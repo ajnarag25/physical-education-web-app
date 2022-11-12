@@ -151,8 +151,8 @@ $(function() {
         events: [
             {
               title: 'Gymnasium',
-              start: '2022-08-01',
-              end: '2022-08-02'
+              start: '2022-11-01',
+              end: '2022-11-21'
             },
             {
               title: 'Gymnasium',

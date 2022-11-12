@@ -1051,8 +1051,51 @@
             <?php
         }
     }
-    
+?>
+
+<?php
+if (isset($_POST['submit_report'])) {
+    $id_no = $_POST['id_no'];
+    $equipment = $_POST['equipment'];
+    $ball_id = $_POST['ball_id'];
+    $time_borrow = $_POST['time_borrow'];
+    $date_borrow = $_POST['date_borrow'];
+    $time_return = $_POST['time_return'];
+    $date_return = $_POST['date_return'];
+    $remarks = $_POST['remarks'];
+    $status = "pending";
+    $admin_name = $_POST['admin_name'];
+    $conn->query("INSERT INTO report_equip (id_no, equipment, ball_id, time_borrow, date_borrow, time_return, date_return, remarks,admin_name, status)
+VALUES('$id_no','$equipment','$ball_id','$time_borrow','$date_borrow','$time_return','$date_return','$remarks','$admin_name','$status')") or die($conn->error);
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        Swal.fire({
+                        title: 'Are you sure?',
+                        text: "The Student will never be able to borrow equipments in the machine until the student report to you.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, I understand'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                            'Report Submit Successfully!',
+                            'The student is banned from borrowing in the machine',
+                            'success'
+                            )
+                            window.location.href = "_basketball.php";
+                        }
+                        })
+                        
+                    })
+                </script>
 
 
+<?php
 
+}
 ?>
