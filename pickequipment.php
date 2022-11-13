@@ -8,6 +8,32 @@
     $id = $_GET['id'];
     $conn->query("DELETE FROM otp_requests WHERE id =".$id) or die($conn->error);
   }
+
+  if (isset($_GET['check_report'])) {
+    $id_no = $_SESSION['get_data']['id_no'];
+    $check_report = "SELECT * FROM report_equip where id_no = '$id_no' AND status = 'pending'";
+    $result_report = mysqli_query($conn, $check_report);
+    $cnt_report = mysqli_num_rows($result_report);
+    if ($cnt_report>0) {
+      ?>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    position: 'middle',
+                    icon: 'error',
+                    title: "Account banned Temporarily",
+                    showConfirmButton: false,
+                    timer: 1500
+                    }).then((result)=>{
+                        window.location.href = "home.php";
+                    })
+                    })
+        </script>
+      <?php
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

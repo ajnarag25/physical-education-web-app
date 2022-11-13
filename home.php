@@ -213,7 +213,7 @@ if (isset($_GET['id'])) {
                       <br>
                       <p>Borrow Equipments at ease,just simply click the desired equipment and type the generated OTP into the machine.</p>
                       <br>
-                      <a href="pickequipment.php" class="service-btn">Borrow Equipments</a>
+                      <a href="pickequipment.php?check_report" class="service-btn">Borrow Equipments</a>
                     </div>
                 <?php
                       }
@@ -245,7 +245,7 @@ if (isset($_GET['id'])) {
                           <br><br>
                           <h3>Borrow Equipments</h3>
                           <br>
-                          <p>Your account has been reported by the admin, Please go to the PE Department to resolve their concern</p>
+                          <p>Your account has been reported by the admin, Click the Transaction Menu for more info.</p>
                           <br>
                           <h5 class = 'text-center'>Banned Temporarily</h5>
                         </div>
