@@ -62,7 +62,6 @@
             <h2>Transactions</h2>
         </div>
         <br>
-
         <div class="container">
             <div class="row" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                 <div class="col-lg-4">
