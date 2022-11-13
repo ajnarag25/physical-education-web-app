@@ -384,6 +384,43 @@
                         </form>
                     </div>
 
+                    <div class="card">
+                        <form>
+                            <div class="header">
+                                <h2><strong>Verification Code</strong> Settings</h2>
+                            </div>
+                            <div class="body">
+                                <div class="col-lg-12">                
+                                    <button type="button" id="edit_vcode" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-edit"></i></button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <label for="user">Current Verification Code</label>
+                                            <input id="vcode1" name="user" type="text" class="form-control" value="500" disabled required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <label for="change">New Verification Code</label>
+                                            <input id="vcode2" name="change" type="text" class="form-control" value="550" disabled required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <label for="change">Confirm Verification Code</label>
+                                            <input id="vcode2" name="change" type="text" class="form-control" value="550" disabled required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 js-sweetalert">
+                                        <button id="save_vcode" type="submit" class="btn btn-primary" data-type="success2" disabled>Save Changes</button>
+                                        <button id="cancel_vcode" class="btn btn-secondary" disabled>Cancel</button>
+                                    </div>                                
+                                </div>                              
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -489,6 +526,22 @@
         document.getElementById('pe2').disabled = true;
         document.getElementById('savepe').disabled = true;
         document.getElementById('cancelhead').disabled = true;   
+	}; 
+
+
+    // Change P.E. VCode DOM //
+    document.getElementById('edit_vcode').onclick = function(){
+        document.getElementById('vcode1').disabled = false;
+        document.getElementById('vcode2').disabled = false;
+        document.getElementById('save_vcode').disabled = false;
+        document.getElementById('cancel_vcode').disabled = false;
+	};  
+
+    document.getElementById('cancel_vcode').onclick = function(){
+		document.getElementById('vcode1').disabled = true;
+        document.getElementById('vcode2').disabled = true;
+        document.getElementById('save_vcode').disabled = true;
+        document.getElementById('cancel_vcode').disabled = true;   
 	}; 
 
 </script>
