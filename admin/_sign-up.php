@@ -41,12 +41,17 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="middlename" placeholder="Middlename" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
                             <input type="text" class="form-control" name="lastname" placeholder="Lastname" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                             </div>
                         </div>
-                        <hr>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="username" placeholder="Username" required>
                             <div class="input-group-append">
@@ -71,6 +76,12 @@
                                 <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                             </div>                            
                         </div> 
+                        <!-- <div class="input-group mb-3">
+                            <input type="password" class="form-control" name="vcode" placeholder="Verification Code" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
+                            </div>                            
+                        </div>  -->
                         <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" name="signup">SIGN UP</button>
                         <div class="signin_with mt-3">
                             <a class="link" href="index.php">You already have a account?</a>

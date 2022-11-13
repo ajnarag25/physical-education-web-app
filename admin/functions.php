@@ -58,12 +58,12 @@
         $first = $_POST['firstname'];
         $last = $_POST['lastname'];
         $user = $_POST['username'];
+        $middlename = $_POST['middlename'];
         $mail = $_POST['email'];
         $pass1 = $_POST['password1'];
         $pass2 = $_POST['password2'];
-        
-
-        $sql = "SELECT * FROM admin WHERE username='$user' OR firstname='$first' AND lastname='$last' ";
+    
+        $sql = "SELECT * FROM admin WHERE (username='$user') OR (email = '$mail') OR (firstname='$first' AND lastname='$last' and middlename = '$middlename');";
         $result = mysqli_query($conn, $sql);
 
         if ($pass1 != $pass2){
@@ -92,8 +92,8 @@
             <?php
         }else{
             if(!$result->num_rows > 0){
-                $conn->query("INSERT INTO admin (firstname, lastname, username, password, email, image)
-                VALUES('$first','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','default_profile/default_pic.jpg')") or die($conn->error);
+                $conn->query("INSERT INTO admin (firstname, lastname, username,middlename, password, email, image)
+                VALUES('$first','$last', '$user','$middlename','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','default_profile/default_pic.jpg')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

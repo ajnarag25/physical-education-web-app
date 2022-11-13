@@ -72,7 +72,7 @@ if (isset($_GET['id'])) {
           <div class="carousel-item active">
             <div class="overlay-image" style="background-image:url(assets/images/bg.jpg);"></div>
             <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-              <h1>Welcome Student in our P.E Department Website</h1>
+              <h1>Welcome to P.E Department Website <?php echo $_SESSION['get_data']['firstname']?></h1>
               <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
                 — the choice is yours.</p>
               <button class="btn btn-custom">Learn More</button>
@@ -177,9 +177,18 @@ if (isset($_GET['id'])) {
                     $id_no = $_SESSION['get_data']['id_no'];
                     $query = "SELECT * FROM borrowing_machine_info where status = 'UNRETURNED'  and id_no = '$id_no';";
                     $result = mysqli_query($conn, $query);
+
                     $query1 = "SELECT * FROM ball_sequence where id = '3'";
                     $result1 = mysqli_query($conn, $query1);
                     $get_near_ball = mysqli_fetch_array($result1);
+
+                    $check_report = "SELECT * FROM report_equip where id_no = '$id_no'";
+                    $result1 = mysqli_query($conn, $check_report);
+                    $get_near_ball = mysqli_fetch_array($result1);
+
+
+                      
+
                     if ($result->num_rows == 0) {
                     ?>
                       <?php
