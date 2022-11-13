@@ -982,7 +982,7 @@ if (isset($_GET['cancel_otp_id'])) {
 if (isset($_POST['generate_new_otp'])) {
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];
-    $permitted_char = '0123456789ABCD';
+    $permitted_char = '0123456789ABCD#*';
     $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
     $typed = $_POST['typed'];
     $actionn = $_POST['actionn'];

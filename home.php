@@ -182,13 +182,11 @@ if (isset($_GET['id'])) {
                     $result1 = mysqli_query($conn, $query1);
                     $get_near_ball = mysqli_fetch_array($result1);
 
-                    $check_report = "SELECT * FROM report_equip where id_no = '$id_no'";
-                    $result1 = mysqli_query($conn, $check_report);
-                    $get_near_ball = mysqli_fetch_array($result1);
+                    $check_report = "SELECT * FROM report_equip where id_no = '$id_no' AND status = 'pending'";
+                    $result_report = mysqli_query($conn, $check_report);
+                    $cnt_report = mysqli_num_rows($result_report);
 
-
-                      
-
+                    if ($cnt_report == 0) {
                     if ($result->num_rows == 0) {
                     ?>
                       <?php
@@ -239,8 +237,22 @@ if (isset($_GET['id'])) {
                 </div> 
                 <?php  
                     }
+                  }else{
                   ?>
+                  <div class="col-sm-4 text-center">
+                          <br><br>
+                          <i class='bx bxs-basketball bx-custom'></i>
+                          <br><br>
+                          <h3>Borrow Equipments</h3>
+                          <br>
+                          <p>Your account has been reported by the admin, Please go to the PE Department to resolve their concern</p>
+                          <br>
+                          <h5 class = 'text-center'>Banned Temporarily</h5>
+                        </div>
 
+                  <?php
+                  }
+                  ?>
 
                 <div id="about"></div>
             </div>
