@@ -93,30 +93,12 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-8 col-md-4 col-sm-11">
-                    <h2>Welcome to P.E. Department Admin Site</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item active">Reservation Calendar</li>
-                        <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
-                        <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
-                        <li class="breadcrumb-item"><a href="#reschedule">Reschedule</a></li>
-                        <li class="breadcrumb-item"><a href="#history">History Table</a></li>
-                    </ul>
+                    <h2 style="text-align: right;">Welcome to P.E. Department Admin Site</h2>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
-            <div class="col-lg-12 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Facility Reservation Calendar</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
             <!-- Request Table -->
             <div class="row clearfix" id="request">
                 <div class="col-lg-12">
@@ -124,7 +106,6 @@
                         <div class="header">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#calendarr">Reservation Calendar</a></li>
                                 <li class="breadcrumb-item active">Request Table</li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item"><a href="#reschedule">Reschedule</a></li>
@@ -194,7 +175,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_accept" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_accept">Approve</button>
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_accept">Accept</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
