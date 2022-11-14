@@ -156,8 +156,7 @@ else {
           </div>
           <br>
         <div class="text-center">
-          <button type = "submit"  name = "generate_new_otp" form="gen_new_otp" class="btn btn-primary" style = "color:white;">Generate New OTP</button>
-            <a href = "home.php" class="btn btn-danger">back to home</a>
+            <a href = "home.php" class="btn btn-danger">Okay</a>
         </div>
    
     </div><!-----END OF PARENT DIV-------->
