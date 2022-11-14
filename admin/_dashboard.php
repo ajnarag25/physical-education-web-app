@@ -270,7 +270,7 @@
                     <div class="card">
                         <div class="header">
                             
-                            <h2><strong>Recent</strong>Uniform Orders</h2>
+                            <h2><strong>Pending</strong> Uniform Orders</h2>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-hover c_table">
@@ -289,7 +289,7 @@
                                 </thead>
                                 <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM inquire";
+                                    $query = "SELECT * FROM inquire WHERE status='PENDING'";
                                     $result = mysqli_query($conn, $query);
                                     $check_row = mysqli_num_rows($result);
                                     while ($row = mysqli_fetch_array($result)) {
@@ -354,6 +354,78 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2><strong>Pending</strong> Reservation of Facility</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover c_table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Req. Date/Time</th>
+                                        <th>Venue</th>
+                                        <th>Purpose</th>
+                                        <th>Participants</th>                             
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                    $query = "SELECT * FROM reserve WHERE status='PENDING'";
+                                    $result = mysqli_query($conn, $query);
+                                    $check_row = mysqli_num_rows($result);
+                                    while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['dept_course'] ?></td>
+                                            <td><?php echo $row['date'] ?> / <?php echo $row['time'] ?></td>
+                                            <td><?php echo $row['booking'] ?></td>
+                                            <td><?php echo $row['purpose'] ?></td>
+                                            <td><?php echo $row['participants'] ?></td>
+                                        <td>
+                                            <?php
+                                                if ($row['status'] == 'PENDING'){
+                                                    echo'
+                                                    <p class="badge badge-warning">PENDING</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'UNPAID'){
+                                                    echo'
+                                                    <p class="badge badge-warning">UNPAID</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'PAID'){
+                                                    echo'
+                                                    <p class="badge badge-success">PAID</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'PICKUP'){
+                                                    echo'
+                                                    <p class="badge badge-success">PICKUP</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'DECLINED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">DECLINED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'CANCELED'){
+                                                    echo'
+                                                    <p class="badge badge-danger">CANCELED</p>
+                                                    ';
+                                                }elseif ($row['status'] == 'RECEIVED'){
+                                                    echo'
+                                                    <p class="badge badge-primary">RECEIVED</p>
+                                                    ';
+                                                }  
+                                            ?>
+                                        </td>
+                                    </tr>
+
+                                <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>  
             
@@ -361,34 +433,7 @@
     </div>
 </section>
 
-<section class="content page-calendar">
-    <div class="body_scroll">
-        <div class="block-header">
-            <div class="row">
-                <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>Calendar</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="_reservation.php">Facility Reservation</a></li>
-                        <li class="breadcrumb-item active">Reservation Calendar</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="col-lg-12 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Facility Reservation Calendar</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script>
