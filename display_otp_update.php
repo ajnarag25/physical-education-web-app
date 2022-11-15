@@ -37,9 +37,10 @@ if ($check > 0) {
     while ($row = mysqli_fetch_array($result)) {
       if ($row['typed'] == '0') {
           $check_nearest_ball = $row['equipment_to_borrow'];
-          if($fet_exec_check_ball[$check_nearest_ball] != NULL or $fet_exec_check_ball[$check_nearest_ball] != ''){ 
+          $actionn = $row['actionn'];
+          if(($actionn == 'BORROWING') and ($fet_exec_check_ball[$check_nearest_ball] != NULL or $fet_exec_check_ball[$check_nearest_ball] != '')){ 
 ?>
-<div>
+        <div>
         <div class="text-center">
             <h4 id = "thistypeotp">Type The OTP into the Machine</h4>
             
@@ -70,7 +71,7 @@ if ($check > 0) {
     </div><!-----END OF PARENT DIV--------->
 <?php
           }
-          else {
+          elseif(($actionn =='BORROWING') and ($fet_exec_check_ball[$check_nearest_ball] == NULL or $fet_exec_check_ball[$check_nearest_ball] == '')) {
             ?>
                       <div>
           <div class="text-center">
@@ -83,6 +84,38 @@ if ($check > 0) {
         </div>
 
         <?php
+          }else{
+            ?>
+          <div>
+              <div class="text-center">
+                  <h4 id = "thistypeotp">Type The OTP into the Machine</h4>
+                  
+                  <b>Important Note:</b>
+                  <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
+                          
+                  <li align = "justify center" class = "alignments">The OTP <b>expires</b> after 5 minutes</li>
+                                  <br>     
+              </div>
+              <div class="row">
+                  <div class="text-center">
+                    <?php 
+                        $query = "SELECT id,otp_generate FROM otp_requests where id_no = '$id_no';";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_array($result)) {
+                          ?>
+                    <h2 id = "display_otp"><?php echo $row['otp_generate'] ?></h2>
+                </div>
+                </div>
+                <br>
+              <div class="text-center">
+              <a href = "functions.php?cancel_otp_id=<?php echo $row['id'] ?>" class="btn btn-danger">Cancel</a>
+              </div>
+
+              <?php
+                  }
+              ?>
+          </div><!-----END OF PARENT DIV--------->
+            <?php
           }
       }
       else {
@@ -110,17 +143,20 @@ if ($check > 0) {
         }//end of if condition for borrowing
 
         elseif ($row['actionn'] == 'RETURNING') {
-          if($fet_exec_check_unreturned == 0){
+          if($fet_exec_check_unreturned > 0){
           ?>
           <h4 class= "text-center">The return door for <?php echo $row['equipment_to_borrow']?> has been Unlocked!</h4>
           <h5 class = "text-center">Please return the ball before the time expires</h5>
+          <h5 class = "text-center"><b>Note:</b> The Returning Process will reset if the sports equipment return UNSUCCESSFULLY</h5>
           <?php
           }
           else {
             ?>
                     <div>
           <div class="text-center">
-            <h4 id = "thistypeotp">Equipment Returned Successfully! <br> You can view and download your borrower's slip in the transaction menu</h4>
+            <h4 id = "thistypeotp">Equipment Returned Successfully! <br>
+            You can view and download your borrower's slip in the transaction menu 
+            </h4>
                             <br>     
         </div>
         <div class="row">
@@ -141,7 +177,7 @@ else {
 ?>
 <div>
         <div class="text-center">
-            <h3 id = "thistypeotp">OTP has been Expired</h3>
+            <h3 id = "thistypeotp">OTP/Request has been Expired</h3>
         </div>
         <div class="row">
             <div class="text-center">
