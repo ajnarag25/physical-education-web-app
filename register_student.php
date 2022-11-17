@@ -133,7 +133,6 @@
                     </div>
                 </div> 
                 <br>
-
                 <div class="row">
                     <div class="col-md-4">
                         <label for="inputQR" class="form-label">Upload QR code from your School ID</label>
@@ -145,7 +144,7 @@
                         <input type="text" id="watcher" name="watcher" class="form-control" hidden>
                     </div>
                         
-
+                    <br>
 
                     <div class="col-md-4">
                         <label for="inputPass1" class="form-label">Password</label>

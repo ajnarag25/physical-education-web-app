@@ -122,18 +122,16 @@
                         <div class="body">
                             <h6>Total Administrator <br><small>(P.E. Dept. Active Account)</small></h6>
                             <br>
-                            <h2>5<small class="info">Active Account/s</small></h2>
-                            <button class="btn btn-danger w-100">View</button>
+                            <h2>5 <small class="info">Active Account/s</small></h2>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon zmdi-account">
                         <div class="body">
-                            <h6>Total Registered Teachers <br><small>(Verified Accounts)</small></h6>
+                            <h6>Total Registered Personnel <br><small>(Verified Accounts)</small></h6>
                             <br>
-                            <h2>5<small class="info">Active Account/s</small></h2>
-                            <button class="btn btn-danger w-100">View</button>
+                            <h2>5 <small class="info">Active Account/s</small></h2>
                         </div>
                     </div>
                 </div>
@@ -142,17 +140,46 @@
                         <div class="body">
                             <h6>Total Registered Students <br><small>(Verified Accounts)</small></h6>
                             <br>
-                            <h2>5<small class="info">Active Account/s</small></h2>
-                            <button class="btn btn-danger w-100">View</button>
+                            <h2>5 <small class="info">Active Account/s</small></h2>
                           
                             </div>
                         </div>
                     </div>
                 </div>
-              
+                <div class="row clearfix">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="header">
+                                
+                                <h2><strong>Verified</strong> Users</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover c_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Item</th>
+                                            <th>Request Date</th>
+                                            <th>P.E Teacher</th>   
+                                            <th>Size of T-shirt</th>   
+                                            <th>Size of Shorts</th>   
+                                            <th>Size of Joggingpants</th>                                    
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>  
             </div>
-            
         </div>
+
     </div>
 </section>
 

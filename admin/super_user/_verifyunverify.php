@@ -1,4 +1,3 @@
-<
 <!doctype html>
 <html class="no-js " lang="en">
 
@@ -116,30 +115,7 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="card mcard_3">
-                <div class="body">
 
-                    <img src="default_profile/default_pic.jpg" class="rounded-circle shadow" width="150" height="150" alt="profile-image">
-  
-                    <h4 class="m-t-10">Add New Teacher Account</h4>   
-                    <button id="changepic" class="btn btn-primary">Add <i class="zmdi zmdi-plus"></i></button>    
-                    <form action="functions.php" method="POST" enctype="multipart/form-data">                    
-                    <div id="uploadpic" class="row" hidden>
-                        <div class="col-12">
-                            <label for="changepp"></label>
-                            <div class="body">
-                                <input id="getpic" type="file" name="admin_profile" accept="image/png, image/jpeg" class="dropify" required>
-                            </div>
-                        </div>                     
-                    </div>
-                    <div id="savepic" class="col-12" hidden>
-                        <input type="hidden" value="" name="admin_id_img">
-                        <button type="submit" id="getpic2" class="btn btn-primary" name="upload_admin_image">Save Changes</button>
-                    </form> 
-                        <button id="cancelpic" class="btn btn-secondary" >Cancel</button>
-                    </div>    
-                </div>
-            </div>
         
             <div class="row clearfix">
                 <div class="col-sm-12 col-md-12 col-lg-12">
