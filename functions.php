@@ -925,8 +925,8 @@ if (isset($_POST['passed_borrower_slip'])) {
         $check = mysqli_num_rows($result);
 
         if ($check == 0) {
-        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
-        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn')") or die($conn->error);
+        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn,is_expired) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn','0')") or die($conn->error);
         
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1013,8 +1013,8 @@ if (isset($_POST['passed_borrower_slip_return'])) {
         $check = mysqli_num_rows($result);
 
         if ($check == 0) {
-        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
-        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn')") or die($conn->error);
+        $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn,is_expired) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_generate','$typed', '$actionn','0')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -1118,12 +1118,12 @@ if (isset($_GET['cancel_otp_id'])) {
 if (isset($_POST['generate_new_otp'])) {
     $equipment_to_borrow = $_POST['equipment_to_borrow'];
     $id_no = $_POST['id_no'];
-    $permitted_char = '0123456789ABCD#*';
-    $otp_equipment =substr(str_shuffle($permitted_char), 0, 5);
+    $permitted_char = '0123456789';
+    $otp_equipment =substr(str_shuffle($permitted_char), 0, 6);
     $typed = $_POST['typed'];
     $actionn = $_POST['actionn'];
-    $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn) 
-        VALUES('$id_no','$equipment_to_borrow','$otp_equipment','$typed', '$actionn')") or die($conn->error);
+    $conn->query("INSERT INTO otp_requests (id_no, equipment_to_borrow,otp_generate,typed,actionn,is_expired) 
+        VALUES('$id_no','$equipment_to_borrow','$otp_equipment','$typed', '$actionn','0')") or die($conn->error);
 ?>
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
