@@ -1,3 +1,8 @@
+<?php
+    include('connection.php');
+    session_start();
+
+?>
 
 <!doctype html>
 <html class="no-js " lang="en">
@@ -14,8 +19,17 @@
 <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
 <link rel="stylesheet" href="assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<!-- Bootstrap Tagsinput Css -->
+<link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+<!-- Bootstrap Select Css -->
+<link href="assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<!-- JQuery DataTable Css -->
+<link rel="stylesheet" href="assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
 <!-- Custom Css -->
 <link rel="stylesheet" href="assets/css/style.min.css">
+<link rel="stylesheet" href="assets/plugins/sweetalert/sweetalert.css"/>
 </head>
 
 <body class="theme-blush">
@@ -151,28 +165,41 @@
                         <div class="card">
                             <div class="header">
                                 
-                                <h2><strong>Verified</strong> Users</h2>
+                                <h2><strong>Verified</strong> Student/Personnel Users</h2>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover c_table">
-                                    <thead>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Item</th>
-                                            <th>Request Date</th>
-                                            <th>P.E Teacher</th>   
-                                            <th>Size of T-shirt</th>   
-                                            <th>Size of Shorts</th>   
-                                            <th>Size of Joggingpants</th>                                    
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="table-responsive" style="text-align: center;">
+                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Contact</th>
+                                        <th>Gender</th>
+                                        <th>Course</th>  
+                                        <th>Department</th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM registration WHERE status='VERIFIED'";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><img src="../../<?php echo $row['image'] ?>" width="50px" alt=""></td>
+                                        <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                        <td><?php echo $row['contact'] ?></td>
+                                        <td><?php echo $row['gender'] ?></td>
+                                        <td><?php echo $row['course'] ?></td>
+                                        <td><?php echo $row['department'] ?></td>
+                                    </tr>
+                                   
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
                         </div>
 
                     </div>
@@ -190,7 +217,21 @@
 <script src="assets/bundles/vendorscripts.bundle.js"></script>
 <script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts --> 
 <script src="assets/bundles/mainscripts.bundle.js"></script>
-<script src=""></script>
+<!-- Jquery DataTable Plugin Js --> 
+<script src="assets/bundles/datatablescripts.bundle.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+<script src="assets/plugins/momentjs/moment.js"></script> <!-- Moment Plugin Js --> 
+<script src="assets/plugins/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js --> 
+<script src="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script> <!-- Bootstrap Tags Input Plugin Js --> 
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script> 
+<script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="assets/js/pages/tables/jquery-datatable.js"></script>
 
 <script src="assets/js/pages/calendar/calendar.js"></script>
 </body>

@@ -182,15 +182,17 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="inputImage" class="form-label">Gender</label>
-                                                        <select name="gender" class="form-select" id="" required>
+                                                        <br>
+                                                        <select name="gender" class="form-select w-100" id="" required>
                                                             <option value="" selected disabled>Select Gender</option>
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="inputCourse" class="form-label">Department</label>
-                                                        <select name="department" class="form-select" id="" required>
+                                                        <label for="inputDepartment" class="form-label">Department</label>
+                                                        <br>
+                                                        <select name="department" class="form-select w-100" id="" required>
                                                             <option value="" selected disabled>Select Department</option>
                                                             <option value="OAA">Office of Academic Affair (OAA)</option>
                                                             <option value="DIT">Department of Information Technology (DIT)</option>
@@ -281,7 +283,131 @@
                                         <td><?php echo $row['contact'] ?></td>
                                         <td><?php echo $row['gender'] ?></td>
                                         <td><?php echo $row['course'] ?></td>
-                                        <td></td>
+                                        <td>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
+                                             <!-- Modal for Edit -->
+                                             <div class="modal fade" id="edit<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Edit Credentials</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Edit Credentials of Student: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputFirst" class="form-label">First name</label>
+                                                                                    <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" value="<?php echo $row['firstname'] ?>" name="firstname" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputMiddle" class="form-label">Middle name</label>
+                                                                                    <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" value="<?php echo $row['middlename'] ?>" name="middlename" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputLast" class="form-label">Last name</label>
+                                                                                    <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" value="<?php echo $row['lastname'] ?>" name="lastname" required>
+                                                                                </div>
+                                                                            </div> 
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputEmail" class="form-label">Email</label>
+                                                                                    <input type="text" class="form-control" id="inputEmail" value="<?php echo $row['email'] ?>" name="email" required>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputContact" class="form-label">Contact No.</label>
+                                                                                    <input type="text" class="form-control" id="inputContact" value="<?php echo $row['contact'] ?>" name="contact" required>
+                                                                                </div>
+                                                                            </div> 
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputImage" class="form-label">Gender</label>
+                                                                                    <br>
+                                                                                    <select name="gender" class="form-select w-100" id="" required>
+                                                                                        <option value="<?php echo $row['gender'] ?>" selected readonly><?php echo $row['gender'] ?></option>
+                                                                                        <option value="Male">Male</option>
+                                                                                        <option value="Female">Female</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputCourse" class="form-label">Course</label>
+                                                                                    <br>
+                                                                                    <select name="course" class="form-select w-100" id="" required>
+                                                                                        <option value="<?php echo $row['course'] ?>" selected><?php echo $row['course'] ?></option>
+                                                                                        <option value="BSCE">BSCE - Bachelor of Science in Civil Engineering</option>
+                                                                                        <option value="BSEE">BSEE - Bachelor of Science in Electrical Engineering</option>
+                                                                                        <option value="BSME">BSME - Bachelor of Science in Mechanical Engineering</option>
+                                                                                        <option value="BGT-AT">BGT-AT - Architecture Technology </option>
+                                                                                        <option value="BET-ET">BET-ET - Electrical Technology</option>
+                                                                                        <option value="BET-ESET">BET-ESET - Industrial Automation Technology</option>
+                                                                                        <option value="BET-COET">BET-COET - Computer Engineering Technology</option>
+                                                                                        <option value="BET-CT-1">BET-CT - Contruction Technology</option>
+                                                                                        <option value="BET-CT-2">BET-CT - Civil Technology</option>
+                                                                                        <option value="BET-MT">BET-MT - Mechanical Technology</option>
+                                                                                        <option value="BET-AT">BET-AT - Automotive Technology</option>
+                                                                                        <option value="BET-PPT">BET-PPT - Power Plant Technology</option>
+                                                                                        <option value="BSIE-HE">BSIE-HE - Home Economics</option>
+                                                                                        <option value="BSIE-IA">BSIE-IA - Industrial Arts</option>
+                                                                                        <option value="BSIE-ICT">BSIE-ICT - Information and Communication Technology</option>
+                                                                                        <option value="BTTE-CP">BTTE-CP - Computer Programming</option>
+                                                                                        <option value="BTTE-E">BTTE-E - Electrical</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br><br>
+                                                                            <div class="text-center">
+                                                                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <input type="hidden" name="id_student" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-danger" name="update_student">Update</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Delete Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Deleting Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible! <br> If you delete this account, all the transactions contained in this account will be deleted.</p>
+                                        
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_account">Delete Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </td>
                                     </tr>
                                    
                                     <?php } ?>
@@ -320,7 +446,125 @@
                                         <td><?php echo $row['contact'] ?></td>
                                         <td><?php echo $row['gender'] ?></td>
                                         <td><?php echo $row['department'] ?></td>
-                                        <td></td>
+                                        <td>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
+                                             <!-- Modal for Edit -->
+                                             <div class="modal fade" id="edit<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Edit Credentials</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Edit Credentials of Personnel: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputFirst" class="form-label">First name</label>
+                                                                                    <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" value="<?php echo $row['firstname'] ?>" name="firstname" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputMiddle" class="form-label">Middle name</label>
+                                                                                    <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" value="<?php echo $row['middlename'] ?>" name="middlename" required>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputLast" class="form-label">Last name</label>
+                                                                                    <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" value="<?php echo $row['lastname'] ?>" name="lastname" required>
+                                                                                </div>
+                                                                            </div> 
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputEmail" class="form-label">Email</label>
+                                                                                    <input type="text" class="form-control" id="inputEmail" value="<?php echo $row['email'] ?>" name="email" required>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputContact" class="form-label">Contact No.</label>
+                                                                                    <input type="text" class="form-control" id="inputContact" value="<?php echo $row['contact'] ?>" name="contact" required>
+                                                                                </div>
+                                                                            </div> 
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputImage" class="form-label">Gender</label>
+                                                                                    <br>
+                                                                                    <select name="gender" class="form-select w-100" id="" required>
+                                                                                        <option value="<?php echo $row['gender'] ?>" selected readonly><?php echo $row['gender'] ?></option>
+                                                                                        <option value="Male">Male</option>
+                                                                                        <option value="Female">Female</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputDepartment" class="form-label">Department</label>
+                                                                                    <br>
+                                                                                    <select name="department" class="form-select w-100" id="" required>
+                                                                                        <option value="<?php echo $row['department'] ?>" selected><?php echo $row['department'] ?></option>
+                                                                                        <option value="OAA">Office of Academic Affair (OAA)</option>
+                                                                                        <option value="DIT">Department of Information Technology (DIT)</option>
+                                                                                        <option value="DLA">Department of Liberal Arts (DLA)</option>
+                                                                                        <option value="OCL">Office of Campus Library (OCL)</option>
+                                                                                        <option value="DMS">Department of Mathematics and Science (DMS)</option>
+                                                                                        <option value="DOE">Department of Engineering (DOE)</option>
+                                                                                        <option value="DED">Department of Education (DED)</option>
+                                                                                        <option value="OSA">Office of Student Affairs (OSA)</option>
+                                                                                        <option value="UITC">University Information Technology Center (UITC)</option>
+                                                                                        <option value="DPE">Department of Physical Education (DPE)</option>
+                                                                                        <option value="SD">Security Department (SD)</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br><br>
+                                                                            <div class="text-center">
+                                                                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <input type="hidden" name="id_personnel" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-danger" name="update_personnel">Update</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Delete Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Deleting Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible! <br> If you delete this account, all the transactions contained in this account will be deleted.</p>
+                                        
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_account">Delete Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </td>
                                     </tr>
                                    
                                     <?php } ?>
