@@ -146,5 +146,117 @@
   
    }
 
+   if (isset($_POST['update_disenable'])) {
+        $id = $_POST['id_disenable'];
+        $status = $_POST['stat'];
+
+        $checking = "SELECT * FROM admin WHERE status='$status' AND id='$id'";
+        $prompt = $conn->query($checking);
+        $row = mysqli_num_rows($prompt);
+
+        if ($row == 0){
+            $conn->query("UPDATE admin SET status='$status' WHERE id='$id'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated Status Account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+    
+            </script>
+            <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'No changes has been made!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+   }
+
+   if (isset($_POST['del_admin'])) {
+        $id = $_POST['id_delete_admin'];
+
+        if ($id == null){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+    
+            </script>
+            <?php
+        }else{
+            $conn->query("DELETE FROM admin WHERE id='$id'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Deleted the Account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+    
+            </script>
+            <?php
+        }
+    
+   }
+
 
 ?>

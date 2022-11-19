@@ -120,7 +120,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Welcome to P.E. Department Superuser Site</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -586,6 +586,7 @@
                                         <th>Name</th>
                                         <th>Username</th>
                                         <th>Email</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -601,7 +602,99 @@
                                         <td><?php echo $row['firstname'] ?>  <?php echo $row['lastname'] ?></td>
                                         <td><?php echo $row['username'] ?></td>
                                         <td><?php echo $row['email'] ?></td>
-                                        <td></td>
+                                        <td> 
+                                        <?php 
+                                            if($row['status'] == 'Enabled' ){
+                                                echo '
+                                                <span class="text-success">Enabled</span>
+                                                ';
+                                            }else{
+                                                echo '
+                                                <span class="text-danger">Disabled</span>
+                                                ';
+                                            }
+                                        
+                                        ?></td>
+                                        <td>
+                                       
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#disenable<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
+                                            <!-- Modal for Disable Enable -->
+                                            <div class="modal fade" id="disenable<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Disable/Enable Account</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <br>
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="body">
+                                                                            <h3>Current Status Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?> is  
+                                                                            <?php 
+                                                                                if($row['status'] == 'Enabled' ){
+                                                                                    echo '
+                                                                                    <span class="text-success">Enabled</span>
+                                                                                    ';
+                                                                                }else{
+                                                                                    echo '
+                                                                                    <span class="text-danger">Disabled</span>
+                                                                                    ';
+                                                                                }
+                                                                                
+                                                                                ?>
+                                                                                </h3>
+                                                                            <label for="">Set Status:</label>
+                                                                            <select name="stat" id="" class="form-select w-100" required>
+                                                                                <option value="<?php echo $row['status'] ?>" selected>Current Status: <?php echo $row['status'] ?></option>
+                                                                                <option value="Enabled">Enable</option>
+                                                                                <option value="Disabled">Disabled</option>
+                                                                            </select>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="id_disenable" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="update_disenable">Update Status</button>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Delete Account</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <br>
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="body">
+                                                                            <h3>Deleting Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                            <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible! <br> If you delete this account, all the transactions contained in this account will be deleted.</p>
+                                    
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="id_delete_admin" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="del_admin">Delete Account</button>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                    
                                     <?php } ?>

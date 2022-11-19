@@ -57,7 +57,7 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="_dashboard.php"><img src="assets/images/tuplogo.png" width="25" alt="Aero"><span class="m-l-10">P.E. Department</span></a>
+        <a href="index.php"><img src="assets/images/tuplogo.png" width="25" alt="Aero"><span class="m-l-10">P.E. Department</span></a>
     </div>
     <div class="menu">
         <ul class="list">
@@ -120,7 +120,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Welcome to P.E. Department Superuser Site</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -136,7 +136,13 @@
                         <div class="body">
                             <h6>Total Administrator <br><small>(P.E. Dept. Active Account)</small></h6>
                             <br>
-                            <h2>5 <small class="info">Active Account/s</small></h2>
+                            <?php 
+                                $query = "SELECT * FROM admin WHERE status='Enabled'";
+                                $result = mysqli_query($conn, $query);
+                                $check_admin = mysqli_num_rows($result);
+                            ?>
+                            <h2><?php echo $check_admin; ?>  <small class="info">Active Account/s</small></h2>
+                    
                         </div>
                     </div>
                 </div>
@@ -145,7 +151,12 @@
                         <div class="body">
                             <h6>Total Registered Personnel <br><small>(Verified Accounts)</small></h6>
                             <br>
-                            <h2>5 <small class="info">Active Account/s</small></h2>
+                            <?php 
+                                $query = "SELECT * FROM registration WHERE users='Teacher'";
+                                $result = mysqli_query($conn, $query);
+                                $check_personnel = mysqli_num_rows($result);
+                            ?>
+                            <h2><?php echo $check_personnel; ?>  <small class="info">Active Account/s</small></h2>
                         </div>
                     </div>
                 </div>
@@ -154,7 +165,12 @@
                         <div class="body">
                             <h6>Total Registered Students <br><small>(Verified Accounts)</small></h6>
                             <br>
-                            <h2>5 <small class="info">Active Account/s</small></h2>
+                            <?php 
+                                $query = "SELECT * FROM registration WHERE users='Student'";
+                                $result = mysqli_query($conn, $query);
+                                $check_student = mysqli_num_rows($result);
+                            ?>
+                            <h2><?php echo $check_student ?> <small class="info">Active Account/s</small></h2>
                           
                             </div>
                         </div>
@@ -165,7 +181,7 @@
                         <div class="card">
                             <div class="header">
                                 
-                                <h2><strong>Verified</strong> Student/Personnel Users</h2>
+                                <h2><strong>Verified</strong> Student & Personnel User Accounts</h2>
                             </div>
                             <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover js-basic-example dataTable table-sm " id="table1">

@@ -23,8 +23,13 @@
 
 
         if (password_verify($password, $getData['password'])){
-            $_SESSION['get_data'] = $getData;
-            header('location:_dashboard.php');
+            if ($getData['status'] == 'Enabled'){
+                $_SESSION['get_data'] = $getData;
+                header('location:_dashboard.php');
+            }else{
+                header('location:disabled.php');
+ 
+            }
         }else{
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
