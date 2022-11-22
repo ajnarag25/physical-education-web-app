@@ -7,6 +7,10 @@
    error_reporting(0);
    date_default_timezone_set('Asia/Manila');
 
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        header('location:../index.php');
+    }  
 
    if (isset($_POST['update_student'])) {
 
@@ -204,6 +208,122 @@
         }
    }
 
+   if (isset($_POST['set_del_student'])) {
+
+    $id = $_POST['id_student_del'];
+    $id_number = $_POST['studentid_del'];
+    $email = $_POST['email_student_del'];
+
+    if ($id == null){
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "_createmanage.php";
+                    }else{
+                        window.location.href = "_createmanage.php";
+                    }
+                })
+                
+            })
+
+        </script>
+        <?php
+        }else{
+            $conn->query("DELETE FROM registration WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+            $conn->query("DELETE FROM inquire WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+            $conn->query("DELETE FROM reserve WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Deleted the Account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }
+
+    }
+    if (isset($_POST['set_del_personnel'])) {
+
+        $id = $_POST['id_personnel_del'];
+        $id_number = $_POST['personnelid_del'];
+        $email = $_POST['email_personnel_del'];
+
+        if ($id == null){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+            }else{
+                $conn->query("DELETE FROM registration WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+                $conn->query("DELETE FROM inquire WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+                $conn->query("DELETE FROM reserve WHERE id_no='$id_number' AND email='$email'") or die($conn->error);
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Deleted the Account',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "_createmanage.php";
+                            }else{
+                                window.location.href = "_createmanage.php";
+                            }
+                        })
+                        
+                    })
+
+                </script>
+                <?php
+            }
+
+        }
    if (isset($_POST['del_admin'])) {
         $id = $_POST['id_delete_admin'];
 
@@ -258,5 +378,6 @@
     
    }
 
+   
 
 ?>

@@ -69,7 +69,7 @@
                     <div class="card card_custom">
                             <?php 
                                 $email = $_SESSION['get_data']['email']; 
-                                $query = "SELECT * FROM reserve WHERE email='$email'";
+                                $query = "SELECT * FROM reserve WHERE email='$email' AND status='PENDING'";
                                 $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_array($result)) {
                             ?>

@@ -181,7 +181,7 @@
                                     '?>
                                 <?php
                                 }?>
-                                
+                                <input type="hidden" name="id_no" value="<?php echo $_SESSION['get_data']['id_no'];?>">
                                 <input type="hidden" name="email" value="<?php echo $_SESSION['get_data']['email'];?>">
                                 <input type="hidden" name="stats" value="PENDING">
                                 <input type="hidden" name="reason" value="N/A">

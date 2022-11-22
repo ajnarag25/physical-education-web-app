@@ -31,17 +31,23 @@
                 <form class="card auth_form" action="functions.php" method="POST">
                     <div class="header">
                         <img class="logo" src="assets/images/tuplogo.png" alt="">
-                        <h5>Forgot Password?</h5>
-                        <span>Enter your e-mail address below to reset your password.</span>
+                        <h4 class="text-center mb-4">Change Password</h4>
                     </div>
                     <div class="body">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+                            <input type="password" class="form-control" name="newpass1" placeholder="New Password" required>
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                                <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100" name="reset_password">Submit</button>                     
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" name="newpass2" placeholder="Retype New Password" required>
+                            <div class="input-group-append">                                
+                                <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
+                            </div>                            
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" name="change_pass">Submit</button>     
+                                        
                         <a href="index.php" class="btn btn-primary w-100" name="">Back</a>                     
                         <!-- <div class="signin_with mt-3">
                             <a href="javascript:void(0);" class="link">Need Help?</a>

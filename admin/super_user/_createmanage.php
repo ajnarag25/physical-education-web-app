@@ -394,9 +394,10 @@
                                                                                 <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible! <br> If you delete this account, all the transactions contained in this account will be deleted.</p>
                                         
                                                                                 <div class="modal-footer">
-                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
-                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_account">Delete Account</button>
+                                                                                    <input type="hidden" name="id_student_del" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="studentid_del" value="<?php echo $row['id_no'] ?>">
+                                                                                    <input type="hidden" name="email_student_del" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_student">Delete Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -551,9 +552,10 @@
                                                                                 <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible! <br> If you delete this account, all the transactions contained in this account will be deleted.</p>
                                         
                                                                                 <div class="modal-footer">
-                                                                                    <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
-                                                                                    <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_account">Delete Account</button>
+                                                                                    <input type="hidden" name="id_personnel_del" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="personnelid_del" value="<?php echo $row['id_no'] ?>">
+                                                                                    <input type="hidden" name="email_personnel_del" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_personnel">Delete Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>

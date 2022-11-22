@@ -31,17 +31,18 @@
                 <form class="card auth_form" action="functions.php" method="POST">
                     <div class="header">
                         <img class="logo" src="assets/images/tuplogo.png" alt="">
-                        <h5>Forgot Password?</h5>
-                        <span>Enter your e-mail address below to reset your password.</span>
+                        <h4 class="text-center mb-4">OTP Verify</h4>
+                        <p>Check your email for the otp verification</p>
                     </div>
                     <div class="body">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+                            <input type="number" class="form-control" name="otp" placeholder="Enter OTP Code" required>
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                                <span class="input-group-text"><i class="zmdi zmdi-collection-text"></i></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100" name="reset_password">Submit</button>                     
+                        <button type="submit" class="btn btn-primary w-100" name="otp_submit">Submit</button>     
+                                        
                         <a href="index.php" class="btn btn-primary w-100" name="">Back</a>                     
                         <!-- <div class="signin_with mt-3">
                             <a href="javascript:void(0);" class="link">Need Help?</a>

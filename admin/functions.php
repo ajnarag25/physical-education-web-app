@@ -13,23 +13,174 @@
         header('location:index.php');
     }   
     
+    #FORGOT PASSWORD
+    if (isset($_POST['reset_password'])) {
+        $emails = $_POST['email'];
+        $setOTP = rand(0000,9999);
+
+        $sql = "SELECT * FROM admin WHERE email='$emails'";
+        $result = mysqli_query($conn, $sql);
+        $check = mysqli_num_rows($result);
+        if ($check == 0){
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An error occured!',
+                    text: 'We could not find your account.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_forgot-password.php";
+                        }else{
+                            window.location.href = "_forgot-password.php";
+                        }
+                    })
+                    
+                })
+            </script>
+            <?php
+        }else{
+            
+            $conn->query("UPDATE admin SET otp=$setOTP WHERE email='$emails'") or die($conn->error);
+            include 'otp_email.php';
+            header("Location: verify_otp.php");
+        }
+
+    }
+
+    #OTP SUBMIT
+    if (isset($_POST['otp_submit'])) {
+        $otp = $_POST['otp'];
+        $_SESSION['otp'] = $otp;
+
+        $sql = "SELECT * FROM admin WHERE otp='$otp'";
+        $result = mysqli_query($conn, $sql);
+        $check = mysqli_num_rows($result);
+
+        if ($check == 0){
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'OTP entered is wrong!',
+                    text: 'Please check your email for the OTP verification',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "verify_otp.php";
+                        }else{
+                            window.location.href = "verify_otp.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            header("Location: change_pass_forgot.php");
+        }
+    }
+
+    // CHANGE PASSWORD
+    if (isset($_POST['change_pass'])) {
+        $password1 = $_POST['newpass1'];
+        $password2 = $_POST['newpass2'];
+        $get_otp = $_SESSION['otp'];
+        
+        if ($password1 != $password2){
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Password does not match!',
+                    text: 'Something went wrong',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "change_pass_forgot.php";
+                        }else{
+                            window.location.href = "change_pass_forgot.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            $conn->query("UPDATE admin SET password='".password_hash($password1, PASSWORD_DEFAULT)."' WHERE otp='$get_otp'") or die($conn->error);
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully changed your password',
+                    text: 'Please login your new created password account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "index.php";
+                        }else{
+                            window.location.href = "index.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+
+    }
+
     #LOGIN
     if (isset($_POST['signin'])) {
-        $email = $_POST['email'];
+        $username = $_POST['username'];
         $password = $_POST['password'];
-        $login="SELECT * FROM admin WHERE email='$email'";
+
+        $login="SELECT * FROM admin WHERE username='$username'";
         $prompt = mysqli_query($conn, $login);
         $getData = mysqli_fetch_array($prompt);
 
+        $sql = "SELECT * FROM superuser_acc WHERE username='$username' AND password = '$password'";
+        $result = mysqli_query($conn, $sql);
+        $check = mysqli_num_rows($result);
 
         if (password_verify($password, $getData['password'])){
-            if ($getData['status'] == 'Enabled'){
-                $_SESSION['get_data'] = $getData;
-                header('location:_dashboard.php');
+            if ($getData['acc_status'] == 'VERIFIED'){
+                if ($getData['status'] == 'Enabled'){
+                    $_SESSION['get_data'] = $getData;
+                    header('location:_dashboard.php');
+                }else{
+                    header('location:disabled.php');
+                }
             }else{
-                header('location:disabled.php');
- 
+                header('location:unverified.php');
             }
+        }elseif($check == 1){
+            $_SESSION['get_data'] = $getData;
+            header('location:super_user/index.php');
         }else{
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -63,12 +214,12 @@
         $first = $_POST['firstname'];
         $last = $_POST['lastname'];
         $user = $_POST['username'];
-        $middlename = $_POST['middlename'];
+        $middle = $_POST['middlename'];
         $mail = $_POST['email'];
         $pass1 = $_POST['password1'];
         $pass2 = $_POST['password2'];
     
-        $sql = "SELECT * FROM admin WHERE (username='$user') OR (email = '$mail') OR (firstname='$first' AND lastname='$last' and middlename = '$middlename');";
+        $sql = "SELECT * FROM admin WHERE (username='$user') OR (email = '$mail') OR (firstname='$first' AND lastname='$last' and middlename = '$middle');";
         $result = mysqli_query($conn, $sql);
 
         if ($pass1 != $pass2){
@@ -97,8 +248,8 @@
             <?php
         }else{
             if(!$result->num_rows > 0){
-                $conn->query("INSERT INTO admin (firstname, lastname, username,middlename, password, email, image)
-                VALUES('$first','$last', '$user','$middlename','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','default_profile/default_pic.jpg')") or die($conn->error);
+                $conn->query("INSERT INTO admin (firstname, middlename, lastname, username, password, email, image, status, acc_status)
+                VALUES('$first', '$middle','$last', '$user','".password_hash($pass1, PASSWORD_DEFAULT)."','$mail','default_profile/default_pic.jpg', 'Enabled', 'UNVERIFIED')") or die($conn->error);
                 ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

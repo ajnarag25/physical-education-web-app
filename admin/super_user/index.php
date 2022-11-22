@@ -152,7 +152,7 @@
                             <h6>Total Registered Personnel <br><small>(Verified Accounts)</small></h6>
                             <br>
                             <?php 
-                                $query = "SELECT * FROM registration WHERE users='Teacher'";
+                                $query = "SELECT * FROM registration WHERE users='Teacher' AND status='VERIFIED'";
                                 $result = mysqli_query($conn, $query);
                                 $check_personnel = mysqli_num_rows($result);
                             ?>
@@ -166,7 +166,7 @@
                             <h6>Total Registered Students <br><small>(Verified Accounts)</small></h6>
                             <br>
                             <?php 
-                                $query = "SELECT * FROM registration WHERE users='Student'";
+                                $query = "SELECT * FROM registration WHERE users='Student' AND status='VERIFIED'";
                                 $result = mysqli_query($conn, $query);
                                 $check_student = mysqli_num_rows($result);
                             ?>

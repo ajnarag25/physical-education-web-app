@@ -72,6 +72,7 @@
         $set_data6 = $_SESSION['get_data']['gender'];
         $set_data7 = $_SESSION['get_data']['email'];
         $set_data8 = $_SESSION['get_data']['image'];
+        $set_data9 = $_SESSION['get_data']['id_no'];
 
         $date_today = date("d/m/Y");
 
@@ -165,6 +166,7 @@
                         <input type="hidden" name="status" value="PENDING">
                         <input type="hidden" name="department" value="N/A">
                         <input type="hidden" name="sizes" value="N/A">
+                        <input type="hidden" name="id_no" value="'.$set_data9.'">
                         <a class="btn btn-secondary" href="pickuniform.php">Back</a>
                         <button type="submit" class="btn btn-danger" name="request_student_2">Request</button>
                     </div>
