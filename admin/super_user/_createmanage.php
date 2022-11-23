@@ -1,7 +1,6 @@
 <?php
     include('connection.php');
     session_start();
-
 ?>
 
 <!doctype html>
@@ -68,7 +67,7 @@
             </li>
             <li><a href="index.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
             <li class="active open"><a href="_createmanage.php"><i class="zmdi zmdi-accounts"></i><span>Create & Manage Accounts</span></a></li>
-            <li><a href="_verifyunverify.php"><i class="zmdi zmdi-chart-donut"></i><span>Verify & Unverified Accounts</span></a></li> 
+            <li><a href="_verifyunverify.php"><i class="zmdi zmdi-chart-donut"></i><span>Verified & Unverified Accounts</span></a></li> 
             <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
         </ul>

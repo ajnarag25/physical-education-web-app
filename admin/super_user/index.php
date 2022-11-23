@@ -1,7 +1,6 @@
 <?php
     include('connection.php');
     session_start();
-
 ?>
 
 <!doctype html>
@@ -68,7 +67,7 @@
             </li>
             <li class="active open"><a href="index.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
             <li><a href="_createmanage.php"><i class="zmdi zmdi-accounts"></i><span>Create & Manage Accounts</span></a></li>
-            <li><a href="_verifyunverify.php"><i class="zmdi zmdi-chart-donut"></i><span>Verify & Unverified Accounts</span></a></li> 
+            <li><a href="_verifyunverify.php"><i class="zmdi zmdi-chart-donut"></i><span>Verified & Unverified Accounts</span></a></li> 
             <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
         </ul>
@@ -178,44 +177,45 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <div class="header">
-                                
-                                <h2><strong>Verified</strong> Student & Personnel User Accounts</h2>
-                            </div>
-                            <div class="table-responsive" style="text-align: center;">
-                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Contact</th>
-                                        <th>Gender</th>
-                                        <th>Course</th>  
-                                        <th>Department</th> 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                        $query = "SELECT * FROM registration WHERE status='VERIFIED'";
-                                        $result = mysqli_query($conn, $query);
-                                        $check_row = mysqli_num_rows($result);
-                                        while ($row = mysqli_fetch_array($result)) {
-                                    ?>
-                                    <tr>
-                                        <td><img src="../../<?php echo $row['image'] ?>" width="50px" alt=""></td>
-                                        <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
-                                        <td><?php echo $row['contact'] ?></td>
-                                        <td><?php echo $row['gender'] ?></td>
-                                        <td><?php echo $row['course'] ?></td>
-                                        <td><?php echo $row['department'] ?></td>
-                                    </tr>
-                                   
-                                    <?php } ?>
+                            <div class="card">
+                                <div class="header">
+                                    
+                                    <h2><strong>Verified</strong> Student & Personnel User Accounts</h2>
+                                </div>
+                                <div class="table-responsive" style="text-align: center;">
+                                <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                            <th>Gender</th>
+                                            <th>Course</th>  
+                                            <th>Department</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $query = "SELECT * FROM registration WHERE status='VERIFIED'";
+                                            $result = mysqli_query($conn, $query);
+                                            $check_row = mysqli_num_rows($result);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                        ?>
+                                        <tr>
+                                            <td><img src="../../<?php echo $row['image'] ?>" width="50px" alt=""></td>
+                                            <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                            <td><?php echo $row['contact'] ?></td>
+                                            <td><?php echo $row['gender'] ?></td>
+                                            <td><?php echo $row['course'] ?></td>
+                                            <td><?php echo $row['department'] ?></td>
+                                        </tr>
+                                    
+                                        <?php } ?>
 
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                
                         </div>
 
                     </div>
