@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 04:19 AM
+-- Generation Time: Nov 29, 2022 at 07:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -96,6 +96,19 @@ CREATE TABLE `borrowing_machine_info` (
 
 INSERT INTO `borrowing_machine_info` (`id`, `id_no`, `equipment`, `ball_id`, `time_borrow`, `date_borrow`, `time_return`, `date_return`, `status`, `qr`, `sort_date_time`) VALUES
 (16, 'TUPC-18-0182', 'volleyball', 'vb3', '12:31am', '2022-11-16', '01:42am', '2022-11-16', 'RETURNED', 'TUPC-18-0182 NAZAIR A BET-COET-NS-C5180', '2022-11-16 00:31:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dept_head`
+--
+
+CREATE TABLE `dept_head` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -253,7 +266,7 @@ CREATE TABLE `superuser_acc` (
 --
 
 INSERT INTO `superuser_acc` (`id`, `username`, `email`, `password`) VALUES
-(1, 'admin123', 'pedepartment2@gmail.com', 'physicaleducation');
+(1, 'admin123', 'pedepartment2@gmail.com', 'admin123');
 
 -- --------------------------------------------------------
 
@@ -287,6 +300,12 @@ ALTER TABLE `admin`
 -- Indexes for table `borrowing_machine_info`
 --
 ALTER TABLE `borrowing_machine_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dept_head`
+--
+ALTER TABLE `dept_head`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -340,6 +359,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `borrowing_machine_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `dept_head`
+--
+ALTER TABLE `dept_head`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `inquire`
