@@ -120,6 +120,7 @@
                     <h2>Welcome to P.E. Department Superuser Site</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item active">Create & Manage Accounts</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -129,118 +130,178 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="card mcard_3">
-                <div class="body">
+            <div class="row">
+                <div class="col">
+                    <div class="card mcard_3">
+                        <div class="body">
 
-                    <img src="default_profile/default_pic.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
-  
-                    <h4 class="m-t-10">Add New Personnel Account</h4>   
-                    <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addPersonnel">Add <i class="zmdi zmdi-plus"></i></button>                     
-                    <!-- Modal for Add Personnel -->
-                    <div class="modal fade" id="addPersonnel" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="title" id="largeModalLabel">Add Personnel Account</h4>
+                            <img src="default_profile/default_pic.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
+        
+                            <h4 class="m-t-10">Add New Personnel Account</h4>   
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addPersonnel">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <!-- Modal for Add Personnel -->
+                            <div class="modal fade" id="addPersonnel" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="title" id="largeModalLabel">Add Personnel Account</h4>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="card">
+                                                    <div class="modal-header">
+                                                        <h6 class="title " style="text-align: center;">Create Account</h6>
+                                                    </div>
+                                                    <br>
+                                                    <div class="body">
+                                                    <form action="../../functions.php" method="POST" enctype="multipart/form-data">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="inputFirst" class="form-label">First name</label>
+                                                                <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" name="firstname" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="inputMiddle" class="form-label">Middle name</label>
+                                                                <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" name="middlename" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="inputLast" class="form-label">Last name</label>
+                                                                <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" name="lastname" required>
+                                                            </div>
+                                                        </div> 
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="inputEmail" class="form-label">Email</label>
+                                                                <input type="text" class="form-control" id="inputEmail" name="email" required>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="inputContact" class="form-label">Contact No.</label>
+                                                                <input type="text" class="form-control" id="inputContact" name="contact" required>
+                                                            </div>
+                                                        </div> 
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="inputImage" class="form-label">Gender</label>
+                                                                <br>
+                                                                <select name="gender" class="form-select w-100" id="" required>
+                                                                    <option value="" selected disabled>Select Gender</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="inputDepartment" class="form-label">Department</label>
+                                                                <br>
+                                                                <select name="department" class="form-select w-100" id="" required>
+                                                                    <option value="" selected disabled>Select Department</option>
+                                                                    <option value="OAA">Office of Academic Affair (OAA)</option>
+                                                                    <option value="DIT">Department of Information Technology (DIT)</option>
+                                                                    <option value="DLA">Department of Liberal Arts (DLA)</option>
+                                                                    <option value="OCL">Office of Campus Library (OCL)</option>
+                                                                    <option value="DMS">Department of Mathematics and Science (DMS)</option>
+                                                                    <option value="DOE">Department of Engineering (DOE)</option>
+                                                                    <option value="DED">Department of Education (DED)</option>
+                                                                    <option value="OSA">Office of Student Affairs (OSA)</option>
+                                                                    <option value="UITC">University Information Technology Center (UITC)</option>
+                                                                    <option value="DPE">Department of Physical Education (DPE)</option>
+                                                                    <option value="SD">Security Department (SD)</option>
+                                                                    <option value="RE">Office of Research & Extension (ORE)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                
+                                                            
+                                                    <div class="row">
+                                                            <div class="col-md-6">
+                                                                <center>
+                                                                <img id="frame_1" src="default_profile/dafauta.jpg" width="100px" height="100px"/>
+                                                                </center>
+                                                                
+                                                                <label for="inputImage" class="form-label">Upload image for your profile pic</label>
+                                                                <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="inputPass1" class="form-label">Password</label>
+                                                                <input type="password" class="form-control" id="inputPass1" name="password1" required>
+                                                                <br>
+                                                                <label for="inputPass2" class="form-label">Retype Password</label>
+                                                                <input type="password" class="form-control" id="inputPass2" name="password2" required>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                        <br>
+                                                        <div class="text-center">
+                                                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <input type="hidden" name="user_personnel" value="Teacher">
+                                                            <button type="submit" class="btn btn-danger" name="addPersonnel">Add Personnel</button>
+                                                        </div>
+
+
+                                                    </form>
+
+                                                    </div>
+                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row clearfix">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="card">
-                                            <div class="modal-header">
-                                                <h6 class="title " style="text-align: center;">Create Account</h6>
-                                            </div>
-                                            <br>
-                                            <div class="body">
-                                            <form action="../../functions.php" method="POST" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label for="inputFirst" class="form-label">First name</label>
-                                                        <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" name="firstname" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mcard_3">
+                        <div class="body">
+
+                            <img src="default_profile/default_head.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
+        
+                            <h4 class="m-t-10">Add New Department HEad</h4>   
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addDepthead">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <!-- Modal for Add Department Head -->
+                            <div class="modal fade" id="addDepthead" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="title" id="largeModalLabel">Add Department Head</h4>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="card">
+                                                    <div class="modal-header">
+                                                        <h6 class="title " style="text-align: center;">Create Account</h6>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <label for="inputMiddle" class="form-label">Middle name</label>
-                                                        <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" name="middlename" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="inputLast" class="form-label">Last name</label>
-                                                        <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" name="lastname" required>
-                                                    </div>
-                                                </div> 
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label for="inputEmail" class="form-label">Email</label>
-                                                        <input type="text" class="form-control" id="inputEmail" name="email" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputContact" class="form-label">Contact No.</label>
-                                                        <input type="text" class="form-control" id="inputContact" name="contact" required>
-                                                    </div>
-                                                </div> 
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label for="inputImage" class="form-label">Gender</label>
+                                                    <br>
+                                                    <div class="body">
+                                                    <form action="functions.php" method="POST" enctype="multipart/form-data">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="inputName" class="form-label">Name</label>
+                                                                <input type="text" class="form-control" id="inputName" name="name" required>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="inputEmail" class="form-label">Email</label>
+                                                                <input type="text" class="form-control" id="inputEmail" name="email" required>
+                                                            </div>
+                                               
+                                                        </div> 
                                                         <br>
-                                                        <select name="gender" class="form-select w-100" id="" required>
-                                                            <option value="" selected disabled>Select Gender</option>
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                        </select>
+                                                 
+                                                        <div class="text-center">
+                                                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-danger" name="addDepthead">Add Department Head</button>
+                                                        </div>
+
+
+                                                    </form>
+
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputDepartment" class="form-label">Department</label>
-                                                        <br>
-                                                        <select name="department" class="form-select w-100" id="" required>
-                                                            <option value="" selected disabled>Select Department</option>
-                                                            <option value="OAA">Office of Academic Affair (OAA)</option>
-                                                            <option value="DIT">Department of Information Technology (DIT)</option>
-                                                            <option value="DLA">Department of Liberal Arts (DLA)</option>
-                                                            <option value="OCL">Office of Campus Library (OCL)</option>
-                                                            <option value="DMS">Department of Mathematics and Science (DMS)</option>
-                                                            <option value="DOE">Department of Engineering (DOE)</option>
-                                                            <option value="DED">Department of Education (DED)</option>
-                                                            <option value="OSA">Office of Student Affairs (OSA)</option>
-                                                            <option value="UITC">University Information Technology Center (UITC)</option>
-                                                            <option value="DPE">Department of Physical Education (DPE)</option>
-                                                            <option value="SD">Security Department (SD)</option>
-                                                            <option value="RE">Office of Research & Extension (ORE)</option>
-                                                        </select>
-                                                    </div>
+                                    
                                                 </div>
-                                                <br>
-                                           
-                                                      
-                                               <div class="row">
-                                                    <div class="col-md-6">
-                                                        <center>
-                                                        <img id="frame_1" src="default_profile/dafauta.jpg" width="100px" height="100px"/>
-                                                        </center>
-                                                        
-                                                        <label for="inputImage" class="form-label">Upload image for your profile pic</label>
-                                                        <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="inputPass1" class="form-label">Password</label>
-                                                        <input type="password" class="form-control" id="inputPass1" name="password1" required>
-                                                        <br>
-                                                        <label for="inputPass2" class="form-label">Retype Password</label>
-                                                        <input type="password" class="form-control" id="inputPass2" name="password2" required>
-                                                    </div>
-                                               </div>
-                                              
-                                                <br>
-                                                <div class="text-center">
-                                                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <input type="hidden" name="user_personnel" value="Teacher">
-                                                    <button type="submit" class="btn btn-danger" name="addPersonnel">Add Personnel</button>
-                                                </div>
-
-
-                                            </form>
-
                                             </div>
-                            
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +310,7 @@
                     </div>
                 </div>
             </div>
-        
+           
             <div class="row clearfix">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
@@ -650,7 +711,7 @@
                                                                             <select name="stat" id="" class="form-select w-100" required>
                                                                                 <option value="<?php echo $row['status'] ?>" selected>Current Status: <?php echo $row['status'] ?></option>
                                                                                 <option value="Enabled">Enable</option>
-                                                                                <option value="Disabled">Disabled</option>
+                                                                                <option value="Disabled">Disable</option>
                                                                             </select>
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_disenable" value="<?php echo $row['id'] ?>">
@@ -704,6 +765,133 @@
                             </table>
                         </div>
                     </div>
+                    
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2><strong>Department</strong> Heads</h2>
+                        </div>
+                        <div class="table-responsive" style="text-align: center;">
+                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM dept_head";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['name'] ?></td>
+                                        <td><?php echo $row['email'] ?></td>
+                                        <td> 
+                                        <?php 
+                                            if($row['status'] == 'Enabled' ){
+                                                echo '
+                                                <span class="text-success">Enabled</span>
+                                                ';
+                                            }else{
+                                                echo '
+                                                <span class="text-danger">Disabled</span>
+                                                ';
+                                            }
+                                        
+                                        ?></td>
+                                        <td>
+                                       
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#disenable_head<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
+                                            <!-- Modal for Disable Enable -->
+                                            <div class="modal fade" id="disenable_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Disable/Enable Department Head</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <br>
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="body">
+                                                                            <h3>Current Status of Department Head: <?php echo $row['name'] ?> is  
+                                                                            <?php 
+                                                                                if($row['status'] == 'Enabled' ){
+                                                                                    echo '
+                                                                                    <span class="text-success">Enabled</span>
+                                                                                    ';
+                                                                                }else{
+                                                                                    echo '
+                                                                                    <span class="text-danger">Disabled</span>
+                                                                                    ';
+                                                                                }
+                                                                                
+                                                                                ?>
+                                                                                </h3>
+                                                                            <label for="">Set Status:</label>
+                                                                            <select name="stat_head" id="" class="form-select w-100" required>
+                                                                                <option value="<?php echo $row['status'] ?>" selected>Current Status: <?php echo $row['status'] ?></option>
+                                                                                <option value="Enabled">Enable</option>
+                                                                                <option value="Disabled">Disable</option>
+                                                                            </select>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="id_disenable_head" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="update_disenable_head">Update Status</button>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete_head<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Remove Department Head</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <br>
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="body">
+                                                                            <h3>Removing Department Head : <?php echo $row['name'] ?></h3>
+                                                                            <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
+                                    
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="id_delete_head" value="<?php echo $row['id'] ?>">
+                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="del_head">Remove</button>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                   
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
    
                 </div>
             </div>  
@@ -736,23 +924,13 @@
 <script src="assets/js/pages/tables/jquery-datatable.js"></script>
 
 <script src="assets/js/pages/calendar/calendar.js"></script>
-<script>
-    function preview() {
-        frame_1.src=URL.createObjectURL(event.target.files[0]);
-    }
-</script>
-    <!----ENDING NG GINAWA KO SA JS PART-------->
+
 <script>
     function lettersOnly(input) {
         var regex = /[^a-z]/gi;
         input.value = input.value.replace(regex, "");
     }
 </script>
-<script>
-    $("input[id='inputContact']").on('input', function(e) {
-        $(this).val($(this).val().replace(/[^0-9]/g, ''));
-    });
-</script> 
 </body>
 
 </html>

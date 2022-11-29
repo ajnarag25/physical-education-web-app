@@ -494,6 +494,292 @@
 
     }
 
+       #CHANGE USERNAME SUPERUSER
+       if (isset($_POST['user_superuser'])) {
+        $id_user = $_POST['id_username'];
+        $get_username = $_POST['username'];
+
+        if ($id_user != null){
+            $conn->query("UPDATE superuser_acc SET username='$get_username' WHERE id='$id_user'") or die($conn->error);
+            session_destroy();
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated your Username',
+                    text: 'Please login your new created username',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "../index.php";
+                        }else{
+                            window.location.href = "../index.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+            
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_profile.php";
+                        }else{
+                            window.location.href = "_profile.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
+
+    #CHANGE PASSWORD SUPERUSER
+    if (isset($_POST['pass_admin'])) {
+        $id_pass = $_POST['id_password'];
+        $password1 = $_POST['pass1'];
+        $password2 = $_POST['pass2'];
+        if ($password1 != $password2){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'Your password does not match',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_profile.php";
+                        }else{
+                            window.location.href = "_profile.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            $conn->query("UPDATE superuser_acc SET password='$password1' WHERE id='$id_pass'") or die($conn->error);
+            session_destroy();
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated your Password',
+                    text: 'Please login your new created password',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "../index.php";
+                        }else{
+                            window.location.href = "../index.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    }
+
+    #ADD DEPARTMENT HEAD
+    if (isset($_POST['addDepthead'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+    
+        $sql = "SELECT * FROM dept_head WHERE (name='$user' AND email='$email') ;";
+        $result = mysqli_query($conn, $sql);
+
+        if(!$result->num_rows > 0){
+            $conn->query("INSERT INTO dept_head (name, email, status)
+            VALUES('$name', '$email', 'Enabled')") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Added',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'Department Head is Already Existed',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "index.php";
+                        }else{
+                            window.location.href = "index.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    
+    }
+
+    if (isset($_POST['update_disenable_head'])) {
+        $id = $_POST['id_disenable_head'];
+        $status = $_POST['stat_head'];
+
+        $checking = "SELECT * FROM dept_head WHERE status='$status' AND id='$id'";
+        $prompt = $conn->query($checking);
+        $row = mysqli_num_rows($prompt);
+
+        if ($row == 0){
+            $conn->query("UPDATE dept_head SET status='$status' WHERE id='$id'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated Status',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+    
+            </script>
+            <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'No changes has been made!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+   }
+
+
+   if (isset($_POST['del_head'])) {
+    $id = $_POST['id_delete_head'];
+    if ($id == null){
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "_createmanage.php";
+                    }else{
+                        window.location.href = "_createmanage.php";
+                    }
+                })
+                
+            })
+
+        </script>
+        <?php
+        }else{
+            $conn->query("DELETE FROM dept_head WHERE id='$id'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Removed the Department Head',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }
+
+    }
    
 
 ?>

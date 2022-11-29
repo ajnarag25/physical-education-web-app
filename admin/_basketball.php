@@ -136,7 +136,7 @@
                 <div class="col-lg-8 col-md-4 col-sm-11">
                     <h2>Welcome to P.E. Department Admin Site</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="_dashboard.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                         <li class="breadcrumb-item active">Basketball & Volleyball Table</li>
                         <li class="breadcrumb-item"><a href="#history">History Table</a></li>
                         <li class="breadcrumb-item"><a href="#report">Report Table</a></li>
@@ -438,7 +438,7 @@
                     <div class="card">
                         <div class="header">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="_dashboard.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="#bv">Basketball & Volleyball Table</a></li>
                                 <li class="breadcrumb-item active">History Table</li>
                                 <li class="breadcrumb-item"><a href="#report">Report Table</a></li>
@@ -541,7 +541,7 @@
                     <div class="card">
                         <div class="header">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="_index.html"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="_dashboard.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="#bv">Basketball & Volleyball Table</a></li>
                                 <li class="breadcrumb-item"><a href="#history">History Table</a></li>
                                 <li class="breadcrumb-item active">Report Table</li>

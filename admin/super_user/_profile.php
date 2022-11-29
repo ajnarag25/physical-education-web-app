@@ -1,9 +1,6 @@
 <?php
     include('connection.php');
     session_start();
-    if (!isset($_SESSION['get_data']['username'])) {
-    header("Location: index.php");
-}
 ?>
 
 <!doctype html>
@@ -15,7 +12,7 @@
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 
-<title>P.E Department Admin Site</title>
+<title>P.E Department Superuser Site</title>
 <!-- Favicon-->
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -64,25 +61,13 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <?php 
-                        $check_name =  $_SESSION['get_data']['firstname'];
-                        $query = "SELECT * FROM admin WHERE firstname='$check_name'";
-                        $result = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                    <a href="_profile.php"><img src="<?php echo $row['image']?>" class="rounded-circle shadow" width="60" alt="profile-image"></a>
-                    <?php }; ?>
-                    <div class="detail">
-                        <h4><?php echo $_SESSION['get_data']['firstname'] ?></h4>
-                        <small>Administrator</small>                        
-                    </div>
+                    <small>Superuser</small>                        
                 </div>
             </li>
-            <li><a href="_dashboard.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation of Facility</span></a></li>
-            <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform Inquiries</span></a></li>
-            <li><a href="_basketball.php"><i class="zmdi zmdi-chart-donut"></i><span>Sports Equipment</span></a></li> 
-            <li class="active open"><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile and Settings</span></a></li>
+            <li><a href="index.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+            <li><a href="_createmanage.php"><i class="zmdi zmdi-accounts"></i><span>Create & Manage Accounts</span></a></li>
+            <li><a href="_verifyunverify.php"><i class="zmdi zmdi-chart-donut"></i><span>Verified & Unverified Accounts</span></a></li> 
+            <li class="active open"><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
         </ul>
     </div>
@@ -133,8 +118,8 @@
                 <div class="col-lg-8 col-md-4 col-sm-11">
                     <h2>Welcome to P.E. Department Admin Site</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="_dashboard.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item active">Account Settings</li>
+                        <li class="breadcrumb-item"><a href="index.php"><i class="zmdi zmdi-home"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item active">My Profile</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
                 </div>
@@ -143,35 +128,6 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12">
-                    <div class="card mcard_3">
-                        <div class="body">
-                            <?php 
-                                $check_name =  $_SESSION['get_data']['firstname'];
-                                $query = "SELECT * FROM admin WHERE firstname='$check_name'";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                            <a href="_profile.php"><img src="<?php echo $row['image'] ?>" class="rounded-circle shadow" width="150" height="150" alt="profile-image"></a>
-                            <?php }; ?>
-                            <h4 class="m-t-10"><?php echo $_SESSION['get_data']['firstname'] ?> <?php echo $_SESSION['get_data']['lastname'] ?></h4>   
-                            <button id="changepic" class="btn btn-primary">Change Profile Picture</button>    
-                            <form action="functions.php" method="POST" enctype="multipart/form-data">                    
-                            <div id="uploadpic" class="row" hidden>
-                                <div class="col-12">
-                                    <label for="changepp"></label>
-                                    <div class="body">
-                                        <input id="getpic" type="file" name="admin_profile" accept="image/png, image/jpeg" class="dropify" required>
-                                    </div>
-                                </div>                     
-                            </div>
-                            <div id="savepic" class="col-12" hidden>
-                                <input type="hidden" value="<?php echo $_SESSION['get_data']['id'] ?>" name="admin_id_img">
-                                <button type="submit" id="getpic2" class="btn btn-primary" name="upload_admin_image">Save Changes</button>
-                            </form> 
-                                <button id="cancelpic" class="btn btn-secondary" >Cancel</button>
-                            </div>    
-                        </div>
-                    </div>
 
                     <div class="card">
                             <div class="header">
@@ -186,8 +142,7 @@
                                         <div class="form-group">
                                             <label for="user">Current Username</label>
                                             <?php 
-                                                $check_name =  $_SESSION['get_data']['firstname'];
-                                                $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                                                $query = "SELECT * FROM superuser_acc";
                                                 $result = mysqli_query($conn, $query);
                                                 while ($row = mysqli_fetch_array($result)) {
                                             ?>
@@ -213,11 +168,11 @@
                                                             <div class="card">
                                                                 <br>
                                                                 <div class="body">
-                                                                    <h3>Update username of : <?php echo $row['firstname'] ?> <?php echo $row['lastname'] ?> </h3>
+                                                                    <h3>Update Username Superuser </h3>
                                                                     <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> You will be automatically logout and simply login your new updated username</p>
                                                                     <div class="modal-footer">
                                                                         <input type="hidden" name="id_username" value="<?php echo $row['id'] ?>">
-                                                                        <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="user_admin">Update</button>
+                                                                        <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="user_superuser">Update</button>
                                                                         <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                     </div>        
                                                                 </div>
@@ -248,8 +203,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-12">
                                     <?php 
-                                        $check_name =  $_SESSION['get_data']['firstname'];
-                                        $query = "SELECT * FROM admin WHERE firstname='$check_name'";
+                                        $query = "SELECT * FROM superuser_acc";
                                         $result = mysqli_query($conn, $query);
                                         while ($row = mysqli_fetch_array($result)) {
                                     ?>
@@ -293,7 +247,7 @@
                                                         <div class="card">
                                                             <br>
                                                             <div class="body">
-                                                                <h3>Update Password of : <?php echo $row['firstname'] ?> <?php echo $row['lastname'] ?> </h3>
+                                                                <h3>Update Password Superuser </h3>
                                                                 <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> You will be automatically logout and simply login your new updated password</p>
                                                                 <div class="modal-footer">
                                                                     <input type="hidden" name="id_password" value="<?php echo $row['id'] ?>">
@@ -315,75 +269,6 @@
                             </div>                              
                         </div>
                     </div>
-
-                    <div class="card">
-                        <form>
-                            <div class="header">
-                                <h2><strong>Head Departments</strong> Settings</h2>
-                            </div>
-                            <div class="body">
-                                <div class="col-lg-12">                
-                                    <button type="button" id="edithead" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-edit"></i></button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="user">Office of Student Affair</label>
-                                            <input id="head1" name="user" type="text" class="form-control" value="Jane Doe" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Department of Engineering Science</label>
-                                            <input id="head2" name="change" type="text" class="form-control" value="Ann Whitaker" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Department of Industrial Technology</label>
-                                            <input id="head3" name="change" type="text" class="form-control" value="Lisa Hurley" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 js-sweetalert">
-                                        <button id="savehead" type="submit" class="btn btn-primary" data-type="success2" disabled>Save Changes</button>
-                                        <button id="cancelhead" class="btn btn-secondary" disabled>Cancel</button>
-                                    </div>                                
-                                </div>                              
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="card">
-                        <form>
-                            <div class="header">
-                                <h2><strong>Uniform Prices</strong> Settings</h2>
-                            </div>
-                            <div class="body">
-                                <div class="col-lg-12">                
-                                    <button type="button" id="editpe" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-edit"></i></button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="user">PE 1 (in Pesos)</label>
-                                            <input id="pe1" name="user" type="text" class="form-control" value="500" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">PE 2 (in Pesos)</label>
-                                            <input id="pe2" name="change" type="text" class="form-control" value="550" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 js-sweetalert">
-                                        <button id="savepe" type="submit" class="btn btn-primary" data-type="success2" disabled>Save Changes</button>
-                                        <button id="cancelpe" class="btn btn-secondary" disabled>Cancel</button>
-                                    </div>                                
-                                </div>                              
-                            </div>
-                        </form>
-                    </div>
-
 
                 </div>
             </div>
@@ -411,23 +296,6 @@
         }
     };
 
-    // Change Profile Pic DOM //
-    document.getElementById('changepic').onclick = function(){
-		document.getElementById('uploadpic').hidden = false;
-        document.getElementById('savepic').hidden = false;
-        document.getElementById('changepic').hidden = true;
-	};  
-
-    document.getElementById('getpic').onclick = function(){
-		document.getElementById('getpic2').disabled = false;
-	};
-
-    document.getElementById('cancelpic').onclick = function(){
-		document.getElementById('changepic').hidden = false;
-        document.getElementById('savepic').hidden = true;
-        document.getElementById('uploadpic').hidden = true;
-        document.getElementById('getpic2').disabled = true;
-	};
 
      // Change Username DOM //
     document.getElementById('edit').onclick = function(){
@@ -460,53 +328,6 @@
         document.getElementById('cancelpass').disabled = true;    
 	}; 
 
-      // Change Head DOM //
-      document.getElementById('edithead').onclick = function(){
-        document.getElementById('head1').disabled = false;
-        document.getElementById('head2').disabled = false;
-        document.getElementById('head3').disabled = false;
-        document.getElementById('savehead').disabled = false;
-        document.getElementById('cancelhead').disabled = false;
-	};  
-
-    document.getElementById('cancelhead').onclick = function(){
-		document.getElementById('head1').disabled = true;
-        document.getElementById('head2').disabled = true;
-        document.getElementById('head3').disabled = true;
-        document.getElementById('savehead').disabled = true;
-        document.getElementById('cancelhead').disabled = true;   
-	}; 
-
-    // Change P.E. Price DOM //
-    document.getElementById('editpe').onclick = function(){
-        document.getElementById('pe1').disabled = false;
-        document.getElementById('pe2').disabled = false;
-        document.getElementById('savepe').disabled = false;
-        document.getElementById('cancelpe').disabled = false;
-	};  
-
-    document.getElementById('cancelpe').onclick = function(){
-		document.getElementById('pe1').disabled = true;
-        document.getElementById('pe2').disabled = true;
-        document.getElementById('savepe').disabled = true;
-        document.getElementById('cancelhead').disabled = true;   
-	}; 
-
-
-    // Change P.E. VCode DOM //
-    document.getElementById('edit_vcode').onclick = function(){
-        document.getElementById('vcode1').disabled = false;
-        document.getElementById('vcode2').disabled = false;
-        document.getElementById('save_vcode').disabled = false;
-        document.getElementById('cancel_vcode').disabled = false;
-	};  
-
-    document.getElementById('cancel_vcode').onclick = function(){
-		document.getElementById('vcode1').disabled = true;
-        document.getElementById('vcode2').disabled = true;
-        document.getElementById('save_vcode').disabled = true;
-        document.getElementById('cancel_vcode').disabled = true;   
-	}; 
 
 </script>
 
