@@ -10,7 +10,6 @@ if (isset($_GET['id'])) {
   $conn->query("DELETE FROM otp_requests WHERE id =".$id) or die($conn->error);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -7,6 +7,9 @@ date_default_timezone_set('Asia/Manila');
 <?php
 
 
+if(isset($_POST['command'])){
+    echo "hey";
+}
 
 if (isset($_POST['otpdata'])) {
     $otp =$_POST['otpdata'];
@@ -15,8 +18,6 @@ if (isset($_POST['otpdata'])) {
     $result_get_data = mysqli_query($conn, $query_get_data);
     $row_get_data = mysqli_num_rows($result_get_data);
     $fetch_data = mysqli_fetch_array($result_get_data);
-
-
 
     if ($row_get_data>0) {
         
