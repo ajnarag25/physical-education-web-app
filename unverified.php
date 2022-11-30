@@ -57,7 +57,7 @@
             <br>
             <h4>Please wait for your account verification.</h4>
             <br><br>
-            <a href="https://accounts.google.com/" target="_blank" class="btn btn-primary">Check Email</a>
+            <a href="https://mail.google.com/" target="_blank" class="btn btn-primary">Check Email</a>
             <a href="functions.php?logout" class="btn btn-danger">Logout</a>
         </div>
 
