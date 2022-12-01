@@ -106,8 +106,8 @@
                             <h5 class="my-3">Borrowed Equipments</h5>
                             <p class="text-muted mb-1">Pending Transaction</p>
                             <?php 
-                                $account = $_SESSION['get_data']['email'];
-                                $query = "SELECT * FROM borrowing_machine_info WHERE email='$account' and status='PENDING'";
+                                $account = $_SESSION['get_data']['id_no'];
+                                $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='PENDING'";
                                 $result = mysqli_query($conn, $query);
                                 $borrow = mysqli_num_rows($result);
                             ?>
@@ -286,8 +286,8 @@
                     <tbody>
 
                     <?php 
-                        $account = $_SESSION['get_data']['email'];
-                        $query = "SELECT * FROM borrowing_machine_info WHERE email='$account'";
+                        $account = $_SESSION['get_data']['id_no'];
+                        $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account'";
                         $result = mysqli_query($conn, $query);
                         $check_row = mysqli_num_rows($result);
                         while ($row = mysqli_fetch_array($result)) {

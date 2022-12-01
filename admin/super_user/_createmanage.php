@@ -259,7 +259,7 @@
 
                             <img src="default_profile/default_head.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
         
-                            <h4 class="m-t-10">Add New Department HEad</h4>   
+                            <h4 class="m-t-10">Add New Department Head</h4>   
                             <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addDepthead">Add <i class="zmdi zmdi-plus"></i></button>                     
                             <!-- Modal for Add Department Head -->
                             <div class="modal fade" id="addDepthead" tabindex="-1" role="dialog">
