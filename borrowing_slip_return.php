@@ -153,7 +153,7 @@
                       // THIS IS THE CODE WHERE THE SYSTEM WILL GENERATE ONE TIME PASSWORD THRU RAND() MODULE AND WILL PASS IT 
                       //ON THE SESSION VARIABLE TOGETHER WITH SOME IMPORTANT DATAS ABOVE
                       $permitted_char = '0123456789';
-                      $otp_equipment =substr(str_shuffle($permitted_char), 0, 6);
+                      $otp_equipment =substr(str_shuffle($permitted_char), 0, 7);
                       ?>
                           
                           

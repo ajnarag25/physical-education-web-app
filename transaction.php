@@ -119,7 +119,37 @@
             </div>
             <br>
             <h4>Inquire Uniform - History</h4>
-            <a class="text-danger" style="font-size:15px;" href="">Clear All</a>
+            <?php 
+                $account = $_SESSION['get_data']['email'];
+                $query = "SELECT * FROM inquire WHERE email='$account'";
+                $result = mysqli_query($conn, $query);
+                $check_row = mysqli_num_rows($result);
+                while ($row = mysqli_fetch_array($result)) {
+            ?>
+
+            <a class="text-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllInquire<?php echo $row['id'] ?>">Clear All</a>
+            <!-- Modal -->
+            <div class="modal fade" id="clearAllInquire<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Clear All Inquire Uniform History</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4>Are you sure to clear all your Inquire Uniform History?</h4>
+                        <p><i class='bx bxs-message-alt-error bx-flashing' style="color:red"></i> This Action is Irreversible!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" name="clear_inquire">Clear All</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
