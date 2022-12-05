@@ -50,7 +50,13 @@ if (isset($_POST['otpdata'])) {
         $ball_id_2 = $fetch_ball_r2[$equipment]; 
         $ball_id_3  = $fetch_ball_r3[$equipment];
 
-
+        // lcd.clear();
+        // lcd.setCursor(0,0);
+        // lcd.print("Enter your OTP:");
+        // lcd.setCursor(0,1);
+        // lcd.print(otp_typed);
+        // Serial.print("sent");
+        // delay(1000);
 
         $conn->query("UPDATE otp_requests SET typed='1' WHERE otp_generate='$otp'") or die($conn->error);
         $command = $fetch_data['actionn'].$fetch_data['equipment_to_borrow'];
@@ -68,7 +74,7 @@ if (isset($_POST['otpdata'])) {
         }
     }
     else {
-        echo"otp error";
+        echo"otp_error";
     }
 }
 
@@ -129,5 +135,11 @@ if (isset($_POST['confirmreturn'])) {
         }
 
     }
+}
+?>
+
+<?php
+if (isset($_POST['reset_otp'])) {
+    $conn->query("DELETE FROM otp_requests WHERE typed  = '1';") or die($conn->error);
 }
 ?>
