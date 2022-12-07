@@ -61,6 +61,9 @@ h1{
     padding: 50px;
     padding-bottom: 70px;
 }
+.card_custom{
+    box-shadow: 4px 4px rgb(151, 8, 8);
+}
 
 /*BUTTONS*/
 .btn-custom{

@@ -68,7 +68,7 @@
                     <div class="row">
                         <?php 
                           $email = $_SESSION['get_data']['email']; 
-                          $query = "SELECT * FROM inquire WHERE email='$email'";
+                          $query = "SELECT * FROM inquire WHERE email='$email' AND status='PENDING'";
                           $result = mysqli_query($conn, $query);
                           $statuses = null;
                           while ($row = mysqli_fetch_array($result)) {

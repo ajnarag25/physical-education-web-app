@@ -21,6 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -65,59 +66,54 @@
         <div class="container">
             <div class="row" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
                 <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img src="assets/images/sample_uniform.jpg" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">Inquire Uniform</h5>
-                            <p class="text-muted mb-1">Pending Transaction</p>
-                            <?php 
-                                $account = $_SESSION['get_data']['email'];
-                                $query = "SELECT * FROM inquire WHERE email='$account' and status='PENDING'";
-                                $result = mysqli_query($conn, $query);
-                                $inquire = mysqli_num_rows($result);
-                            ?>
-                            <p><?php echo $inquire ?></p>
-                        </div>
+                    <br>
+                    <div class="card-body card_custom text-center">
+                        <img src="assets/images/sample_uniform.jpg" alt="avatar" class="card-img-top" >
+                        <h3 class="my-3"> <strong>Inquire Uniform</strong></h3>
+                        <p class="text-muted mb-1">Pending Transaction</p>
+                        <?php 
+                            $account = $_SESSION['get_data']['email'];
+                            $query = "SELECT * FROM inquire WHERE email='$account' and status='PENDING'";
+                            $result = mysqli_query($conn, $query);
+                            $inquire = mysqli_num_rows($result);
+                        ?>
+                        <p><span class="text-danger" style="font-size:25px"><?php echo $inquire ?></span></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img src="assets/images/sample_facility.jpg" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">Reservation of Facilites</h5>
-                            <p class="text-muted mb-1">Pending Transaction</p>
-                            <?php 
-                                $account = $_SESSION['get_data']['email'];
-                                $query = "SELECT * FROM reserve WHERE email='$account' and status='PENDING'";
-                                $result = mysqli_query($conn, $query);
-                                $reserve = mysqli_num_rows($result);
-                            ?>
-                            <p><?php echo $reserve ?></p>
-                        </div>
+                    <br>
+                    <div class="card-body card_custom text-center">
+                        <img src="assets/images/sample_facility.jpg" alt="avatar" class="card-img-top" >
+                        <h3 class="my-3"> <strong>Reservation of Facilites</strong></h3>
+                        <p class="text-muted mb-1">Pending Transaction</p>
+                        <?php 
+                            $account = $_SESSION['get_data']['email'];
+                            $query = "SELECT * FROM reserve WHERE email='$account' and status='PENDING'";
+                            $result = mysqli_query($conn, $query);
+                            $reserve = mysqli_num_rows($result);
+                        ?>
+                        <p><span class="text-danger" style="font-size:25px"><?php echo $reserve ?></span></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img src="assets/images/sample_equipment.jpg" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">Borrowed Equipments</h5>
-                            <p class="text-muted mb-1">Pending Transaction</p>
-                            <?php 
-                                $account = $_SESSION['get_data']['id_no'];
-                                $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='PENDING'";
-                                $result = mysqli_query($conn, $query);
-                                $borrow = mysqli_num_rows($result);
-                            ?>
-                            <p><?php echo $borrow ?></p>
-                        </div>
+                    <br>
+                    <div class="card-body card_custom text-center">
+                        <img src="assets/images/sample_equipment.jpg" alt="avatar" class="card-img-top">
+                        <h3 class="my-3"> <strong>Borrowed Equipments</strong></h3>
+                        <p class="text-muted mb-1">Pending Transaction</p>
+                        <?php 
+                            $account = $_SESSION['get_data']['id_no'];
+                            $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='PENDING'";
+                            $result = mysqli_query($conn, $query);
+                            $borrow = mysqli_num_rows($result);
+                        ?>
+                        <p><span class="text-danger" style="font-size:25px"><?php echo $borrow ?></span></p>
                     </div>
+                    
                 </div>
                 
             </div>
-            <br>
+            <br><br>
             <h4>Inquire Uniform - History</h4>
             <?php 
                 $account = $_SESSION['get_data']['email'];
@@ -127,7 +123,8 @@
                 while ($row = mysqli_fetch_array($result)) {
             ?>
 
-            <a class="text-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllInquire<?php echo $row['id'] ?>">Clear All</a>
+            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllInquire<?php echo $row['id'] ?>">Clear All</a>
+            <br><br> 
             <!-- Modal -->
             <div class="modal fade" id="clearAllInquire<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -140,18 +137,21 @@
                         <h4>Are you sure to clear all your Inquire Uniform History?</h4>
                         <p><i class='bx bxs-message-alt-error bx-flashing' style="color:red"></i> This Action is Irreversible!</p>
                     </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger" name="clear_inquire">Clear All</button>
-                    </div>
+                    <form action="functions.php" method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                            <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger" name="clear_inquire">Clear All</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
             <?php } ?>
 
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="myTable1">
                     <thead>
                         <tr>
                             <th>Date Submitted</th>
@@ -225,9 +225,43 @@
             </div>
             <br>
             <h4>Reservation of Facility - History</h4>
-            <a class="text-danger" style="font-size:15px;" href="">Clear All</a>
+            <?php 
+                $account = $_SESSION['get_data']['email'];
+                $query = "SELECT * FROM reserve WHERE email='$account'";
+                $result = mysqli_query($conn, $query);
+                $check_row = mysqli_num_rows($result);
+                while ($row = mysqli_fetch_array($result)) {
+            ?>
+
+            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllReserve<?php echo $row['id'] ?>">Clear All</a>
+            <br><br> 
+            <!-- Modal -->
+            <div class="modal fade" id="clearAllReserve<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Clear All Reservation Facility History</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4>Are you sure to clear all your Reservation of Facility History?</h4>
+                        <p><i class='bx bxs-message-alt-error bx-flashing' style="color:red"></i> This Action is Irreversible!</p>
+                    </div>
+                    <form action="functions.php" method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                            <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger" name="clear_reserve">Clear All</button>
+                        </div>
+                    </form>
+                
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="myTable2">
                     <thead>
                         <tr>
                             <th>Requested Facility</th>
@@ -382,6 +416,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+      $('#myTable1').DataTable()
+      $('#myTable2').DataTable()
+    </script>
 
 </body>
 </html>
