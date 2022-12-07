@@ -59,10 +59,11 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                            <input type="text" class="form-control" id="inputEmail" onkeyup="gsfeOnly(this)" placeholder="Email" name="email" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
                             </div>
+                            <label id="check_gsfe" class="text-primary"></label>
                         </div>                    
                         <div class="input-group mb-3">
                             <input type="password" class="form-control" name="password1" placeholder="Password" required>
@@ -107,6 +108,19 @@
 <!-- Jquery Core Js -->
 <script src="assets/bundles/libscripts.bundle.js"></script>
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script>
+        function gsfeOnly(input) {
+            let regex = new RegExp('[a-z0-9]+@gsfe.tupcavite.edu.ph');
+            check = regex.test(input.value)
+            if(check == false){
+                console.log('Not gsfe account')
+                document.getElementById("check_gsfe").innerText = "Please use your gsfe account only";
+            }else{
+                console.log('Your using gsfe account')
+                document.getElementById("check_gsfe").innerText = "";
+            }
+        }
+    </script>
 </body>
 
 

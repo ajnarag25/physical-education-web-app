@@ -78,7 +78,8 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="inputEmail" name="email" required>
+                        <input type="text" class="form-control" id="inputEmail" onkeyup="gsfeOnly(this)" name="email" required>
+                        <p id="check_gsfe" class="text-primary"></p>
                     </div>
                     <div class="col-md-4">
                         <label for="inputContact" class="form-label">Contact No.</label>
@@ -89,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="inputImage" class="form-label">Gender</label>
-                        <select name="gender" class="form-select" id="" required>
+                        <select name="gender" class="form-select" required>
                             <option value="" selected disabled>Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -97,7 +98,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputCourse" class="form-label">Course</label>
-                        <select name="course" class="form-select" id="" required>
+                        <select name="course" class="form-select" required>
                             <option value="" selected disabled>Select Course</option>
                             <option value="BSCE">BSCE - Bachelor of Science in Civil Engineering</option>
                             <option value="BSEE">BSEE - Bachelor of Science in Electrical Engineering</option>
@@ -207,6 +208,19 @@
             $(this).val($(this).val().replace(/[^0-9]/g, ''));
         });
     </script>   
+    <script>
+        function gsfeOnly(input) {
+            let regex = new RegExp('[a-z0-9]+@gsfe.tupcavite.edu.ph');
+            check = regex.test(input.value)
+            if(check == false){
+                console.log('Not gsfe account')
+                document.getElementById("check_gsfe").innerText = "Please use your gsfe account only";
+            }else{
+                console.log('Your using gsfe account')
+                document.getElementById("check_gsfe").innerText = "";
+            }
+        }
+    </script>
 
 </body>
 </html>
