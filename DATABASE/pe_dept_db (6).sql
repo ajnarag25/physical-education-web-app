@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2022 at 07:55 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 07, 2022 at 04:12 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,7 +47,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `email`, `image`, `status`, `acc_status`, `otp`) VALUES
 (4, 'Avor john', 'Atienza', 'Narag', 'avorjohn25', '$2y$10$mHQC77k3Mmo.hQSV9l7Okun7sGNZaaplfr5w9xlOItuKmKXng2HyK', 'ajnarag25@gmail.com', 'default_profile/default_pic.jpg', 'Enabled', 'VERIFIED', 111),
-(5, 'Mark', 'Atienza', 'Narag', 'marky25', '$2y$10$jWvcz4PV2c0fglGVsyuofefCaOE2kbWyFcDtteua6kS0gaxUj6w/a', 'markzelon@gmail.com', 'default_profile/default_pic.jpg', 'Enabled', 'UNVERIFIED', 9996);
+(5, 'Mark', 'Atienza', 'Narag', 'marky25', '$2y$10$jWvcz4PV2c0fglGVsyuofefCaOE2kbWyFcDtteua6kS0gaxUj6w/a', 'markzelon@gmail.com', 'default_profile/default_pic.jpg', 'Enabled', 'UNVERIFIED', 9996),
+(6, 'Michael', 'Suarez', 'Rilan', 'micominecraft', '$2y$10$FytlmVMZoFZPZfOcraihMOCqkJR10g0cD3QSBNyJ59G3XEZgdNH32', 'micorilan1999@gmail.com', 'default_profile/default_pic.jpg', 'Enabled', 'UNVERIFIED', 0);
 
 -- --------------------------------------------------------
 
@@ -57,18 +58,18 @@ INSERT INTO `admin` (`id`, `firstname`, `middlename`, `lastname`, `username`, `p
 
 CREATE TABLE `ball_sequence` (
   `id` int(11) NOT NULL,
-  `basketball` varchar(3) NOT NULL,
-  `volleyball` varchar(3) NOT NULL
+  `volleyball` varchar(3) NOT NULL,
+  `basketball` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ball_sequence`
 --
 
-INSERT INTO `ball_sequence` (`id`, `basketball`, `volleyball`) VALUES
-(1, 'bb1', 'vb1'),
-(2, 'bb2', 'vb2'),
-(3, 'bb3', 'vb3');
+INSERT INTO `ball_sequence` (`id`, `volleyball`, `basketball`) VALUES
+(1, 'vb1', ''),
+(2, 'vb2', 'bb1'),
+(3, 'vb3', 'bb2');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,7 @@ CREATE TABLE `borrowing_machine_info` (
 --
 
 INSERT INTO `borrowing_machine_info` (`id`, `id_no`, `equipment`, `ball_id`, `time_borrow`, `date_borrow`, `time_return`, `date_return`, `status`, `qr`, `sort_date_time`) VALUES
-(16, 'TUPC-18-0182', 'volleyball', 'vb3', '12:31am', '2022-11-16', '01:42am', '2022-11-16', 'RETURNED', 'TUPC-18-0182 NAZAIR A BET-COET-NS-C5180', '2022-11-16 00:31:44');
+(60, 'TUPC-18-0638', 'basketball', 'bb3', '11:46am', '2022-12-07', 'N/A', 'N/A', 'UNRETURNED', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', '2022-12-07 11:46:26');
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE `otp_requests` (
   `id` int(11) NOT NULL,
   `id_no` varchar(30) NOT NULL,
   `equipment_to_borrow` varchar(20) NOT NULL,
-  `otp_generate` varchar(5) NOT NULL,
+  `otp_generate` varchar(6) NOT NULL,
   `date_time_generate` datetime DEFAULT current_timestamp(),
   `typed` varchar(1) NOT NULL,
   `actionn` varchar(20) DEFAULT NULL,
@@ -193,7 +194,7 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`, `status`) VALUES
-(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '09120282536', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$j7QhsQSPcHBps8iCye9hBe7kqIW5fyibQec9YHV.FGmVKmhO6vhDO', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 6366, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg', 'UNVERIFIED'),
+(4, 'Michael', 'Suarez', 'Rilan', 'micorilan1999@gmail.com', '09120282536', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1665913812profile.PNG', '$2y$10$PT11OZbr9nB0PJGhzDHPBe6Vqs9fbP35b4kUsUmoTxFgkK2B5WtEy', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 1006, 'TUPC-18-0638', 'uploads/school_id_qr/16659138121662568810aaa.jpg', 'VERIFIED'),
 (9, 'Mark', 'Atienza', 'Narag', 'markzelon@gmail.com', '09555497138', 'Male', 'N/A', 'DED', 'uploads/profile_pic/1668662653Profile-PNG-Clipart.png', '$2y$10$E6eWZVebi8K/IcDmVhpRMuxkzUY3dKLuFq.ZRlkNXc5apB9WDYyHG', 'N/A', 'Teacher', 0, 'N/A', 'N/A', 'UNVERIFIED');
 
 -- --------------------------------------------------------
@@ -297,6 +298,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ball_sequence`
+--
+ALTER TABLE `ball_sequence`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `borrowing_machine_info`
 --
 ALTER TABLE `borrowing_machine_info`
@@ -352,13 +359,19 @@ ALTER TABLE `superuser_acc`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ball_sequence`
+--
+ALTER TABLE `ball_sequence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `borrowing_machine_info`
 --
 ALTER TABLE `borrowing_machine_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `dept_head`
@@ -370,13 +383,13 @@ ALTER TABLE `dept_head`
 -- AUTO_INCREMENT for table `inquire`
 --
 ALTER TABLE `inquire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `otp_requests`
 --
 ALTER TABLE `otp_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `registration`
@@ -394,7 +407,7 @@ ALTER TABLE `report_equip`
 -- AUTO_INCREMENT for table `reserve`
 --
 ALTER TABLE `reserve`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
