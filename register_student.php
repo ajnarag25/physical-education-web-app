@@ -20,12 +20,6 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-
-    
-
-
-
-
 </head>
 
 <body>
@@ -129,7 +123,6 @@
                         <center>
                         <img id="frame_1" src="default_profile/dafauta.jpg" width="100px" height="100px"/>
                         </center>
-                        
                     </div>
                 </div> 
                 <br>
@@ -164,10 +157,7 @@
                     <input type="hidden" name="user_student" value="Student">
                     <button type="submit" class="btn btn-danger" name="register_student">Register</button>
                 </div>
-
-
             </form>
-
         </div>
       </div>
 
@@ -177,7 +167,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
-
 
     <!---DITO KO NILAGAY YUNG PAG IMPORT NG QR JS PACKAGES----->
     <script type="text/javascript" src="js/qr_js_packages/script_qr.js"></script>
@@ -190,7 +179,6 @@
 
     <script>
         var input = document.getElementById('inputstuid');
-
         input.addEventListener("keydown", function() {
         var oldVal = this.value;
         console.log(oldVal);

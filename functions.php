@@ -1455,7 +1455,8 @@ if (isset($_POST['clear_reserve'])) {
             $(document).ready(function(){
                 Swal.fire({
                 icon: 'error',
-                title: 'Successfully Deleted',
+                title: 'An Error Occured',
+                text: 'Something went wrong!',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1488,6 +1489,64 @@ if (isset($_POST['clear_reserve'])) {
                     window.location.href = "transaction.php";
                     }else{
                         window.location.href = "transaction.php";
+                    }
+                })      
+            })
+    
+        </script>
+        <?php
+    }
+}
+
+// SEND CONTACT FORM
+if (isset($_POST['contact_submit'])) {
+    $names = $_POST['name'];
+    $emails = $_POST['email'];
+    $contacts = $_POST['contact'];
+    $message = $_POST['txtmsg'];
+
+    if ($message == null){
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "home.php";
+                    }else{
+                        window.location.href = "home.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        include 'contact_email.php';
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Submitted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "home.php";
+                    }else{
+                        window.location.href = "home.php";
                     }
                 })      
             })

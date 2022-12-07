@@ -69,7 +69,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="overlay-image" style="background-image:url(assets/images/bg.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/official_bg.jpg);"></div>
             <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
               <h1>Welcome to P.E Department Website <?php echo $_SESSION['get_data']['firstname']?></h1>
               <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
             </div>
           </div>
           <div class="carousel-item">
-            <div class="overlay-image" style="background-image:url(assets/images/sample_equipment.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/official_equipment.jpg);"></div>
             <div class="container carousel-body-2">
               <h1>Borrowing of Equipments</h1>
               <p>Generate your own OTP and simply borrow equipment in the borrowing machine <br> or either submit a form and borrow it in the department.</p>
@@ -294,7 +294,7 @@ if (isset($_GET['id'])) {
               <div class="col-12 col-sm-4 col-lg-2 ">
                 <div class="single_advisor_profile">
                   <div class="advisor_thumb"><img src="assets/profile/rai.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/aziar.gumarang04" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/raizagumarang" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.instagram.com/raiza.gumarang/" target="_blank"><i class="fa fa-instagram"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Raiza Gumarang</h6>
@@ -306,7 +306,7 @@ if (isset($_GET['id'])) {
               <div class="col-12 col-sm-4 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/naj.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/nigelle.salvador" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/Nigellejarred" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.instagram.com/nigellejarred/" target="_blank"><i class="fa fa-instagram"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Nigelle Salvador</h6>
@@ -319,7 +319,7 @@ if (isset($_GET['id'])) {
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/aj.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.linkedin.com/in/avor-john-narag-660091221/" target="_blank"><i class="fa fa-linkedin"></i></a><a href="https://github.com/ajnarag25" target="_blank"><i class="fa fa-github"></i></a><a href="https://www.facebook.com/avorjohn.narag/" target="_blank"><i class="fa fa-facebook"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Avor John Narag</h6>
@@ -331,7 +331,7 @@ if (isset($_GET['id'])) {
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/sean.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/wooopieee" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://github.com/SeanDotExe" target="blank"><i class="fa fa-github"></i></a><a href="https://seanpw.herokuapp.com/" target="_blank"><i class="fa fa-globe"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Sean Monacillo</h6>
@@ -343,7 +343,7 @@ if (isset($_GET['id'])) {
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/rilan.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.linkedin.com/in/michael-rilan-272b92233/" target="_blank"><i class="fa fa-linkedin"></i></a><a href="https://github.com/michaelrilan" target="_blank"><i class="fa fa-github"></i></a><a href="https://www.facebook.com/michaelangelo.rilan" target="_blank"><i class="fa fa-facebook"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Michael Rilan</h6>
@@ -354,7 +354,6 @@ if (isset($_GET['id'])) {
             </div>
           </div>
         </div>
-
         <br><br>
 
         <div id="contact" class="container slideanim">
@@ -365,7 +364,7 @@ if (isset($_GET['id'])) {
                   <br>
                   <div class="content">
                     <i class='bx bxs-navigation bx-contact' ></i>
-                    <p> Dasma, Philippines</p>
+                    <p> Carlos Q. Trinidad Avenue Brgy. Salawag Dasmariñas City, Cavite 4114</p>
                   </div>
                   <div class="content">
                     <i class='bx bx-phone bx-contact'></i>
@@ -373,36 +372,44 @@ if (isset($_GET['id'])) {
                   </div>
                   <div class="content">
                     <i class='bx bxs-envelope bx-contact' ></i>
-                    <p> tupcservices@gmail.com</p>
+                    <p> pedepartment2@gmail.com</p>
                   </div>
               </div>
               <div class="col-sm-8 ">
-                  <form method="#">
+                  <form action="functions.php" method="POST">
                       <div class="container">
                           <div class="row">
+                          <?php 
+                              $account = $_SESSION['get_data']['email'];
+                              $query = "SELECT * FROM registration WHERE email='$account'";
+                              $result = mysqli_query($conn, $query);
+                              $check_row = mysqli_num_rows($result);
+                              while ($row = mysqli_fetch_array($result)) {
+                          ?>
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                      <input type="text" name="txtName" class="form-control" placeholder="Name" value="" required />
-                                  </div>
-                                  <br>
-                                  <div class="form-group">
-                                      <input type="email" name="txtEmail" class="form-control" placeholder="Email" value="" required/>
-                                  </div>
-                                  <br>
-                                  <div class="form-group">
-                                      <input type="text" name="txtPhone" class="form-control" placeholder="Phone Number" value="" required/>
-                                  </div>
-                                  <br>
-                              </div>
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <textarea name="txtMsg" class="form-control" placeholder="Message" style="width: 100%; height: 150px;" required></textarea>
-                                  </div>
-                                  <br>
-                              </div>
-                              <div class="form-group mx-auto text-center m-3">
-                                <button class="btn btn-custom">Send Message</button>
-                              </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?>" readonly />
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo $row['email'] ?>" readonly/>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="contact" placeholder="Phone Number" value="<?php echo $row['contact'] ?>" readonly/>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <textarea name="txtmsg" class="form-control" placeholder="Message" style="width: 100%; height: 150px;" required></textarea>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="form-group mx-auto text-center m-3">
+                                  <button type="submit" name="contact_submit" class="btn btn-custom">Send Message</button>
+                                </div>
+                            <?php } ?>
                           </div>
                       </div>
                   </form>

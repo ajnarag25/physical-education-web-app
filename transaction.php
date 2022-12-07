@@ -98,7 +98,7 @@
                 <div class="col-lg-4">
                     <br>
                     <div class="card-body card_custom text-center">
-                        <img src="assets/images/sample_equipment.jpg" alt="avatar" class="card-img-top">
+                        <img src="assets/images/official_equipment.jpg" alt="avatar" class="card-img-top">
                         <h3 class="my-3"> <strong>Borrowed Equipments</strong></h3>
                         <p class="text-muted mb-1">Pending Transaction</p>
                         <?php 

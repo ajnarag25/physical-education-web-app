@@ -88,7 +88,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="overlay-image" style="background-image:url(assets/images/bg.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/official_bg.jpg);"></div>
             <div class="container carousel-body text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
               <h1>Welcome Student in our P.E Department Website</h1>
               <p>This website is to provide a service where you can now inquire a uniform, reserve, and borrow equipment from the department
@@ -111,7 +111,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <div class="overlay-image" style="background-image:url(assets/images/sample_equipment.jpg);"></div>
+            <div class="overlay-image" style="background-image:url(assets/images/official_equipment.jpg);"></div>
             <div class="container carousel-body-2">
               <h1>Borrowing of Equipments</h1>
               <p>Generate your own OTP and simply borrow equipment in the borrowing machine <br> or either submit a form and borrow it in the department.</p>
@@ -208,7 +208,7 @@
               <div class="col-12 col-sm-4 col-lg-2 ">
                 <div class="single_advisor_profile">
                   <div class="advisor_thumb"><img src="assets/profile/rai.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/aziar.gumarang04" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/raizagumarang" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.instagram.com/raiza.gumarang/" target="_blank"><i class="fa fa-instagram"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Raiza Gumarang</h6>
@@ -220,7 +220,7 @@
               <div class="col-12 col-sm-4 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/naj.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/nigelle.salvador" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/Nigellejarred" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.instagram.com/nigellejarred/" target="_blank"><i class="fa fa-instagram"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Nigelle Salvador</h6>
@@ -233,7 +233,7 @@
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/aj.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.linkedin.com/in/avor-john-narag-660091221/" target="_blank"><i class="fa fa-linkedin"></i></a><a href="https://github.com/ajnarag25" target="_blank"><i class="fa fa-github"></i></a><a href="https://www.facebook.com/avorjohn.narag/" target="_blank"><i class="fa fa-facebook"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Avor John Narag</h6>
@@ -245,7 +245,7 @@
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/sean.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.facebook.com/wooopieee" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://github.com/SeanDotExe" target="blank"><i class="fa fa-github"></i></a><a href="https://seanpw.herokuapp.com/" target="_blank"><i class="fa fa-globe"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Sean Monacillo</h6>
@@ -257,7 +257,7 @@
               <div class="col-12 col-sm-6 col-lg-2">
                 <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                   <div class="advisor_thumb"><img src="assets/profile/rilan.jpg" width="150" alt="">
-                    <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="social-info"><a href="https://www.linkedin.com/in/michael-rilan-272b92233/" target="_blank"><i class="fa fa-linkedin"></i></a><a href="https://github.com/michaelrilan" target="_blank"><i class="fa fa-github"></i></a><a href="https://www.facebook.com/michaelangelo.rilan" target="_blank"><i class="fa fa-facebook"></i></a></div>
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Michael Rilan</h6>
@@ -279,7 +279,7 @@
                   <br>
                   <div class="content">
                     <i class='bx bxs-navigation bx-contact' ></i>
-                    <p> Dasma, Philippines</p>
+                    <p> Carlos Q. Trinidad Avenue Brgy. Salawag Dasmariñas City, Cavite 4114</p>
                   </div>
                   <div class="content">
                     <i class='bx bx-phone bx-contact'></i>
@@ -287,7 +287,7 @@
                   </div>
                   <div class="content">
                     <i class='bx bxs-envelope bx-contact' ></i>
-                    <p> tupcservices@gmail.com</p>
+                    <p> pedepartment2@gmail.com</p>
                   </div>
               </div>
               <div class="col-sm-8 ">

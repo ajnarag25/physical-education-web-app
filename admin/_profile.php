@@ -316,73 +316,6 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <form>
-                            <div class="header">
-                                <h2><strong>Head Departments</strong> Settings</h2>
-                            </div>
-                            <div class="body">
-                                <div class="col-lg-12">                
-                                    <button type="button" id="edithead" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-edit"></i></button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="user">Office of Student Affair</label>
-                                            <input id="head1" name="user" type="text" class="form-control" value="Jane Doe" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Department of Engineering Science</label>
-                                            <input id="head2" name="change" type="text" class="form-control" value="Ann Whitaker" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">Department of Industrial Technology</label>
-                                            <input id="head3" name="change" type="text" class="form-control" value="Lisa Hurley" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 js-sweetalert">
-                                        <button id="savehead" type="submit" class="btn btn-primary" data-type="success2" disabled>Save Changes</button>
-                                        <button id="cancelhead" class="btn btn-secondary" disabled>Cancel</button>
-                                    </div>                                
-                                </div>                              
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="card">
-                        <form>
-                            <div class="header">
-                                <h2><strong>Uniform Prices</strong> Settings</h2>
-                            </div>
-                            <div class="body">
-                                <div class="col-lg-12">                
-                                    <button type="button" id="editpe" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-edit"></i></button>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="user">PE 1 (in Pesos)</label>
-                                            <input id="pe1" name="user" type="text" class="form-control" value="500" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="change">PE 2 (in Pesos)</label>
-                                            <input id="pe2" name="change" type="text" class="form-control" value="550" disabled required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 js-sweetalert">
-                                        <button id="savepe" type="submit" class="btn btn-primary" data-type="success2" disabled>Save Changes</button>
-                                        <button id="cancelpe" class="btn btn-secondary" disabled>Cancel</button>
-                                    </div>                                
-                                </div>                              
-                            </div>
-                        </form>
-                    </div>
 
 
                 </div>
@@ -460,53 +393,6 @@
         document.getElementById('cancelpass').disabled = true;    
 	}; 
 
-      // Change Head DOM //
-      document.getElementById('edithead').onclick = function(){
-        document.getElementById('head1').disabled = false;
-        document.getElementById('head2').disabled = false;
-        document.getElementById('head3').disabled = false;
-        document.getElementById('savehead').disabled = false;
-        document.getElementById('cancelhead').disabled = false;
-	};  
-
-    document.getElementById('cancelhead').onclick = function(){
-		document.getElementById('head1').disabled = true;
-        document.getElementById('head2').disabled = true;
-        document.getElementById('head3').disabled = true;
-        document.getElementById('savehead').disabled = true;
-        document.getElementById('cancelhead').disabled = true;   
-	}; 
-
-    // Change P.E. Price DOM //
-    document.getElementById('editpe').onclick = function(){
-        document.getElementById('pe1').disabled = false;
-        document.getElementById('pe2').disabled = false;
-        document.getElementById('savepe').disabled = false;
-        document.getElementById('cancelpe').disabled = false;
-	};  
-
-    document.getElementById('cancelpe').onclick = function(){
-		document.getElementById('pe1').disabled = true;
-        document.getElementById('pe2').disabled = true;
-        document.getElementById('savepe').disabled = true;
-        document.getElementById('cancelhead').disabled = true;   
-	}; 
-
-
-    // Change P.E. VCode DOM //
-    document.getElementById('edit_vcode').onclick = function(){
-        document.getElementById('vcode1').disabled = false;
-        document.getElementById('vcode2').disabled = false;
-        document.getElementById('save_vcode').disabled = false;
-        document.getElementById('cancel_vcode').disabled = false;
-	};  
-
-    document.getElementById('cancel_vcode').onclick = function(){
-		document.getElementById('vcode1').disabled = true;
-        document.getElementById('vcode2').disabled = true;
-        document.getElementById('save_vcode').disabled = true;
-        document.getElementById('cancel_vcode').disabled = true;   
-	}; 
 
 </script>
 
