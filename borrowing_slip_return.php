@@ -91,7 +91,7 @@
                         <?php
 
             
-                        $fetch_data="SELECT * FROM borrowing_machine_info WHERE id_no ='$equip'";
+                        $fetch_data="SELECT * FROM borrowing_machine_info WHERE id_no ='$equip' and status = 'UNRETURNED'";
                         $result_data = mysqli_query($conn, $fetch_data);
 
                         while ($row = mysqli_fetch_array($result_data)) {
@@ -99,6 +99,9 @@
                         ?>
                         <p><b>Note:</b> 
                           <br>
+                          <?php
+                          echo $equip;
+                          ?>
                           *Each ball has its own ID, your information will be saved as the last borrower of the specified equipment.
                         </p>
                         <div class="col-md-12">
@@ -166,7 +169,7 @@
                               <input type="hidden" name = "otp_generate" value = '<?php echo $otp_equipment ?>'>
                               <input type="hidden" name = "typed" value = '0'>
                               <input type="hidden" name = "actionn" value = 'RETURNING'>
-                              <a href = "pickequipment.php" class="btn btn-secondary">Back</a>
+                              <a href = "home.php" class="btn btn-secondary">Back</a>
                               <button type = "submit" name = "passed_borrower_slip_return" class="btn btn-danger"  id = "btn_confirm_generate">Generate OTP</button>
                             </form>                 
                         </div> <!---end of text center for buttons--->

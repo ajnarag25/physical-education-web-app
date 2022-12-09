@@ -13,7 +13,7 @@ if(isset($_POST['command'])){
 
 if (isset($_POST['otpdata'])) {
     $otp =$_POST['otpdata'];
-    $query_get_data = "SELECT * FROM otp_requests WHERE otp_generate = '$otp' and is_expired = '0'";
+    $query_get_data = "SELECT * FROM otp_requests WHERE otp_generate = '$otp' and typed = '0' and is_expired = '0'";
     
     $result_get_data = mysqli_query($conn, $query_get_data);
     $row_get_data = mysqli_num_rows($result_get_data);
@@ -60,8 +60,7 @@ if (isset($_POST['otpdata'])) {
 
         $conn->query("UPDATE otp_requests SET typed='1' WHERE otp_generate='$otp'") or die($conn->error);
         $command = $fetch_data['actionn'].$fetch_data['equipment_to_borrow'];
-        echo $command;
-
+        
 
         if($command == 'BORROWINGvolleyball' OR $command == 'BORROWINGbasketball'){
             $conn->query("UPDATE otp_requests SET is_expired='1' WHERE otp_generate='$otp'") or die($conn->error);
@@ -71,6 +70,20 @@ if (isset($_POST['otpdata'])) {
             $conn->query("UPDATE ball_sequence SET $equipment= '$ball_id_2' WHERE id ='3';") or die($conn->error);
             $conn->query("UPDATE ball_sequence SET $equipment='$ball_id_1' WHERE id ='2';") or die($conn->error);
             $conn->query("UPDATE ball_sequence SET $equipment='' WHERE id ='1';") or die($conn->error);
+            
+        }
+        if ($command == 'BORROWINGvolleyball') {
+            echo 'BORROW_V_BALL';
+        }
+        elseif ($command == 'BORROWINGbasketball') {
+            echo 'BORROW_B_BALL';
+        }
+        elseif($command == 'RETURNINGvolleyball'){
+                echo 'RETURN_V_BALL';
+
+        }
+        elseif ($command == 'RETURNINGbasketball') {
+            echo 'RETURN_B_BALL';
         }
     }
     else {
@@ -93,7 +106,7 @@ if (isset($_POST['confirmreturn'])) {
         $time_return = date("h:ia");
         $date_return = date("Y-m-d");
 
-        $query_ball_id = "SELECT * FROM borrowing_machine_info WHERE id_no = '$id_no'";
+        $query_ball_id = "SELECT * FROM borrowing_machine_info WHERE id_no = '$id_no' and status = 'UNRETURNED'";
         $result_ball_id = mysqli_query($conn, $query_ball_id);
         $fetch_ball_id = mysqli_fetch_array($result_ball_id);
 
@@ -140,6 +153,6 @@ if (isset($_POST['confirmreturn'])) {
 
 <?php
 if (isset($_POST['reset_otp'])) {
-    $conn->query("DELETE FROM otp_requests WHERE typed  = '1';") or die($conn->error);
+    $conn->query("DELETE FROM otp_requests WHERE typed  = '1' AND is_expired = '0';") or die($conn->error);
 }
 ?>

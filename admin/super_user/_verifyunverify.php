@@ -138,7 +138,7 @@
                     <div class="card">
                         <div class="header">
                             
-                            <h2><strong>Unverified</strong> Accounts</h2>
+                            <h2><strong>Unverified</strong> Accounts - Student</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
@@ -205,11 +205,80 @@
                             </table>
                         </div>
                     </div>
+                                        
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2><strong>Unverified</strong> Accounts - Administrator</h2>
+                        </div>
+                        <div class="table-responsive" style="text-align: center;">
+                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM admin WHERE acc_status= 'UNVERIFIED'";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><img src="../<?php echo $row['image'] ?>" width="50px" alt=""></td>
+                                        <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                        <td><?php echo $row['email'] ?></td>
+                                        <td>
+                                            
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Verify Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Verifying Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_verify" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="verify_acc_admin">Verify Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </td>
+                                    </tr>
+                                   
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     <div class="card">
                         <div class="header">
                             
-                            <h2><strong>Verified</strong> Accounts</h2>
+                            <h2><strong>Verified</strong> Accounts - Student</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
@@ -349,6 +418,124 @@
                         </div>
                     </div>
    
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2><strong>Verified</strong> Accounts - Administrator</h2>
+                        </div>
+                        <div class="table-responsive" style="text-align: center;">
+                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = "SELECT * FROM admin WHERE acc_status='VERIFIED'";
+                                        $result = mysqli_query($conn, $query);
+                                        $check_row = mysqli_num_rows($result);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><img src="../<?php echo $row['image'] ?>" width="50px" alt=""></td>
+                                        <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
+                                        <td><?php echo $row['email'] ?></td>
+                                        <td>
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#accdetails<?php echo $row['id'] ?>"><i class="zmdi zmdi-receipt"></i> </button>
+                                             <!-- Modal for Account Details -->
+                                             <div class="modal fade" id="accdetails<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="title" id="largeModalLabel">Account Details</h4>
+                                                        </div>
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="card">
+                                                                    <form action="functions.php" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Account Details of: <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h6>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputFirst" class="form-label">First name</label>
+                                                                                    <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" value="<?php echo $row['firstname'] ?>" name="firstname" readonly>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputMiddle" class="form-label">Middle name</label>
+                                                                                    <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" value="<?php echo $row['middlename'] ?>" name="middlename" readonly>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <label for="inputLast" class="form-label">Last name</label>
+                                                                                    <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" value="<?php echo $row['lastname'] ?>" name="lastname" readonly>
+                                                                                </div>
+                                                                            </div> 
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputEmail" class="form-label">Email</label>
+                                                                                    <input type="text" class="form-control" id="inputEmail" value="<?php echo $row['email'] ?>" name="email" readonly>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputCourse" class="form-label">Status</label>
+                                                                                    <input style="color:green" type="text" class="form-control" id="inputStatus" value="<?php echo $row['status'] ?>" name="status" readonly>
+                                                                                </div>
+                                                                            </div>        
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-rotate-left"></i>  </button>
+                                             <!-- Modal for Delete -->
+                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Unverified Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Unverifying Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_unverify" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="unverify_acc_admin">Unverify Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </td>
+                                    </tr>
+                                   
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>  
             

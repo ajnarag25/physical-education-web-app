@@ -99,11 +99,11 @@
                     <br>
                     <div class="card-body card_custom text-center">
                         <img src="assets/images/official_equipment.jpg" alt="avatar" class="card-img-top">
-                        <h3 class="my-3"> <strong>Borrowed Equipments</strong></h3>
-                        <p class="text-muted mb-1">Pending Transaction</p>
+                        <h3 class="my-3"> <strong>Unreturned Equipment</strong></h3>
+                        <p class="text-muted mb-1"></p>
                         <?php 
                             $account = $_SESSION['get_data']['id_no'];
-                            $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='PENDING'";
+                            $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='UNRETURN'";
                             $result = mysqli_query($conn, $query);
                             $borrow = mysqli_num_rows($result);
                         ?>

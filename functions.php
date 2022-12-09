@@ -1555,6 +1555,18 @@ if (isset($_POST['contact_submit'])) {
         <?php
     }
 }
+
+// $email = "user@domain.com";
+
+// if (preg_match("/@domain\.com$/", $email)) {
+//   // The email address is from the domain.com domain
+// } else {
+//   // The email address is not from the domain.com domain
+// }
+
+
 ?>
+
+
 
 

@@ -244,7 +244,7 @@ if (isset($_GET['id'])) {
                           <br><br>
                           <h3>Borrow Equipments</h3>
                           <br>
-                          <p>Your account has been reported by the admin, Click the Transaction Menu for more info.</p>
+                          <p>Your account has been reported by the admin,Please Report to the PE Department Immediately</p>
                           <br>
                           <h5 class = 'text-center'>Banned Temporarily</h5>
                         </div>
