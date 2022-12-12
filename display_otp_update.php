@@ -9,7 +9,7 @@ $query = "SELECT otp_generate FROM otp_requests where id_no = '$id_no';";
 $result = mysqli_query($conn, $query);
 $check = mysqli_num_rows($result);
 if ($check > 0) {
-  $id_no=  $_SESSION['get_data']['id_no'];
+    $id_no=  $_SESSION['get_data']['id_no'];
 
 
     //if there's request for the specific user
@@ -48,7 +48,18 @@ if ($check > 0) {
             <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
                     
             <li align = "justify center" class = "alignments">The OTP <b>expires</b> after 5 minutes</li>
-                            <br>     
+                            <br>
+                            <?php
+                            if(isset($_POST['otp_error'])){
+                              ?>
+                              <script>
+                                  alert("OTP ERROR");
+
+                              </script>
+                              <?php
+
+                            }
+                            ?>     
         </div>
         <div class="row">
             <div class="text-center">
@@ -144,10 +155,12 @@ if ($check > 0) {
 
         elseif ($row['actionn'] == 'RETURNING') {
           if($fet_exec_check_unreturned > 0){
-          ?>
-          <h4 class= "text-center">The return door for <?php echo $row['equipment_to_borrow']?> has been Unlocked!</h4>
-          <h5 class = "text-center">Please return the ball before the time expires</h5>
-          <h5 class = "text-center"><b>Note:</b> The Returning Process will reset if the sports equipment return UNSUCCESSFULLY</h5>
+          ?>\
+          <br>
+          <br>
+          
+          <h4 class= "text-center"><?php echo $row['equipment_to_borrow']?> Return Door has been Unlocked</h4>
+          <h5 class = "text-center"> Please Return the ball within 15 seconds. The door will <b>Lock<b> after the time expires</h5>
           <?php
           }
           else {
@@ -173,6 +186,8 @@ if ($check > 0) {
       }//end of else
     }// end of while loop
     } //end of check if condition
+
+
 else {
 ?>
 <div>

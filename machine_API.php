@@ -88,6 +88,7 @@ if (isset($_POST['otpdata'])) {
     }
     else {
         echo"otp_error";
+        
     }
 }
 
