@@ -50,7 +50,7 @@
 
       <br><br>
 
-      <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+      <div class="container marg-top d-flex justify-content-center mt-5" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
         <div class="card card_custom">
             <i class='bx bxs-key bx-custom text-center'></i>
             <br>

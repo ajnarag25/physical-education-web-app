@@ -52,7 +52,7 @@
 
       <br><br>
 
-        <div class="container text-center">
+        <div class="container text-center mt-5">
             <h1>Your Account is Unverified !</h1>
             <br>
             <h4>Please wait for your account verification.</h4>
