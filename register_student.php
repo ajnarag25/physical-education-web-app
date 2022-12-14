@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="input_stuID" class="form-label">ID-number(TUPC-xx-xxxx)</label>
-                        <input type="text" class="form-control" id="inputstuid" name="stuid" value="TUPC-" required>
+                        <input type="text" class="form-control" id="inputstuid"  name="stuid" value="TUPC-" required>
                     </div>
                     <div class="col-md-4">
                         <label for="inputEmail" class="form-label">Email</label>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="inputContact" class="form-label">Contact No.</label>
-                        <input type="text" class="form-control" id="inputContact" name="contact" required>
+                        <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="11" id="inputContact" name="contact" required>
                     </div>
                 </div> 
                 <br>
@@ -203,11 +203,6 @@
             input.value = input.value.replace(regex, "");
         }
     </script>
-    <script>
-        $("input[id='inputContact']").on('input', function(e) {
-            $(this).val($(this).val().replace(/[^0-9]/g, ''));
-        });
-    </script>   
     <script>
         function gsfeOnly(input) {
             let regex = new RegExp('[a-z0-9]+@gsfe.tupcavite.edu.ph');
