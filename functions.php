@@ -508,14 +508,15 @@ if (isset($_POST['request_student_1'])) {
     $sizeT = $_POST['tshirt'];
     $sizeS = $_POST['shorts'];
     $sizeJ = $_POST['sizej'];
-    $email = $_POST['email'];
+    $emails = $_POST['email'];
     $image = $_POST['image'];
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
-    if ($email != null){
+    if ($emails != null){
         $conn->query("INSERT INTO inquire (id_no,firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
-        VALUES('$id_number','$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        VALUES('$id_number','$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$emails', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        include "email_inquire.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -575,16 +576,17 @@ if (isset($_POST['request_student_2'])) {
     $sizeT = $_POST['tshirt'];
     $sizeS = $_POST['sizes'];
     $sizeJ = $_POST['joggingpants'];
-    $email = $_POST['email'];
+    $emails = $_POST['email'];
     $image = $_POST['image'];
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
 
-    if ($email != null){
+    if ($emails != null){
         $conn->query("INSERT INTO inquire (id_no, firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
-        VALUES('$id_number','$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        VALUES('$id_number','$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$emails', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        include "email_inquire.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -645,14 +647,15 @@ if (isset($_POST['request_teacher_1'])) {
     $sizeT = $_POST['tshirt'];
     $sizeS = $_POST['shorts'];
     $sizeJ = $_POST['sizej'];
-    $email = $_POST['email'];
+    $emails = $_POST['email'];
     $image = $_POST['image'];
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
-    if ($email != null){
+    if ($emails != null){
         $conn->query("INSERT INTO inquire (id_no, firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
-        VALUES('N/A', '$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        VALUES('N/A', '$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$emails', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        include "email_inquire.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -711,17 +714,17 @@ if (isset($_POST['request_teacher_2'])) {
     $sizeT = $_POST['tshirt'];
     $sizeS = $_POST['sizes'];
     $sizeJ = $_POST['joggingpants'];
-    $email = $_POST['email'];
+    $emails = $_POST['email'];
     $image = $_POST['image'];
     $status = $_POST['status'];
     $note = $_POST['note'];
     $date =  $_POST['date'];
     
 
-
-    if ($email != null){
+    if ($emails != null){
         $conn->query("INSERT INTO inquire (id_no, firstname, middlename, lastname, course, department, gender, teacher, size_t, size_s, size_j, email, image, status, note, date, sched_pay, sched_pickup) 
-        VALUES('N/A', '$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$email', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        VALUES('N/A', '$first','$middle','$last', '$course', '$dept', '$gender', '$teacher', '$sizeT', '$sizeS', '$sizeJ', '$emails', '$image', '$status', '$note', '$date', 'N/A', 'N/A')") or die($conn->error);
+        include "email_inquire.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -908,6 +911,7 @@ if (isset($_POST['reserve_facility'])) {
     if ($check_mail != null){
         $conn->query("INSERT INTO reserve (id_no, email, name, dept_course, date, time, booking, purpose, participants, reason, status, resched) 
         VALUES('$id_number','$check_mail','$names','$dept_course','$dates', '$times', '$bookings', '$purposes', '$participants', '$reasons', '$status', '$rescheds')") or die($conn->error);
+        include "email_reserve.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

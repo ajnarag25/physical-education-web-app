@@ -138,7 +138,7 @@
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>" required>
+                                    <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>" readonly>
                                 </div>
                             </div>
                             <hr>
