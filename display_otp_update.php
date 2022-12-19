@@ -41,9 +41,10 @@ if ($check > 0) {
           if(($actionn == 'BORROWING') and ($fet_exec_check_ball[$check_nearest_ball] != NULL or $fet_exec_check_ball[$check_nearest_ball] != '')){ 
 ?>
         <div>
-        <div class="text-center">
+        <br><br>
+        <div class="text-center mt-5">
             <h4 id = "thistypeotp">Type The OTP into the Machine</h4>
-            
+            <br>
             <b>Important Note:</b>
             <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
                     
@@ -84,8 +85,9 @@ if ($check > 0) {
           }
           elseif(($actionn =='BORROWING') and ($fet_exec_check_ball[$check_nearest_ball] == NULL or $fet_exec_check_ball[$check_nearest_ball] == '')) {
             ?>
-                      <div>
-          <div class="text-center">
+          <div>
+          <br><br>
+          <div class="text-center mt-5">
             <h4 id = "thistypeotp"><?php echo $row['equipment_to_borrow']?> is currently not available, please try again later</h4>
         </div>
         <div class="row">
@@ -98,9 +100,10 @@ if ($check > 0) {
           }else{
             ?>
           <div>
-              <div class="text-center">
+            <br><br>
+              <div class="text-center mt-5">
                   <h4 id = "thistypeotp">Type The OTP into the Machine</h4>
-                  
+                  <br>
                   <b>Important Note:</b>
                   <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
                           
@@ -134,11 +137,13 @@ if ($check > 0) {
         if ($row['actionn'] == 'BORROWING') {
         ?>
         <div>
-          <div class="text-center">
+          <br><br>
+          <div class="text-center mt-5">
             <h4 id = "thistypeotp">Please Wait and Claim the borrowed ball in the Machine</h4>
-            
+            <br>
             <b>Important Note:</b>
-            <li align = "justify center" class = "alignments">If the ball is <b>deflated/damaged</b>, Please return the ball to the PE Department <b>Immediately</b></li>
+            <li align = "justify center" class = "alignments">If the ball is <b>deflated/damaged or lost</b>, Please return the ball to the PE Department <b>Immediately</b></li>
+            <li align = "justify center" class = "alignments">RGB LED turns red if the inputted OTP is wrong or expired</li>
                             <br>     
         </div>
         <div class="row">
@@ -155,18 +160,21 @@ if ($check > 0) {
 
         elseif ($row['actionn'] == 'RETURNING') {
           if($fet_exec_check_unreturned > 0){
-          ?>\
+          ?>
           <br>
           <br>
-          
-          <h4 class= "text-center"><?php echo $row['equipment_to_borrow']?> Return Door has been Unlocked</h4>
-          <h5 class = "text-center"> Please Return the ball within 15 seconds. The door will <b>Lock<b> after the time expires</h5>
+          <div class="mt-5">
+            <h4 class= "text-center"><?php echo $row['equipment_to_borrow']?> Return Door has been Unlocked</h4>
+            <h5 class = "text-center"> Please Return the ball within 15 seconds. The door will <b>Lock<b> after the time expires</h5>
+          </div>
+        
           <?php
           }
           else {
             ?>
-                    <div>
-          <div class="text-center">
+          <div>
+            <br><br>
+          <div class="text-center mt-5">
             <h4 id = "thistypeotp">Equipment Returned Successfully! <br>
             You can view and download your borrower's slip in the transaction menu 
             </h4>
@@ -191,9 +199,11 @@ if ($check > 0) {
 else {
 ?>
 <div>
-        <div class="text-center">
+  <br><br>
+        <div class="text-center mt-5">
             <h3 id = "thistypeotp">OTP/Request has been Expired</h3>
         </div>
+        <br>
         <div class="row">
             <div class="text-center">
               <form action="functions.php" id = "gen_new_otp" method="post">
