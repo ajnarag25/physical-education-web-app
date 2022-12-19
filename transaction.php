@@ -99,15 +99,26 @@
                     <br>
                     <div class="card-body card_custom text-center">
                         <img src="assets/images/official_equipment.jpg" alt="avatar" class="card-img-top">
-                        <h3 class="my-3"> <strong>Unreturned Equipment</strong></h3>
+                        <h3 class="my-3"> <strong>Borrowing of Equipment</strong></h3>
+                        <p class="text-muted mb-1">Unreturned Equipment</p>
                         <p class="text-muted mb-1"></p>
                         <?php 
                             $account = $_SESSION['get_data']['id_no'];
-                            $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='UNRETURN'";
+                            $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' and status='UNRETURNED'";
                             $result = mysqli_query($conn, $query);
                             $borrow = mysqli_num_rows($result);
+                            $fet_equip = mysqli_fetch_array($result);
                         ?>
-                        <p><span class="text-danger" style="font-size:25px"><?php echo $borrow ?></span></p>
+                        <?php
+                        if ($borrow>0) {    
+                        ?>
+                        <p><span class="text-danger" style="font-size:25px"><?php echo $fet_equip['equipment'] ?></span></p>
+                        <?php
+                        }else{
+                        ?>
+                        <p><span class="text-danger" style="font-size:25px">None</span></p>
+                        <?php
+                        }?>
                     </div>
                     
                 </div>
@@ -331,73 +342,56 @@
             </div>
             <br>
             <h4>Borrowed Equipment - History</h4>
-            <a class="text-danger" style="font-size:15px;" href="">Clear All</a>
+            
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover" id="myTable3">
                     <thead>
                         <tr>
-                            <th>Date Submitted</th>
-                            <th>Size T-Shirt</th>
-                            <th>Size Shorts</th>
-                            <th>Size Joggingpants</th>
-                            <th>Teacher</th>
-                            <th>Payment Schedule</th>
-                            <th>Pickup Schedule</th>
+                                
+                            <th>Equipment</th>
+                            <th>Ball ID</th>
+                            <th>Time Borrowed</th>
+                            <th>Date Borrowed</th>
+                            <th>Time Returned</th>
+                            <th>Date Returned</th>
                             <th>Status</th>
-                            <th>Note</th>
+                            <th>Borrowing Slip</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
 
                     <?php 
                         $account = $_SESSION['get_data']['id_no'];
-                        $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account'";
+                        $query = "SELECT * FROM borrowing_machine_info WHERE id_no='$account' order by sort_date_time desc";
                         $result = mysqli_query($conn, $query);
                         $check_row = mysqli_num_rows($result);
                         while ($row = mysqli_fetch_array($result)) {
                     ?>
 
                     <tr>
-                        <td><?php echo $row['date'] ?></td>
-                        <td><?php echo $row['size_t'] ?></td>
-                        <td><?php echo $row['size_s'] ?></td>
-                        <td><?php echo $row['size_j'] ?></td>
-                        <td><?php echo $row['teacher'] ?></td>
-                        <td><?php echo $row['sched_pay'] ?></td>
-                        <td><?php echo $row['sched_pickup'] ?></td>
+                        <td><?php echo $row['equipment'] ?></td>
+                        <td><?php echo $row['ball_id'] ?></td>
+                        <td><?php echo $row['time_borrow'] ?></td>
+                        <td><?php echo $row['date_borrow'] ?></td>
+                        <td><?php echo $row['time_return'] ?></td>
+                        <td><?php echo $row['date_return'] ?></td>
                         <td>
                             <?php 
-                                if($row['status'] == 'PENDING'){
+                                if($row['status'] == 'UNRETURNED'){
                                     echo'
-                                        <span class="text-warning">PENDING</span>
+                                        <span class="text-warning">UNRETURNED</span>
                                     ';
-                                }elseif($row['status'] == 'UNPAID'){
+                                }elseif($row['status'] == 'RETURNED'){
                                     echo'
-                                        <span class="text-warning">UNPAID</span>
-                                    ';
-                                }elseif($row['status'] == 'PAID'){
-                                    echo'
-                                        <span class="text-primary">PAID</span>
-                                    ';
-                                }elseif($row['status'] == 'DECLINED'){
-                                    echo'
-                                        <span class="text-danger">DECLINED</span>
-                                    ';
-                                }elseif($row['status'] == 'CANCELED'){
-                                    echo'
-                                        <span class="text-danger">CANCELED</span>
-                                    ';
-                                }
-                                else{
-                                    echo'
-                                        <span class="text-success">RECEIVED</span>
+                                        <span class="text-primary">RETURNED</span>
                                     ';
                                 }
                             
                             ?>
                 
                         </td>
-                        <td><?php echo $row['note'] ?></td>
+                        <td><button class="btn btn-info btn-sm " style = "color: white ;">Download</button></td>
                     </tr>
 
                     <?php } ?>
@@ -420,6 +414,7 @@
     <script>
       $('#myTable1').DataTable()
       $('#myTable2').DataTable()
+      $('#myTable3').DataTable()
     </script>
 
 </body>
