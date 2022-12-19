@@ -623,7 +623,40 @@
                                                     <?php
                                                     if ($row_rep_all['status'] == 'pending') {
                                                     ?>
-                                                    <button class="btn btn-info btn-sm ">Resolve</button>
+                                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#resolve<?php echo $row_rep_all['id']?>">Resolve</button>
+                                                    
+                                                    <!-- Modal for resolve student -->
+                                                    <div class="modal fade" id="resolve<?php echo $row_rep_all['id']?>" tabindex="-1" role="dialog">
+                    
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Resolve Student <?php echo $_SESSION['get_id_no'].":"." ".$_SESSION['get_name']?>?</h4>
+                                                                <p>The Ban will be lifted if you click save changes</p>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="body">
+                                                                            <form action="functions.php" id="resolve_account" method="post">
+                                                
+                                                                                <label for="name">Action by:</label>
+                                                                                <div class="form-group">                  
+                                                                                    <input type="text" id="name" name = "admin_name" class="form-control" value = "<?php echo  $_SESSION['get_data']['firstname'].' '.$_SESSION['get_data']['lastname'];?>" readonly>
+                                                                                    <input type="hidden" name = "fet_id" value = <?php echo $row_rep_all['id'] ?>>
+                                                                                </div>
+                                                                                <div class="modal-footer">      
+                                                                                        <button type="submit" name = "submit_resolve" class="btn btn-outline-success btn-round waves-effect">Save Changes</button>
+                                                                                        <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!---end div of modal--->
                                                     <?php
                                                     }else{
                                                     echo "";
@@ -700,6 +733,9 @@
         </div>
     </div>
 </div><!---end div of modal--->
+
+
+
 
 
 <style type="text/css">

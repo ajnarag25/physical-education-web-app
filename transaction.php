@@ -126,18 +126,10 @@
             </div>
             <br><br>
             <h4>Inquire Uniform - History</h4>
-            <?php 
-                $account = $_SESSION['get_data']['email'];
-                $query = "SELECT * FROM inquire WHERE email='$account'";
-                $result = mysqli_query($conn, $query);
-                $check_row = mysqli_num_rows($result);
-                while ($row = mysqli_fetch_array($result)) {
-            ?>
-
-            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllInquire<?php echo $row['id'] ?>">Clear All</a>
-            <br><br> 
+            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllInquire<?php $_SESSION['get_data']['email'] ?>">Clear All</a>
+            <br><br>
             <!-- Modal -->
-            <div class="modal fade" id="clearAllInquire<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="clearAllInquire<?php $_SESSION['get_data']['email'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -150,8 +142,7 @@
                     </div>
                     <form action="functions.php" method="POST">
                         <div class="modal-footer">
-                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                            <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                            <input type="hidden" name="email" value="<?php echo $_SESSION['get_data']['email'] ?>">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger" name="clear_inquire">Clear All</button>
                         </div>
@@ -159,7 +150,6 @@
                     </div>
                 </div>
             </div>
-            <?php } ?>
 
             <div class="table-responsive">
                 <table class="table table-hover" id="myTable1">
@@ -236,18 +226,11 @@
             </div>
             <br>
             <h4>Reservation of Facility - History</h4>
-            <?php 
-                $account = $_SESSION['get_data']['email'];
-                $query = "SELECT * FROM reserve WHERE email='$account'";
-                $result = mysqli_query($conn, $query);
-                $check_row = mysqli_num_rows($result);
-                while ($row = mysqli_fetch_array($result)) {
-            ?>
 
-            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllReserve<?php echo $row['id'] ?>">Clear All</a>
+            <a class="btn btn-danger" href="" style="font-size:15px;" data-bs-toggle="modal" data-bs-target="#clearAllReserve<?php $_SESSION['get_data']['email'] ?>">Clear All</a>
             <br><br> 
             <!-- Modal -->
-            <div class="modal fade" id="clearAllReserve<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="clearAllReserve<?php $_SESSION['get_data']['email'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -260,8 +243,7 @@
                     </div>
                     <form action="functions.php" method="POST">
                         <div class="modal-footer">
-                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                            <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                            <input type="hidden" name="email" value="<?php echo $_SESSION['get_data']['email'] ?>">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger" name="clear_reserve">Clear All</button>
                         </div>
@@ -270,7 +252,6 @@
                     </div>
                 </div>
             </div>
-            <?php } ?>
             <div class="table-responsive">
                 <table class="table table-hover" id="myTable2">
                     <thead>

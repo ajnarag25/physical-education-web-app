@@ -1391,7 +1391,10 @@ if (isset($_POST['update_password'])) {
 // CLEAR HISTORY INQUIRE
 if (isset($_POST['clear_inquire'])) {
     $get_email = $_POST['email'];
-    if ($get_email == null){
+    $sql = "SELECT * FROM inquire WHERE email='$get_email'";
+    $result = mysqli_query($conn, $sql);
+
+    if(!$result->num_rows > 0){
         ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1399,34 +1402,8 @@ if (isset($_POST['clear_inquire'])) {
         <script>
             $(document).ready(function(){
                 Swal.fire({
-                icon: 'error',
-                title: 'An Error Occured',
-                text: 'Something went wrong!',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Okay'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "transaction.php";
-                    }else{
-                        window.location.href = "transaction.php";
-                    }
-                })
-                
-            })
-    
-        </script>
-        <?php
-    }else{
-        $conn->query("DELETE FROM inquire WHERE email='$get_email'") or die($conn->error);
-        ?>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
+                icon: 'warning',
+                title: 'No Data Available',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1440,13 +1417,67 @@ if (isset($_POST['clear_inquire'])) {
     
         </script>
         <?php
+    }else{
+        if ($get_email == null){
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    text: 'Something went wrong!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "transaction.php";
+                        }else{
+                            window.location.href = "transaction.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            $conn->query("DELETE FROM inquire WHERE email='$get_email'") or die($conn->error);
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Deleted',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "transaction.php";
+                        }else{
+                            window.location.href = "transaction.php";
+                        }
+                    })      
+                })
+        
+            </script>
+            <?php
+        }
     }
+    
 }
 
 // CLEAR HISTORY RESERVE
 if (isset($_POST['clear_reserve'])) {
     $get_email = $_POST['email'];
-    if ($get_email == null){
+    $sql = "SELECT * FROM reserve WHERE email='$get_email'";
+    $result = mysqli_query($conn, $sql);
+    if(!$result->num_rows > 0){
         ?>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1454,34 +1485,8 @@ if (isset($_POST['clear_reserve'])) {
         <script>
             $(document).ready(function(){
                 Swal.fire({
-                icon: 'error',
-                title: 'An Error Occured',
-                text: 'Something went wrong!',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Okay'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "transaction.php";
-                    }else{
-                        window.location.href = "transaction.php";
-                    }
-                })
-                
-            })
-    
-        </script>
-        <?php
-    }else{
-        $conn->query("DELETE FROM reserve WHERE email='$get_email'") or die($conn->error);
-        ?>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
+                icon: 'warning',
+                title: 'No Data Available',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1495,7 +1500,59 @@ if (isset($_POST['clear_reserve'])) {
     
         </script>
         <?php
+    }else{
+        if ($get_email == null){
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    text: 'Something went wrong!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "transaction.php";
+                        }else{
+                            window.location.href = "transaction.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            $conn->query("DELETE FROM reserve WHERE email='$get_email'") or die($conn->error);
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Deleted',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "transaction.php";
+                        }else{
+                            window.location.href = "transaction.php";
+                        }
+                    })      
+                })
+        
+            </script>
+            <?php
+        }
     }
+   
 }
 
 // SEND CONTACT FORM

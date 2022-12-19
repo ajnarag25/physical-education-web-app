@@ -71,7 +71,7 @@
                         <br>
                         <div class="card card_custom">
                             <h4 class="text-center mb-4">PE-1</h4>
-                            <img src="assets/images/sample.jpg" width="250" alt="">
+                            <img src="assets/images/uniform_short.png" width="250" alt="">
                             <br>
                             <div class="text-center">
                                 <p>P.E Uniform with shorts</p>
@@ -83,7 +83,7 @@
                         <br>
                         <div class="card card_custom">
                             <h4 class="text-center mb-4">PE-2</h4>
-                            <img src="assets/images/sample.jpg" width="250" alt="">
+                            <img src="assets/images/uniform_jogging.png" width="250" alt="">
                             <br>
                             <div class="text-center">
                                 <p>P.E Uniform with joggingpants</p>

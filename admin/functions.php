@@ -1208,6 +1208,38 @@
         }
     }
 ?>
+<?php
+
+if (isset($_POST['submit_resolve'])) {
+    
+    $fet_idd = $_POST['fet_id'];
+
+    $conn->query("UPDATE report_equip SET status ='resolved' WHERE id = '$fet_idd'") or die($conn->error);
+    ?>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Resolved!',
+                    text: 'The ban has been lifted',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_basketball.php";
+                        }else{
+                            window.location.href = "_basketball.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+    <?php
+}
+?>
 
 <?php
 if (isset($_POST['submit_report'])) {
@@ -1240,7 +1272,7 @@ VALUES('$id_no','$equipment','$ball_id','$time_borrow','$date_borrow','$time_ret
                         if (result.isConfirmed) {
                             Swal.fire(
                             'Report Submit Successfully!',
-                            'The student is banned from borrowing in the machine',
+                            'The account is banned from borrowing in the machine',
                             'success'
                             )
                             window.location.href = "_basketball.php";

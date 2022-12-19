@@ -49,13 +49,13 @@ if ($check > 0) {
             <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
                     
             <li align = "justify center" class = "alignments">The OTP <b>expires</b> after 5 minutes</li>
+            <li align = "justify center" class = "alignments">RGB LED turns red if the inputted OTP is wrong or expired.</li>
                             <br>
                             <?php
                             if(isset($_POST['otp_error'])){
                               ?>
                               <script>
                                   alert("OTP ERROR");
-
                               </script>
                               <?php
 
@@ -108,6 +108,7 @@ if ($check > 0) {
                   <li align = "justify center" class = "alignments">The OTP will <b>reset</b> if you click the <b>`Cancel`</b> button.</li>
                           
                   <li align = "justify center" class = "alignments">The OTP <b>expires</b> after 5 minutes</li>
+                  <li align = "justify center" class = "alignments">RGB LED turns red if the inputted OTP is wrong or expired</li>
                                   <br>     
               </div>
               <div class="row">
@@ -143,7 +144,6 @@ if ($check > 0) {
             <br>
             <b>Important Note:</b>
             <li align = "justify center" class = "alignments">If the ball is <b>deflated/damaged or lost</b>, Please return the ball to the PE Department <b>Immediately</b></li>
-            <li align = "justify center" class = "alignments">RGB LED turns red if the inputted OTP is wrong or expired</li>
                             <br>     
         </div>
         <div class="row">

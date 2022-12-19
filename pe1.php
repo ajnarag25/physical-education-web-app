@@ -84,7 +84,7 @@
                 <div class="card card_custom">
                     <div class="text-center">
                         <h4 class="mb-4">PE-1</h4>
-                        <img src="assets/images/sample.jpg" width="200" alt="">
+                        <img src="assets/images/uniform_short.png" width="200" alt="">
                     </div>
                     <br>
                     <div class="text-center">
@@ -183,7 +183,7 @@
                 <div class="card card_custom">
                     <div class="text-center">
                         <h4 class="mb-4">PE-1</h4>
-                        <img src="assets/images/sample.jpg" width="200" alt="">
+                        <img src="assets/images/uniform_short.png" width="200" alt="">
                     </div>
                     <br>
                     <div class="text-center">
