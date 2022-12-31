@@ -729,13 +729,14 @@
     if (isset($_POST['addDepthead'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
+        $departs = $_POST['depts'];
     
-        $sql = "SELECT * FROM dept_head WHERE (name='$user' AND email='$email') ;";
+        $sql = "SELECT * FROM dept_head WHERE name='$name' AND email='$email' AND department='$departs'";
         $result = mysqli_query($conn, $sql);
 
         if(!$result->num_rows > 0){
-            $conn->query("INSERT INTO dept_head (name, email, status)
-            VALUES('$name', '$email', 'Enabled')") or die($conn->error);
+            $conn->query("INSERT INTO dept_head (department, name, email, status)
+            VALUES('$departs','$name', '$email', 'Enabled')") or die($conn->error);
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -771,9 +772,9 @@
                     confirmButtonText: 'Okay'
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "index.php";
+                        window.location.href = "_createmanage.php";
                         }else{
-                            window.location.href = "index.php";
+                            window.location.href = "_createmanage.php";
                         }
                     })
                     
