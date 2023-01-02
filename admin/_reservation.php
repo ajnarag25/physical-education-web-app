@@ -356,9 +356,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status"><i class="zmdi zmdi-alarm"></i></button>
+                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
                                                 <!-- Modal for Status -->
-                                                <div class="modal fade" id="status" tabindex="-1" role="dialog">
+                                                <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -368,15 +368,22 @@
                                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                                     <div class="card">
                                                                         <div class="modal-header">
-                                                                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
+                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
                                                                         </div>
                                                                         <div class="body">
                                                                             <form>
+                                                                    
                                                                                 <div class="row clearfix js-sweetalert">
+                                                                                <?php 
+                                                                                    $query = "SELECT * FROM dept_head WHERE status='Enabled'";
+                                                                                    $result = mysqli_query($conn, $query);
+                                                                                    $check_row = mysqli_num_rows($result);
+                                                                                    while ($row = mysqli_fetch_array($result)) {
+                                                                                ?>
                                                                                     <div class="col-lg-5">
                                                                                         <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Office of Student Affairs</label>
-                                                                                            <input type="text" class="form-control" value="Jane Doe" required readonly>
+                                                                                            <label id="reasonlabel" for="reason"><?php echo $row['department'] ?></label>
+                                                                                            <input type="text" class="form-control" value="<?php echo $row['name'] ?>" required readonly>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3">
@@ -387,39 +394,10 @@
                                                                                         <label for="statt">Inform the Head Department</label>
                                                                                         <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
                                                                                     </div>
-                                                                                </div>
+                                                                                <?php } ?>
+                                                                                </div>                                                                                
                                                                                 <div class="row clearfix js-sweetalert">
-                                                                                    <div class="col-lg-5">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Department of Engineering Science</label>
-                                                                                            <input type="text" class="form-control" value="Ann Whitaker" required readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3">
-                                                                                        <label for="statt">Current Status</label>
-                                                                                        <input type="text" class="form-control bg-danger text-white" value="Uninformed" readonly>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">  
-                                                                                        <label for="statt">Inform the Head Department</label>
-                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row clearfix js-sweetalert">
-                                                                                    <div class="col-lg-5">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Department of Industrial Technology</label>
-                                                                                            <input type="text" class="form-control" value="Lisa Hurley" required readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3">
-                                                                                        <label for="statt">Current Status</label>
-                                                                                        <input type="text" class="form-control bg-success text-white" value="Approved" readonly>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">  
-                                                                                        <label for="statt">Inform the Head Department</label>
-                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success" disabled>Inform</button>          
-                                                                                    </div>
-                                                                                </div>
+                                                                        
                                                                             </form>
                                                                             <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
                                                                                 <strong ><div class="alert-icon">
