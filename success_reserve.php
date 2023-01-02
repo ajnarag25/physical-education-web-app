@@ -183,14 +183,18 @@
                 <h5 class="modal-title" id="exampleModalLabel">Request for Approval</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+              <?php 
+                  $query = "SELECT * FROM dept_head WHERE status='Enabled'";
+                  $result = mysqli_query($conn, $query);
+                  while ($row = mysqli_fetch_array($result)) {
+              ?>
               <div class="modal-body">
-                <h5>Teacher 1</h5>
+                <h5><?php echo $row['name'] ?></h5>
+                <p><?php echo $row['department'] ?></p>
                 <input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>
-                <h5>Teacher 2</h5>
-                <input style="color:red" type="text" class="form-control" value="DECLINE" readonly>
-                <h5>Teacher 3</h5>
-                <input style="color:green" type="text" class="form-control" value="ACCEPTED" readonly>
               </div>
+              <?php
+              }?>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>

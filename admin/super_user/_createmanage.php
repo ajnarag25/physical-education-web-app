@@ -278,6 +278,15 @@
                                                     <div class="body">
                                                     <form action="functions.php" method="POST" enctype="multipart/form-data">
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label for="inputName" class="form-label">Department</label>
+                                                                <select name="depts" class="form-control" id="">
+                                                                    <option value="" selected disabled>Select Department</option>
+                                                                    <option value="Office of Student Affairs">Office of Student Affairs</option>
+                                                                    <option value="Department of Engineering Science">Department of Engineering Science</option>
+                                                                    <option value="Department of Industrial Technology">Department of Industrial Technology</option>
+                                                                </select>
+                                                            </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputName" class="form-label">Name</label>
                                                                 <input type="text" class="form-control" id="inputName" name="name" required>
@@ -776,6 +785,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Name</th>
+                                        <th>Department</th>
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -790,6 +800,7 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $row['name'] ?></td>
+                                        <td><?php echo $row['department'] ?></td>
                                         <td><?php echo $row['email'] ?></td>
                                         <td> 
                                         <?php 

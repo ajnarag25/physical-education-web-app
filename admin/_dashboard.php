@@ -140,13 +140,13 @@
                         <div class="body">
                             <h6>Facility Reservation <br><small>(P.E. Dept. Facilities)</small></h6>
                             <?php 
-                                $query = "SELECT * FROM reserve";
+                                $query = "SELECT * FROM reserve WHERE status='PENDING'";
                                 $result = mysqli_query($conn, $query);
                                 $row_reserve_1 = mysqli_num_rows($result);
                             ?>
                             <h2><?php echo $row_reserve_1; ?> <small class="info">Request/s</small></h2>
                             <?php 
-                                $query = "SELECT * FROM reserve";
+                                $query = "SELECT * FROM reserve WHERE status='PENDING'";
                                 $result = mysqli_query($conn, $query);
                                 $row_reserve_2 = mysqli_num_rows($result);
                             ?>
@@ -162,7 +162,7 @@
                         <div class="body">
                             <h6>Uniform Inquiries <br><small>(P.E. Uniform)</small></h6>
                             <?php 
-                                $query = "SELECT * FROM inquire";
+                                $query = "SELECT * FROM inquire WHERE status='PENDING'";
                                 $result = mysqli_query($conn, $query);
                                 $row_inquire_1 = mysqli_num_rows($result);
                             ?>
