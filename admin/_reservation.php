@@ -371,15 +371,11 @@
                                                                             <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
                                                                         </div>
                                                                         <div class="body">
-                                                                            <form>
-                                                                    
+                                                                            <form action="functions.php" method="POST">
                                                                                 <div class="row clearfix js-sweetalert">
-                                                                                <?php 
-                                                                                    $query = "SELECT * FROM dept_head WHERE status='Enabled'";
-                                                                                    $result = mysqli_query($conn, $query);
-                                                                                    $check_row = mysqli_num_rows($result);
-                                                                                    while ($row = mysqli_fetch_array($result)) {
-                                                                                ?>
+                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="student_id">
+                                                                                    <input type="hidden" value="<?php echo $row['name'] ?>" name="student_name">
+                                                                              
                                                                                     <div class="col-lg-5">
                                                                                         <div class="form-group">
                                                                                             <label id="reasonlabel" for="reason"><?php echo $row['department'] ?></label>
@@ -392,12 +388,11 @@
                                                                                     </div>
                                                                                     <div class="col-lg-4">  
                                                                                         <label for="statt">Inform the Head Department</label>
-                                                                                        <button type="button" class="btn btn-block btn-info waves-effect" data-type="success">Inform</button>          
+                                                                                        <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_dept">Inform</button>          
                                                                                     </div>
-                                                                                <?php } ?>
+                                                                               
                                                                                 </div>                                                                                
                                                                                 <div class="row clearfix js-sweetalert">
-                                                                        
                                                                             </form>
                                                                             <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
                                                                                 <strong ><div class="alert-icon">
@@ -419,7 +414,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?php } ?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -484,7 +479,78 @@
                                             <td><?php echo $row['participants'] ?></td>
                                             <td>
                                               
-                                                <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info">Info</button>
+                                                <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info<?php echo $row['id'] ?>">Info</button>
+                                                <!-- Modal for Info -->
+                                                <div class="modal fade" id="info<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Approving Process</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <form>
+                                                                                <label for="stat">Current Status</label>
+                                                                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-info">
+                                                                                    <strong >Reschedule</strong>
+                                                                                </div>
+                                                                                <label for="status">Action Status</label>
+                                                                                <div name="stats" class="form-group"> 
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="Approve">
+                                                                                        <label for="Approve">Approve</label>
+                                                                                    </div>                             
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="decline" class="with-gap" value="decline">
+                                                                                        <label for="decline">Decline</label>
+                                                                                    </div>
+                                                                                    <div class="radio inlineblock m-r-20">
+                                                                                        <input type="radio" name="stats" id="res" class="with-gap" value="reschedule" checked>
+                                                                                        <label for="res">Reschedule</label>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div id="resched" class="inlineblock col-sm-6">
+                                                                                        <div class="input-group">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                            </div>
+                                                                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule" value="Wednesday 27 July 2022 - 2:12" disabled>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
+                                                                                <div class="form-group">                                
+                                                                                    <input type="text" id="reason" class="form-control" placeholder="Enter your reason" value="Conflicts on reservation" readonly required>
+                                                                                </div>
+                                                                                <label for="name">Action by</label>
+                                                                                <div class="form-group">                                
+                                                                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" value="John Cena" readonly required>
+                                                                                </div>
+                                                                                <label id="approveschedd" for="approvesched">Date/Time of Approval/Decline/Reschedule (Date Today)</label>
+                                                                                <div name="approvesched" id="approvesched" class="form-group">
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                                                                        </div>
+                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" value="Saturday 30 July 2022 - 2:12" disabled required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
                                                 <!-- Modal for Cancel -->
                                                 <div class="modal fade" id="cancel<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
@@ -639,77 +705,7 @@
 </section>
 
 
-<!-- Modal for Info -->
-<div class="modal fade" id="info" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="title" id="largeModalLabel">Approving Process</h4>
-            </div>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="modal-header">
-                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
-                        </div>
-                        <div class="body">
-                            <form>
-                                <label for="stat">Current Status</label>
-                                <div id="stat" name="stat" style="text-align: center;" class="alert alert-info">
-                                    <strong >Reschedule</strong>
-                                </div>
-                                <label for="status">Action Status</label>
-                                <div name="stats" class="form-group"> 
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="Approve" readonly>
-                                        <label for="Approve">Approve</label>
-                                    </div>                             
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="decline" class="with-gap" value="decline" readonly>
-                                        <label for="decline">Decline</label>
-                                    </div>
-                                    <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="stats" id="res" class="with-gap" value="reschedule" checked readonly>
-                                        <label for="res">Reschedule</label>
-                                    </div>
-                                    
-                                    <div id="resched" class="inlineblock col-sm-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule" value="Wednesday 27 July 2022 - 2:12" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
-                                <div class="form-group">                                
-                                    <input type="text" id="reason" class="form-control" placeholder="Enter your reason" value="Conflicts on reservation" readonly required>
-                                </div>
-                                <label for="name">Action by</label>
-                                <div class="form-group">                                
-                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" value="John Cena" readonly required>
-                                </div>
-                                <label id="approveschedd" for="approvesched">Date/Time of Approval/Decline/Reschedule (Date Today)</label>
-                                <div name="approvesched" id="approvesched" class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                        </div>
-                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" value="Saturday 30 July 2022 - 2:12" disabled required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script>
     
 

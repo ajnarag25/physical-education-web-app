@@ -1207,6 +1207,14 @@
             <?php
         }
     }
+
+    #INFORM DEPT HEAD
+    if (isset($_POST['inform_dept'])) {
+        $name = $_POST['student_name'];
+        $ids = $_POST['student_id'];
+        echo $ids;
+        echo $name;
+    }
 ?>
 <?php
 

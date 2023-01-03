@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/images/tup-logo.png" rel="icon">
-    <title>E-Signature</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link href="../assets/images/tup-logo.png" rel="icon">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -20,14 +20,14 @@
     #sig-canvas {
         border: 5px solid #000;
         border-radius: 15px;
-        cursor: url('/assets/images/pen.png'), auto;
+        cursor: url('../assets/images/pen.png'), auto;
     }
 </style>
 <body>
     
     <nav class="navbar navbar-expand-lg navbar-light nav-bg">
         <div class="container">
-          <img src="assets/images/gear-spin.gif" width="50" alt="">
+          <img src="../assets/images/gear-spin.gif" width="50" alt="">
           <h4 class="title-pe">P.E Department</h4>  
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
@@ -56,13 +56,13 @@
     </div>
 
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="../js/scripts.js"></script>
 
     <!---DITO KO NILAGAY YUNG PAG IMPORT NG QR JS PACKAGES----->
-    <script type="text/javascript" src="js/qr_js_packages/script_qr.js"></script>
-    <script src="js/canvas.js"></script>
+    <script type="text/javascript" src="../js/qr_js_packages/script_qr.js"></script>
+    <script src="../js/canvas.js"></script>
 </body>
 </html>

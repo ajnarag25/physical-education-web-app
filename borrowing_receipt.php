@@ -20,8 +20,10 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
 
     <title>Borrower's Slip</title>
+
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light nav-bg sticky-top">
         <div class="container">
           <img src="assets/images/gear-spin.gif" width="50" alt="">
@@ -53,14 +55,19 @@
           </div>
         </div>
       </nav>
-      
+
     <br>
     <?php
     if (isset($_GET['idd'])) {
       $a = $_GET['idd'];
                   
     ?>
-    <div class="container receipt-wrap">
+    <div class="d-flex flex-row bd-highlight mb-3">
+    <a href="transaction.php" style="text-decoration: none;margin-left:100px; color:rgb(151, 8, 8);"><i class='bx bx-left-arrow-alt'></i> Back </a>
+  </div>
+    <div class="container receipt-wrap" id="invoice">
+    
+      
         <div class="row justify-content-md-center">
           <div class="container mb-5 mt-2">
             <div class="row d-flex align-items-baseline">
@@ -177,11 +184,7 @@
                   </p>
               </div>
               <div class="col-xl-10">
-        <br>
-        <center>
-        <button class="btn btn-danger btn-lg " style = "color: white;">Download PDF</button>
-              
-        </center>
+        
               
             </div>
             </div>
@@ -189,6 +192,11 @@
         </div>
       </div>
       </div>
+      <br>
+        <center>
+        <button class="btn btn-danger btn-lg " id  = "download" style = "color: white;">Download PDF</button>
+              
+        </center>
       <?php
     }
     else{
@@ -199,4 +207,6 @@
     
       ?>
 </body>
+<script src = "pdf.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 </html>
