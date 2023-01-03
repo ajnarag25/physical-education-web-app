@@ -73,10 +73,11 @@
                                     <label for="inputBooking" class="form-label">Booking for: <span style="color:red;">* </span></label>
                                     <select name="book" class="form-select" id="" required>
                                         <option value="" selected disabled>Please Select</option>
-                                        <option value="AVR & GYM">AVR * GYM</option>
+                                        <option value="AVR">AVR</option>
                                         <option value="ConferenceRoom">Conference Room</option>
+                                        <option value="Gym">Gym</option>
                                         <option value="Amphitheater">Amphitheater</option>
-                                        <option value="Hostel">Hostel</option>
+                                        <option value="Hostel x Gym">Hostel x Gym</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">

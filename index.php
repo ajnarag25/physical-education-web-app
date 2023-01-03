@@ -130,7 +130,7 @@
       <div class="jumbotron">
         <div class="container service-container">
             <div class="text-center slideanim">
-                <h3>Our Services Offered</h3>
+                <h3>Services Offered</h3>
                 <p class="lead">Experience our quality service to meet your needs.</p>
                 <hr>
             </div>
@@ -249,7 +249,7 @@
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Sean Monacillo</h6>
-                    <p class="designation">Developer</p>
+                    <p class="designation">Designer</p>
                   </div>
                 </div>
               </div>
@@ -261,7 +261,7 @@
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Michael Rilan</h6>
-                    <p class="designation">Designer</p>
+                    <p class="designation">Developer/Designer</p>
                   </div>
                 </div>
               </div>

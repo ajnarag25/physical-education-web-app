@@ -335,7 +335,7 @@ if (isset($_GET['id'])) {
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Sean Monacillo</h6>
-                    <p class="designation">Developer</p>
+                    <p class="designation">Designer</p>
                   </div>
                 </div>
               </div>
@@ -347,7 +347,7 @@ if (isset($_GET['id'])) {
                   </div>
                   <div class="single_advisor_details_info">
                     <h6>Michael Rilan</h6>
-                    <p class="designation">Designer</p>
+                    <p class="designation">Developer/Designer</p>
                   </div>
                 </div>
               </div>

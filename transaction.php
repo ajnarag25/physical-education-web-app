@@ -372,7 +372,9 @@
                             ?>
                 
                         </td>
-                        <td><button class="btn btn-info btn-sm " style = "color: white ;">Download</button></td>
+                        <!-- <td><button class="btn btn-info btn-sm " style = "color: white;">View</button></td> -->
+                        <td><a href="borrowing_receipt.php?idd=<?php echo $row['id'] ?>" >View</a></td>
+
                     </tr>
 
                     <?php } ?>

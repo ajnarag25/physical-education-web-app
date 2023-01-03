@@ -281,7 +281,6 @@
                                             <th><small>Ball ID</small></th>
                                             <th><small>Time Borrowed</small></th>
                                             <th><small>Date Borrowed</small></th>
-                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -292,7 +291,7 @@
                                             <th><small>Ball ID</small></th>
                                             <th><small>Time Borrowed</small></th>
                                             <th><small>Date Borrowed</small></th>
-                                            <th><small>Action</small></th>
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -313,29 +312,6 @@
                                             <td><?php echo $row_unret_vball['ball_id']?></td>
                                             <td><?php echo $row_unret_vball['time_borrow']?></td>                                           
                                             <td><?php echo $row_unret_vball['date_borrow']?></td>
-                                            <td>
-                                            <?php
-                                                $_SESSION['get_id_no'] = $row_unret_vball['id_no'];
-                                                $_SESSION['get_name'] = $fetch_info['firstname']." ".$fetch_info['middlename']." ".$fetch_info['lastname'];
-                                                
-                                                ?>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <?php
-                                                        $check_report = "SELECT * FROM report_equip WHERE id_no = '".$row_unret_vball['id_no']."' and status = 'pending'";
-                                                        $result_report = mysqli_query($conn, $check_report);
-                                                        $cnt_report = mysqli_num_rows($result_report);
-                                                    ?>
-                                                    <?php 
-                                                        if ($cnt_report > 0) {
-                                                            echo "<p class='badge badge-warning'>reported</p>";
-                                                        }else{
-                                                    ?>
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_unret_vball['id_no']?>">Report</button>
-                                                            <?php
-                                                        }
-                                                            ?>
-                                                </div>
-                                            </td>
                                         </tr> 
                                         <?php
                                             }
@@ -366,7 +342,6 @@
                                             <th><small>Ball ID</small></th>
                                             <th><small>Time Borrowed</small></th>
                                             <th><small>Date Borrowed</small></th>
-                                            <th><small>Action</small></th>
                                         </tr>
                                     </thead>
                                     <tfoot class="thead-light">
@@ -377,7 +352,6 @@
                                             <th><small>Ball ID</small></th>
                                             <th><small>Time Borrowed</small></th>
                                             <th><small>Date Borrowed</small></th>
-                                            <th><small>Action</small></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -398,28 +372,28 @@
                                             <td><?php echo $row_unret_bball['ball_id']?></td>
                                             <td><?php echo $row_unret_bball['time_borrow']?></td>                                           
                                             <td><?php echo $row_unret_bball['date_borrow']?></td>
-                                            <td>
+                                            <!-- <td>
                                             <?php
-                                                $_SESSION['get_id_no'] = $row_unret_bball['id_no'];
-                                                $_SESSION['get_name'] = $fetch_info1['firstname']." ".$fetch_info1['middlename']." ".$fetch_info1['lastname'];
-                                                ?>
-                                                <div class="col-sm-12 btn-group" role="group">
-                                                    <?php
-                                                        $check_report = "SELECT * FROM report_equip WHERE id_no = '".$row_unret_bball['id_no']."' and status = 'pending'";
-                                                        $result_report = mysqli_query($conn, $check_report);
-                                                        $cnt_report = mysqli_num_rows($result_report);
-                                                    ?>
-                                                    <?php 
-                                                        if ($cnt_report > 0) {
-                                                            echo "<p class='badge badge-warning'>reported</p>";
-                                                        }else{
-                                                    ?>
-                                                    <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_unret_bball['id_no']?>">Report</button>
-                                                            <?php
-                                                        }
-                                                            ?>
+                                                // $_SESSION['get_id_no'] = $row_unret_bball['id_no'];
+                                                // $_SESSION['get_name'] = $fetch_info1['firstname']." ".$fetch_info1['middlename']." ".$fetch_info1['lastname'];
+                                                // ?>
+                                                // <div class="col-sm-12 btn-group" role="group">
+                                                //     <?php
+                                                //         $check_report = "SELECT * FROM report_equip WHERE id_no = '".$row_unret_bball['id_no']."' and status = 'pending'";
+                                                //         $result_report = mysqli_query($conn, $check_report);
+                                                //         $cnt_report = mysqli_num_rows($result_report);
+                                                //     ?>
+                                                //     <?php 
+                                                //         if ($cnt_report > 0) {
+                                                //             echo "<p class='badge badge-warning'>reported</p>";
+                                                //         }else{
+                                                //     ?>
+                                                //     <button class="btn btn-danger btn-sm " data-toggle="modal" data-target="#reportt<?php echo $row_unret_bball['id_no']?>">Report</button>
+                                                //             <?php
+                                                //         }
+                                                //             ?>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                         </tr> 
                                         <?php
                                             }
