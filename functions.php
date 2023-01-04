@@ -909,8 +909,8 @@ if (isset($_POST['reserve_facility'])) {
     $rescheds = $_POST['resched'];
 
     if ($check_mail != null){
-        $conn->query("INSERT INTO reserve (id_no, email, name, dept_course, date, time, booking, purpose, participants, reason, status, resched, sig_status) 
-        VALUES('$id_number','$check_mail','$names','$dept_course','$dates', '$times', '$bookings', '$purposes', '$participants', '$reasons', '$status', '$rescheds', 'N/A')") or die($conn->error);
+        $conn->query("INSERT INTO reserve (id_no, email, name, dept_course, date, time, booking, purpose, participants, reason, status, resched, stat_osa, stat_dit, stat_des) 
+        VALUES('$id_number','$check_mail','$names','$dept_course','$dates', '$times', '$bookings', '$purposes', '$participants', '$reasons', '$status', '$rescheds', 'N/A', 'N/A', 'N/A')") or die($conn->error);
         include "email_reserve.php";
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

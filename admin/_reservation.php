@@ -218,6 +218,104 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
+                                                
+                                                <!-- Modal for Status -->
+                                                <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Request for Approval of Other Departments</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <div class="modal-header">
+                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
+                                                                        </div>
+                                                                        <div class="body">
+                                                                            <form action="functions.php" method="POST">
+                                                                                <div class="row clearfix js-sweetalert">
+                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="student_id">
+                                                                                    <input type="hidden" value="<?php echo $row['name'] ?>" name="student_name">
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Department of Engineering Science</label>
+                                                                                            <br><br>
+                                                                                            <?php 
+                                                                                                if ($row['stat_des'] == 'N/A'){
+                                                                                                    $set_stat=$row['stat_des'];
+                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
+                                                                                                }elseif($row['stat_des'] == 'APPROVED'){
+                                                                                                    $set_stat= $row['stat_osa'];
+                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
+                                                                                                }elseif($row['stat_des'] == 'DECLINED'){
+                                                                                                    $set_stat=$row['stat_des'];
+                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
+                                                                                                }
+                                                                                            ?>
+                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_des">Inform</button> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Office of Student <br> Affairs</label>
+                                                                                            <br><br>
+                                                                                            <?php 
+                                                                                                if ($row['stat_osa'] == 'PENDING'){
+                                                                                                    $set_stat=$row['stat_osa'];
+                                                                                                    echo '<h3 class="text-warning">'.$set_stat.'</h3>';
+                                                                                                }elseif($row['stat_osa'] == 'APPROVED'){
+                                                                                                    $set_stat= $row['stat_osa'];
+                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
+                                                                                                }elseif($row['stat_osa'] == 'DECLINED'){
+                                                                                                    $set_stat=$row['stat_osa'];
+                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
+                                                                                                }
+                                                                                            ?>
+                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_osa">Inform</button> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="form-group">
+                                                                                            <label id="reasonlabel" for="reason">Department of Industrial Technology</label>
+                                                                                            <br><br>
+                                                                                            <?php 
+                                                                                                if ($row['stat_dit'] == 'N/A'){
+                                                                                                    $set_stat=$row['stat_dit'];
+                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
+                                                                                                }elseif($row['stat_dit'] == 'APPROVED'){
+                                                                                                    $set_stat= $row['stat_dit'];
+                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
+                                                                                                }elseif($row['stat_dit'] == 'DECLINED'){
+                                                                                                    $set_stat=$row['stat_dit'];
+                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
+                                                                                                }
+                                                                                            ?>
+                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_dit">Inform</button> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>                                                                                
+                                                                                <div class="row clearfix js-sweetalert">
+                                                                            </form>
+                                                                            <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
+                                                                                <strong ><div class="alert-icon">
+                                                                                    <i class="zmdi zmdi-alert-circle-o"></i>
+                                                                                </div>Note:
+                                                                                    <br>-> If status is 'Uninformed' it means that the head department is not yet informed about the request. Simply click the button 'Inform' to inform the head department.
+                                                                                    <br>-> If status is 'Pending' it means that you already informed the head department and you'll need to wait for his/her approval. To inform again just simply click the button 'Inform'.
+                                                                                    <br>-> If status is 'Approved' it means the head department approved the request. You can now decide whether approved, dissapproved or reschedule.</strong>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-danger btn-block waves-effect" data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -306,28 +404,24 @@
                                                                                     <strong >ACCEPTED</strong>
                                                                                 </div>
                                                                                 <label for="status">Action Status</label>
-                                                                                <div name="stats" class="form-group"> 
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="APPROVED" required>
-                                                                                        <label for="Approve">Approve</label>
-                                                                                    </div>                             
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="decline" class="with-gap" value="DECLINED" required>
-                                                                                        <label for="decline">Decline</label>
-                                                                                    </div>
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="res" class="with-gap" value="RESCHEDULE" required>
-                                                                                        <label for="res">Reschedule</label>
-                                                                                    </div>
+                                                                            
+                                                                                <div class="form-group"> 
+                                                                                    <select name="stats" class="form-control">
+                                                                                        <option value="APPROVED">Approve</option>
+                                                                                        <option value="DECLINED">Decline</option>
+                                                                                        <option value="RESCHEDULE">Reschedule</option>
+                                                                                    </select>
                                                                                     
-                                                                                    <div id="resched" class="inlineblock col-sm-6" hidden>
-                                                                                        <div class="input-group">
-                                                                                            <div class="input-group-prepend">
-                                                                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
-                                                                                            </div>
-                                                                                            <input type="text" name="resched" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule">
+                                                                                    <label for="stat" class="mt-2">This is for Reschedule only *</label>
+                                                                                    <div class="input-group">
+                                                                                        
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
+                                                                                      
+                                                                                        <input type="text" name="resched" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule">
                                                                                     </div>
+                                                                                
                                                                                 </div>
                                                                                 <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
                                                                                 <div class="form-group">                                
@@ -356,62 +450,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
-                                                <!-- Modal for Status -->
-                                                <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="title" id="largeModalLabel">Request for Approval of Other Departments</h4>
-                                                            </div>
-                                                            <div class="row clearfix">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                                    <div class="card">
-                                                                        <div class="modal-header">
-                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
-                                                                        </div>
-                                                                        <div class="body">
-                                                                            <form action="functions.php" method="POST">
-                                                                                <div class="row clearfix js-sweetalert">
-                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="student_id">
-                                                                                    <input type="hidden" value="<?php echo $row['name'] ?>" name="student_name">
-                                                                              
-                                                                                    <div class="col-lg-5">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason"><?php echo $row['department'] ?></label>
-                                                                                            <input type="text" class="form-control" value="<?php echo $row['name'] ?>" required readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3">
-                                                                                        <label for="statt">Current Status</label>
-                                                                                        <input type="text" class="form-control bg-warning text-white" value="Pending" readonly>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">  
-                                                                                        <label for="statt">Inform the Head Department</label>
-                                                                                        <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_dept">Inform</button>          
-                                                                                    </div>
-                                                                               
-                                                                                </div>                                                                                
-                                                                                <div class="row clearfix js-sweetalert">
-                                                                            </form>
-                                                                            <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
-                                                                                <strong ><div class="alert-icon">
-                                                                                    <i class="zmdi zmdi-alert-circle-o"></i>
-                                                                                </div>Note:
-                                                                                    <br>-> If status is 'Uninformed' it means that the head department is not yet informed about the request. Simply click the button 'Inform' to inform the head department.
-                                                                                    <br>-> If status is 'Pending' it means that you already informed the head department and you'll need to wait for his/her approval. To inform again just simply click the button 'Inform'.
-                                                                                    <br>-> If status is 'Approved' it means the head department approved the request. You can now decide whether approved, dissapproved or reschedule.</strong>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline-danger btn-block waves-effect" data-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -705,45 +744,6 @@
 </section>
 
 
-
-<script>
-    
-
-	document.getElementById('Approve').onclick = function(){
-		document.getElementById('resched').hidden = true;
-		document.getElementById('reasonlabel').innerHTML = 'Reason for Approved';
-        document.getElementById('approveschedd').innerHTML = 'Date/Time of Approval (Date Today)';
-		document.getElementById('stat').innerHTML = 'Approving';
-        document.getElementById('stat').classList = 'alert alert-success';
-        document.getElementById('reason').disabled = false;
-        document.getElementById('name').disabled = false;
-        document.getElementById('setdate').disabled = false;
-	};
-
-	document.getElementById('decline').onclick = function(){
-		document.getElementById('resched').hidden = true;
-		document.getElementById('reasonlabel').innerHTML = 'Reason for Dissapproved';
-        document.getElementById('approveschedd').innerHTML = 'Date/Time of Decline (Date Today)';
-		document.getElementById('stat').innerHTML = 'Dissapproved';
-        document.getElementById('stat').classList = 'alert alert-danger';
-        document.getElementById('reason').disabled = false;
-        document.getElementById('name').disabled = false;
-        document.getElementById('setdate').disabled = false;
-	};
-
-	document.getElementById('res').onclick = function(){
-		document.getElementById('resched').hidden = false;
-		document.getElementById('reasonlabel').innerHTML = 'Reason for Reschedule';
-        document.getElementById('approveschedd').innerHTML = 'Date/Time of Reschedule (Date Today)';
-		document.getElementById('stat').innerHTML = 'Reschedule';
-        document.getElementById('stat').classList = 'alert alert-warning';
-        document.getElementById('reason').disabled = false;
-        document.getElementById('name').disabled = false;
-        document.getElementById('setdate').disabled = false;
-	};
-
-
-</script>
 
 <!-- Jquery Core Js --> 
 <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 

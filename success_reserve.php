@@ -135,7 +135,45 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="" class="form-label">Please wait for Head Officials Approval</label>
-                                    <a type="button" href="" data-bs-toggle="modal" data-bs-target="#status">View Status</a>
+                                    <a type="button" href="" data-bs-toggle="modal" data-bs-target="#status<?php echo $row['id'] ?>">View Status</a>
+                                           
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Request for Approval</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                      
+                                        <div class="modal-body">
+                                          <h5>Office of Student Affairs</h5>
+                                          <?php 
+                                            if ($row['stat_osa'] == 'N/A'){
+                                              echo '<input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>';
+                                            }elseif($row['stat_osa'] == 'APPROVED'){
+                                              echo '<input style="color:rgb(5, 171, 14)" type="text" class="form-control" value="APPROVED" readonly>';
+                                            }else{
+                                              echo '<input style="color:rgb(176, 0, 0)" type="text" class="form-control" value="APPROVED" readonly>';
+                                            }
+                                          
+                                          ?>
+                                         
+                                          <h5><?php echo $row['name'] ?></h5>
+                                          <p><?php echo $row['department'] ?></p>
+                                          <input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>
+
+                                          <h5><?php echo $row['name'] ?></h5>
+                                          <p><?php echo $row['department'] ?></p>
+                                          <input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>
+                                        </div>
+                                   
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="inputDate" class="form-label">RESCHEDULE Date:</label>
@@ -174,33 +212,7 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Request for Approval</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <?php 
-                  $query = "SELECT * FROM dept_head WHERE status='Enabled'";
-                  $result = mysqli_query($conn, $query);
-                  while ($row = mysqli_fetch_array($result)) {
-              ?>
-              <div class="modal-body">
-                <h5><?php echo $row['name'] ?></h5>
-                <p><?php echo $row['department'] ?></p>
-                <input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>
-              </div>
-              <?php
-              }?>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
+ 
 
         <!-- Modal -->
         <div class="modal fade" id="cancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
