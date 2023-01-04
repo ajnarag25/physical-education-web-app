@@ -1631,3 +1631,64 @@ if (isset($_POST['contact_submit'])) {
 
 
 
+
+<?php
+if (isset($_POST['submit_qr_gate'])) {
+    $scanned_id = $_POST['scanned_id'];
+    echo $scanned_id;
+    $sql = "SELECT * FROM  borrowing_machine_info WHERE status='UNRETURNED' and qr = '".$scanned_id."'";
+    $result = mysqli_query($conn, $sql);
+    $check = mysqli_num_rows($result);
+    if ($check == 0) {
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Student/Personel Cleared',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "guard.php";
+                    }else{
+                        window.location.href = "guard.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        
+        <?php
+    }else{
+
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'Unreturned Equipment',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "guard.php";
+                    }else{
+                        window.location.href = "guard.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+?>
