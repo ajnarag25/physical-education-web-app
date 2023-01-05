@@ -262,9 +262,9 @@
                                                                                             <label id="reasonlabel" for="reason">Office of Student <br> Affairs</label>
                                                                                             <br><br>
                                                                                             <?php 
-                                                                                                if ($row['stat_osa'] == 'PENDING'){
+                                                                                                if ($row['stat_osa'] == 'N/A'){
                                                                                                     $set_stat=$row['stat_osa'];
-                                                                                                    echo '<h3 class="text-warning">'.$set_stat.'</h3>';
+                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
                                                                                                 }elseif($row['stat_osa'] == 'APPROVED'){
                                                                                                     $set_stat= $row['stat_osa'];
                                                                                                     echo '<h3 class="text-success">'.$set_stat.'</h3>';
@@ -530,7 +530,7 @@
                                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                                     <div class="card">
                                                                         <div class="modal-header">
-                                                                            <h6 class="title " style="text-align: center;">Requested By: Firstname Lastname</h6>
+                                                                            <h6 class="title " style="text-align: center;">Requested By: <?php echo $row['name'] ?></h6>
                                                                         </div>
                                                                         <div class="body">
                                                                             <form>
@@ -540,35 +540,23 @@
                                                                                 </div>
                                                                                 <label for="status">Action Status</label>
                                                                                 <div name="stats" class="form-group"> 
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="Approve" class="with-gap" value="Approve">
-                                                                                        <label for="Approve">Approve</label>
-                                                                                    </div>                             
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="decline" class="with-gap" value="decline">
-                                                                                        <label for="decline">Decline</label>
-                                                                                    </div>
-                                                                                    <div class="radio inlineblock m-r-20">
-                                                                                        <input type="radio" name="stats" id="res" class="with-gap" value="reschedule" checked>
-                                                                                        <label for="res">Reschedule</label>
-                                                                                    </div>
                                                                                     
-                                                                                    <div id="resched" class="inlineblock col-sm-6">
+                                                                                 
                                                                                         <div class="input-group">
                                                                                             <div class="input-group-prepend">
                                                                                                 <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                             </div>
-                                                                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule" value="Wednesday 27 July 2022 - 2:12" disabled>
+                                                                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule" value="<?php echo $row['resched'] ?>" disabled>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    
                                                                                 </div>
                                                                                 <label id="reasonlabel" for="reason">Reason for Approving/Dissapproved/Reschedule</label>
                                                                                 <div class="form-group">                                
-                                                                                    <input type="text" id="reason" class="form-control" placeholder="Enter your reason" value="Conflicts on reservation" readonly required>
+                                                                                    <input type="text" id="reason" class="form-control" placeholder="Enter your reason" value="<?php echo $row['reason'] ?>" readonly required>
                                                                                 </div>
                                                                                 <label for="name">Action by</label>
                                                                                 <div class="form-group">                                
-                                                                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" value="John Cena" readonly required>
+                                                                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" value="<?php echo $row['name'] ?>" readonly required>
                                                                                 </div>
                                                                                 <label id="approveschedd" for="approvesched">Date/Time of Approval/Decline/Reschedule (Date Today)</label>
                                                                                 <div name="approvesched" id="approvesched" class="form-group">
@@ -576,7 +564,7 @@
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" value="Saturday 30 July 2022 - 2:12" disabled required>
+                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" value="<?php echo $row['date'] ?>" disabled required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
