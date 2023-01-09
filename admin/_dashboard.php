@@ -266,7 +266,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card widget_2 big_icon zmdi-star-circle">
+                    <div class="card widget_2">
                         <div class="body">
                             <h6>Table Tennis Ball Status <br></h6>
                             <?php 
