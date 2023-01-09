@@ -264,7 +264,35 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon zmdi-star-circle">
+                        <div class="body">
+                            <h6>Table Tennis Ball Status <br></h6>
+                            <?php 
+                                $query = "SELECT is_emptyy FROM ping_pong_stat WHERE id='1'";
+                                $result = mysqli_query($conn, $query);
+                                $statt = mysqli_fetch_array($result);
+                            ?>
+                            <?php
+                            if($statt['is_emptyy'] == 1){
+
+                            ?>
+                            <h3 style = "color : red;">Empty</h3>
+                            <?php
+                            } else{
+                            ?>
+                            <h3 style = "color : green;">Not Empty</h3>
+                            <?php
+                            }
+                            ?>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
             <div class="row clearfix">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
