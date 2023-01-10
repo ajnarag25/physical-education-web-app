@@ -26,9 +26,9 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($get_email);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We already approved your inquiry:'." ".$set_scheds." ".'. Will be your schedule to pay. Thank you have nice day.';
+    $mail->Body = 'Good day,'.' '.'Your uniform inquiry was approved, and you must make payment on '." ".$set_scheds." ".',as specified. Thank you and have a nice day.';
 
-
+    //Good Day, Your uniform inquiry was approved, and you must make payment on  ________ , as specified.. Thank you and have a nice day.
     if ($mail->send())
         // echo "Mail Sent";
 

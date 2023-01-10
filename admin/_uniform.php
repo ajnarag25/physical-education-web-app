@@ -80,8 +80,8 @@
                 </div>
             </li>
             <li><a href="_dashboard.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation of Facility</span></a></li>
-            <li class="active open"><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform Inquiries</span></a></li>
+            <li><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation <span id="no_number_reserve">0</span></span></a></li>
+            <li class="active open"><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform <span id="no_number_inquire">0</span></span></a></li>
             <li><a href="_basketball.php"><i class="zmdi zmdi-chart-donut"></i><span>Sports Equipment</span></a></li> 
             <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
@@ -184,7 +184,7 @@
                                             <td><?php echo $row['teacher'] ?></td>
                                             <td><?php echo $row['date'] ?></td>
                                             <td>
-                                                <button id="acceptt" class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
+                                                <button id="acceptt" class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept Request" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
                                                 <!-- Modal for Accept -->
                                                 <div class="modal fade" id="accept<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -207,13 +207,13 @@
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" id="setdate" name="sched" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                        <input type="text" id="min-date" name="sched" class="form-control" placeholder="Please choose date & time" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_sched" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_sched">Confirm</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="set_sched">Confirm</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -224,7 +224,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline Request" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
                                                 <!-- Modal for Decline -->
                                                 <div class="modal fade" id="decline<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -245,7 +245,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_decline">Decline</button>
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="set_decline">Decline</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -368,7 +368,7 @@
                                             </td>
                                             <td>
                                                 <div class="col-sm-12 btn-group" role="group">                                      
-                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#modify<?php echo $row['id'] ?>">Edit</button>
+                                                    <button class="btn btn-info btn-sm " data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Modify" data-target="#modify<?php echo $row['id'] ?>">Edit</button>
                                                 </div>
                                                 <!-- Modal for modify -->
                                                 <div class="modal fade" id="modify<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
@@ -393,6 +393,12 @@
                                                                                         <strong>Unpaid</strong>
                                                                                         </div>
                                                                                         ';
+                                                                                    }elseif ($row['status'] == 'REFUND'){
+                                                                                        echo '
+                                                                                        <div style="text-align: center;" class="alert alert-warning ">
+                                                                                        <strong>Refund</strong>
+                                                                                        </div>
+                                                                                        ';
                                                                                     }else{
                                                                                         echo '
                                                                                         <div style="text-align: center;" class="alert alert-success ">
@@ -404,21 +410,9 @@
                                                                                 <label  for="status">Change Status</label>
                                                                                 <div class="mb-3">
                                                                                     <select class="form-control show-tick" name="stat">
-                                                                                    <?php
-                                                                                        if ($row['status'] == 'UNPAID'){
-                                                                                            $unpaid = $row['status'];
-                                                                                            echo '
-                                                                                            <option selected value='.$unpaid.'>'.$unpaid.'</option>
-                                                                                            <option value="PAID">PAID</option>
-                                                                                            ';
-                                                                                        }else{
-                                                                                            $paid = $row['status'];
-                                                                                            echo '
-                                                                                            <option selected value='.$paid.'>'.$paid.'</option>
-                                                                                            <option value="UNPAID">UNPAID</option>
-                                                                                            ';
-                                                                                        }
-                                                                                    ?>
+                                                                                        <option value="UNPAID">UNPAID</option>
+                                                                                        <option value="PAID">PAID</option>
+                                                                                        <option value="REFUND">REFUND</option>
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="row">
@@ -486,7 +480,7 @@
                                                                                 </div>      
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_modify" value="<?php echo $row['id'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="modify_inquire">Save Changes</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="modify_inquire">Save Changes</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>
                                                                             </form>
@@ -522,14 +516,14 @@
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                     </div>
-                                                                                    <input type="text" name="sched" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                    <input type="text" id="min-date2" name="sched" class="form-control" placeholder="Please choose date & time" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" value="<?php echo $row['id'] ?>" name="id_pickup">
                                                                                 <input type="hidden" value="<?php echo $row['status'] ?>" name="check_stat">
                                                                                 <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_pickup">
-                                                                                <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_pickup">Confirm</button>
+                                                                                <button type="submit" class="btn btn-success btn-round waves-effect" name="set_pickup">Confirm</button>
                                                                                 <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>
                                                                         </form>
@@ -561,7 +555,7 @@
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_cancel" value="<?php echo $row['id'] ?>">
                                                                                 <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_cancel">
-                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_cancel">Cancel</button>
+                                                                                <button type="submit" class="btn btn-danger btn-round waves-effect" name="set_cancel">Cancel</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
                                                                         </div>
@@ -679,7 +673,7 @@
                                                                             <form action="functions.php" method="POST">
                                                                                 <input type="hidden" value="<?php echo $row['id'] ?>" name="id_received">
                                                                                 <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_received">
-                                                                                <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="received_order">Received Order</button>
+                                                                                <button type="submit" class="btn btn-success btn-round waves-effect" name="received_order">Received Order</button>
                                                                                 <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </form>
                                                                         </div>
@@ -712,13 +706,13 @@
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" name="resched_date" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                        <input type="text" id="min-date3" name="resched_date" class="form-control " placeholder="Please choose date & time" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" value="<?php echo $row['id'] ?>" name="id_resched">
                                                                                     <input type="hidden" value="<?php echo $row['email'] ?>" name="set_email_resched">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_resched">Confirm</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="set_resched">Confirm</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>
                                                                             </form>
@@ -838,6 +832,10 @@
                                                     echo'
                                                     <p class="badge badge-success">PAID</p>
                                                     ';
+                                                }elseif ($row['status'] == 'REFUND'){
+                                                    echo'
+                                                    <p class="badge badge-warning">REFUND</p>
+                                                    ';
                                                 }elseif ($row['status'] == 'PICKUP'){
                                                     echo'
                                                     <p class="badge badge-success">PICKUP</p>
@@ -899,6 +897,45 @@
 <script src="assets/js/pages/forms/basic-form-elements.js"></script>
 <script src="assets/js/pages/ui/sweetalert.js"></script>
 <script src="assets/js/pages/forms/advanced-form-elements.js"></script> 
+<script>
+    function loadDoc1(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_reserve').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_reserve.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc1();
+    function loadDoc2(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_inquire').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_inquire.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc2();
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function()
+    {
+        $('[id=min-date]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date2]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date3]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date4]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $.material.init()
+    });
+</script>
 </body>
 
 </html>

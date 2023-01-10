@@ -28,7 +28,7 @@ function fetchRequest(file, formData) {
                 watcher.value = "1";
             }
             else{
-                infoText.innerText ="QR data does not match to the Inputted Information";
+                infoText.innerText ="Invalid QR Code";
                 watcher.value = "0";
                 stuid.value = "TUPC-";
                 

@@ -49,7 +49,7 @@
             </ul>
             <div class="d-flex flex-row-reverse bd-highlight">
                 <h5 class="title_profile">Welcome,  <?php echo $_SESSION['get_data']['firstname']; ?> 
-                
+                    
                 <a href="functions.php?logout" type="submit" class="btn btn-danger side" >Logout</a>
                 </h5>
             </div>
@@ -59,11 +59,12 @@
 
       <div class="jumbotron">
         <div class="text-center">
-            <h2>Request Form - PE 2</h2>
+            <h2>Request Form - Type 2</h2>
         </div>
         <br>
         <div class="container marg-top d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
         <?php 
+        $set_studentid = $_SESSION['get_data']['id_no'];
         $set_data1 = $_SESSION['get_data']['firstname'];
         $set_data2 = $_SESSION['get_data']['middlename'];
         $set_data3 = $_SESSION['get_data']['lastname'];
@@ -73,23 +74,21 @@
         $set_data7 = $_SESSION['get_data']['email'];
         $set_data8 = $_SESSION['get_data']['image'];
         $set_data9 = $_SESSION['get_data']['id_no'];
-
         $date_today = date("d/m/Y");
-
-        if ($_SESSION['get_data']['users'] == 'Student'){
         
-        echo '
+        if ($_SESSION['get_data']['users'] == 'Student'){
+        ?>
         <div class="row">
             <div class="col-md-4">
                 <br>
                 <div class="card card_custom">
                     <div class="text-center">
-                        <h4 class="mb-4">PE-2</h4>
+                        <h4 class="mb-4">Type-2</h4>
                         <img src="assets/images/uniform_jogging.png" width="200" alt="">
                     </div>
                     <br>
                     <div class="text-center">
-                        <p>P.E Uniform with Jogginpants</p>
+                        <p>P.E Uniform with joggingpants</p>
                     </div>
                 </div>
             </div>
@@ -98,29 +97,36 @@
             <div class="card card_custom">
                 <form class="" action="functions.php" method="POST">
                     <div class="row">
+                        <div class="col-md-12">
+                            <label for="inputFirst" class="form-label">Student I.D</label>
+                            <input type="text" class="form-control" id="inputFirst" name="studentid" value="<?php  echo $set_studentid ?>" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-4">
                             <label for="inputFirst" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirst" name="firstname" value=" '.$set_data1.' " readonly>
+                            <input type="text" class="form-control" id="inputFirst" name="firstname" value="<?php  echo $set_data1 ?> " readonly>
                         </div>
                         <div class="col-md-4">
                             <label for="inputMiddle" class="form-label">Middle name</label>
-                            <input type="text" class="form-control" id="inputMiddle" name="middlename" value="'.$set_data2.'" readonly>
+                            <input type="text" class="form-control" id="inputMiddle" name="middlename" value="<?php  echo $set_data2 ?>" readonly>
                         </div>
                         <div class="col-md-4">
                             <label for="inputLast" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLast" name="lastname" value="'.$set_data3.'" readonly>
+                            <input type="text" class="form-control" id="inputLast" name="lastname" value="<?php  echo $set_data3 ?>" readonly>
                         </div>
                     </div>  
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputCourse" class="form-label">Course</label>
-                            <input type="text" class="form-control" id="inputCourse" name="course" value="'.$set_data4.'" readonly>
+                            <input type="text" class="form-control" id="inputCourse" name="course" value="<?php  echo $set_data4 ?>" readonly>
                         </div>
                         <br>
                         <div class="col-md-6">
                             <label for="inputGender" class="form-label">Gender</label>
-                            <input type="text" class="form-control" id="inputGender" name="gender" value="'.$set_data6.'" readonly>
+                            <input type="text" class="form-control" id="inputGender" name="gender" value="<?php  echo $set_data6 ?>" readonly>
                         </div>
                     </div> 
                     <br>
@@ -128,11 +134,21 @@
                         <div class="col-md-4">
                             <label for="inputPeTeach" class="form-label">P.E Teacher <span style="color:red;">* </span></label>
                             <select name="teacher" class="form-select" id="" required>
+
                                 <option value="" selected disabled>Select P.E Teacher</option>
-                                <option value="Janlee">Mr. Janlee</option>
-                                <option value="Eiman">Mr. Eiman</option>
-                                <option value="Mica">Ms. Mica</option>
+                                <?php 
+                                    $query = "SELECT * FROM peteachers";
+                                    $result = mysqli_query($conn, $query);
+                                    $check_row = mysqli_num_rows($result);
+                                    while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <option value="<?php echo $row['name'] ?>"><?php echo $row["name"] ?></option>
+                                
+                                <?php } ?>
+                    
+                            
                             </select>
+                          
                         </div>
                         <div class="col-md-4">
                             <label for="tshirt" class="form-label">Size of T-Shirt <span style="color:red;">* </span></label>
@@ -141,8 +157,8 @@
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
-                                <option value="extralarge">XL</option>
-                                <option value="2extralarge">XXL</option>
+                                <option value="extra large">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -159,35 +175,34 @@
                     </div> 
                     <br>
                     <div class="text-center">
-                        <input type="hidden" name="date" value="'.$date_today.'">
-                        <input type="hidden" name="email" value="'.$set_data7.'">
-                        <input type="hidden" name="image" value="'.$set_data8.'">
+                        <input type="hidden" name="date" value="<?php  echo $date_today ?>">
+                        <input type="hidden" name="email" value="<?php  echo $set_data7 ?>">
+                        <input type="hidden" name="image" value="<?php  echo $set_data8 ?>">
                         <input type="hidden" name="note" value="N/A">
                         <input type="hidden" name="status" value="PENDING">
                         <input type="hidden" name="department" value="N/A">
                         <input type="hidden" name="sizes" value="N/A">
-                        <input type="hidden" name="id_no" value="'.$set_data9.'">
+                        <input type="hidden" name="id_no" value="<?php  echo $set_data9 ?>">
                         <a class="btn btn-secondary" href="pickuniform.php">Back</a>
                         <button type="submit" class="btn btn-danger" name="request_student_2">Request</button>
                     </div>
 
 
                 </form>
-             '?>
-             <?php } 
-             else{
-                echo '
+            <?php } 
+            
+            else {?>
                 <div class="row">
             <div class="col-md-4">
                 <br>
                 <div class="card card_custom">
                     <div class="text-center">
-                        <h4 class="mb-4">PE-2</h4>
-                        <img src="assets/images/uniform_jogging.png" width="200" alt="">
+                        <h4 class="mb-4">Type-2</h4>
+                        <img src="assets/images/uniform_short.png" width="200" alt="">
                     </div>
                     <br>
                     <div class="text-center">
-                        <p>P.E Uniform with Joggingpants</p>
+                        <p>P.E Uniform with shorts</p>
                     </div>
                 </div>
             </div>
@@ -198,27 +213,27 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="inputFirst" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirst" name="firstname" value=" '.$set_data1.' " readonly>
+                            <input type="text" class="form-control" id="inputFirst" name="firstname" value=" <?php  echo $set_data1 ?> " readonly>
                         </div>
                         <div class="col-md-4">
                             <label for="inputMiddle" class="form-label">Middle name</label>
-                            <input type="text" class="form-control" id="inputMiddle" name="middlename" value="'.$set_data2.'" readonly>
+                            <input type="text" class="form-control" id="inputMiddle" name="middlename" value="<?php  echo $set_data2 ?>" readonly>
                         </div>
                         <div class="col-md-4">
                             <label for="inputLast" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLast" name="lastname" value="'.$set_data3.'" readonly>
+                            <input type="text" class="form-control" id="inputLast" name="lastname" value="<?php  echo $set_data3 ?>" readonly>
                         </div>
                     </div>  
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputDepartment" class="form-label">Department</label>
-                            <input type="text" class="form-control" id="inputDepartment" name="department" value="'.$set_data5.'" readonly>
+                            <input type="text" class="form-control" id="inputDepartment" name="department" value="<?php  echo $set_data5 ?>" readonly>
                         </div>
                         <br>
                         <div class="col-md-6">
                             <label for="inputGender" class="form-label">Gender</label>
-                            <input type="text" class="form-control" id="inputGender" name="gender" value="'.$set_data6.'" readonly>
+                            <input type="text" class="form-control" id="inputGender" name="gender" value="<?php  echo $set_data6 ?>" readonly>
                         </div>
                     </div> 
                     <br>
@@ -227,9 +242,15 @@
                             <label for="inputPeTeach" class="form-label">P.E Teacher <span style="color:red;">* </span></label>
                             <select name="teacher" class="form-select" id="" required>
                                 <option value="" selected disabled>Select P.E Teacher</option>
-                                <option value="Janlee">Mr. Janlee</option>
-                                <option value="Eiman">Mr. Eiman</option>
-                                <option value="Mica">Ms. Mica</option>
+                                <?php 
+                                    $query = "SELECT * FROM peteachers";
+                                    $result = mysqli_query($conn, $query);
+                                    $check_row = mysqli_num_rows($result);
+                                    while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                <option value="<?php echo $row['name'] ?>"><?php echo $row["name"] ?></option>
+                                
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -250,16 +271,16 @@
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
-                                <option value="extra large">XL</option>
-                                <option value="XXL">XXL</option>
+                                <option value="extralarge">XL</option>
+                                <option value="2extralarge">XXL</option>
                             </select>
                         </div>
                     </div> 
                     <br>
                     <div class="text-center">
-                        <input type="hidden" name="date" value="'.$date_today.'">
-                        <input type="hidden" name="email" value="'.$set_data7.'">
-                        <input type="hidden" name="image" value="'.$set_data8.'">
+                        <input type="hidden" name="date" value="<?php  echo $date_today ?>">
+                        <input type="hidden" name="email" value="<?php  echo $set_data7 ?>">
+                        <input type="hidden" name="image" value="<?php  echo $set_data8 ?>">
                         <input type="hidden" name="note" value="N/A">
                         <input type="hidden" name="status" value="PENDING">
                         <input type="hidden" name="course" value="N/A">
@@ -270,12 +291,8 @@
 
 
                 </form>
-                
-            '?>
-            <?php }
-             
-             
-            ?>
+                <?php } ?>
+   
                 </div>
             </div>
         </div>
@@ -289,5 +306,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/scripts.js"></script>
+
+
 </body>
 </html>

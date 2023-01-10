@@ -165,9 +165,9 @@
                                         <td><?php echo $row['department'] ?></td>
                                         <td>
                                             
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i>  </button>
-                                             <!-- Modal for Delete -->
-                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                            <button class="btn btn-success" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Verify Account" data-target="#verify<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i>  </button>
+                                             <!-- Modal for Verify -->
+                                             <div class="modal fade" id="verify<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -185,7 +185,39 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="verify_acc">Verify Account</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="verify_acc">Verify Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel Verification" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Cancel -->
+                                             <div class="modal fade" id="cancel<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Cancel Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Cancelling Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_cancel" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="cancel_acc">Cancel Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -234,9 +266,9 @@
                                         <td><?php echo $row['email'] ?></td>
                                         <td>
                                             
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i>  </button>
+                                            <button class="btn btn-success" data-toggle="modal"  data-bs-toggle="tooltip" data-bs-placement="top" title="Verify Account" data-target="#verify_admin<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i>  </button>
                                              <!-- Modal for Delete -->
-                                             <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                             <div class="modal fade" id="verify_admin<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -255,6 +287,38 @@
                                                                                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
                                                                                     <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="verify_acc_admin">Verify Account</button>
+                                                                                    <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
+                                                                                </div>        
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel Verification" data-target="#cancel_admin<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                             <!-- Modal for Cancel -->
+                                             <div class="modal fade" id="cancel_admin<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="title" id="largeModalLabel">Cancel Account</h4>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                    <div class="card">
+                                                                        <br>
+                                                                        <form action="functions.php" method="POST">
+                                                                            <div class="body">
+                                                                                <h3>Cancelling Account of : <?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></h3>
+                                                                                <p style="text-align:left">Leave a message for this user:</p>
+                                                                                <textarea class="form-control" name="msg_cancel" id="" cols="30" rows="5" required></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="cancel_acc_admin">Cancel Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -304,7 +368,7 @@
                                         <td><?php echo $row['course'] ?></td>
                                         <td><?php echo $row['department'] ?></td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#accdetails<?php echo $row['id'] ?>"><i class="zmdi zmdi-receipt"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Account Details" data-target="#accdetails<?php echo $row['id'] ?>"><i class="zmdi zmdi-receipt"></i> </button>
                                              <!-- Modal for Account Details -->
                                              <div class="modal fade" id="accdetails<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -377,7 +441,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-warning" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-rotate-left"></i>  </button>
+                                            <button class="btn btn-warning" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unverify Account" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-rotate-left"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -397,7 +461,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="unverify_acc">Unverify Account</button>
+                                                                                    <button type="submit" class="btn btn-warning btn-round waves-effect" style="color:white" name="unverify_acc">Unverify Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -445,7 +509,7 @@
                                         <td><?php echo $row['firstname'] ?> <?php echo $row['middlename'] ?> <?php echo $row['lastname'] ?></td>
                                         <td><?php echo $row['email'] ?></td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#accdetails<?php echo $row['id'] ?>"><i class="zmdi zmdi-receipt"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Account Details" data-target="#accdetails<?php echo $row['id'] ?>"><i class="zmdi zmdi-receipt"></i> </button>
                                              <!-- Modal for Account Details -->
                                              <div class="modal fade" id="accdetails<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -495,8 +559,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-warning" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-rotate-left"></i>  </button>
-                                             <!-- Modal for Delete -->
+                                            <button class="btn btn-warning" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unverify Account" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-rotate-left"></i>  </button>
+                                             <!-- Modal for Unverify -->
                                              <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
@@ -515,7 +579,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="unverify_acc_admin">Unverify Account</button>
+                                                                                    <button type="submit" class="btn btn-warning btn-round waves-effect" style="color:white" name="unverify_acc_admin">Unverify Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>

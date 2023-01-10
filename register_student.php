@@ -53,43 +53,43 @@
         </div>
         <br>
         <div class="card card_custom container"  data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
-            <p class="text-primary">Fields that has (*) are required to fillout</p>
+            <p class="text-primary">Fields that has (<span class="text-danger">*</span>) are required to fillout</p>
 
             <form class="" action="functions.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="inputFirst" class="form-label">First name</label>
+                        <label for="inputFirst" class="form-label">First name <span class="text-danger">*</span> </label>
                         <input type="text" class="form-control" id="inputFirst" onkeyup="lettersOnly(this)" name="firstname" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputMiddle" class="form-label">Middle name</label>
+                        <label for="inputMiddle" class="form-label">Middle name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="inputMiddle" onkeyup="lettersOnly(this)" name="middlename" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputLast" class="form-label">Last name</label>
+                        <label for="inputLast" class="form-label">Last name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="inputLast" onkeyup="lettersOnly(this)" name="lastname" required>
                     </div>
                 </div> 
                 <br>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="input_stuID" class="form-label">ID-number(TUPC-xx-xxxx)</label>
+                        <label for="input_stuID" class="form-label">ID-number(TUPC-xx-xxxx) <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="inputstuid"  name="stuid" value="TUPC-" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputEmail" class="form-label">Email</label>
+                        <label for="inputEmail" class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="inputEmail" onkeyup="gsfeOnly(this)" name="email" required>
                         <p id="check_gsfe" class="text-primary"></p>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputContact" class="form-label">Contact No.</label>
+                        <label for="inputContact" class="form-label">Contact No. <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="11" id="inputContact" name="contact" required>
                     </div>
                 </div> 
                 <br>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="inputImage" class="form-label">Gender</label>
+                        <label for="inputImage" class="form-label">Gender <span class="text-danger">*</span></label>
                         <select name="gender" class="form-select" required>
                             <option value="" selected disabled>Select Gender</option>
                             <option value="Male">Male</option>
@@ -97,7 +97,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="inputCourse" class="form-label">Course</label>
+                        <label for="inputCourse" class="form-label">Course <span class="text-danger">*</span></label>
                         <select name="course" class="form-select" required>
                             <option value="" selected disabled>Select Course</option>
                             <option value="BSCE">BSCE - Bachelor of Science in Civil Engineering</option>
@@ -129,26 +129,26 @@
                 <br>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="inputQR" class="form-label">Upload QR code from your School ID</label>
+                        <label for="inputQR" class="form-label">Upload QR code from your School ID <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="qr_val" id="qr_data" hidden>
 
                         <input type="file" class="form-control" id = "qr_input" name="ID_pic" accept="image/png, image/jpeg" required>
                         
                         <p id="pp" class="text-primary">Select a clearer photo for the system to scan</p>
                         <input type="text" id="watcher" name="watcher" class="form-control" hidden>
+                        <a href="" class="text-danger" style="text-decoration:none" data-bs-toggle="modal" data-bs-target="#qr">Instructions for QR code requirements</a>
                     </div>
-                        
                     <br>
 
                     <div class="col-md-4">
-                        <label for="inputPass1" class="form-label">Password</label>
+                        <label for="inputPass1" class="form-label">Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="inputPass1" name="password1" required>
                         <br>
-                        <label for="inputPass2" class="form-label">Retype Password</label>
+                        <label for="inputPass2" class="form-label">Retype Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="inputPass2" name="password2" required>
                     </div>
                     <div class="col-md-4">
-                    <label for="inputImage" class="form-label">Upload image for your profile pic</label>
+                    <label for="inputImage" class="form-label">Upload image for your profile pic <span class="text-danger">*</span></label>
                     <input class="form-control" name="profile_pic" type="file" accept="image/png, image/jpeg" onchange="preview()" required>
                     </div>
                 </div> 
@@ -162,6 +162,40 @@
         </div>
       </div>
 
+      <div class="modal fade" id="qr" tabindex="-1" aria-labelledby="qr" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="">QR Code Requirements</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-body text-center">
+                <div class="row">
+                    <h5>Uploaded image must be clear</h5>
+                    <br><br>
+                    <div class="col">
+                        <img src="qr_sample/naj.jpg" width="150" alt="">
+                        <br><br>
+                        <img src="qr_sample/visperas.jpg" width="150" alt="">
+                        <br>
+                        <img src="assets/images/check.png" width="70" alt="">
+                    </div>
+                    <div class="col">
+                        <img src="qr_sample/narag.jpg" width="150" alt="">
+                        <br><br>
+                        <img src="qr_sample/torres.jpg" width="150" alt="">
+                        <br>
+                        <img src="assets/images/xmark.png" width="50" alt="">
+                    </div>
+                </div>
+              
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+        </div>
+      </div>
    
 
     <script src="js/jquery.js"></script>

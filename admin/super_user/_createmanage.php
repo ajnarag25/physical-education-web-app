@@ -138,7 +138,7 @@
                             <img src="default_profile/default_pic.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
         
                             <h4 class="m-t-10">Add New Personnel Account</h4>   
-                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addPersonnel">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Personnel Account" data-target="#addPersonnel">Add <i class="zmdi zmdi-plus"></i></button>                     
                             <!-- Modal for Add Personnel -->
                             <div class="modal fade" id="addPersonnel" tabindex="-1" role="dialog">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -260,7 +260,7 @@
                             <img src="default_profile/default_head.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
         
                             <h4 class="m-t-10">Add New Department Head</h4>   
-                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-target="#addDepthead">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Department Head" data-target="#addDepthead">Add <i class="zmdi zmdi-plus"></i></button>                     
                             <!-- Modal for Add Department Head -->
                             <div class="modal fade" id="addDepthead" tabindex="-1" role="dialog">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -328,7 +328,7 @@
                             <h2><strong>Student</strong> Accounts</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
-                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                            <table class="table table-hover dataTable js-exportable table-sm " id="table1">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Image</th>
@@ -353,7 +353,7 @@
                                         <td><?php echo $row['gender'] ?></td>
                                         <td><?php echo $row['course'] ?></td>
                                         <td>
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Credentials" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
                                              <!-- Modal for Edit -->
                                              <div class="modal fade" id="edit<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -445,7 +445,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Account" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -466,7 +466,7 @@
                                                                                     <input type="hidden" name="id_student_del" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="studentid_del" value="<?php echo $row['id_no'] ?>">
                                                                                     <input type="hidden" name="email_student_del" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_student">Delete Account</button>
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="set_del_student">Delete Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -492,7 +492,7 @@
                             <h2><strong>Personnel</strong> Accounts</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
-                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                            <table class="table table-hover dataTable js-exportable table-sm " id="table1">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Image</th>
@@ -517,7 +517,7 @@
                                         <td><?php echo $row['gender'] ?></td>
                                         <td><?php echo $row['department'] ?></td>
                                         <td>
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Credentials" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
                                              <!-- Modal for Edit -->
                                              <div class="modal fade" id="edit<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -603,7 +603,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Account" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -624,7 +624,7 @@
                                                                                     <input type="hidden" name="id_personnel_del" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="personnelid_del" value="<?php echo $row['id_no'] ?>">
                                                                                     <input type="hidden" name="email_personnel_del" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="set_del_personnel">Delete Account</button>
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="set_del_personnel">Delete Account</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -650,7 +650,7 @@
                             <h2><strong>Administrator</strong> Accounts</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
-                            <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
+                            <table class="table table-hover dataTable js-exportable table-sm " id="table1">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Image</th>
@@ -688,7 +688,7 @@
                                         ?></td>
                                         <td>
                                        
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#disenable<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Disable/Enable Account" data-target="#disenable<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
                                             <!-- Modal for Disable Enable -->
                                             <div class="modal fade" id="disenable<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -724,7 +724,7 @@
                                                                             </select>
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_disenable" value="<?php echo $row['id'] ?>">
-                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="update_disenable">Update Status</button>
+                                                                                <button type="submit" class="btn btn-danger btn-round waves-effect" name="update_disenable">Update Status</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
                                                                         </div>
@@ -735,7 +735,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Account" data-target="#delete<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -817,7 +817,7 @@
                                         ?></td>
                                         <td>
                                        
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#disenable_head<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Disable/Enable Department Head" data-target="#disenable_head<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
                                             <!-- Modal for Disable Enable -->
                                             <div class="modal fade" id="disenable_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -853,7 +853,7 @@
                                                                             </select>
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_disenable_head" value="<?php echo $row['id'] ?>">
-                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="update_disenable_head">Update Status</button>
+                                                                                <button type="submit" class="btn btn-danger btn-round waves-effect" name="update_disenable_head">Update Status</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
                                                                         </div>
@@ -864,7 +864,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete_head<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Department Head" data-target="#delete_head<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -883,7 +883,7 @@
                                     
                                                                             <div class="modal-footer">
                                                                                 <input type="hidden" name="id_delete_head" value="<?php echo $row['id'] ?>">
-                                                                                <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="del_head">Remove</button>
+                                                                                <button type="submit" class="btn btn-danger btn-round waves-effect" name="del_head">Remove</button>
                                                                                 <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>        
                                                                         </div>

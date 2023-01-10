@@ -70,7 +70,7 @@
                     <div class="col">
                         <br>
                         <div class="card card_custom">
-                            <h4 class="text-center mb-4">PE-1</h4>
+                            <h4 class="text-center mb-4">Type 1</h4>
                             <img src="assets/images/uniform_short.png" width="250" alt="">
                             <br>
                             <div class="text-center">
@@ -82,7 +82,7 @@
                     <div class="col">
                         <br>
                         <div class="card card_custom">
-                            <h4 class="text-center mb-4">PE-2</h4>
+                            <h4 class="text-center mb-4">Type 2</h4>
                             <img src="assets/images/uniform_jogging.png" width="250" alt="">
                             <br>
                             <div class="text-center">

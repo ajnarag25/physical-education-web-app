@@ -78,10 +78,10 @@
                 </div>
             </li>
             <li><a href="_dashboard.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li class="active open"><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation of Facility</span></a></li>
-            <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform Inquiries</span></a></li>
+            <li class="active open"><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation <span id="no_number_reserve">0</span></span></a> </li>
+            <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform <span id="no_number_inquire">0</span></span></a> </li>
             <li><a href="_basketball.php"><i class="zmdi zmdi-chart-donut"></i><span>Sports Equipment</span></a></li> 
-            <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
+            <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile </span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
         </ul>
     </div>
@@ -153,7 +153,7 @@
                                             <td><?php echo $row['purpose'] ?></td>
                                             <td><?php echo $row['participants'] ?></td>
                                             <td>
-                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
+                                                <button class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept Request" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
                                                 <!-- Modal for Accept -->
                                                 <div class="modal fade" id="accept<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -175,7 +175,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_accept" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_accept" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_accept">Accept</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="set_accept">Accept</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -186,7 +186,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Decline Request" data-toggle="modal" data-target="#decline<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
                                                 <!-- Modal for Decline -->
                                                 <div class="modal fade" id="decline<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -207,7 +207,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_decline" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_decline" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="decline_req">Decline</button>
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="decline_req">Decline</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -218,7 +218,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-info btn-sm " data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
+                                                <button class="btn btn-info btn-sm " data-bs-toggle="tooltip" data-bs-placement="top" title="Approval of Other Departments" data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
                                                 
                                                 <!-- Modal for Status -->
                                                 <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
@@ -383,7 +383,7 @@
                                             <td><?php echo $row['purpose'] ?></td>
                                             <td><?php echo $row['participants'] ?></td>
                                             <td>
-                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approve<?php echo $row['id'] ?>"><i class="zmdi zmdi-assignment-check"></i></button>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve Request" data-target="#approve<?php echo $row['id'] ?>"><i class="zmdi zmdi-assignment-check"></i></button>
                                                 <!-- Modal for Approve -->
                                                 <div class="modal fade" id="approve<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -419,7 +419,9 @@
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
                                                                                       
-                                                                                        <input type="text" name="resched" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule">
+                                                                                        <input type="text" id="min-date" name="resched" class="form-control floating-label" placeholder="Set Date/Time for Reschedule">
+
+                                                                                        
                                                                                     </div>
                                                                                 
                                                                                 </div>
@@ -433,13 +435,13 @@
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" name="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" required>
+                                                                                        <input type="text" id="min-date2" name="setdate" class="form-control floating-label" placeholder="Please choose date & time" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" value="<?php echo $row['id'] ?>" name="id_approval">
                                                                                     <input type="hidden" value="<?php echo $row['email'] ?>" name="get_email_approval">
-                                                                                    <button type="submit" class="btn btn-outline-success btn-round waves-effect" name="set_approval">Confirm</button>
+                                                                                    <button type="submit" class="btn btn-success btn-round waves-effect" name="set_approval">Confirm</button>
                                                                                     <button type="button" class="btn btn-outline-danger btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>
                                                                             </form>
@@ -518,7 +520,7 @@
                                             <td><?php echo $row['participants'] ?></td>
                                             <td>
                                               
-                                                <button class="btn btn-info btn-sm "data-toggle="modal" data-target="#info<?php echo $row['id'] ?>">Info</button>
+                                                <button class="btn btn-info btn-sm " data-bs-toggle="tooltip" data-bs-placement="top" title="Info" data-toggle="modal" data-target="#info<?php echo $row['id'] ?>">Info</button>
                                                 <!-- Modal for Info -->
                                                 <div class="modal fade" id="info<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -546,7 +548,7 @@
                                                                                             <div class="input-group-prepend">
                                                                                                 <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                             </div>
-                                                                                            <input type="text" class="form-control datetimepicker" placeholder="Set Date/Time for Reschedule" value="<?php echo $row['resched'] ?>" disabled>
+                                                                                            <input type="text" id="min-date3" class="form-control" placeholder="Set Date/Time for Reschedule" value="<?php echo $row['resched'] ?>" disabled>
                                                                                         </div>
                                                                                     
                                                                                 </div>
@@ -564,7 +566,7 @@
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
                                                                                         </div>
-                                                                                        <input type="text" id="setdate" class="form-control datetimepicker" placeholder="Please choose date & time" value="<?php echo $row['date'] ?>" disabled required>
+                                                                                        <input type="text" id="min-date4" class="form-control" placeholder="Please choose date & time" value="<?php echo $row['date'] ?>" disabled required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
@@ -578,7 +580,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel Request" data-target="#cancel<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i></button>
                                                 <!-- Modal for Cancel -->
                                                 <div class="modal fade" id="cancel<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -599,7 +601,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <input type="hidden" name="id_cancel" value="<?php echo $row['id'] ?>">
                                                                                     <input type="hidden" name="email_set_cancel" value="<?php echo $row['email'] ?>">
-                                                                                    <button type="submit" class="btn btn-outline-danger btn-round waves-effect" name="cancel_req">Cancel</button>
+                                                                                    <button type="submit" class="btn btn-danger btn-round waves-effect" name="cancel_req">Cancel</button>
                                                                                     <button type="button" class="btn btn-outline-secondary btn-round waves-effect" data-dismiss="modal">Close</button>
                                                                                 </div>        
                                                                             </div>
@@ -757,6 +759,47 @@
 <script src="assets/js/pages/calendar/calendar.js"></script>
 <script src="assets/js/pages/forms/basic-form-elements.js"></script>
 <script src="assets/js/pages/ui/sweetalert.js"></script>
+
+<script>
+    function loadDoc1(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_reserve').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_reserve.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc1();
+    function loadDoc2(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_inquire').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_inquire.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc2();
+</script>
+<script type="text/javascript">
+   
+    $(document).ready(function()
+    {
+      
+        $('[id=min-date]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date2]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date3]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $('[id=min-date4]').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+        $.material.init()
+    });
+</script>
 </body>
 
 </html>

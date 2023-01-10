@@ -206,6 +206,10 @@
                                     echo'
                                         <span class="text-danger">CANCELED</span>
                                     ';
+                                }elseif($row['status'] == 'REFUND'){
+                                    echo'
+                                        <span class="text-warning">REFUND</span>
+                                    ';
                                 }
                                 else{
                                     echo'

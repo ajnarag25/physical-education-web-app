@@ -17,7 +17,8 @@
       this.element = element;
       this.$element = $(element);
 
-      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false};
+
+      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, disabledDays: [], shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false, triggerEvent: 'focus', monthPicker: false, year:true};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -65,7 +66,7 @@
                  this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
                  this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
-                 this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
+                 this._attachEvent(this.$element, this.params.triggerEvent, this._fireCalendar.bind(this));
               },
               initDays: function ()
               {
@@ -199,66 +200,80 @@
               },
               initTemplate: function ()
               {
+                  var yearPicker = "";
+                  var y =this.currentDate.year();
+                  for (var i = y-3; i < y + 4; i++) {
+                      yearPicker += '<div class="year-picker-item" data-year="' + i + '">' + i + '</div>';
+                  }
+                  this.midYear=y;
+                  var yearHtml =
+                      '<div class="dtp-picker-year hidden" >' +
+                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
+                      yearPicker +
+                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
+                      '</div>';
+
                  this.template = '<div class="dtp hidden" id="' + this.name + '">' +
-                     '<div class="dtp-content">' +
-                     '<div class="dtp-date-view">' +
-                     '<header class="dtp-header">' +
-                     '<div class="dtp-actual-day">Lundi</div>' +
-                     '<div class="dtp-close"><a href="javascript:void(0);"><i class="zmdi zmdi-close"></i></</div>' +
-                     '</header>' +
-                     '<div class="dtp-date hidden">' +
-                     '<div>' +
-                     '<div class="left center p10">' +
-                     '<a href="javascript:void(0);" class="dtp-select-month-before"><i class="zmdi zmdi-chevron-left"></i></a>' +
-                     '</div>' +
-                     '<div class="dtp-actual-month p80">MAR</div>' +
-                     '<div class="right center p10">' +
-                     '<a href="javascript:void(0);" class="dtp-select-month-after"><i class="zmdi zmdi-chevron-right"></i></a>' +
-                     '</div>' +
-                     '<div class="clearfix"></div>' +
-                     '</div>' +
-                     '<div class="dtp-actual-num">13</div>' +
-                     '<div>' +
-                     '<div class="left center p10">' +
-                     '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="zmdi zmdi-chevron-left"></i></a>' +
-                     '</div>' +
-                     '<div class="dtp-actual-year p80">2014</div>' +
-                     '<div class="right center p10">' +
-                     '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="zmdi zmdi-chevron-right"></i></a>' +
-                     '</div>' +
-                     '<div class="clearfix"></div>' +
-                     '</div>' +
-                     '</div>' +
-                     '<div class="dtp-time hidden">' +
-                     '<div class="dtp-actual-maxtime">23:55</div>' +
-                     '</div>' +
-                     '<div class="dtp-picker">' +
-                     '<div class="dtp-picker-calendar"></div>' +
-                     '<div class="dtp-picker-datetime hidden">' +
-                     '<div class="dtp-actual-meridien">' +
-                     '<div class="left p20">' +
-                     '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
-                     '</div>' +
-                     '<div class="dtp-actual-time p60"></div>' +
-                     '<div class="right p20">' +
-                     '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
-                     '</div>' +
-                     '<div class="clearfix"></div>' +
-                     '</div>' +
-                     '<div id="dtp-svg-clock">' +
-                     '</div>' +
-                     '</div>' +
-                     '</div>' +
-                     '</div>' +
-                     '<div class="dtp-buttons">' +
-                     '<button class="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
-                     '<button class="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
-                     '<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
-                     '<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
-                     '<div class="clearfix"></div>' +
-                     '</div>' +
-                     '</div>' +
-                     '</div>';
+                         '<div class="dtp-content">' +
+                         '<div class="dtp-date-view">' +
+                         '<header class="dtp-header">' +
+                         '<div class="dtp-actual-day">Lundi</div>' +
+                         '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></a></div>' +
+                         '</header>' +
+                         '<div class="dtp-date hidden">' +
+                         '<div>' +
+                         '<div class="left center p10">' +
+                         '<a href="javascript:void(0);" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
+                         '</div>' +
+                         '<div class="dtp-actual-month p80">MAR</div>' +
+                         '<div class="right center p10">' +
+                         '<a href="javascript:void(0);" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
+                         '</div>' +
+                         '<div class="clearfix"></div>' +
+                         '</div>' +
+                         '<div class="dtp-actual-num">13</div>' +
+                         '<div>' +
+                         '<div class="left center p10">' +
+                         '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
+                         '</div>' +
+                         '<div class="dtp-actual-year p80'+(this.params.year?"":" disabled")+'">2014</div>' +
+                         '<div class="right center p10">' +
+                         '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
+                         '</div>' +
+                         '<div class="clearfix"></div>' +
+                         '</div>' +
+                         '</div>' +
+                         '<div class="dtp-time hidden">' +
+                         '<div class="dtp-actual-maxtime">23:55</div>' +
+                         '</div>' +
+                         '<div class="dtp-picker">' +
+                         '<div class="dtp-picker-calendar"></div>' +
+                         '<div class="dtp-picker-datetime hidden">' +
+                         '<div class="dtp-actual-meridien">' +
+                         '<div class="left p20">' +
+                         '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
+                         '</div>' +
+                         '<div class="dtp-actual-time p60"></div>' +
+                         '<div class="right p20">' +
+                         '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
+                         '</div>' +
+                         '<div class="clearfix"></div>' +
+                         '</div>' +
+                         '<div id="dtp-svg-clock">' +
+                         '</div>' +
+                         '</div>' +
+                         yearHtml+
+                         '</div>' +
+                         '</div>' +
+                         '<div class="dtp-buttons">' +
+                         '<button class="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
+                         '<button class="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
+                         '<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
+                         '<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
+                         '<div class="clearfix"></div>' +
+                         '</div>' +
+                         '</div>' +
+                         '</div>';
 
                  if ($('body').find("#" + this.name).length <= 0)
                  {
@@ -277,6 +292,10 @@
                  this._attachEvent(this.$dtpElement.find('a.dtp-select-month-after'), 'click', this._onMonthAfterClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('a.dtp-select-year-before'), 'click', this._onYearBeforeClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('a.dtp-select-year-after'), 'click', this._onYearAfterClick.bind(this));
+                 this._attachEvent(this.$dtpElement.find('.dtp-actual-year'), 'click', this._onActualYearClick.bind(this));
+                 this._attachEvent(this.$dtpElement.find('a.dtp-select-year-range.before'), 'click', this._onYearRangeBeforeClick.bind(this));
+                 this._attachEvent(this.$dtpElement.find('a.dtp-select-year-range.after'), 'click', this._onYearRangeAfterClick.bind(this));
+                 this._attachEvent(this.$dtpElement.find('div.year-picker-item'), 'click', this._onYearItemClick.bind(this));
 
                  if (this.params.clearButton === true)
                  {
@@ -307,8 +326,12 @@
               {
                  this.currentView = 0;
 
-                 this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 if (this.params.monthPicker === false)
+                 {
+                    this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
+                 }
                  this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
+                 this.$dtpElement.find('.dtp-picker-year').addClass('hidden');
 
                  var _date = ((typeof (this.currentDate) !== 'undefined' && this.currentDate !== null) ? this.currentDate : null);
                  var _calendar = this.generateCalendar(this.currentDate);
@@ -347,6 +370,7 @@
 
                  this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
                  this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
+                 this.$dtpElement.find('.dtp-picker-year').addClass('hidden');
 
                  var svgClockElement = this.createSVGClock(true);
 
@@ -355,7 +379,7 @@
                     var x = -(162 * (Math.sin(-Math.PI * 2 * (i / 12))));
                     var y = -(162 * (Math.cos(-Math.PI * 2 * (i / 12))));
 
-                    var fill = ((this.currentDate.format(hFormat) == i) ? "#007d72" : 'transparent');
+                    var fill = ((this.currentDate.format(hFormat) == i) ? "#8BC34A" : 'transparent');
                     var color = ((this.currentDate.format(hFormat) == i) ? "#fff" : '#000');
 
                     var svgHourCircle = this.createSVGElement("circle", {'id': 'h-' + i, 'class': 'dtp-select-hour', 'style': 'cursor:pointer', r: '30', cx: x, cy: y, fill: fill, 'data-hour': i});
@@ -385,7 +409,7 @@
                        var x = -(110 * (Math.sin(-Math.PI * 2 * (i / 12))));
                        var y = -(110 * (Math.cos(-Math.PI * 2 * (i / 12))));
 
-                       var fill = ((this.currentDate.format(hFormat) == (i + 12)) ? "#007d72" : 'transparent');
+                       var fill = ((this.currentDate.format(hFormat) == (i + 12)) ? "#8BC34A" : 'transparent');
                        var color = ((this.currentDate.format(hFormat) == (i + 12)) ? "#fff" : '#000');
 
                        var svgHourCircle = this.createSVGElement("circle", {'id': 'h-' + (i + 12), 'class': 'dtp-select-hour', 'style': 'cursor:pointer', r: '30', cx: x, cy: y, fill: fill, 'data-hour': (i + 12)});
@@ -430,6 +454,7 @@
                     this.$dtpElement.find('a.dtp-meridien-pm').click();
                  }
 
+                 this.$dtpElement.find('.dtp-picker-year').addClass('hidden');
                  this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
                  this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
 
@@ -443,7 +468,7 @@
                     var x = -(s * (Math.sin(-Math.PI * 2 * (i / 60))));
                     var y = -(s * (Math.cos(-Math.PI * 2 * (i / 60))));
 
-                    var color = ((this.currentDate.format("m") == i) ? "#007d72" : 'transparent');
+                    var color = ((this.currentDate.format("m") == i) ? "#8BC34A" : 'transparent');
 
                     var svgMinuteCircle = this.createSVGElement("circle", {'id': 'm-' + i, 'class': 'dtp-select-minute', 'style': 'cursor:pointer', r: r, cx: x, cy: y, fill: color, 'data-minute': i});
 
@@ -510,13 +535,13 @@
                  if (isHour)
                  {
                     var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#bdbdbd', 'stroke-width': 2});
-                    var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#007d72', 'stroke-width': 8});
+                    var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#8BC34A', 'stroke-width': 8});
 
                     svgGElement.appendChild(svgMinuteHand);
                     svgGElement.appendChild(svgHourHand);
                  } else
                  {
-                    var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#007d72', 'stroke-width': 2});
+                    var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#8BC34A', 'stroke-width': 2});
                     var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#bdbdbd', 'stroke-width': 8});
 
                     svgGElement.appendChild(svgHourHand);
@@ -719,21 +744,23 @@
                     _template += '<td data-date="' + moment(calendar.days[i]).locale(this.params.lang).format("D") + '">';
                     if (calendar.days[i] != 0)
                     {
-                       if (this.isBeforeMaxDate(moment(calendar.days[i]), false, false) === false || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false)
-                       {
-                          _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
-                       } else
-                       {
-                          if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
-                          {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
-                          } else
-                          {
-                             _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
-                          }
-                       }
+                        if (this.isBeforeMaxDate(moment(calendar.days[i]), false, false) === false
+                            || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false
+                            || this.params.disabledDays.indexOf(calendar.days[i].isoWeekday()) !== -1)
+                        {
+                            _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
+                        } else
+                        {
+                            if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
+                            {
+                                _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                            } else
+                            {
+                                _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                            }
+                        }
 
-                       _template += '</td>';
+                        _template += '</td>';
                     }
                  }
                  _template += '</tr></tbody></table>';
@@ -842,7 +869,7 @@
                     this._attachedEvents.splice(i, 1);
                  }
               },
-              _onFocus: function ()
+              _fireCalendar: function ()
               {
                  this.currentView = 0;
                  this.$element.blur();
@@ -981,22 +1008,104 @@
               {
                  this.currentDate.subtract(1, 'months');
                  this.initDate(this.currentDate);
+                  this._closeYearPicker();
               },
               _onMonthAfterClick: function ()
               {
                  this.currentDate.add(1, 'months');
                  this.initDate(this.currentDate);
+                  this._closeYearPicker();
               },
               _onYearBeforeClick: function ()
               {
                  this.currentDate.subtract(1, 'years');
                  this.initDate(this.currentDate);
+                  this._closeYearPicker();
               },
               _onYearAfterClick: function ()
               {
                  this.currentDate.add(1, 'years');
                  this.initDate(this.currentDate);
+                  this._closeYearPicker();
               },
+               refreshYearItems:function () {
+                  var curYear=this.currentDate.year(),midYear=this.midYear;
+                   var minYear=1850;
+                   if (typeof (this.minDate) !== 'undefined' && this.minDate !== null){
+                       minYear=moment(this.minDate).year();
+                   }
+
+                   var maxYear=2200;
+                   if (typeof (this.maxDate) !== 'undefined' && this.maxDate !== null){
+                       maxYear=moment(this.maxDate).year();
+                   }
+
+                   this.$dtpElement.find(".dtp-picker-year .invisible").removeClass("invisible");
+                   this.$dtpElement.find(".year-picker-item").each(function (i, el) {
+                       var newYear = midYear - 3 + i;
+                       $(el).attr("data-year", newYear).text(newYear).data("year", newYear);
+                       if (curYear == newYear) {
+                           $(el).addClass("active");
+                       } else {
+                           $(el).removeClass("active");
+                       }
+                       if(newYear<minYear || newYear>maxYear){
+                           $(el).addClass("invisible")
+                       }
+                   });
+                   if(minYear>=midYear-3){
+                       this.$dtpElement.find(".dtp-select-year-range.before").addClass('invisible');
+                   }
+                   if(maxYear<=midYear+3){
+                       this.$dtpElement.find(".dtp-select-year-range.after").addClass('invisible');
+                   }
+
+                   this.$dtpElement.find(".dtp-select-year-range").data("mid", midYear);
+               },
+               _onActualYearClick:function(){
+                  if(this.params.year){
+                      if(this.$dtpElement.find('.dtp-picker-year.hidden').length>0) {
+                          this.$dtpElement.find('.dtp-picker-datetime').addClass("hidden");
+                          this.$dtpElement.find('.dtp-picker-calendar').addClass("hidden");
+                          this.$dtpElement.find('.dtp-picker-year').removeClass("hidden");
+                          this.midYear = this.currentDate.year();
+                          this.refreshYearItems();
+                      }else{
+                          this._closeYearPicker();
+                      }
+                  }
+               },
+               _onYearRangeBeforeClick:function(){
+                   this.midYear-=7;
+                   this.refreshYearItems();
+               },
+               _onYearRangeAfterClick:function(){
+                   this.midYear+=7;
+                   this.refreshYearItems();
+               },
+               _onYearItemClick:function (e) {
+                   var newYear = $(e.currentTarget).data('year');
+                   var oldYear = this.currentDate.year();
+                   var diff = newYear - oldYear;
+                   this.currentDate.add(diff, 'years');
+                   this.initDate(this.currentDate);
+
+                   this._closeYearPicker();
+                   this.$element.trigger("yearSelected",this.currentDate);
+               },
+               _closeYearPicker:function(){
+                   this.$dtpElement.find('.dtp-picker-calendar').removeClass("hidden");
+                   this.$dtpElement.find('.dtp-picker-year').addClass("hidden");
+               },
+               enableYearPicker:function () {
+                    this.params.year=true;
+                    this.$dtpElement.find(".dtp-actual-year").reomveClass("disabled");
+               },
+               disableYearPicker:function () {
+                   this.params.year=false;
+                   this.$dtpElement.find(".dtp-actual-year").addClass("disabled");
+                   this._closeYearPicker();
+               },
               _onSelectDate: function (e)
               {
                  this.$dtpElement.find('a.dtp-select-day').removeClass('selected');
@@ -1006,11 +1115,11 @@
 
                  if (this.params.switchOnClick === true && this.params.time === true)
                     setTimeout(this.initHours.bind(this), 200);
-                    
+
                  if(this.params.switchOnClick === true && this.params.time === false) {
                     setTimeout(this._onOKClick.bind(this), 200);
                  }
-                 
+
               },
               _onSelectHour: function (e)
               {
@@ -1030,7 +1139,7 @@
                        $(th[i]).attr('fill', '#000');
                     }
 
-                    $(parent.find('#h-' + value)).attr('fill', '#1cbfd0');
+                    $(parent.find('#h-' + value)).attr('fill', '#8BC34A');
                     $(parent.find('#th-' + value)).attr('fill', '#fff');
 
                     this.currentDate.hour(parseInt(value));
@@ -1066,7 +1175,7 @@
                        $(tm[i]).attr('fill', '#000');
                     }
 
-                    $(parent.find('#m-' + value)).attr('fill', '#007d72');
+                    $(parent.find('#m-' + value)).attr('fill', '#8BC34A');
                     $(parent.find('#tm-' + value)).attr('fill', '#fff');
 
                     this.currentDate.minute(parseInt(value));
@@ -1105,6 +1214,9 @@
                        this.showTime(this.currentDate);
                  }
                  this.toggleTime((this.currentView === 1));
+              },
+              _hideCalendar: function() {
+                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
               },
               convertHours: function (h)
               {
@@ -1145,11 +1257,17 @@
                  this.$dtpElement.removeClass('hidden');
                  this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
                  this._centerBox();
+                 this.$element.trigger('open');
+                 if (this.params.monthPicker === true)
+                 {
+                    this._hideCalendar();
+                 }
               },
               hide: function ()
               {
                  $(window).off('keydown', null, null, this._onKeydown.bind(this));
                  this.$dtpElement.addClass('hidden');
+                 this.$element.trigger('close');
               },
               _centerBox: function ()
               {

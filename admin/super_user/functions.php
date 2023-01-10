@@ -436,6 +436,65 @@
 
    }
 
+
+   if (isset($_POST['cancel_acc'])) {
+        $id = $_POST['id'];
+        $emails = $_POST['email'];
+        $msg = $_POST['msg_verify'];
+        if($id == null){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_verifyunverify.php";
+                        }else{
+                            window.location.href = "_verifyunverify.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }else{
+            echo $emails;
+            $conn->query("UPDATE registration SET status='CANCELED' WHERE id='$id'") or die($conn->error);
+            include 'send_email_verified.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Canceled the Account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_verifyunverify.php";
+                        }else{
+                            window.location.href = "_verifyunverify.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }
+
+
+    }
+
    if (isset($_POST['verify_acc_admin'])) {
         $id = $_POST['id'];
         $emails = $_POST['email'];
@@ -466,6 +525,64 @@
         }else{
             echo $emails;
             $conn->query("UPDATE admin SET acc_status='VERIFIED' WHERE id='$id'") or die($conn->error);
+            include 'send_email_verified.php';
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Verified the Account',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_verifyunverify.php";
+                        }else{
+                            window.location.href = "_verifyunverify.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }
+
+    }
+
+
+    if (isset($_POST['cancel_acc_admin'])) {
+        $id = $_POST['id'];
+        $emails = $_POST['email'];
+        $msg = $_POST['msg_cancel'];
+        if($id == null){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_verifyunverify.php";
+                        }else{
+                            window.location.href = "_verifyunverify.php";
+                        }
+                    })
+                    
+                })
+
+            </script>
+            <?php
+        }else{
+            echo $emails;
+            $conn->query("UPDATE admin SET acc_status='CANCELED' WHERE id='$id'") or die($conn->error);
             include 'send_email_verified.php';
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

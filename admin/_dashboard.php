@@ -70,8 +70,8 @@
                 </div>
             </li>
             <li class="active open"><a href="_dashboard.php"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation of Facility</span></a></li>
-            <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform Inquiries</span></a></li>
+            <li><a href="_reservation.php"><i class="zmdi zmdi-calendar"></i><span>Reservation <span id="no_number_reserve">0</span></span></a></li>
+            <li><a href="_uniform.php"><i class="zmdi zmdi-shopping-cart"></i><span>Uniform <span id="no_number_inquire">0</span></span></a></li>
             <li><a href="_basketball.php"><i class="zmdi zmdi-chart-donut"></i><span>Sports Equipment</span></a></li> 
             <li><a href="_profile.php"><i class="zmdi zmdi-account-circle"></i><span>My Profile</span></a></li>
             <li><a href="functions.php?logout"><i class="zmdi zmdi-sign-in"></i><span>Logout</span></a></li>
@@ -471,6 +471,34 @@
 <script src=""></script>
 
 <script src="assets/js/pages/calendar/calendar.js"></script>
+<script>
+    function loadDoc1(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_reserve').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_reserve.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc1();
+    function loadDoc2(){
+        setInterval(() => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    document.getElementById('no_number_inquire').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "data_inquire.php", true);
+            xhttp.send();
+        }, 1000);
+    }
+    loadDoc2();
+</script>
 </body>
 
 </html>

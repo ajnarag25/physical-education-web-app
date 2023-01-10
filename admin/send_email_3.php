@@ -26,9 +26,9 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($get_email);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We already updated your inquiry:'." ".$set_pickup." ".'. Will be your schedule to pickup. Thank you have nice day.';
+    $mail->Body = 'Good day,'.' '.'Your inquiry has been updated, you must pick-up your uniform on '." ".$set_pickup." ".', as specified. Thank you have nice day.';
 
-
+    //Good Day, Your inquiry has been updated, you must pick-up your uniform on ________ , as specified.
     if ($mail->send())
         // echo "Mail Sent";
 

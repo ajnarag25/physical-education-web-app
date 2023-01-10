@@ -26,9 +26,9 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($get_email);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We accept your request it is on process now. Please wait for the approval of each department head. Thank you have nice day';
+    $mail->Body = 'Good day,'.' '."Your facility reservation request is now being processed. Thank you, and have a nice day.";
 
-
+    // Your facility reservation request is now being processed. Thank you, and have a nice day.
     if ($mail->send())
         // echo "Mail Sent";
 

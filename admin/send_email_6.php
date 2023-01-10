@@ -26,9 +26,9 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($get_email);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We reschedule your inquiry:'." ".$get_resched." ".'. Will be your new schedule to pickup. Thank you have nice day.';
+    $mail->Body = 'Good day,'.' '.'Your inquiry has been rescheduled on date '." ".$get_resched." ".'. Thank you have nice day.';
 
-
+    // Your inquiry has been rescheduled on date ______.
     if ($mail->send())
         // echo "Mail Sent";
 
