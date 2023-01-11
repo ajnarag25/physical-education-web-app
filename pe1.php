@@ -154,6 +154,7 @@
                             <label for="tshirt" class="form-label">Size of T-Shirt <span style="color:red;">* </span></label>
                             <select name="tshirt" class="form-select" id="" required>
                                 <option value="" selected disabled>Select Size</option>
+                                <option value="extra small">XS</option>
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
@@ -165,6 +166,7 @@
                             <label for="shorts" class="form-label">Size of Shorts <span style="color:red;">* </span></label>
                             <select name="shorts" class="form-select" id="" required>
                                 <option value="" selected disabled>Select Size</option>
+                                <option value="extra small">XS</option>
                                 <option value="small">S</option>
                                 <option value="medium">M</option>
                                 <option value="large">L</option>
@@ -175,6 +177,28 @@
                     </div> 
                     <br>
                     <div class="text-center">
+                        <a class="btn btn-secondary" href="pickuniform.php">Back</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#studentpe1<?php echo $set_studentid ?>" >Request</button>
+                    </div>
+
+
+            </div>
+                </div>
+                    </div>
+                        </div>    
+
+            <!-- Modal -->
+            <div class="modal fade" id="studentpe1<?php echo $set_studentid ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inquire Uniform Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure to submit now your inquiry?</h4>
+                    </div>
+                    <div class="modal-footer">
                         <input type="hidden" name="date" value="<?php  echo $date_today ?>">
                         <input type="hidden" name="email" value="<?php  echo $set_data7 ?>">
                         <input type="hidden" name="image" value="<?php  echo $set_data8 ?>">
@@ -183,18 +207,19 @@
                         <input type="hidden" name="department" value="N/A">
                         <input type="hidden" name="sizej" value="N/A">
                         <input type="hidden" name="id_no" value="<?php  echo $set_data9 ?>">
-                        <a class="btn btn-secondary" href="pickuniform.php">Back</a>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#studentpe1<?php echo $set_studentid ?>" >Request</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" name="request_student_1">Yes</button>
                     </div>
-
-            
-                </form>
-
+                    </div>
+                </div>
+            </div>
+                             
+                </form>       
             <?php } 
             
             else {?>
                 <div class="row">
-            <div class="col-md-4">
+                    <div class="col-md-4">
                 <br>
                 <div class="card card_custom">
                     <div class="text-center">
@@ -281,19 +306,39 @@
                     </div> 
                     <br>
                     <div class="text-center">
-                        <input type="hidden" name="date" value="<?php  echo $date_today ?>">
-                        <input type="hidden" name="email" value="<?php  echo $set_data7 ?>">
-                        <input type="hidden" name="image" value="<?php  echo $set_data8 ?>">
-                        <input type="hidden" name="note" value="N/A">
-                        <input type="hidden" name="status" value="PENDING">
-                        <input type="hidden" name="course" value="N/A">
-                        <input type="hidden" name="sizej" value="N/A">
                         <a class="btn btn-secondary" href="pickuniform.php">Back</a>
-                        <button type="submit" class="btn btn-danger" name="request_teacher_1">Request</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#teacherpe1<?php echo $set_studentid ?>">Request</button>
                     </div>
-
-
-                </form>
+                </div>
+                </div>
+                    </div>
+                        </div>  
+                    <!-- Modal -->
+                    <div class="modal fade" id="teacherpe1<?php echo $set_studentid ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Inquire Uniform Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h4>Are you sure to submit now your inquiry?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="date" value="<?php  echo $date_today ?>">
+                                <input type="hidden" name="email" value="<?php  echo $set_data7 ?>">
+                                <input type="hidden" name="image" value="<?php  echo $set_data8 ?>">
+                                <input type="hidden" name="note" value="N/A">
+                                <input type="hidden" name="status" value="PENDING">
+                                <input type="hidden" name="course" value="N/A">
+                                <input type="hidden" name="sizej" value="N/A">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger" name="request_teacher_1">Yes</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 <?php } ?>
    
                 </div>
