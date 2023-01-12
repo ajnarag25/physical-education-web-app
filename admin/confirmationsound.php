@@ -74,7 +74,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" value="<?php echo $row['id'] ?>" name="ids">
-                            <button type="submit" class="btn btn-success" name="approve_osa">Yes</button>
+                            <button type="submit" class="btn btn-success" name="approve_sound">Yes</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="hidden" value="<?php echo $row['id'] ?>" name="ids">
-                                <button type="submit" class="btn btn-danger" name="decline_osa">Yes</button>
+                                <button type="submit" class="btn btn-danger" name="decline_sound">Yes</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
                             </div>
                         </div>

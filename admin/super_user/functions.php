@@ -842,18 +842,18 @@
         }
     }
 
-    #ADD DEPARTMENT HEAD
-    if (isset($_POST['addDepthead'])) {
+    #ADD SOUND SYSTEM COORDINATOR
+    if (isset($_POST['addSound'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $departs = $_POST['depts'];
     
-        $sql = "SELECT * FROM dept_head WHERE name='$name' AND email='$email' AND department='$departs'";
+        $sql = "SELECT * FROM sound_coordinator WHERE name='$name' AND email='$email'";
         $result = mysqli_query($conn, $sql);
 
         if(!$result->num_rows > 0){
-            $conn->query("INSERT INTO dept_head (department, name, email, status)
-            VALUES('$departs','$name', '$email', 'Enabled')") or die($conn->error);
+            $conn->query("INSERT INTO sound_coordinator (name, email, status)
+            VALUES('$name', '$email', 'Enabled')") or die($conn->error);
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -884,7 +884,7 @@
                 $(document).ready(function(){
                     Swal.fire({
                     icon: 'warning',
-                    title: 'Department Head is Already Existed',
+                    title: 'Sound System Coordinator is Already Existed',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Okay'
                     }).then((result) => {
@@ -907,12 +907,12 @@
         $id = $_POST['id_disenable_head'];
         $status = $_POST['stat_head'];
 
-        $checking = "SELECT * FROM dept_head WHERE status='$status' AND id='$id'";
+        $checking = "SELECT * FROM sound_coordinator WHERE status='$status' AND id='$id'";
         $prompt = $conn->query($checking);
         $row = mysqli_num_rows($prompt);
 
         if ($row == 0){
-            $conn->query("UPDATE dept_head SET status='$status' WHERE id='$id'") or die($conn->error);
+            $conn->query("UPDATE sound_coordinator SET status='$status' WHERE id='$id'") or die($conn->error);
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -988,7 +988,7 @@
         </script>
         <?php
         }else{
-            $conn->query("DELETE FROM dept_head WHERE id='$id'") or die($conn->error);
+            $conn->query("DELETE FROM sound_coordinator WHERE id='$id'") or die($conn->error);
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -996,7 +996,7 @@
                 $(document).ready(function(){
                     Swal.fire({
                     icon: 'success',
-                    title: 'Successfully Removed the Department Head',
+                    title: 'Successfully Removed the Sound System Coordinator',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Okay'
                     }).then((result) => {

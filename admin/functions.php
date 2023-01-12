@@ -746,7 +746,54 @@
             $result = mysqli_query($conn, $query);
             $check_row = mysqli_num_rows($result);
             while ($row = mysqli_fetch_array($result)) {
-                if ($row['stat_osa'] == 'APPROVED' && $row['stat_dit'] == 'APPROVED' && $row['stat_des'] == 'APPROVED'){
+                if ($row['stat_sound'] == 'PENDING'){
+                    ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function(){
+                            Swal.fire({
+                            icon: 'warning',
+                            title: 'This student/personnel has a pending request from sound system coordinator',
+                            text:'Please wait for the confirmation',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "_reservation.php";
+                                }else{
+                                    window.location.href = "_reservation.php";
+                                }
+                            })
+                            
+                        })
+                
+                    </script>
+                    <?php
+                }elseif ($row['stat_sound'] == 'DECLINED' AND $row['status'] == 'PENDING'){
+                    ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function(){
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'The request has been declined by the sound system coordinator',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "_reservation.php";
+                                }else{
+                                    window.location.href = "_reservation.php";
+                                }
+                            })
+                            
+                        })
+                
+                    </script>
+                    <?php
+                }else{
                     $conn->query("UPDATE reserve SET status='ACCEPTED' WHERE id='$id_accepts'") or die($conn->error);
                     include 'send_email_7.php';
                     ?>
@@ -771,29 +818,7 @@
                 
                     </script>
                     <?php
-                }else{
-                    ?>
-                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function(){
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Some Department Head still not approving the request',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                            }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "_reservation.php";
-                                }else{
-                                    window.location.href = "_reservation.php";
-                                }
-                            })
-                            
-                        })
-                
-                    </script>
-                    <?php
+   
                 }
             }
      
@@ -1240,16 +1265,17 @@
     }
 
     #INFORM DEPT HEAD OSA
-    if (isset($_POST['inform_osa'])) {
+    if (isset($_POST['inform_sound'])) {
         $student_names = $_POST['student_name'];
         $ids = $_POST['student_id'];
         
-        $query = "SELECT * FROM dept_head WHERE department='Office of Student Affairs' AND status='Enabled'";
+        $query = "SELECT * FROM sound_coordinator WHERE status='Enabled'";
         $result = mysqli_query($conn, $query);
         $check_row = mysqli_num_rows($result);
         while ($row = mysqli_fetch_array($result)) {
             $emails = $row['email'];
-            include "email_osa.php";
+            $conn->query("UPDATE reserve SET stat_sound='PENDING' WHERE id='$ids'") or die($conn->error);
+            include "email_sound_coordinator.php";
         }
         ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1258,7 +1284,7 @@
                 $(document).ready(function(){
                     Swal.fire({
                     icon: 'success',
-                    title: 'Successfully Submitted',
+                    title: 'Successfully Submitted your Request',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Okay'
                     }).then((result) => {
@@ -1274,73 +1300,116 @@
             </script>
         <?php
         
-    }elseif(isset($_POST['inform_des'])){
-        $student_names = $_POST['student_name'];
-        $ids = $_POST['student_id'];
-        
-        $query = "SELECT * FROM dept_head WHERE department='Department of Engineering Science' AND status='Enabled'";
-        $result = mysqli_query($conn, $query);
-        $check_row = mysqli_num_rows($result);
-        while ($row = mysqli_fetch_array($result)) {
-            $emails = $row['email'];
-            include "email_DES.php";
-        }
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function(){
-                    Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Submitted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "_reservation.php";
-                        }else{
-                            window.location.href = "_reservation.php";
-                        }
-                    })
-                    
-                })
-        
-            </script>
-        <?php
-    }elseif(isset($_POST['inform_dit'])){
-        $student_names = $_POST['student_name'];
-        $ids = $_POST['student_id'];
-        
-        $query = "SELECT * FROM dept_head WHERE department='Department of Industrial Technology' AND status='Enabled'";
-        $result = mysqli_query($conn, $query);
-        $check_row = mysqli_num_rows($result);
-        while ($row = mysqli_fetch_array($result)) {
-            $emails = $row['email'];
-            include "email_DIT.php";
-        }
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function(){
-                    Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Submitted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "_reservation.php";
-                        }else{
-                            window.location.href = "_reservation.php";
-                        }
-                    })
-                    
-                })
-        
-            </script>
-        <?php
+    }
 
+    #APPROVE SOUND
+    if(isset($_POST['approve_sound'])){
+        $get_ids = $_POST['ids'];
+        echo $get_ids;
+        if ($get_ids != null){
+            $conn->query("UPDATE reserve SET stat_sound='APPROVED' WHERE id='$get_ids'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Submitted your Approval',
+                    text: 'You may now close this window. Thank you and have a nice day',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = window.close();
+                        }else{
+                            window.location.href = window.close();
+                        }
+                    })
+                    
+                })
+        
+            </script>
+        <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = window.close();
+                        }else{
+                            window.location.href = window.close();
+                        }
+                    })
+                    
+                })
+        
+            </script>
+        <?php
+        }
+    }
+
+     #DECLINE SOUND
+     if(isset($_POST['decline_sound'])){
+        $get_ids = $_POST['ids'];
+        echo $get_ids;
+        if ($get_ids != null){
+            $conn->query("UPDATE reserve SET stat_sound='DECLINED' WHERE id='$get_ids'") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Declined the Request',
+                    text: 'You may now close this window. Thank you and have a nice day',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = window.close();
+                        }else{
+                            window.location.href = window.close();
+                        }
+                    })
+                    
+                })
+        
+            </script>
+        <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = window.close();
+                        }else{
+                            window.location.href = window.close();
+                        }
+                    })
+                    
+                })
+        
+            </script>
+        <?php
+        }
     }
 
     #APPROVE DES

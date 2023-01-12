@@ -124,6 +124,7 @@
                                             <th><small>Venue</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
+                                            <th><small>Sound System</small></th>
                                             <th><small>Decisions</small></th>
                                         </tr>
                                     </thead>
@@ -135,6 +136,7 @@
                                             <th><small>Venue</small></th>
                                             <th><small>Purpose</small></th>
                                             <th><small>Participants</small></th>
+                                            <th><small>Sound System</small></th>
                                             <th><small>Decisions</small></th>
                                         </tr>
                                     </tfoot>
@@ -152,6 +154,7 @@
                                             <td><?php echo $row['booking'] ?></td>
                                             <td><?php echo $row['purpose'] ?></td>
                                             <td><?php echo $row['participants'] ?></td>
+                                            <td><?php echo $row['stat_sound'] ?></td>
                                             <td>
                                                 <button class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Accept Request" data-toggle="modal" data-target="#accept<?php echo $row['id'] ?>"><i class="zmdi zmdi-check"></i></button>
                                                 <!-- Modal for Accept -->
@@ -218,14 +221,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-info btn-sm " data-bs-toggle="tooltip" data-bs-placement="top" title="Approval of Other Departments" data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
+                                                <button class="btn btn-info btn-sm " data-bs-toggle="tooltip" data-bs-placement="top" title="Request for Sound System" data-toggle="modal" data-target="#status<?php echo $row['id'] ?>"><i class="zmdi zmdi-alarm"></i></button>
                                                 
                                                 <!-- Modal for Status -->
                                                 <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="title" id="largeModalLabel">Request for Approval of Other Departments</h4>
+                                                                <h4 class="title" id="largeModalLabel">Request for Sound System</h4>
                                                             </div>
                                                             <div class="row clearfix">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -235,77 +238,12 @@
                                                                         </div>
                                                                         <div class="body">
                                                                             <form action="functions.php" method="POST">
-                                                                                <div class="row clearfix js-sweetalert">
-                                                                                    <input type="hidden" value="<?php echo $row['id'] ?>" name="student_id">
-                                                                                    <input type="hidden" value="<?php echo $row['name'] ?>" name="student_name">
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Department of Engineering Science</label>
-                                                                                            <br><br>
-                                                                                            <?php 
-                                                                                                if ($row['stat_des'] == 'N/A'){
-                                                                                                    $set_stat=$row['stat_des'];
-                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
-                                                                                                }elseif($row['stat_des'] == 'APPROVED'){
-                                                                                                    $set_stat= $row['stat_osa'];
-                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
-                                                                                                }elseif($row['stat_des'] == 'DECLINED'){
-                                                                                                    $set_stat=$row['stat_des'];
-                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
-                                                                                                }
-                                                                                            ?>
-                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_des">Inform</button> 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Office of Student <br> Affairs</label>
-                                                                                            <br><br>
-                                                                                            <?php 
-                                                                                                if ($row['stat_osa'] == 'N/A'){
-                                                                                                    $set_stat=$row['stat_osa'];
-                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
-                                                                                                }elseif($row['stat_osa'] == 'APPROVED'){
-                                                                                                    $set_stat= $row['stat_osa'];
-                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
-                                                                                                }elseif($row['stat_osa'] == 'DECLINED'){
-                                                                                                    $set_stat=$row['stat_osa'];
-                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
-                                                                                                }
-                                                                                            ?>
-                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_osa">Inform</button> 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="form-group">
-                                                                                            <label id="reasonlabel" for="reason">Department of Industrial Technology</label>
-                                                                                            <br><br>
-                                                                                            <?php 
-                                                                                                if ($row['stat_dit'] == 'N/A'){
-                                                                                                    $set_stat=$row['stat_dit'];
-                                                                                                    echo '<h3 class="text-warning">PENDING</h3>';
-                                                                                                }elseif($row['stat_dit'] == 'APPROVED'){
-                                                                                                    $set_stat= $row['stat_dit'];
-                                                                                                    echo '<h3 class="text-success">'.$set_stat.'</h3>';
-                                                                                                }elseif($row['stat_dit'] == 'DECLINED'){
-                                                                                                    $set_stat=$row['stat_dit'];
-                                                                                                    echo '<h3 class="text-danger">'.$set_stat.'</h3>';
-                                                                                                }
-                                                                                            ?>
-                                                                                            <button type="submit" class="btn btn-block btn-info waves-effect" name="inform_dit">Inform</button> 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>                                                                                
-                                                                                <div class="row clearfix js-sweetalert">
+                                                                                <input type="hidden" value="<?php echo $row['id'] ?>" name="student_id">
+                                                                                <input type="hidden" value="<?php echo $row['name'] ?>" name="student_name">
+                                                                                <h2>Sound System Coordinator</h2>
+                                                                                <button type="submit" class="btn btn-block btn-info waves-effect w-50" name="inform_sound">Request</button> 
                                                                             </form>
-                                                                            <div id="stat" name="stat" style="text-align: justify;" class="alert alert-secondary text-dark">
-                                                                                <strong ><div class="alert-icon">
-                                                                                    <i class="zmdi zmdi-alert-circle-o"></i>
-                                                                                </div>Note:
-                                                                                    <br>-> If status is 'Uninformed' it means that the head department is not yet informed about the request. Simply click the button 'Inform' to inform the head department.
-                                                                                    <br>-> If status is 'Pending' it means that you already informed the head department and you'll need to wait for his/her approval. To inform again just simply click the button 'Inform'.
-                                                                                    <br>-> If status is 'Approved' it means the head department approved the request. You can now decide whether approved, dissapproved or reschedule.</strong>
-                                                                            </div>
+                                                                           
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-outline-danger btn-block waves-effect" data-dismiss="modal">Close</button>
                                                                             </div>

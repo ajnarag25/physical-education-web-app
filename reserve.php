@@ -130,14 +130,11 @@
                 <div class="col">
                     <div class="card card_custom">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="inputStatus" class="form-label">Action Status:</label>
                                     <input type="text" class="form-control" id="inputStatus" placeholder="NONE" readonly>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Please wait for Head Officials Approval</label>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="inputDate" class="form-label">RESCHEDULE Date:</label>
                                     <input type="date" class="form-control" id="inputDate" readonly>
                                 </div>

@@ -259,26 +259,22 @@
 
                             <img src="default_profile/default_head.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
         
-                            <h4 class="m-t-10">Add New Department Head</h4>   
-                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Department Head" data-target="#addDepthead">Add <i class="zmdi zmdi-plus"></i></button>                     
-                            <!-- Modal for Add Department Head -->
-                            <div class="modal fade" id="addDepthead" tabindex="-1" role="dialog">
+                            <h4 class="m-t-10">Add New Sound System Coordinator</h4>   
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Sound System Coordinator" data-target="#addSound">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <!-- Modal for Add Sound System Coordinator -->
+                            <div class="modal fade" id="addSound" tabindex="-1" role="dialog">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="title" id="largeModalLabel">Add Department Head</h4>
+                                            <h4 class="title" id="largeModalLabel">Add Sound System Coordinator</h4>
                                         </div>
                                         <div class="row clearfix">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="card">
-                                                    <div class="modal-header">
-                                                        <h6 class="title " style="text-align: center;">Create Account</h6>
-                                                    </div>
-                                                    <br>
                                                     <div class="body">
                                                     <form action="functions.php" method="POST" enctype="multipart/form-data">
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <!-- <div class="col-md-12">
                                                                 <label for="inputName" class="form-label">Department</label>
                                                                 <select name="depts" class="form-control" id="">
                                                                     <option value="" selected disabled>Select Department</option>
@@ -286,7 +282,7 @@
                                                                     <option value="Department of Engineering Science">Department of Engineering Science</option>
                                                                     <option value="Department of Industrial Technology">Department of Industrial Technology</option>
                                                                 </select>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-md-6">
                                                                 <label for="inputName" class="form-label">Name</label>
                                                                 <input type="text" class="form-control" id="inputName" name="name" required>
@@ -301,7 +297,7 @@
                                                  
                                                         <div class="text-center">
                                                             <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-danger" name="addDepthead">Add Department Head</button>
+                                                            <button type="submit" class="btn btn-danger" name="addSound">Add Sound System Coordinator</button>
                                                         </div>
 
 
@@ -778,14 +774,13 @@
                     <div class="card">
                         <div class="header">
                             
-                            <h2><strong>Department</strong> Heads</h2>
+                            <h2><strong>Sound System</strong> Coordinator</h2>
                         </div>
                         <div class="table-responsive" style="text-align: center;">
                             <table class="table table-hover js-basic-example dataTable table-sm " id="table1">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>Name</th>
-                                        <th>Department</th>
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -793,14 +788,13 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = "SELECT * FROM dept_head";
+                                        $query = "SELECT * FROM sound_coordinator";
                                         $result = mysqli_query($conn, $query);
                                         $check_row = mysqli_num_rows($result);
                                         while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                     <tr>
                                         <td><?php echo $row['name'] ?></td>
-                                        <td><?php echo $row['department'] ?></td>
                                         <td><?php echo $row['email'] ?></td>
                                         <td> 
                                         <?php 
@@ -817,13 +811,13 @@
                                         ?></td>
                                         <td>
                                        
-                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Disable/Enable Department Head" data-target="#disenable_head<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
+                                            <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Disable/Enable Sound System Coordinator" data-target="#disenable_head<?php echo $row['id'] ?>" ><i class="zmdi zmdi-account-box-o"></i> </button>
                                             <!-- Modal for Disable Enable -->
                                             <div class="modal fade" id="disenable_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="title" id="largeModalLabel">Disable/Enable Department Head</h4>
+                                                            <h4 class="title" id="largeModalLabel">Disable/Enable Sound System Coordinator</h4>
                                                         </div>
                                                         <div class="row clearfix">
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -831,7 +825,7 @@
                                                                     <br>
                                                                     <form action="functions.php" method="POST">
                                                                         <div class="body">
-                                                                            <h3>Current Status of Department Head: <?php echo $row['name'] ?> is  
+                                                                            <h3>Current Status of Sound System Coordinator: <?php echo $row['name'] ?> is  
                                                                             <?php 
                                                                                 if($row['status'] == 'Enabled' ){
                                                                                     echo '
@@ -864,13 +858,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Department Head" data-target="#delete_head<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
+                                            <button class="btn btn-danger" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove Sound System Coordinator" data-target="#delete_head<?php echo $row['id'] ?>"><i class="zmdi zmdi-close"></i>  </button>
                                              <!-- Modal for Delete -->
                                              <div class="modal fade" id="delete_head<?php echo $row['id'] ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="title" id="largeModalLabel">Remove Department Head</h4>
+                                                            <h4 class="title" id="largeModalLabel">Remove Sound System Coordinator</h4>
                                                         </div>
                                                         <div class="row clearfix">
                                                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -878,7 +872,7 @@
                                                                     <br>
                                                                     <form action="functions.php" method="POST">
                                                                         <div class="body">
-                                                                            <h3>Removing Department Head : <?php echo $row['name'] ?></h3>
+                                                                            <h3>Removing Sound System Coordinator : <?php echo $row['name'] ?></h3>
                                                                             <p><i class="zmdi zmdi-alert-circle infinite pulse" style="color:red"></i> This Action is Irrevesible!</p>
                                     
                                                                             <div class="modal-footer">

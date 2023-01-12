@@ -129,15 +129,11 @@
                 <div class="col">
                     <div class="card card_custom">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="inputStatus" class="form-label">Action Status:</label>
                                     <input type="text" class="form-control" name="stat" value="<?php echo $row['status'] ?>" readonly>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="" class="form-label">Please wait for Head Officials Approval</label>
-                                    <a type="button" href="" data-bs-toggle="modal" data-bs-target="#status<?php echo $row['id'] ?>">View Status</a>   
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="inputDate" class="form-label">RESCHEDULE Date:</label>
                                     <input type="date" class="form-control" id="inputDate" readonly>
                                 </div>
@@ -171,58 +167,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-       <!-- Modal -->
-       <div class="modal fade" id="status<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Request for Approval</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  <h5>Office of Student Affairs</h5>
-                  <?php 
-                    if ($row['stat_osa'] == 'N/A'){
-                      echo '<input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>';
-                    }elseif($row['stat_osa'] == 'APPROVED'){
-                      echo '<input style="color:rgb(5, 171, 14)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }else{
-                      echo '<input style="color:rgb(176, 0, 0)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }
-                  
-                  ?>
-                  
-                  <h5>Department of Engineering Science</h5>
-                  <?php 
-                    if ($row['stat_des'] == 'N/A'){
-                      echo '<input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>';
-                    }elseif($row['stat_des'] == 'APPROVED'){
-                      echo '<input style="color:rgb(5, 171, 14)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }else{
-                      echo '<input style="color:rgb(176, 0, 0)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }
-                  
-                  ?>
-
-                  <h5>Department of Industrial Technology</h5>
-                  <?php 
-                    if ($row['stat_dit'] == 'N/A'){
-                      echo '<input style="color:rgb(185, 187, 48)" type="text" class="form-control" value="PENDING" readonly>';
-                    }elseif($row['stat_dit'] == 'APPROVED'){
-                      echo '<input style="color:rgb(5, 171, 14)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }else{
-                      echo '<input style="color:rgb(176, 0, 0)" type="text" class="form-control" value="APPROVED" readonly>';
-                    }
-                  
-                  ?>
-                </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
         </div>
         <?php
         }?>

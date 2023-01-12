@@ -26,7 +26,7 @@
     $mail->setFrom($email, $names);
     $mail->addAddress($emails);
     $mail->Subject = "TUPC - P.E DEPARTMENT";
-    $mail->Body = 'Good day,'.' '.'We would like to inform you that this student:'." ".$student_names." ".'. Will reserving a particular facility inside the campus. We would like to know if you are approving or declining the request. Here is the link for the approval: '.'http://localhost/PE_System/physical_education_web_app/admin/confirmation_des.php?id='.$ids.'&email='.$emails;
+    $mail->Body = 'Good day,'.' '.'We would like to inform you that this student:'." ".$student_names." ".'. Will reserving a particular facility inside the campus and they need a sound system. We would like to know if you are approving or declining the request. Here is the link for the approval: '.'http://localhost/physical_education_web_app/admin/confirmationsound.php?id='.$ids.'&email='.$emails;
 
 
     if ($mail->send())
