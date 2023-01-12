@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2023 at 12:14 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jan 12, 2023 at 05:13 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,6 +40,13 @@ CREATE TABLE `admin` (
   `acc_status` varchar(100) NOT NULL,
   `otp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `email`, `image`, `status`, `acc_status`, `otp`) VALUES
+(1, 'Avor John', 'Atienza', 'Narag', 'avorjohn25', '$2y$10$L99GywFdRyp5cqcbgFEIJO0CpNWSJeSB3jmYAbLLJ.j4GR0J4a2xi', 'ajnarag25@gmail.com', 'default_profile/default_pic.jpg', 'Enabled', 'VERIFIED', 0);
 
 -- --------------------------------------------------------
 
@@ -80,20 +87,6 @@ CREATE TABLE `borrowing_machine_info` (
   `status` varchar(30) DEFAULT NULL,
   `qr` varchar(200) DEFAULT NULL,
   `sort_date_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dept_head`
---
-
-CREATE TABLE `dept_head` (
-  `id` int(11) NOT NULL,
-  `department` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -144,6 +137,44 @@ CREATE TABLE `otp_requests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `peteachers`
+--
+
+CREATE TABLE `peteachers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `peteachers`
+--
+
+INSERT INTO `peteachers` (`id`, `name`) VALUES
+(1, 'Janlee T. Sarmiento'),
+(2, 'Jester C. Eiman'),
+(3, 'Micah Joyce J. Manalo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ping_pong_stat`
+--
+
+CREATE TABLE `ping_pong_stat` (
+  `id` int(11) NOT NULL,
+  `is_emptyy` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ping_pong_stat`
+--
+
+INSERT INTO `ping_pong_stat` (`id`, `is_emptyy`) VALUES
+(1, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `registration`
 --
 
@@ -166,6 +197,13 @@ CREATE TABLE `registration` (
   `qr_path` varchar(300) DEFAULT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `registration`
+--
+
+INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`, `status`) VALUES
+(1, 'Michael', 'Suarez', 'Rilan', 'michaelangelo.rilan@gsfe.tupcavite.edu.ph', '09123456789', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1672879665profile.PNG', '$2y$10$kZ6Y8mJ1cDZJG638qJZ3hu11tIydjGDPng23aotro7/ITPTIoeR7i', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/1672879665aaa.jpg', 'VERIFIED');
 
 -- --------------------------------------------------------
 
@@ -208,10 +246,28 @@ CREATE TABLE `reserve` (
   `reason` text NOT NULL,
   `status` varchar(100) NOT NULL,
   `resched` text NOT NULL,
-  `stat_osa` varchar(100) NOT NULL,
-  `stat_dit` varchar(100) NOT NULL,
-  `stat_des` varchar(100) NOT NULL
+  `stat_sound` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sound_coordinator`
+--
+
+CREATE TABLE `sound_coordinator` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sound_coordinator`
+--
+
+INSERT INTO `sound_coordinator` (`id`, `name`, `email`, `status`) VALUES
+(5, 'aj narag', 'ajnarag25@gmail.com', 'Enabled');
 
 -- --------------------------------------------------------
 
@@ -274,12 +330,6 @@ ALTER TABLE `borrowing_machine_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dept_head`
---
-ALTER TABLE `dept_head`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `inquire`
 --
 ALTER TABLE `inquire`
@@ -289,6 +339,12 @@ ALTER TABLE `inquire`
 -- Indexes for table `otp_requests`
 --
 ALTER TABLE `otp_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `peteachers`
+--
+ALTER TABLE `peteachers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -310,6 +366,12 @@ ALTER TABLE `reserve`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sound_coordinator`
+--
+ALTER TABLE `sound_coordinator`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `superuser_acc`
 --
 ALTER TABLE `superuser_acc`
@@ -323,7 +385,7 @@ ALTER TABLE `superuser_acc`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ball_sequence`
@@ -338,16 +400,10 @@ ALTER TABLE `borrowing_machine_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `dept_head`
---
-ALTER TABLE `dept_head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `inquire`
 --
 ALTER TABLE `inquire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `otp_requests`
@@ -356,10 +412,16 @@ ALTER TABLE `otp_requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=448;
 
 --
+-- AUTO_INCREMENT for table `peteachers`
+--
+ALTER TABLE `peteachers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `report_equip`
@@ -371,7 +433,13 @@ ALTER TABLE `report_equip`
 -- AUTO_INCREMENT for table `reserve`
 --
 ALTER TABLE `reserve`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `sound_coordinator`
+--
+ALTER TABLE `sound_coordinator`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
