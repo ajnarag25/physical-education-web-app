@@ -112,7 +112,7 @@
                                 <li class="breadcrumb-item active">Request Table</li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onpickup">On-Pickup</a></li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>Request</strong> Table </h2>
                         </div>
@@ -278,7 +278,7 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item active">On-Process Table</li>
                                 <li class="breadcrumb-item"><a href="#onpickup">On-Pickup</a></li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>On-Process</strong> Table </h2>
                         </div>
@@ -587,7 +587,7 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item active">On-Pickup</li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>On-pickup</strong> Table </h2>
                         </div>
@@ -747,9 +747,9 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onpickup">On-Pickup</a></li>
-                                <li class="breadcrumb-item active">History Table</li>
+                                <li class="breadcrumb-item active">Transaction Table</li>
                             </ul>
-                            <h2><strong>History</strong> Table </h2>
+                            <h2><strong>Transaction</strong> Table </h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive" style="text-align: center;">

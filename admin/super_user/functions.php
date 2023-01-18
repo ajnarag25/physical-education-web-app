@@ -4,7 +4,7 @@
 <?php 
    include('connection.php');
    session_start();
-   error_reporting(0);
+//    error_reporting(0);
    date_default_timezone_set('Asia/Manila');
 
     if (isset($_GET['logout'])) {
@@ -902,6 +902,65 @@
         }
     
     }
+
+    if (isset($_POST['addTeacher'])) {
+        $name = $_POST['name'];
+    
+        $sql = "SELECT * FROM peteachers WHERE name='$name'";
+        $result = mysqli_query($conn, $sql);
+
+        if(!$result->num_rows > 0){
+            $conn->query("INSERT INTO peteachers (name)
+            VALUES('$name')") or die($conn->error);
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Added',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'PE Teacher is Already Existed',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "_createmanage.php";
+                        }else{
+                            window.location.href = "_createmanage.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
+        }
+    
+    }
+
 
     if (isset($_POST['update_disenable_head'])) {
         $id = $_POST['id_disenable_head'];

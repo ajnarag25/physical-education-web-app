@@ -314,6 +314,63 @@
                         </div>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="card mcard_3">
+                        <div class="body">
+
+                            <img src="default_profile/default_head.png" class="rounded-circle shadow" width="100" height="100" alt="profile-image">
+        
+                            <h4 class="m-t-10">Add New P.E Teacher</h4>   
+                            <button id="changepic" class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Sound System Coordinator" data-target="#addTeacher">Add <i class="zmdi zmdi-plus"></i></button>                     
+                            <!-- Modal for Add Sound System Coordinator -->
+                            <div class="modal fade" id="addTeacher" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="title" id="largeModalLabel">Add P.E Teacher</h4>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="card">
+                                                    <div class="body">
+                                                    <form action="functions.php" method="POST" enctype="multipart/form-data">
+                                                        <div class="row">
+                                                            <!-- <div class="col-md-12">
+                                                                <label for="inputName" class="form-label">Department</label>
+                                                                <select name="depts" class="form-control" id="">
+                                                                    <option value="" selected disabled>Select Department</option>
+                                                                    <option value="Office of Student Affairs">Office of Student Affairs</option>
+                                                                    <option value="Department of Engineering Science">Department of Engineering Science</option>
+                                                                    <option value="Department of Industrial Technology">Department of Industrial Technology</option>
+                                                                </select>
+                                                            </div> -->
+                                                            <div class="col-md-12">
+                                                                <label for="inputName" class="form-label">Name</label>
+                                                                <input type="text" class="form-control" id="inputName" name="name" required>
+                                                            </div>
+                                                    
+                                                        </div> 
+                                                        <br>
+                                                 
+                                                        <div class="text-center">
+                                                            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-danger" name="addTeacher">Add P.E Teacher</button>
+                                                        </div>
+
+
+                                                    </form>
+
+                                                    </div>
+                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
            
             <div class="row clearfix">
@@ -331,7 +388,8 @@
                                         <th>Name</th>
                                         <th>Contact</th>
                                         <th>Gender</th>
-                                        <th>Course</th>   
+                                        <th>Course</th>
+                                        <th>Date Registered</th>   
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -348,6 +406,7 @@
                                         <td><?php echo $row['contact'] ?></td>
                                         <td><?php echo $row['gender'] ?></td>
                                         <td><?php echo $row['course'] ?></td>
+                                        <td><?php echo $row['dt_log'] ?></td>
                                         <td>
                                             <button class="btn btn-primary" data-toggle="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Credentials" data-target="#edit<?php echo $row['id'] ?>"><i class="zmdi zmdi-edit"></i> </button>
                                              <!-- Modal for Edit -->

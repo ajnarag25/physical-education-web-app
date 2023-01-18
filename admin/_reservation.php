@@ -109,7 +109,7 @@
                                 <li class="breadcrumb-item active">Request Table</li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item"><a href="#reschedule">Reschedule</a></li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>Request</strong> Table </h2>
                         </div>
@@ -277,7 +277,7 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item active">On-Process Table</li>
                                 <li class="breadcrumb-item"><a href="#reschedule">Reschedule</a></li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>On-Process</strong> Table </h2>
                         </div>
@@ -413,7 +413,7 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item active">Reschedule</li>
-                                <li class="breadcrumb-item"><a href="#history">History Table</a></li>
+                                <li class="breadcrumb-item"><a href="#history">Transaction Table</a></li>
                             </ul>
                             <h2><strong>Reschedule</strong> Table </h2>
                         </div>
@@ -574,9 +574,9 @@
                                 <li class="breadcrumb-item"><a href="#request">Request Table</a></li>
                                 <li class="breadcrumb-item"><a href="#onprocess">On-Process Table</a></li>
                                 <li class="breadcrumb-item"><a href="#reschedule">Reschedule</a></li>
-                                <li class="breadcrumb-item active">History Table</li>
+                                <li class="breadcrumb-item active">Transaction Table</li>
                             </ul>
-                            <h2><strong>History</strong> Table </h2>
+                            <h2><strong>Transaction</strong> Table </h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive" style="text-align: center;">
