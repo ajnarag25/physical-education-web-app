@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2023 at 05:13 AM
+-- Generation Time: Jan 18, 2023 at 10:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -117,6 +117,13 @@ CREATE TABLE `inquire` (
   `sched_pickup` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `inquire`
+--
+
+INSERT INTO `inquire` (`id`, `id_no`, `firstname`, `middlename`, `lastname`, `course`, `department`, `gender`, `teacher`, `size_t`, `size_s`, `size_j`, `email`, `image`, `status`, `note`, `date`, `sched_pay`, `sched_pickup`) VALUES
+(19, 'TUPC-18-0638', 'Michael ', 'Suarez', 'Rilan', 'BET-COET', 'N/A', 'Male', 'Janlee T. Sarmiento', 'small', 'small', 'N/A', 'michaelangelo.rilan@gsfe.tupcavite.edu.ph', 'uploads/profile_pic/1672879665profile.PNG', 'UNPAID', 'Approved', '13/01/2023', '13/01/2023 15:22', 'N/A');
+
 -- --------------------------------------------------------
 
 --
@@ -152,7 +159,9 @@ CREATE TABLE `peteachers` (
 INSERT INTO `peteachers` (`id`, `name`) VALUES
 (1, 'Janlee T. Sarmiento'),
 (2, 'Jester C. Eiman'),
-(3, 'Micah Joyce J. Manalo');
+(3, 'Micah Joyce J. Manalo'),
+(4, 'try'),
+(5, 'Neil Narciso');
 
 -- --------------------------------------------------------
 
@@ -195,15 +204,17 @@ CREATE TABLE `registration` (
   `otp` int(11) NOT NULL,
   `id_no` varchar(20) DEFAULT NULL,
   `qr_path` varchar(300) DEFAULT NULL,
-  `status` varchar(100) NOT NULL
+  `status` varchar(100) NOT NULL,
+  `dt_log` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `registration`
 --
 
-INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`, `status`) VALUES
-(1, 'Michael', 'Suarez', 'Rilan', 'michaelangelo.rilan@gsfe.tupcavite.edu.ph', '09123456789', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1672879665profile.PNG', '$2y$10$kZ6Y8mJ1cDZJG638qJZ3hu11tIydjGDPng23aotro7/ITPTIoeR7i', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/1672879665aaa.jpg', 'VERIFIED');
+INSERT INTO `registration` (`id`, `firstname`, `middlename`, `lastname`, `email`, `contact`, `gender`, `course`, `department`, `image`, `password`, `qr`, `users`, `otp`, `id_no`, `qr_path`, `status`, `dt_log`) VALUES
+(1, 'Michael', 'Suarez', 'Rilan', 'michaelangelo.rilan@gsfe.tupcavite.edu.ph', '09123456789', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1672879665profile.PNG', '$2y$10$kZ6Y8mJ1cDZJG638qJZ3hu11tIydjGDPng23aotro7/ITPTIoeR7i', 'TUPC-18-0638 RILAN MABET-COET-NS-C 5636', 'Student', 0, 'TUPC-18-0638', 'uploads/school_id_qr/1672879665aaa.jpg', 'VERIFIED', '2023-01-13 17:30:02'),
+(2, 'Nigelle Jarred', 'Martinez', 'Salvador', 'nigellejarred.salvador@gsfe.tupcavite.edu.ph', '09988828217', 'Male', 'BET-COET', 'N/A', 'uploads/profile_pic/1673602493323206502_502994615041368_975479866190563230_n.jpg', '$2y$10$Yo.szxVfSVLoyT76Q2tto.moUwPfu4d6R5y9C.IV2Iv/4nWDHd5SK', 'TUPC-18-0412 SALVADOR N.BET-COET-C 5410', 'Student', 0, 'TUPC-18-0412', 'uploads/school_id_qr/1673602493naj.jpg', 'VERIFIED', '2023-01-13 17:34:53');
 
 -- --------------------------------------------------------
 
@@ -249,6 +260,13 @@ CREATE TABLE `reserve` (
   `stat_sound` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `reserve`
+--
+
+INSERT INTO `reserve` (`id`, `id_no`, `email`, `name`, `dept_course`, `date`, `time`, `booking`, `purpose`, `participants`, `reason`, `status`, `resched`, `stat_sound`) VALUES
+(8, 'TUPC-18-0638', 'michaelangelo.rilan@gsfe.tupcavite.edu.ph', 'Michael Suarez Rilan', 'BET-COET', '2023-01-13', '17:30', 'ConferenceRoom', 'Event', 150, 'N/A', 'ACCEPTED', 'N/A', 'APPROVED');
+
 -- --------------------------------------------------------
 
 --
@@ -267,7 +285,8 @@ CREATE TABLE `sound_coordinator` (
 --
 
 INSERT INTO `sound_coordinator` (`id`, `name`, `email`, `status`) VALUES
-(5, 'aj narag', 'ajnarag25@gmail.com', 'Enabled');
+(5, 'aj narag', 'ajnarag25@gmail.com', 'Enabled'),
+(6, 'Juliet', 'juliet@gmail.com', 'Disabled');
 
 -- --------------------------------------------------------
 
@@ -403,7 +422,7 @@ ALTER TABLE `borrowing_machine_info`
 -- AUTO_INCREMENT for table `inquire`
 --
 ALTER TABLE `inquire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `otp_requests`
@@ -415,13 +434,13 @@ ALTER TABLE `otp_requests`
 -- AUTO_INCREMENT for table `peteachers`
 --
 ALTER TABLE `peteachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `report_equip`
@@ -433,13 +452,13 @@ ALTER TABLE `report_equip`
 -- AUTO_INCREMENT for table `reserve`
 --
 ALTER TABLE `reserve`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sound_coordinator`
 --
 ALTER TABLE `sound_coordinator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
