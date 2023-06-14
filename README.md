@@ -1,4 +1,4 @@
-# physical_education_web_app
+#physical_education_web_app
 
 <h4> The study, Innovation of Physical Education System in Technological University of the Philippines Cavite Campus, is focused on the development and implementation of the web-based application system for the PE department, which displays all the functions using a friendly graphical user interface, that would enable the users to access all the features, such as ordering uniforms, borrowing sports equipment, and reservation of facilities in the campus. This web-based application system is developed using PHP and MySQL for databases. </h4>
 <h4>This proposed research study also includes the innovation of the project which is the Sports Equipment Borrowing Machine. </h4>
